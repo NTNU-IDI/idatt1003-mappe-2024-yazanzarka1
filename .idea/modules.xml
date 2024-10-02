@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Main/Food/Food.iml" filepath="$PROJECT_DIR$/Main/Food/Food.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Main.iml" filepath="$PROJECT_DIR$/Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Main/Units/Units.iml" filepath="$PROJECT_DIR$/Main/Units/Units.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/idatt1003-mappe-2024-yazanzarka1.iml" filepath="$PROJECT_DIR$/.idea/idatt1003-mappe-2024-yazanzarka1.iml" />
     </modules>
   </component>

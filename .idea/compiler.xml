@@ -10,5 +10,9 @@
         <module name="Food" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Console" target="23" />
+      <module name="Unit" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
