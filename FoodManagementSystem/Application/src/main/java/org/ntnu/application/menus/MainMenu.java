@@ -1,7 +1,7 @@
-package org.ntnu.menus;
+package org.ntnu.application.menus;
 import org.ntnu.console.CommandRegistry;
 import org.ntnu.console.MenuContext;
-import org.ntnu.commands.SwitchMenuCommand;
+import org.ntnu.application.commands.SwitchMenuCommand;
 
 public class MainMenu extends MenuContext {
 	public MainMenu(CommandRegistry commandRegistry){

@@ -1,8 +1,9 @@
-package org.ntnu;
+package org.ntnu.application;
 
-import org.ntnu.menus.MainMenu;
+import org.ntnu.application.menus.MainMenu;
 import org.ntnu.console.InputHandler;
 import org.ntnu.console.DisplayManager;
+import org.ntnu.console.CommandRegistry;
 
 
 public class Application {

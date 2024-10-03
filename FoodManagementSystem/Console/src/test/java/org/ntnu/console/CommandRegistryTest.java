@@ -11,7 +11,7 @@ class CommandRegistryTest {
 	@BeforeEach
 	void setUp() {
 		commandRegistry = new CommandRegistry();
-		mainMenu = new MenuContext("Main Menu");
+		mainMenu = new MenuContext("Main Menu", "main-menu");
 
 		Command mockCommand = new Command() {
 			@Override
@@ -31,7 +31,7 @@ class CommandRegistryTest {
 
 	@Test
 	void testSwitchContext() {
-		commandRegistry.switchContext("Main Menu");
+		commandRegistry.switchContext("main-menu");
 		assertEquals(mainMenu, commandRegistry.getCurrentContext(), "Should switch to the correct context");
 	}
 
@@ -43,14 +43,14 @@ class CommandRegistryTest {
 
 	@Test
 	void testExecuteCommandInContext() {
-		commandRegistry.switchContext("Main Menu");
+		commandRegistry.switchContext("main-menu");
 		commandRegistry.executeCommand("test");
 
 	}
 
 	@Test
 	void testExecuteInvalidCommand() {
-		commandRegistry.switchContext("Main Menu");
+		commandRegistry.switchContext("main-menu");
 		commandRegistry.executeCommand("invalid");
 
 	}

@@ -1,4 +1,4 @@
-package org.ntnu.commands;
+package org.ntnu.application.commands;
 
 import org.ntnu.console.Command;
 import org.ntnu.console.CommandRegistry;

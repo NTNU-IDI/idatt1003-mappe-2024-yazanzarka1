@@ -9,7 +9,7 @@ class MenuContextTest {
 
 	@BeforeEach
 	void setUp() {
-		menuContext = new MenuContext("Test Menu");
+		menuContext = new MenuContext("Test Menu", "test-menu");
 		mockCommand = new Command() {
 			@Override
 			public void execute() {

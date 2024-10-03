@@ -13,11 +13,11 @@ public class CommandRegistry {
 	}
 
 	public void addContext(MenuContext context) {
-		contexts.put(context.getName(), context);
+		contexts.put(context.getKey(), context);
 	}
 
-	public void switchContext(String contextName) {
-		MenuContext context = contexts.get(contextName);
+	public void switchContext(String contextKey) {
+		MenuContext context = contexts.get(contextKey);
 		if (context != null) {
 			currentContext = context;
 			context.displayMenu();

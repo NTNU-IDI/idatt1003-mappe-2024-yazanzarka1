@@ -19,7 +19,7 @@ class GroceryTest {
 	@DisplayName("Adding to grocery")
 	void add_to_grocery() {
 		grocery.add(new Liter(50));
-		float amount = grocery.groceryAmount.getValue();
+		float amount = grocery.quantity.getValue();
 		Assertions.assertEquals(100, amount);
 	}
 
@@ -27,7 +27,7 @@ class GroceryTest {
 	@DisplayName("Removing from grocery")
 	void remove_from_grocery() {
 		grocery.remove(new Liter(50));
-		float amount = grocery.groceryAmount.getValue();
+		float amount = grocery.quantity.getValue();
 		Assertions.assertEquals(0, amount);
 	}
 }
