@@ -1,0 +1,18 @@
+package org.ntnu.menus;
+import org.ntnu.console.CommandRegistry;
+import org.ntnu.console.MenuContext;
+import org.ntnu.commands.SwitchMenuCommand;
+
+public class MainMenu extends MenuContext {
+	public MainMenu(CommandRegistry commandRegistry){
+		super("Main Menu", "main-menu");
+		addCommand("1", new SwitchMenuCommand("grocery", commandRegistry));
+		addCommand("2", new SwitchMenuCommand("storages", commandRegistry));
+		addCommand("3", new SwitchMenuCommand("recipes ", commandRegistry));
+
+	}
+}
+
+
+
+
