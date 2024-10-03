@@ -1,43 +1,51 @@
 package org.ntnu.units;
-import org.
+
 public abstract class Unit {
-    // unit name - KG, Liter
-    String unitName;
-    float value;
 
-    /**
-     * getter for unit value
-     * @return float
-     */
-    public float getValue(){
-        return value;
-    }
+	// unit name - KG, Liter
+	String unitName;
+	float value;
 
-    /**
-     * getter for unitName: KG, Liter
-     * @return
-     */
-    public String getUnitName() {
-        return unitName;
-    }
+	/**
+	 * getter for unit value
+	 *
+	 * @return float value
+	 */
+	public float getValue() {
+		return value;
+	}
 
-    /**
-     * adds to units' value
-     * @param Unit otherUnit
-     */
-    public void plus(Unit otherUnit){
+	/**
+	 * getter for unitName: KG, Liter
+	 *
+	 * @return String unitName
+	 */
+	public String getUnitName() {
+		return unitName;
+	}
 
-        if(this.unitName == otherUnit.unitName){
-            throw new IllegalArgumentException()
-        }
-        this.value += otherUnit.value;
-    }
+	/**
+	 * adds to units' value
+	 *
+	 * @param Unit otherUnit
+	 */
+	public void plus(Unit otherUnit) {
 
-    /**
-     * substracts from unit's value
-     * @param Unit otherUnit
-     */
-    public void subtract(Unit otherUnit){
-        this.value -= otherUnit.value;
-    }
+		if (!this.unitName.equals(otherUnit.unitName)) {
+			throw new IllegalArgumentException("You can't add two different units together");
+		}
+		this.value += otherUnit.value;
+	}
+
+	/**
+	 * subtracts from unit's value
+	 *
+	 * @param Unit otherUnit
+	 */
+	public void subtract(Unit otherUnit) {
+		if (!this.unitName.equals(otherUnit.unitName)) {
+			throw new IllegalArgumentException("You can't subtract two different units together");
+		}
+		this.value -= otherUnit.value;
+	}
 }
