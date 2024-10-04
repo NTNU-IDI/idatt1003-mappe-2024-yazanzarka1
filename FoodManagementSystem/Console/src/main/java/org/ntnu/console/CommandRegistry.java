@@ -3,12 +3,20 @@ package org.ntnu.console;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.fusesource.jansi.Ansi.Color;
 
+/**
+ * CommandRegistry is responsible for managing, executing and switching menu-contexts.
+ * Each context has commands which will be handled on user interaction.
+ * CommandRegistry makes sure that the right command is being executed.
+ */
 public class CommandRegistry {
 	private final Map<String, MenuContext> contexts;
 	private MenuContext currentContext;
+	private final DisplayManager displayManager;
 
 	public CommandRegistry() {
+		displayManager = new DisplayManager();
 		this.contexts = new HashMap<>();
 	}
 
@@ -22,7 +30,7 @@ public class CommandRegistry {
 			currentContext = context;
 			context.displayMenu();
 		} else {
-			System.out.println("Context not found!");
+			displayManager.showColoredMessage("Context not found!", Color.RED);
 		}
 	}
 
@@ -31,7 +39,7 @@ public class CommandRegistry {
 		if (command != null) {
 			command.execute();
 		} else {
-			System.out.println("Invalid command!");
+			displayManager.showColoredMessage("Invalid command!", Color.RED);
 		}
 	}
 

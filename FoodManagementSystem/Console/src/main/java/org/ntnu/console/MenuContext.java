@@ -3,6 +3,11 @@ package org.ntnu.console;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * MenuContext is responsible for defining commands and displaying current context's commands
+ *
+ */
 public class MenuContext {
 
 	private final String name;

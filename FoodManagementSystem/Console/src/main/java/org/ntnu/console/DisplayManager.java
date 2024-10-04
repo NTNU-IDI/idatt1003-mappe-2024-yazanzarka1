@@ -7,6 +7,12 @@ import java.util.List;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 
+
+/**
+ * DisplayManager is responsible for printing data to the console. whether it's a colored text, tables or a simple println.
+ * DisplayManager makes modifying data output to the console easier by being the standard way this application
+ * outputs data to the console.
+ */
 public class DisplayManager {
 
 	public DisplayManager() {
