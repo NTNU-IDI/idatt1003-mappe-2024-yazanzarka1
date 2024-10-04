@@ -9,11 +9,9 @@ import java.util.Scanner;
  */
 public class InputHandler {
 	private final Scanner scanner;
-	private final DisplayManager displayManager;
 
 	public InputHandler() {
 		this.scanner = new Scanner(System.in);
-		displayManager = new DisplayManager();
 	}
 
 	// get input from user

@@ -3,8 +3,10 @@ package org.ntnu.application.core;
 import org.ntnu.application.menus.grocery_menu.GroceryMenu;
 import org.ntnu.application.menus.main_menu.MainMenu;
 import org.ntnu.console.CommandRegistry;
-import org.ntnu.console.DisplayManager;
 
+/**
+ * Bootstraps CommandRegistry and registers MenuContexts
+ */
 public class Bootstrap {
 
 	public static CommandRegistry initCommandRegistry() {

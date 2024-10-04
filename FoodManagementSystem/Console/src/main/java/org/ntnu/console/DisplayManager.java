@@ -55,7 +55,7 @@ public class DisplayManager {
 		for (int i = 0; i < row.size(); i++) {
 			rowOutput.append(padRight(row.get(i), columnWidths[i])).append(" | ");
 		}
-		System.out.println(rowOutput.toString());
+		System.out.println(rowOutput);
 
 		// Print a separator after the header
 		if (isHeader) {
@@ -63,7 +63,7 @@ public class DisplayManager {
 			for (int columnWidth : columnWidths) {
 				separator.append("-".repeat(columnWidth + 2)).append("+");
 			}
-			System.out.println(separator.toString());
+			System.out.println(separator);
 		}
 	}
 
