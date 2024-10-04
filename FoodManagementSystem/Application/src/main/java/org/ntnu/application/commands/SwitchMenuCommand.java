@@ -13,8 +13,9 @@ public class SwitchMenuCommand implements Command {
 	}
 
 	@Override
-	public void execute() {
+	public Boolean execute() {
 		commandRegistry.switchContext(targetMenu);
+		return false;
 	}
 
 	@Override

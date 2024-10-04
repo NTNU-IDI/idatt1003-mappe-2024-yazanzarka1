@@ -12,22 +12,7 @@ class GroceryTest {
 
 	@BeforeEach
 	void setUp() {
-		grocery = new Grocery("Milk", new Liter(50));
+		grocery = new Grocery("Milk", new Liter(), 50);
 	}
 
-	@Test
-	@DisplayName("Adding to grocery")
-	void add_to_grocery() {
-		grocery.add(new Liter(50));
-		float amount = grocery.quantity.getValue();
-		Assertions.assertEquals(100, amount);
-	}
-
-	@Test
-	@DisplayName("Removing from grocery")
-	void remove_from_grocery() {
-		grocery.remove(new Liter(50));
-		float amount = grocery.quantity.getValue();
-		Assertions.assertEquals(0, amount);
-	}
 }

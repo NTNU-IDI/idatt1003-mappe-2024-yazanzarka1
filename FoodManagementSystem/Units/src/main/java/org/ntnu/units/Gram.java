@@ -3,8 +3,7 @@ package org.ntnu.units;
 public class Gram extends Unit {
 
 
-	public Gram(float value) {
-		this.value = value;
+	public Gram() {
 		this.unitName = "gram";
 	}
 }
