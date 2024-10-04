@@ -1,5 +1,6 @@
 package org.ntnu.application.core;
 
+import org.ntnu.application.containers.MainFoodStorage;
 import org.ntnu.application.menus.grocery_menu.GroceryMenu;
 import org.ntnu.application.menus.main_menu.MainMenu;
 import org.ntnu.console.CommandRegistry;
@@ -18,8 +19,10 @@ public class Bootstrap {
 		commandRegistry.addContext(mainMenu);
 
 		// Register Grocery Menu's context and add to registry.
-		GroceryMenu groceryMenu = new GroceryMenu(commandRegistry);
+		MainFoodStorage mainFoodStorage = new MainFoodStorage();
+		GroceryMenu groceryMenu = new GroceryMenu(commandRegistry, mainFoodStorage);
 		commandRegistry.addContext(groceryMenu);
+
 
 		// Set initial menu context
 		commandRegistry.switchContext("main-menu");

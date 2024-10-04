@@ -20,10 +20,19 @@ public class CommandRegistry {
 		this.contexts = new HashMap<>();
 	}
 
+	/**
+	 * Add new menu context to CommandRegistry
+	 *
+	 * @param context
+	 */
 	public void addContext(MenuContext context) {
 		contexts.put(context.getKey(), context);
 	}
 
+	/**
+	 * Switches current context and renders context's command
+	 * @param contextKey context to switch to
+	 */
 	public void switchContext(String contextKey) {
 		MenuContext context = contexts.get(contextKey);
 		if (context != null) {
@@ -34,13 +43,20 @@ public class CommandRegistry {
 		}
 	}
 
-	public void executeCommand(String keyword) {
+	/**
+	 *
+	 * @param keyword user command input
+	 * @return Boolean rerender menu-context commands.
+	 *
+	 */
+	public Boolean executeCommand(String keyword) {
 		Command command = currentContext.getCommand(keyword);
 		if (command != null) {
-			command.execute();
+			return command.execute();
 		} else {
 			displayManager.showColoredMessage("Invalid command!", Color.RED);
 		}
+		return false;
 	}
 
 	public MenuContext getCurrentContext() {

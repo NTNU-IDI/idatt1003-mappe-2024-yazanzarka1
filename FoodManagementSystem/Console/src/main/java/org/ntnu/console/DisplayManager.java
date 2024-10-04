@@ -27,6 +27,10 @@ public class DisplayManager {
 		System.out.println(message);
 	}
 
+	public void showSameLineMessage(String message) {
+		System.out.print(message);
+	}
+
 	// Method for printing tables
 	public void printTable(List<String> headers, List<List<String>> rows) {
 		// Calculate the width of each column

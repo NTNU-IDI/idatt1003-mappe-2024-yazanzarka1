@@ -16,7 +16,11 @@ public class InputHandler {
 
 	// get input from user
 	public String getInput() {
-		System.out.print("Enter command: ");
+		return getInput("Enter Command (help - Display available commands): ");
+	}
+
+	public String getInput(String prompt) {
+		System.out.print(prompt);
 		return scanner.nextLine().trim();
 	}
 

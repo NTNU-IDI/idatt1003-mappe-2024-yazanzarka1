@@ -13,6 +13,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Main" target="22" />
       <module name="Test" target="22" />
     </bytecodeTargetLevel>
   </component>

@@ -4,6 +4,6 @@ package org.ntnu.console;
  * Command blueprint
  */
 public interface Command {
-	void execute();
+	Boolean execute();
 	String getDescription();
 }
