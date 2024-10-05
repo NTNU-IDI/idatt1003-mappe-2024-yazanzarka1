@@ -46,7 +46,7 @@ STUDENT ID = 530542
 
 ## Link to repository
 
-[//]: # (TODO: Include a link to your GitHub repository here.)
+[//] https://github.com/NTNU-IDI/idatt1003-mappe-2024-yazanzarka1.git
 
 ## How to run the project
 
