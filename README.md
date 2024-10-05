@@ -51,7 +51,7 @@ STUDENT ID = 530542
 ## How to run the project
 
 [//] you run the project by running the following command in the terminal:
-` ./BuuilAndRun.ps1 
+` ./BuildAndRun.ps1 
 `
 
 
