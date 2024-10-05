@@ -13,41 +13,31 @@
     <artifactId>Application</artifactId>
 
     <build>
+        <finalName>Application</finalName>
+        <directory>${project.basedir}/build/</directory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
                 <configuration>
-
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
                             <mainClass>org.ntnu.application.Application</mainClass>
                         </manifest>
                     </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                    <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>org.ntnu.application.Application</mainClass> <!-- Your main class here -->
-                        </transformer>
-                    </transformers>
-                </configuration>
             </plugin>
         </plugins>
     </build>

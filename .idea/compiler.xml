@@ -7,9 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Console" />
-        <module name="Application" />
         <module name="Units" />
         <module name="Food" />
+      </profile>
+      <profile name="Annotation profile for FoodManagementSystem" enabled="true">
+        <sourceOutputDir name="build/generated-sources/annotations" />
+        <sourceTestOutputDir name="build/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Application" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

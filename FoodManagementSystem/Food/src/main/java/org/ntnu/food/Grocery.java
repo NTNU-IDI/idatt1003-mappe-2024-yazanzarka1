@@ -15,4 +15,16 @@ public class Grocery {
 		this.pricePerUnit = pricePerUnit;
 	}
 
+	public String getGroceryName() {
+		return groceryName;
+	}
+
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public float getPricePerUnit() {
+		return pricePerUnit;
+	}
+
 }

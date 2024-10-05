@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 
 /**
- * InputHandler is responsible for waiting for user's input and trimming it so it can be safely passed
- * to commandRegistry for executing commands.
+ * InputHandler is responsible for waiting for user's input and trimming it so it can be safely
+ * passed to commandRegistry for executing commands.
  */
 public class InputHandler {
+
 	private final Scanner scanner;
 
 	public InputHandler() {

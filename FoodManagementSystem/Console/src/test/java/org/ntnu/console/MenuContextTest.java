@@ -1,9 +1,13 @@
 package org.ntnu.console;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MenuContextTest {
+
 	private MenuContext menuContext;
 	private Command mockCommand;
 
@@ -12,8 +16,8 @@ class MenuContextTest {
 		menuContext = new MenuContext("Test Menu", "test-menu");
 		mockCommand = new Command() {
 			@Override
-			public void execute() {
-				System.out.println("Mock Command Executed");
+			public Boolean execute() {
+				return false;
 			}
 
 			@Override
@@ -31,6 +35,7 @@ class MenuContextTest {
 
 	@Test
 	void testGetNonExistentCommand() {
-		assertNull(menuContext.getCommand("nonexistent"), "Should return null for a non-existent command");
+		assertNull(menuContext.getCommand("nonexistent"),
+				"Should return null for a non-existent command");
 	}
 }

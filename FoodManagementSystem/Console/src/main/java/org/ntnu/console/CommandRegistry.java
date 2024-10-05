@@ -6,14 +6,15 @@ import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
- * CommandRegistry is responsible for managing, executing and switching menu-contexts.
- * Each context has commands which will be handled on user interaction.
- * CommandRegistry makes sure that the right command is being executed.
+ * CommandRegistry is responsible for managing, executing and switching menu-contexts. Each context
+ * has commands which will be handled on user interaction. CommandRegistry makes sure that the right
+ * command is being executed.
  */
 public class CommandRegistry {
+
 	private final Map<String, MenuContext> contexts;
-	private MenuContext currentContext;
 	private final DisplayManager displayManager;
+	private MenuContext currentContext;
 
 	public CommandRegistry() {
 		displayManager = new DisplayManager();
@@ -23,7 +24,7 @@ public class CommandRegistry {
 	/**
 	 * Add new menu context to CommandRegistry
 	 *
-	 * @param context
+	 * @param context MenuContext with defined commands
 	 */
 	public void addContext(MenuContext context) {
 		contexts.put(context.getKey(), context);
@@ -31,6 +32,7 @@ public class CommandRegistry {
 
 	/**
 	 * Switches current context and renders context's command
+	 *
 	 * @param contextKey context to switch to
 	 */
 	public void switchContext(String contextKey) {
@@ -44,10 +46,8 @@ public class CommandRegistry {
 	}
 
 	/**
-	 *
 	 * @param keyword user command input
 	 * @return Boolean rerender menu-context commands.
-	 *
 	 */
 	public Boolean executeCommand(String keyword) {
 		Command command = currentContext.getCommand(keyword);

@@ -11,11 +11,38 @@ STUDENT ID = 530542
 
 ## Project description
 
-[//]: # (TODO: Write a short description of your project/product here.)
+[//] Food Management System is a system that is built with scability in mind. The system is built to manage food items in a restaurant. The system is built with the following features:
+- Manage Groceries (Add, Remove, List)
+- Manage Recipes (Add, Remove, List)
+- Store Groceries in Storage Units (Add, Remove, List)
+
+
 
 ## Project structure
 
-[//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+[//] All modules follow the following structure:
+* Module
+    * src
+        * main
+            * java
+                * org.ntnu.packageName
+                  
+        * test
+            * java
+                * org.ntnu.packageName
+
+[//] Food Management System is built modular with SOLID principles without Dependency Injection. The system is divided into the following modules:
+
+
+* Application (Main Module)
+    * Application - The main class of the system
+    * Menus - A directory containing the menu contexts of the system and commands
+    * Commands - A directory containing the commands of the system
+    * Core - A directory containing the Bootstrapper and the Application Context
+    * Containers - A directory containing the Food Storage Containers of the system.
+* Food - Contains the classes for managing food items 
+* Console - Contains the classes for managing the console input and output
+* Unit - Contains SI units
 
 ## Link to repository
 
@@ -23,12 +50,16 @@ STUDENT ID = 530542
 
 ## How to run the project
 
-[//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
-What is the input and output of the program? What is the expected behaviour of the program?)
+[//] you run the project by running the following command in the terminal:
+` ./BuuilAndRun.ps1 
+`
+
 
 ## How to run the tests
 
-[//]: # (TODO: Describe how to run the tests here.)
+[//] you run the tests by running the following command in the terminal:
+` ./RunTests.ps1 
+`
 
 ## References
 

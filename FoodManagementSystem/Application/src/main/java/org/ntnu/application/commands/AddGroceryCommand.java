@@ -5,7 +5,9 @@ import org.ntnu.console.Command;
 import org.ntnu.console.DisplayManager;
 import org.ntnu.console.InputHandler;
 import org.ntnu.food.Grocery;
-import org.ntnu.food.StorageContainer;
+import org.ntnu.food.GroceryManager;
+import org.ntnu.food.StorageEntry;
+import org.ntnu.food.StorageUnit;
 import org.ntnu.units.Unit;
 import org.ntnu.units.UnitProvider;
 
@@ -15,13 +17,13 @@ import java.util.List;
 
 public class AddGroceryCommand implements Command {
 
-    StorageContainer storageContainer;
+    GroceryManager groceryManager;
     InputHandler inputHandler;
     DisplayManager displayManager;
     UnitProvider unitProvider;
 
-    public AddGroceryCommand(StorageContainer storageContainer) {
-        this.storageContainer = storageContainer;
+    public AddGroceryCommand(GroceryManager groceryManager) {
+        this.groceryManager = groceryManager;
         this.inputHandler = new InputHandler();
         this.displayManager = new DisplayManager();
         this.unitProvider = new UnitProvider();
@@ -52,13 +54,10 @@ public class AddGroceryCommand implements Command {
             // Get the chosen unit
             Unit selectedUnit = units.get(choice - 1);
 
-            float groceryQuantity = Float.parseFloat(inputHandler.getInput("Enter quantity: "));
 
             float groceryPricePerUnit = Float.parseFloat(inputHandler.getInput("Enter price per unit: "));
 
-            Date groceryBestBeforeDate = new SimpleDateFormat("dd.MM.yyyy").parse(inputHandler.getInput("Enter best before date (dd.mm.yyyy): "));
-            System.out.println(groceryBestBeforeDate);
-            storageContainer.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));
+            groceryManager.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));
 
             return true;
         } catch (Exception e) {
@@ -69,6 +68,6 @@ public class AddGroceryCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "Add Grocery to Storage";
+        return "Add grocery to application";
     }
 }
