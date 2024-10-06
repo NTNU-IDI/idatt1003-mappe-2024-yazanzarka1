@@ -44,9 +44,9 @@ public class StorageUnit {
         }
 
         groceries.put(grocery.groceryName, new StorageEntry(grocery, quantity, bestBeforeDate));
-    };
+    }
 
-    /*
+	/*
      * Removes a grocery from the storage unit.
      *  If the quantity is less than the quantity in the storage unit,
      *  the quantity will be updated.
@@ -69,8 +69,9 @@ public class StorageUnit {
         groceries.put(grocery.groceryName, groceryToRemove);
 
 
-    };
-    /*
+    }
+
+	/*
      * Displays a list of all storage entries in the storage unit.
      */
     public void displayGroceries() {

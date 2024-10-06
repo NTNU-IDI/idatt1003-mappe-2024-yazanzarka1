@@ -6,6 +6,7 @@ import org.ntnu.application.menus.main_menu.MainMenu;
 import org.ntnu.application.menus.recipes_menu.RecipesMenu;
 import org.ntnu.application.menus.storage_menu.StorageUnitMenu;
 import org.ntnu.console.CommandRegistry;
+import org.ntnu.console.InputHandler;
 import org.ntnu.food.GroceryManager;
 import org.ntnu.food.StorageUnit;
 
@@ -36,9 +37,17 @@ public class Bootstrap {
 		RecipesMenu recipesMenu = new RecipesMenu(commandRegistry);
 		commandRegistry.addContext(recipesMenu);
 
+		// Seed data
+		Seeder seeder = new Seeder(groceryManager, mainStorageUnit);
+		boolean seedData = new InputHandler().getInput("write 'y' to seed data, anything else to skip: ")
+				.equalsIgnoreCase("y");
+		if (seedData) {
+			seeder.Seed();
+		}
 
 		// Set initial menu context
 		commandRegistry.switchContext("main-menu");
+
 		return commandRegistry;
 	}
 

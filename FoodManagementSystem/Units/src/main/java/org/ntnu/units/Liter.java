@@ -4,6 +4,6 @@ public class Liter extends Unit {
 
 
 	public Liter() {
-		this.unitName = "liter";
+		this.unitName = "L";
 	}
 }

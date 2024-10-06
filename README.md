@@ -9,6 +9,12 @@ This file uses Mark Down syntax. For more information see [here]([x]https://www.
 STUDENT NAME = Yazan Zarka  
 STUDENT ID = 530542
 
+## Requirements
+    
+[//] Make sure you have the following installed:
+* `Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)`
+* `Oracle OpenJDK 23`
+
 ## Project description
 
 [//] Food Management System is a system that is built with scability in mind. The system is built to manage food items in a restaurant. The system is built with the following features:
@@ -49,6 +55,7 @@ STUDENT ID = 530542
 [//] https://github.com/NTNU-IDI/idatt1003-mappe-2024-yazanzarka1.git
 
 ## How to run the project
+
 
 [//] you run the project by running the following command in the terminal:
 ` ./BuildAndRun.ps1 

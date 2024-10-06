@@ -19,7 +19,7 @@ public class DisplayGroceriesCommand implements Command {
 
     @Override
     public String getDescription() {
-        return String.format("Display Available Groceries");
+        return "Display Available Groceries";
     }
 }
 

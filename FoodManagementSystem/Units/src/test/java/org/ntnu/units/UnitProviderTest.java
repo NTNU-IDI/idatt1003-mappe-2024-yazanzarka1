@@ -14,7 +14,7 @@ class UnitProviderTest {
 
 		assertNotNull(units, "Units list should not be null");
 		assertEquals(3, units.size(), "Units list should contain 3 elements");
-		assertTrue(units.stream().anyMatch(unit -> unit instanceof Gram), "Units list should contain an instance of Gram");
+		assertTrue(units.stream().anyMatch(unit -> unit instanceof Kilogram), "Units list should contain an instance of Kilogram");
 		assertTrue(units.stream().anyMatch(unit -> unit instanceof Piece), "Units list should contain an instance of Piece");
 		assertTrue(units.stream().anyMatch(unit -> unit instanceof Liter), "Units list should contain an instance of Liter");
 	}

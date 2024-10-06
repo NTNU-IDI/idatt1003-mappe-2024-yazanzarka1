@@ -7,7 +7,7 @@ public class UnitProvider {
     List<Unit> units;
     public UnitProvider() {
         units = new ArrayList<Unit>();
-        units.add(new Gram());
+        units.add(new Kilogram());
         units.add(new Piece());
         units.add(new Liter());
     }
