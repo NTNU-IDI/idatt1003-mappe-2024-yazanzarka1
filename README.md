@@ -10,10 +10,13 @@ STUDENT NAME = Yazan Zarka
 STUDENT ID = 530542
 
 ## Requirements
+
+### Run `mvn --version`
     
 [//] Make sure you have the following installed:
 * `Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)`
 * `Oracle OpenJDK 23`
+
 
 ## Project description
 
