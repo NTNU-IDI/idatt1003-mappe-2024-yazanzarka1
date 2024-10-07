@@ -39,7 +39,7 @@ public class MenuContext {
 
 	/**
 	 * @param keyword Command key - user's input should match keyword to execute command
-	 * @param command
+	 * @param command Command Object
 	 */
 	public void addCommand(String keyword, Command command) {
 		commands.put(keyword, command);
@@ -47,7 +47,7 @@ public class MenuContext {
 
 	/**
 	 * @param keyword get command rom commands map
-	 * @return
+	 * @return Command
 	 */
 	public Command getCommand(String keyword) {
 		return commands.get(keyword);
