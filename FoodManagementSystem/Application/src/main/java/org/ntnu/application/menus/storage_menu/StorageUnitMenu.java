@@ -1,6 +1,7 @@
 package org.ntnu.application.menus.storage_menu;
 
 import org.ntnu.application.commands.AddGroceryToStorageUnitCommand;
+import org.ntnu.application.commands.DisplayExpiredGroceriesCommand;
 import org.ntnu.application.commands.DisplayStoredGroceryCommand;
 import org.ntnu.application.commands.RemoveGroceryFromStorageUnitCommand;
 import org.ntnu.application.commands.SearchInStorageUnitCommand;
@@ -18,6 +19,7 @@ public class StorageUnitMenu extends MenuContext {
 		addCommand("2", new AddGroceryToStorageUnitCommand(groceryManager, storageUnit));
 		addCommand("3", new RemoveGroceryFromStorageUnitCommand(storageUnit));
 		addCommand("4", new SearchInStorageUnitCommand(storageUnit));
+		addCommand("5", new DisplayExpiredGroceriesCommand(storageUnit));
 		addCommand("back", new SwitchMenuCommand("main-menu", commandRegistry));
 
 	}

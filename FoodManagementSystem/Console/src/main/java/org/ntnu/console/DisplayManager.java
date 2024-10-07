@@ -53,7 +53,6 @@ public class DisplayManager {
 
 	/*
 	 * Print tables with headers and rows
-	 *  Written with help from CoPilot
 	 */
 
 	public void printTable(List<String> headers, List<List<String>> rows) {
