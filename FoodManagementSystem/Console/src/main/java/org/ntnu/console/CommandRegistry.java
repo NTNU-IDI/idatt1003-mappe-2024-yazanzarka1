@@ -59,6 +59,9 @@ public class CommandRegistry {
 		return false;
 	}
 
+	/**
+	 * @return MenuContext return application's current menu-context
+	 */
 	public MenuContext getCurrentContext() {
 		return currentContext;
 	}

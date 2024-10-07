@@ -13,9 +13,9 @@ import java.util.Date;
 
 public class Seeder {
 
-	private GroceryManager groceryManager;
-	private StorageUnit storageUnit;
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private final GroceryManager groceryManager;
+	private final StorageUnit storageUnit;
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 	Seeder(GroceryManager groceryManager, StorageUnit storageUnit) {
 		this.groceryManager = groceryManager;

@@ -10,9 +10,9 @@ import org.ntnu.food.StorageUnit;
 
 public class RemoveGroceryFromStorageUnitCommand implements Command {
 
-	InputHandler inputHandler;
-	StorageUnit storageUnit;
-	DisplayManager displayManager;
+	final InputHandler inputHandler;
+	final StorageUnit storageUnit;
+	final DisplayManager displayManager;
 	public RemoveGroceryFromStorageUnitCommand(StorageUnit storageUnit){
 		inputHandler = new InputHandler();
 		this.storageUnit = storageUnit;
@@ -24,7 +24,6 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
 		storageUnit.displayGroceries();
 		try {
 			String storageEntryName = inputHandler.getInput("Enter name of grocery to remove: ");
-			float quantity = Float.parseFloat(inputHandler.getInput("Enter quantity to remove: "));
 
 			List<StorageEntry> storageEntries =  storageUnit.findGrocery(storageEntryName);
 			if(storageEntries.isEmpty()) {
@@ -36,6 +35,9 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
 				displayManager.showColoredMessage("Error: Multiple groceries found", Color.RED);
 				return true;
 			}
+
+			float quantity = Float.parseFloat(inputHandler.getInput("Enter quantity to remove: "));
+
 
 			storageUnit.removeGrocery(storageEntries.getFirst(), quantity);
 			return false;

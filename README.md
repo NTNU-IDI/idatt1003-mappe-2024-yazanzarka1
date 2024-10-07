@@ -14,13 +14,13 @@ STUDENT ID = 530542
 ### Run `mvn --version`
     
 [//] Make sure you have the following installed:
-* `Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)`
+* `Apache Maven 3.9.8 `
 * `Oracle OpenJDK 23`
 
 
 ## Project description
 
-[//] Food Management System is a system that is built with scability in mind. The system is built to manage food items in a restaurant. The system is built with the following features:
+[//] Food Management System is a system that is built with scalability in mind. The system is built to manage food items in a restaurant. The system is built with the following features:
 - Manage Groceries (Add, Remove, List)
 - Manage Recipes (Add, Remove, List)
 - Store Groceries in Storage Units (Add, Remove, List)

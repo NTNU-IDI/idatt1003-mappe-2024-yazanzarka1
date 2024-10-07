@@ -17,9 +17,9 @@ import org.ntnu.console.DisplayManager;
  */
 public class StorageUnit {
 
-    public String name;
-    HashMap<String, StorageEntry> groceries;
-    DisplayManager displayManager;
+    public final String name;
+    final HashMap<String, StorageEntry> groceries;
+    final DisplayManager displayManager;
 
     public StorageUnit(String name){
       this.name = name;
@@ -103,8 +103,8 @@ public class StorageUnit {
     }
 
     /*
-     * Finds a grocery in the storage unit by name or part of the name. The search is case insensitive.
-     * Return List<StorageEntry> of found groceries.
+     * Finds a grocery in the storage unit by name or part of the name. The search is case-insensitive.
+     * @Return List<StorageEntry> of found groceries.
      */
     public List<StorageEntry> findGrocery(String query) {
         List<StorageEntry> foundGroceries = new ArrayList<>();

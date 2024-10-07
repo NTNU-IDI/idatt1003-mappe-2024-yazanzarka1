@@ -2,11 +2,10 @@ package org.ntnu.application.commands;
 
 import org.ntnu.console.Command;
 import org.ntnu.food.GroceryManager;
-import org.ntnu.food.StorageUnit;
 
 public class DisplayGroceriesCommand implements Command {
 
-    GroceryManager groceryManager;
+    final GroceryManager groceryManager;
     public DisplayGroceriesCommand(GroceryManager groceryManager) {
         this.groceryManager = groceryManager;
     }

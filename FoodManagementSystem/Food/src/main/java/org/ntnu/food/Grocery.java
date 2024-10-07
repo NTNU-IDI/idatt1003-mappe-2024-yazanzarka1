@@ -1,30 +1,48 @@
 package org.ntnu.food;
+
 import org.ntnu.units.Unit;
 
-import java.util.Date;
-
+/**
+ *
+ */
 public class Grocery {
 
-	final String groceryName;
-	final Unit unit;
-	public float pricePerUnit;
+  final String groceryName;
+  final Unit unit;
+  public float pricePerUnit;
 
-	public Grocery(String itemName, Unit unit,float pricePerUnit) {
-		this.groceryName = itemName;
-		this.unit = unit;
-		this.pricePerUnit = pricePerUnit;
-	}
+  /**
+   * @param itemName
+   * @param unit
+   * @param pricePerUnit
+   */
+  public Grocery(String itemName, Unit unit, float pricePerUnit) {
+    this.groceryName = itemName;
+    this.unit = unit;
+    this.pricePerUnit = pricePerUnit;
+  }
 
-	public String getGroceryName() {
-		return groceryName;
-	}
+  /**
+   * @return String Grocery Name
+   */
+  public String getGroceryName() {
+    return groceryName;
+  }
 
-	public Unit getUnit() {
-		return unit;
-	}
 
-	public float getPricePerUnit() {
-		return pricePerUnit;
-	}
+  /**
+   * @return Unit Grocery's unit
+   */
+  public Unit getUnit() {
+    return unit;
+  }
+
+
+  /**
+   * @return float PricePerUnit
+   */
+  public float getPricePerUnit() {
+    return pricePerUnit;
+  }
 
 }

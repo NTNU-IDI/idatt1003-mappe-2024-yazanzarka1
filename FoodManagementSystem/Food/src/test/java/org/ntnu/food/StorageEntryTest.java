@@ -13,13 +13,12 @@ import java.util.Date;
 class StorageEntryTest {
 
 	private StorageEntry storageEntry;
-	private Grocery grocery;
-	private Date bestBeforeDate;
+  private Date bestBeforeDate;
 
 	@BeforeEach
 	void setUp() {
 		Unit unit = new Liter();
-		grocery = new Grocery("Milk", unit, 50.0f);
+    Grocery grocery = new Grocery("Milk", unit, 50.0f);
 		bestBeforeDate = new Date();
 		storageEntry = new StorageEntry(grocery, 10.0f, bestBeforeDate);
 	}

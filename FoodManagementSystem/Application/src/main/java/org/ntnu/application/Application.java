@@ -14,21 +14,21 @@ import org.ntnu.console.CommandRegistry;
 public class Application {
 
 	public static void main(String[] args) {
-		/**
-		 * Initialize the application
+		/*
+		  Initialize the application
 		 */
 		InputHandler inputHandler = new InputHandler();
 		DisplayManager displayManager = new DisplayManager();
 
-		/**
-		 * Bootstrap the application's Command Registry
-		 * This will initialize all the commands and menus
+		/*
+		  Bootstrap the application's Command Registry
+		  This will initialize all the commands and menus
 		 */
 		CommandRegistry commandRegistry = Bootstrap.initCommandRegistry();
 		Boolean displayMenu = false;
 
-		/**
-		 * Main loop
+		/*
+		  Main loop
 		 */
 		while (true) {
 			if (displayMenu){

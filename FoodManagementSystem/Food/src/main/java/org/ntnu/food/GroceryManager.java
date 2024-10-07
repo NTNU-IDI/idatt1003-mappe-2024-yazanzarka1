@@ -1,11 +1,12 @@
 package org.ntnu.food;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.ntnu.console.DisplayManager;
 
+/**
+ *
+ */
 /*
  * Class for managing groceries
  * 
@@ -14,7 +15,7 @@ public class GroceryManager {
 	final private List<Grocery> availableGroceries;
 	final private DisplayManager displayManager;
 	public GroceryManager() {
-		availableGroceries = new ArrayList<Grocery>();
+		availableGroceries = new ArrayList<>();
 		displayManager = new DisplayManager();
 	}
 
@@ -23,18 +24,25 @@ public class GroceryManager {
 
 	}
 
+	/**
+	 * @return List<Grocery> Available Groceries in the application.
+	 */
 	public List<Grocery> getAvailableGroceries() {
 		return availableGroceries;
 	}
 
+
+	/**
+	 * @param grocery Grocery to be removed
+	 */
 	public void removeGrocery(Grocery grocery) {
 		availableGroceries.remove(grocery);
 
 	}
 
-	/*
-	 * Displays a list of all groceries in the grocery manager.
-	 * 
+
+	/**
+	 * Displays groceries in a table
 	 */
 	public void displayGroceries() {
 		List<String> headers = List.of("Index", "Grocery", "Unit", "NOK / Unit");

@@ -1,8 +1,6 @@
 package org.ntnu.application.commands;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.ntnu.console.Command;
 import org.ntnu.console.DisplayManager;
 import org.ntnu.console.InputHandler;
@@ -11,9 +9,9 @@ import org.ntnu.food.StorageUnit;
 
 public class SearchInStorageUnitCommand implements Command {
 
-	InputHandler inputHandler;
-	StorageUnit storageUnit;
-	DisplayManager displayManager;
+	final InputHandler inputHandler;
+	final StorageUnit storageUnit;
+	final DisplayManager displayManager;
 
 	public SearchInStorageUnitCommand(StorageUnit storageUnit) {
 		inputHandler = new InputHandler();
@@ -40,7 +38,7 @@ public class SearchInStorageUnitCommand implements Command {
 	}
 
 	/**
-	 * @return
+	 * @return String Description of Command
 	 */
 	@Override
 	public String getDescription() {

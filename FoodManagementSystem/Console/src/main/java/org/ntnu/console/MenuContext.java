@@ -20,22 +20,42 @@ public class MenuContext {
 		this.commands = new HashMap<>();
 	}
 
+	/**
+	 *
+	 * @return String Menu-Name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Unique Key
+	 * @return String Key used to identify context in Application lifecycle.
+	 *
+	 */
 	public String getKey() {
 		return menuKey;
 	}
 
+	/**
+	 * @param keyword Command key - user's input should match keyword to execute command
+	 * @param command
+	 */
 	public void addCommand(String keyword, Command command) {
 		commands.put(keyword, command);
 	}
 
+	/**
+	 * @param keyword get command rom commands map
+	 * @return
+	 */
 	public Command getCommand(String keyword) {
 		return commands.get(keyword);
 	}
 
+	/**
+	 * Display commands in current menu-context
+	 */
 	public void displayMenu() {
 		displayManager.showSpace();
 		System.out.println("============ " + name + " ============");

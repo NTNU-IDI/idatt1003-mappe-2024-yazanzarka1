@@ -12,10 +12,10 @@ import org.ntnu.units.UnitProvider;
 
 public class AddGroceryCommand implements Command {
 
-	GroceryManager groceryManager;
-	InputHandler inputHandler;
-	DisplayManager displayManager;
-	UnitProvider unitProvider;
+	final GroceryManager groceryManager;
+	final InputHandler inputHandler;
+	final DisplayManager displayManager;
+	final UnitProvider unitProvider;
 
 	public AddGroceryCommand(GroceryManager groceryManager) {
 		this.groceryManager = groceryManager;

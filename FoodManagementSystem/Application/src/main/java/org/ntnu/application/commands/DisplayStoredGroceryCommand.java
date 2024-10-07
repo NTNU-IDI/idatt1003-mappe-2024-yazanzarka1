@@ -5,7 +5,7 @@ import org.ntnu.food.StorageUnit;
 
 public class DisplayStoredGroceryCommand implements Command {
 
-	StorageUnit storageUnit;
+	final StorageUnit storageUnit;
 	public DisplayStoredGroceryCommand(StorageUnit storageUnit) {
 		this.storageUnit = storageUnit;
 

@@ -6,7 +6,6 @@ import org.ntnu.application.commands.SwitchMenuCommand;
 import org.ntnu.console.CommandRegistry;
 import org.ntnu.console.MenuContext;
 import org.ntnu.food.GroceryManager;
-import org.ntnu.food.StorageUnit;
 
 public class GroceryMenu extends MenuContext {
 	public GroceryMenu(CommandRegistry commandRegistry, GroceryManager groceryManager){

@@ -6,21 +6,21 @@ import org.fusesource.jansi.Ansi.Color;
 import org.ntnu.console.Command;
 import org.ntnu.console.DisplayManager;
 import org.ntnu.console.InputHandler;
-import org.ntnu.food.Grocery;
 import org.ntnu.food.GroceryManager;
 import org.ntnu.food.StorageUnit;
 
 public class AddGroceryToStorageUnitCommand implements Command {
 
 
-	GroceryManager groceryManager;
-	StorageUnit storageUnit;
-	InputHandler inputHandler;
-	DisplayManager displayManager;
+	final GroceryManager groceryManager;
+	final StorageUnit storageUnit;
+	final InputHandler inputHandler;
+	final DisplayManager displayManager;
 	public AddGroceryToStorageUnitCommand(GroceryManager groceryManager, StorageUnit storageUnit) {
 		this.groceryManager = groceryManager;
 		this.storageUnit = storageUnit;
 		this.inputHandler = new InputHandler();
+		this.displayManager = new DisplayManager();
 	}
 
 	@Override
