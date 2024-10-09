@@ -3,43 +3,60 @@ package org.ntnu.application.commands;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 import org.ntnu.console.Command;
 import org.ntnu.console.DisplayManager;
 import org.ntnu.food.StorageEntry;
 import org.ntnu.food.StorageUnit;
 
+/**
+ * Display expired groceries with total value summary.
+ */
 public class DisplayExpiredGroceriesCommand implements Command {
 
   StorageUnit storageUnit;
   DisplayManager displayManager;
-  public DisplayExpiredGroceriesCommand(StorageUnit storageUnit){
+
+  /**
+   * .
+   *
+   * @param storageUnit Storage unit that we should look for expired groceries in.
+   */
+  public DisplayExpiredGroceriesCommand(StorageUnit storageUnit) {
     displayManager = new DisplayManager();
     this.storageUnit = storageUnit;
   }
+
   /**
+   * Execute command.
+   *
    * @return Boolean redisplay commands in menu-contexts if true
    */
   @Override
   public Boolean execute() {
-    HashMap<String, StorageEntry> storageEntries = storageUnit.getGroceries();
+    Map<String, StorageEntry> storageEntries = storageUnit.getGroceries();
     List<StorageEntry> expiredGroceries = new ArrayList<>();
     float totalExpiredGroceriesValue = 0;
-    for (StorageEntry storageEntry : storageEntries.values()){
-      if (storageEntry.isExpired()){
+    for (StorageEntry storageEntry : storageEntries.values()) {
+      if (Boolean.TRUE.equals(storageEntry.isExpired())) {
         totalExpiredGroceriesValue += storageEntry.getQuantity() + storageEntry.getPricePerUnit();
         expiredGroceries.add(storageEntry);
       }
     }
 
     storageUnit.displayGroceries(expiredGroceries);
-    displayManager.showColoredMessage(String.format("Total value of expired products: %.2f NOK", totalExpiredGroceriesValue), Color.RED);
+    displayManager.showColoredMessage(
+        String.format("Total value of expired products: %.2f NOK", totalExpiredGroceriesValue),
+        Color.RED);
     displayManager.showSpace();
     return false;
 
   }
 
   /**
+   * .
+   *
    * @return String defines the commands description
    */
   @Override

@@ -3,10 +3,11 @@ package org.ntnu.food;
 import java.util.Date;
 
 /**
- * StorageEntry is responsible for storing the quantity
- * and best before date of a grocery inside a StorageUnit.
+ * StorageEntry is responsible for storing the quantity and best before date of a grocery inside a
+ * StorageUnit.
  */
 public class StorageEntry extends Grocery {
+
   float quantity;
   Date bestBeforeDate;
 
@@ -17,6 +18,8 @@ public class StorageEntry extends Grocery {
   }
 
   /**
+   * groceryName getter.
+   *
    * @return float Grocery's quantity in a storage unit
    */
   public float getQuantity() {
@@ -24,14 +27,8 @@ public class StorageEntry extends Grocery {
   }
 
   /**
-   * @return Date BestBeforeDate when the grocery expires
-   */
-  public Date getBestBeforeDate() {
-    return bestBeforeDate;
-  }
-
-  /**
-   * Quantity setter
+   * Quantity setter.
+   *
    * @param quantity new quantity
    */
   public void setQuantity(float quantity) {
@@ -39,6 +36,17 @@ public class StorageEntry extends Grocery {
   }
 
   /**
+   * bestBeforeDate getter.
+   *
+   * @return Date BestBeforeDate when the grocery expires
+   */
+  public Date getBestBeforeDate() {
+    return bestBeforeDate;
+  }
+
+  /**
+   * BestBeforeDate setter.
+   *
    * @param bestBeforeDate new best before date.
    */
   public void setBestBeforeDate(Date bestBeforeDate) {
@@ -46,23 +54,29 @@ public class StorageEntry extends Grocery {
   }
 
   /**
+   * add quantity to current quantity.
+   *
    * @param quantity quantity to add to current quantity
    */
-  public void addQuantity(float quantity){
+  public void addQuantity(float quantity) {
     this.quantity += quantity;
   }
 
   /**
+   * subtract quantity from current quantity.
+   *
    * @param quantity quantity to be removed
    */
-  public void subtractQuantity(float quantity){
+  public void subtractQuantity(float quantity) {
     this.quantity -= quantity;
   }
 
   /**
+   * check if the grocery is expired.
+   *
    * @return Boolean is the grocery expired
    */
-  public Boolean isExpired(){
+  public Boolean isExpired() {
     Date currentDate = new Date();
     return currentDate.after(bestBeforeDate);
 

@@ -6,18 +6,29 @@ import org.ntnu.console.DisplayManager;
 import org.ntnu.console.InputHandler;
 import org.ntnu.food.RecipeManager;
 
+/**
+ * Display a recipe.
+ */
 public class DisplayRecipeCommand implements Command {
 
   private final RecipeManager recipeManager;
   private final DisplayManager displayManager;
   private final InputHandler inputHandler;
-  public DisplayRecipeCommand(RecipeManager recipeManager){
+
+  /**
+   * Initiate command with given recipeManager.
+   *
+   * @param recipeManager recipe manager where recipes are stored
+   */
+  public DisplayRecipeCommand(RecipeManager recipeManager) {
     this.recipeManager = recipeManager;
     this.displayManager = new DisplayManager();
     this.inputHandler = new InputHandler();
   }
 
   /**
+   *.
+   *
    * @return Boolean redisplay commands in menu-contexts if true
    */
   @Override
@@ -25,7 +36,7 @@ public class DisplayRecipeCommand implements Command {
     displayManager.showSpace();
     recipeManager.displayRecipes();
     displayManager.showSpace();
-    try{
+    try {
       int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
       displayManager.showSpace();
       recipeManager.getRecipes().get(recipeIndex).displayRecipe();
@@ -40,6 +51,8 @@ public class DisplayRecipeCommand implements Command {
   }
 
   /**
+   * Get command's description.
+   *
    * @return String defines the commands description
    */
   @Override
