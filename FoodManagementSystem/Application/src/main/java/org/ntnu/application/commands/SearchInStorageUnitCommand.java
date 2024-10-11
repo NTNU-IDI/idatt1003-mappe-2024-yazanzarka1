@@ -7,41 +7,53 @@ import org.ntnu.console.InputHandler;
 import org.ntnu.food.StorageEntry;
 import org.ntnu.food.StorageUnit;
 
+/**
+ * Search in storage unit.
+ */
 public class SearchInStorageUnitCommand implements Command {
 
-	final InputHandler inputHandler;
-	final StorageUnit storageUnit;
-	final DisplayManager displayManager;
+  final InputHandler inputHandler;
+  final StorageUnit storageUnit;
+  final DisplayManager displayManager;
 
-	public SearchInStorageUnitCommand(StorageUnit storageUnit) {
-		inputHandler = new InputHandler();
-		this.storageUnit = storageUnit;
-		displayManager = new DisplayManager();
-	}
+  /**
+   * Initiate a search in storage unit command.
+   *
+   * @param storageUnit Storage unit to search in
+   */
+  public SearchInStorageUnitCommand(StorageUnit storageUnit) {
+    inputHandler = new InputHandler();
+    this.storageUnit = storageUnit;
+    displayManager = new DisplayManager();
+  }
 
-	/**
-	 * @return Boolean rerender the menu-context commands
-	 */
-	@Override
-	public Boolean execute() {
-		System.out.println("Search in storage unit");
+  /**
+   * execute search in storage unit command.
+   *
+   * @return Boolean rerender the menu-context commands
+   */
+  @Override
+  public Boolean execute() {
+    System.out.println("Search in storage unit");
 
-		String query = inputHandler.getInput("Enter grocery name: ");
-		// search in storage unit
-		List<StorageEntry> foundEntries = storageUnit.findGrocery(query);
-		if (foundEntries.isEmpty()) {
-			displayManager.showFancyMessage("No groceries found");
-			return false;
-		}
-		storageUnit.displayGroceries(foundEntries);
-		return false;
-	}
+    String query = inputHandler.getInput("Enter grocery name: ");
+    // search in storage unit
+    List<StorageEntry> foundEntries = storageUnit.findGrocery(query);
+    if (foundEntries.isEmpty()) {
+      displayManager.showFancyMessage("No groceries found");
+      return false;
+    }
+    storageUnit.displayGroceries(foundEntries);
+    return false;
+  }
 
-	/**
-	 * @return String Description of Command
-	 */
-	@Override
-	public String getDescription() {
-		return "Search in storage unit";
-	}
+  /**
+   * description of Command.
+   *
+   * @return String Description of Command
+   */
+  @Override
+  public String getDescription() {
+    return "Search in storage unit";
+  }
 }

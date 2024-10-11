@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.ntnu</groupId>
-        <artifactId>FoodManagementSystem</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>Food</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>Units</artifactId>
+      <groupId>org.ntnu.units</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>junit-jupiter</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>Console</artifactId>
+      <groupId>org.ntnu.console</groupId>
+    </dependency>
+  </dependencies>
 
-    <groupId>org.ntnu.food</groupId>
-    <artifactId>Food</artifactId>
+  <groupId>org.ntnu.food</groupId>
+  <modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
-        <maven.compiler.release>23</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.ntnu.units</groupId>
-            <artifactId>Units</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ntnu.console</groupId>
-            <artifactId>Console</artifactId>
-        </dependency>
-    </dependencies>
+  <parent>
+    <artifactId>FoodManagementSystem</artifactId>
+    <groupId>org.ntnu</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <maven.compiler.release>23</maven.compiler.release>
+    <maven.compiler.source>23</maven.compiler.source>
+    <maven.compiler.target>23</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
 </project>

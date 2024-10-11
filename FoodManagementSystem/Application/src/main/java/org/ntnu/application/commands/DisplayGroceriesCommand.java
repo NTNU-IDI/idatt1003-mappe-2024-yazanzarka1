@@ -3,22 +3,31 @@ package org.ntnu.application.commands;
 import org.ntnu.console.Command;
 import org.ntnu.food.GroceryManager;
 
+/**
+ * Display application's groceries.
+ */
 public class DisplayGroceriesCommand implements Command {
 
-    final GroceryManager groceryManager;
-    public DisplayGroceriesCommand(GroceryManager groceryManager) {
-        this.groceryManager = groceryManager;
-    }
+  final GroceryManager groceryManager;
 
-    @Override
-    public Boolean execute() {
-        groceryManager.displayGroceries();
-        return false;
-    }
+  /**
+   *.
+   *
+   * @param groceryManager groceryManager we display groceries from
+   */
+  public DisplayGroceriesCommand(GroceryManager groceryManager) {
+    this.groceryManager = groceryManager;
+  }
 
-    @Override
-    public String getDescription() {
-        return "Display Available Groceries";
-    }
+  @Override
+  public Boolean execute() {
+    groceryManager.displayGroceries();
+    return false;
+  }
+
+  @Override
+  public String getDescription() {
+    return "Display Available Groceries";
+  }
 }
 

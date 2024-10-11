@@ -3,26 +3,30 @@ package org.ntnu.food;
 import org.ntnu.units.Unit;
 
 /**
- *
+ * Grocery class represent a grocery that can be stored in a recipe or a storage unit.
  */
 public class Grocery {
 
   final String groceryName;
   final Unit unit;
-  public float pricePerUnit;
+  final float pricePerUnit;
 
   /**
-   * @param itemName
-   * @param unit
-   * @param pricePerUnit
+   * Public Grocery constructor.
+   *
+   * @param groceryName grocery name
+   * @param unit SI unit
+   * @param pricePerUnit price per unit NOK/KG for example
    */
-  public Grocery(String itemName, Unit unit, float pricePerUnit) {
-    this.groceryName = itemName;
+  public Grocery(String groceryName, Unit unit, float pricePerUnit) {
+    this.groceryName = groceryName;
     this.unit = unit;
     this.pricePerUnit = pricePerUnit;
   }
 
   /**
+   * Grocery's name getter.
+   *
    * @return String Grocery Name
    */
   public String getGroceryName() {
@@ -31,6 +35,8 @@ public class Grocery {
 
 
   /**
+   * Grocery's unit getter.
+   *
    * @return Unit Grocery's unit
    */
   public Unit getUnit() {
@@ -39,6 +45,8 @@ public class Grocery {
 
 
   /**
+   * Grocery's price per unit getter.
+   *
    * @return float PricePerUnit
    */
   public float getPricePerUnit() {

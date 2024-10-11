@@ -1,9 +1,15 @@
 package org.ntnu.units;
 
+/**
+ * Kilogram SI unit.
+ */
 public class Kilogram extends Unit {
 
 
-	public Kilogram() {
-		this.unitName = "KG";
-	}
+  /**
+   * Initiate an instance.
+   */
+  public Kilogram() {
+    this.unitName = "KG";
+  }
 }

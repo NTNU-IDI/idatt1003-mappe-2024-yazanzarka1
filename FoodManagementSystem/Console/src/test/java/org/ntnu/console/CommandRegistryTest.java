@@ -8,55 +8,55 @@ import org.junit.jupiter.api.Test;
 
 class CommandRegistryTest {
 
-	private CommandRegistry commandRegistry;
-	private MenuContext mainMenu;
+  private CommandRegistry commandRegistry;
+  private MenuContext mainMenu;
 
-	@BeforeEach
-	void setUp() {
-		commandRegistry = new CommandRegistry();
-		mainMenu = new MenuContext("Main Menu", "main-menu");
+  @BeforeEach
+  void setUp() {
+    commandRegistry = new CommandRegistry();
+    mainMenu = new MenuContext("Main Menu", "main-menu");
 
-		Command mockCommand = new Command() {
-			@Override
-			public Boolean execute() {
-				return false;
-			}
+    Command mockCommand = new Command() {
+      @Override
+      public Boolean execute() {
+        return false;
+      }
 
-			@Override
-			public String getDescription() {
-				return "Mock Command";
-			}
-		};
+      @Override
+      public String getDescription() {
+        return "Mock Command";
+      }
+    };
 
-		mainMenu.addCommand("test", mockCommand);
-		commandRegistry.addContext(mainMenu);
-	}
+    mainMenu.addCommand("test", mockCommand);
+    commandRegistry.addContext(mainMenu);
+  }
 
-	@Test
-	void testSwitchContext() {
-		commandRegistry.switchContext("main-menu");
-		assertEquals(mainMenu, commandRegistry.getCurrentContext(),
-				"Should switch to the correct context");
-	}
+  @Test
+  void testSwitchContext() {
+    commandRegistry.switchContext("main-menu");
+    assertEquals(mainMenu, commandRegistry.getCurrentContext(),
+        "Should switch to the correct context");
+  }
 
-	@Test
-	void testSwitchToNonExistentContext() {
-		commandRegistry.switchContext("NonExistent");
-		assertNull(commandRegistry.getCurrentContext(),
-				"Should return null when switching to a non-existent context");
-	}
+  @Test
+  void testSwitchToNonExistentContext() {
+    commandRegistry.switchContext("NonExistent");
+    assertNull(commandRegistry.getCurrentContext(),
+        "Should return null when switching to a non-existent context");
+  }
 
-	@Test
-	void testExecuteCommandInContext() {
-		commandRegistry.switchContext("main-menu");
-		commandRegistry.executeCommand("test");
+  @Test
+  void testExecuteCommandInContext() {
+    commandRegistry.switchContext("main-menu");
+    commandRegistry.executeCommand("test");
 
-	}
+  }
 
-	@Test
-	void testExecuteInvalidCommand() {
-		commandRegistry.switchContext("main-menu");
-		commandRegistry.executeCommand("invalid");
+  @Test
+  void testExecuteInvalidCommand() {
+    commandRegistry.switchContext("main-menu");
+    commandRegistry.executeCommand("invalid");
 
-	}
+  }
 }

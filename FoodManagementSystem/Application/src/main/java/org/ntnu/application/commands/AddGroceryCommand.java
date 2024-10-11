@@ -10,6 +10,9 @@ import org.ntnu.food.GroceryManager;
 import org.ntnu.units.Unit;
 import org.ntnu.units.UnitProvider;
 
+/**
+ * Add grocery to GroceryManager.
+ */
 public class AddGroceryCommand implements Command {
 
 	final GroceryManager groceryManager;
@@ -17,6 +20,11 @@ public class AddGroceryCommand implements Command {
 	final DisplayManager displayManager;
 	final UnitProvider unitProvider;
 
+	/**
+	 * Adds Grocery to GroceryManager.
+	 *
+	 * @param groceryManager Grocery manager
+	 */
 	public AddGroceryCommand(GroceryManager groceryManager) {
 		this.groceryManager = groceryManager;
 		this.inputHandler = new InputHandler();
@@ -27,7 +35,7 @@ public class AddGroceryCommand implements Command {
 	@Override
 	public Boolean execute() {
 		try {
-			String groceryName = inputHandler.getInput("Enter Grocery Name: ");
+			final String groceryName = inputHandler.getInput("Enter Grocery Name: ");
 
 			// Display available units
 			List<Unit> units = unitProvider.getUnits();
@@ -50,11 +58,12 @@ public class AddGroceryCommand implements Command {
 			float groceryPricePerUnit = Float.parseFloat(inputHandler.getInput("Enter price per unit: "));
 
 			groceryManager.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));
-			displayManager.showColoredMessage("Grocery added successfully", Ansi.Color.GREEN);
-			return true;
+			displayManager.showFancyMessage("Grocery created successfully");
+
+			return false;
 		} catch (Exception e) {
 			displayManager.showColoredMessage(String.format("ERROR: %s", e.getMessage()), Ansi.Color.RED);
-			return true;
+			return false;
 		}
 	}
 
