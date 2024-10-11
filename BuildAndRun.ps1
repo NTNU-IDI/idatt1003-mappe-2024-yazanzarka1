@@ -13,3 +13,4 @@ if ($LASTEXITCODE -eq 0) {
 } else {
     Write-Host "Build failed."
 }
+

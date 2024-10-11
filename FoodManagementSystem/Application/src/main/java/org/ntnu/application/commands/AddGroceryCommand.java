@@ -50,7 +50,7 @@ public class AddGroceryCommand implements Command {
 			float groceryPricePerUnit = Float.parseFloat(inputHandler.getInput("Enter price per unit: "));
 
 			groceryManager.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));
-
+			displayManager.showColoredMessage("Grocery added successfully", Ansi.Color.GREEN);
 			return true;
 		} catch (Exception e) {
 			displayManager.showColoredMessage(String.format("ERROR: %s", e.getMessage()), Ansi.Color.RED);

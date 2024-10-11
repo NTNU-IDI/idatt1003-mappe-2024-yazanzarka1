@@ -40,6 +40,7 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
 
 
 			storageUnit.removeGrocery(storageEntries.getFirst(), quantity);
+			displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
 			return false;
 		} catch (Exception e) {
 			displayManager.showColoredMessage(String.format("Error: %s", e.getMessage()), Color.RED);
