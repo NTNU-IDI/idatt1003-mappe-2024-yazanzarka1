@@ -15,7 +15,6 @@ import org.ntnu.food.StorageUnit;
  */
 public class AddGroceryToStorageUnitCommand implements Command {
 
-
   final GroceryManager groceryManager;
   final StorageUnit storageUnit;
   final InputHandler inputHandler;
@@ -25,7 +24,7 @@ public class AddGroceryToStorageUnitCommand implements Command {
    * Add Grocery Command.
    *
    * @param groceryManager groceryManage to get available groceries in app.
-   * @param storageUnit storageUnit where grocery will be added
+   * @param storageUnit    storageUnit where grocery will be added
    */
   public AddGroceryToStorageUnitCommand(GroceryManager groceryManager, StorageUnit storageUnit) {
     this.groceryManager = groceryManager;
