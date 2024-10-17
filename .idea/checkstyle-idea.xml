@@ -6,14 +6,14 @@
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="6ffcfc65-2b81-4aa3-b0c4-130f2d5988e8" />
+      <option value="d120399a-06ae-4055-baac-29885c55b357" />
     </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="6ffcfc65-2b81-4aa3-b0c4-130f2d5988e8" type="LOCAL_FILE" scope="All" description="Google Checks">
-          $USER_HOME$/Downloads/google_checks.xml
+        <ConfigurationLocation id="d120399a-06ae-4055-baac-29885c55b357" type="LOCAL_FILE" scope="All" description="Checkstyle Google">
+          $PROJECT_DIR$/lib/google_checks.xml
           <option name="properties">
             <map>
               <entry key="org.checkstyle.google.severity" value="warning" />
