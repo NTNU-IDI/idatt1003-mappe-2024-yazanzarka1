@@ -34,7 +34,7 @@ public class SearchInStorageUnitCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    System.out.println("Search in storage unit");
+    displayManager.showMessage("Search in storage unit");
 
     String query = inputHandler.getInput("Enter grocery name: ");
     // search in storage unit

@@ -128,14 +128,8 @@ public class StorageUnit {
    * @return List of storage entries that match the query
    */
   public List<StorageEntry> findGrocery(String query) {
-    List<StorageEntry> foundGroceries = new ArrayList<>();
-    for (Map.Entry<String, StorageEntry> entry : groceries.entrySet()) {
-      if (entry.getKey().contains(query) || entry.getKey().equalsIgnoreCase(query)
-          || entry.getValue().groceryName.equals(query)) {
-        foundGroceries.add(entry.getValue());
-      }
-    }
-    return foundGroceries;
+    return groceries.entrySet().stream().filter(entry -> entry.getKey().toLowerCase()
+        .contains(query.toLowerCase())).map(Map.Entry::getValue).toList();
   }
 
 
