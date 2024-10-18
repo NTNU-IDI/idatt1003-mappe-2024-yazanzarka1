@@ -12,7 +12,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>org.ntnu.application.Application</mainClass>
+              <mainClass>edu.ntnu.idi.idatt.application.Application</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
