@@ -53,6 +53,8 @@ public class AddGroceryToStorageUnitCommand implements Command {
       storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(groceryIndex),
           groceryAmount, groceryBestBeforeDate);
 
+      displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
+
       return true;
     } catch (Exception e) {
       displayManager.showColoredMessage(String.format("Error: %s", e.getMessage()), Color.RED);

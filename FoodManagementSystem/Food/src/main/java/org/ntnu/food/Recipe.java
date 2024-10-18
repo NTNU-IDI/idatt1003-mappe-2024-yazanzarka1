@@ -76,4 +76,17 @@ public class Recipe {
     displayManager.printTable(headers, groceriesList);
   }
 
+  /**
+   * Get the price of a recipe.
+   *
+   * @return float price of a recipe
+   */
+  public float getRecipePrice() {
+    float price = 0;
+    for (Grocery grocery : groceries.keySet()) {
+      price += groceries.get(grocery) * grocery.getPricePerUnit();
+    }
+    return price;
+  }
+
 }

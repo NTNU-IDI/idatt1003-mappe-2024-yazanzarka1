@@ -4,6 +4,7 @@ import org.fusesource.jansi.Ansi.Color;
 import org.ntnu.console.Command;
 import org.ntnu.console.DisplayManager;
 import org.ntnu.console.InputHandler;
+import org.ntnu.food.Recipe;
 import org.ntnu.food.RecipeManager;
 
 /**
@@ -39,7 +40,9 @@ public class DisplayRecipeCommand implements Command {
     try {
       int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
       displayManager.showSpace();
-      recipeManager.getRecipes().get(recipeIndex).displayRecipe();
+      Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
+      recipe.displayRecipe();
+      displayManager.showMessage(String.format("Total recipe price: %.2f NOK", recipe.getRecipePrice()));
       displayManager.showSpace();
 
       return false;

@@ -2,6 +2,7 @@ package org.ntnu.application.menus.groceryMenu;
 
 import org.ntnu.application.commands.AddGroceryCommand;
 import org.ntnu.application.commands.DisplayGroceriesCommand;
+import org.ntnu.application.commands.RemoveGroceryFromGroceryManagerCommand;
 import org.ntnu.application.commands.SwitchMenuCommand;
 import org.ntnu.console.CommandRegistry;
 import org.ntnu.console.MenuContext;
@@ -22,6 +23,7 @@ public class GroceryMenu extends MenuContext {
     super("Grocery", "grocery-menu");
     addCommand("1", new DisplayGroceriesCommand(groceryManager));
     addCommand("2", new AddGroceryCommand(groceryManager));
+    addCommand("3", new RemoveGroceryFromGroceryManagerCommand(groceryManager));
     addCommand("back", new SwitchMenuCommand("main-menu", commandRegistry));
   }
 }
