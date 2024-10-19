@@ -20,7 +20,7 @@ public class InputHandler {
 
   // get input from user
   public String getInput() {
-    return getInput("Enter Command (help - Display available commands): ");
+    return getInput("Enter Command: ");
   }
 
   /**

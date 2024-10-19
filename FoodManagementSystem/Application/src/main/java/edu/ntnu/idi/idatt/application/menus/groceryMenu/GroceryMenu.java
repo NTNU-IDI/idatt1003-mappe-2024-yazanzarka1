@@ -17,7 +17,7 @@ public class GroceryMenu extends MenuContext {
    * Initiate Menu.
    *
    * @param commandRegistry commandRegistry to handle switching contexts
-   * @param groceryManager GroceryManager to execute needed actions related to GroceryManager
+   * @param groceryManager  GroceryManager to execute needed actions related to GroceryManager
    */
   public GroceryMenu(CommandRegistry commandRegistry, GroceryManager groceryManager) {
     super("Grocery", "grocery-menu");

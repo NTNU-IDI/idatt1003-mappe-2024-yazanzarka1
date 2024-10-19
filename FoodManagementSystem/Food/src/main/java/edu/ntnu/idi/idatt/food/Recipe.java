@@ -1,19 +1,18 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Represent a recipe in a recipe manager.
  */
 public class Recipe {
 
-  String name;
-  String description;
-  Map<Grocery, Float> groceries;
-  DisplayManager displayManager;
+  private final String name;
+  private final String description;
+  private final List<RecipeGrocery> groceries;
+  private final DisplayManager displayManager;
 
   /**
    * Initiate a recipe.
@@ -22,7 +21,7 @@ public class Recipe {
    * @param description description of a recipe
    * @param groceries   groceries in a recipe
    */
-  public Recipe(String name, String description, Map<Grocery, Float> groceries) {
+  public Recipe(String name, String description, List<RecipeGrocery> groceries) {
     this.name = name;
     this.groceries = groceries;
     this.description = description;
@@ -37,7 +36,7 @@ public class Recipe {
    */
   public Recipe(String name, String description) {
     this.name = name;
-    this.groceries = new HashMap<>();
+    this.groceries = new ArrayList<>();
     this.description = description;
     displayManager = new DisplayManager();
   }
@@ -49,18 +48,16 @@ public class Recipe {
    * @param amount  amount of grocery in a recipe
    */
   public void addGrocery(Grocery grocery, float amount) {
-    groceries.computeIfPresent(grocery, (key, value) ->
-        groceries.put(key, groceries.get(grocery) + amount)
-    );
-    groceries.put(grocery, amount);
+    RecipeGrocery recipeGrocery = new RecipeGrocery(grocery, amount);
+    groceries.add(recipeGrocery);
   }
 
   /**
    * Get Groceries in a recipe.
    *
-   * @return Map of Groceries and value in a recipe
+   * @return List of Groceries and value in a recipe
    */
-  public Map<Grocery, Float> getGroceries() {
+  public List<RecipeGrocery> getGroceries() {
     return groceries;
   }
 
@@ -70,9 +67,12 @@ public class Recipe {
    */
   public void displayRecipe() {
     List<String> headers = List.of("Grocery", "Unit", "Amount");
-    List<List<String>> groceriesList = groceries.keySet().stream()
-        .map(grocery -> List.of(grocery.getGroceryName(), grocery.getUnit().getUnitName(),
-            groceries.get(grocery).toString())).toList();
+
+    List<List<String>> groceriesList = groceries.stream()
+        .map(entry -> List.of(entry.getGrocery().getGroceryName(),
+            entry.getGrocery().getUnit().getUnitName(), String.valueOf(entry.getAmount())
+        )).toList();
+
     displayManager.printTable(headers, groceriesList);
   }
 
@@ -83,10 +83,28 @@ public class Recipe {
    */
   public float getRecipePrice() {
     float price = 0;
-    for (Grocery grocery : groceries.keySet()) {
-      price += groceries.get(grocery) * grocery.getPricePerUnit();
+    for (RecipeGrocery entry : groceries) {
+      price += entry.getAmount() * entry.getGrocery().getPricePerUnit();
     }
     return price;
+  }
+
+  /**
+   * Get the name of a recipe.
+   *
+   * @return String name of a recipe
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Get the description of a recipe.
+   *
+   * @return String description of a recipe
+   */
+  public String getDescription() {
+    return description;
   }
 
 }

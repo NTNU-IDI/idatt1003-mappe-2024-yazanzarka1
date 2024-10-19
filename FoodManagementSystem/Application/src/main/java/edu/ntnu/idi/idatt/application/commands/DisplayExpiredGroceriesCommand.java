@@ -1,13 +1,13 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import org.fusesource.jansi.Ansi.Color;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Display expired groceries with total value summary.

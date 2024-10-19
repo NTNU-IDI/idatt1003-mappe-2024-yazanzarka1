@@ -1,4 +1,5 @@
 package edu.ntnu.idi.idatt.food;
+
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,12 @@ public class GroceryManager {
   }
 
   /**
-   * Adds Grocery to GroceryManager.
+   * Adds Grocery to GroceryManager. Multiple groceries can have the same name.
    *
    * @param grocery grocery to be added
    */
   public void addGrocery(Grocery grocery) {
     availableGroceries.add(grocery);
-
   }
 
   /**
@@ -42,12 +42,16 @@ public class GroceryManager {
 
   /**
    * Removes Grocery from GroceryManager.
+   * Throws IndexOutOfBoundsException if index is out of bounds.
    *
-   * @param grocery Grocery to be removed
+   * @param index index of grocery to be removed
    */
-  public void removeGrocery(Grocery grocery) {
-    availableGroceries.remove(grocery);
-
+  public void removeGrocery(int index) {
+    if (index < 0 || index >= availableGroceries.size()) {
+      throw new IndexOutOfBoundsException(
+          "Index out of bounds: No grocery found at index " + index);
+    }
+    availableGroceries.remove(index);
   }
 
 
@@ -57,11 +61,12 @@ public class GroceryManager {
   public void displayGroceries() {
     List<String> headers = List.of("Index", "Grocery", "Unit", "NOK / Unit");
     List<List<String>> groceryList = new ArrayList<>();
-    for (int i = 0; i < availableGroceries.size(); i++) {
-      Grocery entry = availableGroceries.get(i);
-      groceryList.add(List.of(String.valueOf(i), entry.groceryName, entry.unit.getUnitName(),
-          String.valueOf(entry.pricePerUnit)));
-    }
+
+    availableGroceries.stream()
+        .map(grocery -> List.of(String.valueOf(availableGroceries.indexOf(grocery)),
+            grocery.groceryName, grocery.unit.getUnitName(), String.valueOf(grocery.pricePerUnit)))
+        .forEach(groceryList::add);
+
     displayManager.showSpace();
     displayManager.printTable(headers, groceryList);
     displayManager.showSpace();

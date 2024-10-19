@@ -1,14 +1,15 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import java.util.List;
-import org.fusesource.jansi.Ansi;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.units.Unit;
 import edu.ntnu.idi.idatt.units.UnitProvider;
+import java.util.List;
+import org.fusesource.jansi.Ansi;
 
 /**
  * Add grocery to GroceryManager.
@@ -31,6 +32,19 @@ public class AddGroceryCommand implements Command {
     this.displayManager = new DisplayManager();
     this.unitProvider = new UnitProvider();
   }
+
+  /**
+   * Adds Grocery to GroceryManager.
+   *
+   * @param groceryManager Grocery manager
+   */
+  public AddGroceryCommand(GroceryManager groceryManager, InputHandler inputHandler) {
+    this.groceryManager = groceryManager;
+    this.inputHandler = inputHandler;
+    this.displayManager = new DisplayManager();
+    this.unitProvider = new UnitProvider();
+  }
+
 
   @Override
   public Boolean execute() {
@@ -62,8 +76,7 @@ public class AddGroceryCommand implements Command {
 
       return false;
     } catch (Exception e) {
-      displayManager.showColoredMessage(String.format("ERROR: %s", e.getMessage()), Ansi.Color.RED);
-      return false;
+      throw new UserInputException("Invalid input: " + e.getMessage());
     }
   }
 

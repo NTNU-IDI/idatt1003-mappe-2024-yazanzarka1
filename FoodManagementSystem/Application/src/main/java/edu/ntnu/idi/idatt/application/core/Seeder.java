@@ -1,7 +1,5 @@
 package edu.ntnu.idi.idatt.application.core;
 
-import java.util.Calendar;
-import java.util.Date;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.Recipe;
@@ -10,6 +8,8 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Piece;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Seeder class to seed the application with groceries, storage units and recipes.

@@ -1,9 +1,10 @@
 package edu.ntnu.idi.idatt.console;
 
 
+import edu.ntnu.idi.idatt.console.exceptions.UnknownCommandException;
+import edu.ntnu.idi.idatt.console.exceptions.UnknownContextException;
 import java.util.HashMap;
 import java.util.Map;
-import org.fusesource.jansi.Ansi.Color;
 
 /**
  * CommandRegistry is responsible for managing, executing and switching menu-contexts. Each context
@@ -40,12 +41,11 @@ public class CommandRegistry {
    */
   public void switchContext(String contextKey) {
     MenuContext context = contexts.get(contextKey);
-    if (context != null) {
-      currentContext = context;
-      context.displayMenu();
-    } else {
-      displayManager.showColoredMessage("Context not found!", Color.RED);
+    if (context == null) {
+      throw new UnknownContextException("Unknown context: " + contextKey);
     }
+    currentContext = context;
+    context.displayMenu();
   }
 
   /**
@@ -56,12 +56,11 @@ public class CommandRegistry {
    */
   public Boolean executeCommand(String keyword) {
     Command command = currentContext.getCommand(keyword);
-    if (command != null) {
-      return command.execute();
-    } else {
-      displayManager.showColoredMessage("Invalid command!", Color.RED);
+    if (command == null) {
+      throw new UnknownCommandException(
+          "Unknown command: " + keyword + " - type 'help' for available commands");
     }
-    return false;
+    return command.execute();
   }
 
   /**

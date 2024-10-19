@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import org.fusesource.jansi.Ansi.Color;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
@@ -20,6 +19,7 @@ public class RemoveGroceryCommand implements Command {
   public RemoveGroceryCommand(GroceryManager groceryManager) {
     this.groceryManager = groceryManager;
   }
+
   /**
    * Execute command.
    *
@@ -28,15 +28,10 @@ public class RemoveGroceryCommand implements Command {
   @Override
   public Boolean execute() {
     groceryManager.displayGroceries();
-    try {
-      int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
-      groceryManager.removeGrocery(groceryManager.getAvailableGroceries().get(groceryIndex));
-      displayManager.showFancyMessage("Grocery removed successfully");
-      return true;
-    } catch (Exception e) {
-      displayManager.showColoredMessage(String.format("Error: %s", e.getMessage()), Color.RED);
-    }
-    return false;
+    int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
+    groceryManager.removeGrocery(groceryIndex);
+    displayManager.showFancyMessage("Grocery removed successfully");
+    return true;
   }
 
   /**

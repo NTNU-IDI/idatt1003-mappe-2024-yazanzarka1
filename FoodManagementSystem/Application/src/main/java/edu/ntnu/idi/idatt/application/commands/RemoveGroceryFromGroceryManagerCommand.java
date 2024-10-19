@@ -1,10 +1,10 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import org.fusesource.jansi.Ansi.Color;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.GroceryManager;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Remove grocery from grocery manager.
@@ -14,6 +14,7 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
   GroceryManager groceryManager;
   InputHandler inputHandler = new InputHandler();
   DisplayManager displayManager = new DisplayManager();
+
   /**
    * Initiate command.
    */
@@ -29,15 +30,11 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
   @Override
   public Boolean execute() {
     groceryManager.displayGroceries();
-    try {
-      int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the grocery: "));
-      groceryManager.removeGrocery(groceryManager.getAvailableGroceries().get(groceryIndex));
-      displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
-      return false;
-    } catch (Exception e) {
-      displayManager.showColoredMessage(String.format("Error: %s", e.getMessage()), Color.RED);
-      return true;
-    }
+    int groceryIndex =
+        Integer.parseInt(inputHandler.getInput("Enter the index of the grocery: "));
+    groceryManager.removeGrocery(groceryIndex);
+    displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
+    return false;
   }
 
   /**

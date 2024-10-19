@@ -3,12 +3,12 @@ package edu.ntnu.idi.idatt.food;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import edu.ntnu.idi.idatt.units.Liter;
+import edu.ntnu.idi.idatt.units.Unit;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import edu.ntnu.idi.idatt.units.Liter;
-import edu.ntnu.idi.idatt.units.Unit;
 
 class StorageUnitTest {
 

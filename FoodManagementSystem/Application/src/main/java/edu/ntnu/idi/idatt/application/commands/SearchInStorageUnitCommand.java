@@ -1,11 +1,11 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import java.util.List;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import java.util.List;
 
 /**
  * Search in storage unit.

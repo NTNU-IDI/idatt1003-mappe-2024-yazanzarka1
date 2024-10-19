@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.application.core.Bootstrap;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Entry point for the application This class contains the main method and will initialize the
@@ -44,8 +45,11 @@ public class Application {
         break;
       }
 
-      // Execute the entered command
-      displayMenu = commandRegistry.executeCommand(input);
+      try {
+        displayMenu = commandRegistry.executeCommand(input);
+      } catch (Exception e) {
+        displayManager.showColoredMessage(e.getMessage(), Color.RED);
+      }
     }
   }
 
