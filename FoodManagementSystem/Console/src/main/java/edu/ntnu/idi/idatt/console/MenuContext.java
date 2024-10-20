@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.console;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.fusesource.jansi.Ansi.Color;
 
 
 /**
@@ -17,7 +18,7 @@ public class MenuContext {
   /**
    * Initiate menu context.
    *
-   * @param name name of the menu
+   * @param name    name of the menu
    * @param menuKey unique menu-key
    */
   public MenuContext(String name, String menuKey) {
@@ -69,10 +70,32 @@ public class MenuContext {
    */
   public void displayMenu() {
     displayManager.showSpace();
-    System.out.println("============ " + name + " ============");
-    for (String keyword : commands.keySet()) {
-      System.out.println(keyword + ": " + commands.get(keyword).getDescription());
-    }
+    displayManager.showColoredMessage("============ " + name + " ============", Color.YELLOW);
+    printCommands();
     displayManager.showSpace();
   }
+
+  /**
+   * Padding for command-list.
+   */
+  private String padRight(String string, int n) {
+    return String.format("%-" + n + "s", string);
+  }
+
+  /**
+   * Print all commands in the context. with evenly spaced padding.
+   */
+  private void printCommands() {
+    // Find the longest command keyword to pad the output
+    int maxWidth =
+        commands.keySet().stream().map(String::length).max(Integer::compareTo).orElse(0);
+
+    // Print each command with its description
+    for (String keyword : commands.keySet()) {
+      displayManager.showColoredMessage(
+          padRight(keyword + ":", maxWidth + 2) + commands.get(keyword).getDescription(),
+          Color.CYAN);
+    }
+  }
+
 }

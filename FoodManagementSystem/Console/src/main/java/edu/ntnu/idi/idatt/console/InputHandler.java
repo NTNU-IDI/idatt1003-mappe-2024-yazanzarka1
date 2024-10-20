@@ -34,15 +34,4 @@ public class InputHandler {
     return scanner.nextLine().trim();
   }
 
-  /**
-   * Added for mocking user input.
-   * Deprecated 09.10.2024
-   *
-   * @param input mocked input
-   * @return String mocked string
-   */
-  @Deprecated(forRemoval = true)
-  public String mockInput(String input) {
-    return input.trim();
-  }
 }

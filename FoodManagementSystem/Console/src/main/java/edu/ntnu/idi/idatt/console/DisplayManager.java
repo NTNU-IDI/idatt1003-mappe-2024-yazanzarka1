@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.console;
 
 import static org.fusesource.jansi.Ansi.Color.BLUE;
+import static org.fusesource.jansi.Ansi.Color.CYAN;
 import static org.fusesource.jansi.Ansi.Color.GREEN;
 import static org.fusesource.jansi.Ansi.Color.WHITE;
 import static org.fusesource.jansi.Ansi.Color.YELLOW;
@@ -17,6 +18,8 @@ import org.fusesource.jansi.AnsiConsole;
  */
 public class DisplayManager {
 
+  private static final Ansi.Color HEADER_COLOR = YELLOW;
+  private static final Ansi.Color DATA_COLOR = CYAN;
   private static final Pattern ANSI_COLOR_PATTERN = Pattern.compile("\\u001B\\[[;\\d]*m");
 
   /**
@@ -86,7 +89,7 @@ public class DisplayManager {
     for (int i = 0; i < row.size(); i++) {
       rowOutput.append(padRight(row.get(i), columnWidths[i])).append(" | ");
     }
-    showColoredMessage(String.valueOf(rowOutput), isHeader ? GREEN : WHITE);
+    showColoredMessage(String.valueOf(rowOutput), isHeader ? HEADER_COLOR : DATA_COLOR);
 
     // Print a separator after the header
     if (isHeader) {

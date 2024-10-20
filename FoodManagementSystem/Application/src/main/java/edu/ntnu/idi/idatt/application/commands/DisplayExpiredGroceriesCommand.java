@@ -18,7 +18,7 @@ public class DisplayExpiredGroceriesCommand implements Command {
   DisplayManager displayManager;
 
   /**
-   * .
+   * DisplayExpiredGroceriesCommand constructor.
    *
    * @param storageUnit Storage unit that we should look for expired groceries in.
    */

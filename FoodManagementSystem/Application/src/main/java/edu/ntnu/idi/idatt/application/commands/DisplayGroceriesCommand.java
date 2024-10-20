@@ -11,7 +11,7 @@ public class DisplayGroceriesCommand implements Command {
   final GroceryManager groceryManager;
 
   /**
-   *.
+   * DisplayGroceriesCommand constructor.
    *
    * @param groceryManager groceryManager we display groceries from
    */

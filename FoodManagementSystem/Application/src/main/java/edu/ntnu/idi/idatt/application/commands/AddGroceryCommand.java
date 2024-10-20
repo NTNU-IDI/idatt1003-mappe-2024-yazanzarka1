@@ -62,8 +62,8 @@ public class AddGroceryCommand implements Command {
       int choice = Integer.parseInt(inputHandler.getInput("Enter Choice: "));
 
       if (choice < 1 || choice > units.size()) {
-        System.out.println("Invalid choice");
-        return true;
+        throw new IndexOutOfBoundsException(
+            choice + " is invalid. Must be between 1 and " + units.size());
       }
 
       // Get the chosen unit
@@ -76,7 +76,9 @@ public class AddGroceryCommand implements Command {
 
       return false;
     } catch (Exception e) {
-      throw new UserInputException("Invalid input: " + e.getMessage());
+      throw new UserInputException(
+          "Invalid input: " + e.getMessage() + ". Grocery could not be added");
+
     }
   }
 
