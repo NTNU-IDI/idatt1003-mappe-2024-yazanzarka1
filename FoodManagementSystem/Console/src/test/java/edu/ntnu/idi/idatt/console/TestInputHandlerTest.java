@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.console;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,9 +9,10 @@ import org.junit.jupiter.api.Test;
 class TestInputHandlerTest {
 
   TestInputHandler testInputHandler;
+
   @BeforeEach
   void setUp() {
-    testInputHandler = new TestInputHandler(new String[]{"test", "test2", "test3", "test4"});
+    testInputHandler = new TestInputHandler(new String[] {"test", "test2", "test3", "test4"});
   }
 
   @Test

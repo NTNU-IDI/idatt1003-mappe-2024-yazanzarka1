@@ -1,11 +1,11 @@
 package edu.ntnu.idi.idatt.application.commands;
 
-import org.fusesource.jansi.Ansi.Color;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeManager;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Display a recipe.
@@ -42,7 +42,8 @@ public class DisplayRecipeCommand implements Command {
       displayManager.showSpace();
       Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
       recipe.displayRecipe();
-      displayManager.showMessage(String.format("Total recipe price: %.2f NOK", recipe.getRecipePrice()));
+      displayManager.showMessage(
+          String.format("Total recipe price: %.2f NOK", recipe.getRecipePrice()));
       displayManager.showSpace();
 
       return false;

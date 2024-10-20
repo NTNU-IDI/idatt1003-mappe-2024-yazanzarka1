@@ -41,6 +41,7 @@ public class Application {
       // Check for exit command
       if ("exit".equalsIgnoreCase(input)) {
         displayManager.showMessage("Exiting application...");
+        displayManager.shutdown();
         break;
       }
 

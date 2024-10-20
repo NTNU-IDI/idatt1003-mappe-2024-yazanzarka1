@@ -2,7 +2,6 @@ package edu.ntnu.idi.idatt.console;
 
 import static org.fusesource.jansi.Ansi.Color.BLUE;
 import static org.fusesource.jansi.Ansi.Color.CYAN;
-import static org.fusesource.jansi.Ansi.Color.GREEN;
 import static org.fusesource.jansi.Ansi.Color.WHITE;
 import static org.fusesource.jansi.Ansi.Color.YELLOW;
 
@@ -62,7 +61,7 @@ public class DisplayManager {
    * .
    *
    * @param headers list of table headers
-   * @param rows data rows
+   * @param rows    data rows
    */
   public void printTable(List<String> headers, List<List<String>> rows) {
     // Calculate the width of each column
