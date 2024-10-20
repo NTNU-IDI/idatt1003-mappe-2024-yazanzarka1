@@ -3,11 +3,11 @@ package edu.ntnu.idi.idatt.food;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+import edu.ntnu.idi.idatt.units.Liter;
+import edu.ntnu.idi.idatt.units.Unit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import edu.ntnu.idi.idatt.units.Liter;
-import edu.ntnu.idi.idatt.units.Unit;
 
 class GroceryTest {
 

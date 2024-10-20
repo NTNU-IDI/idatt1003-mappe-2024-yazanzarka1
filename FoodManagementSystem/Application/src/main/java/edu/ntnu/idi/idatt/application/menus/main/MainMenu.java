@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.menus.mainMenu;
+package edu.ntnu.idi.idatt.application.menus.main;
 
 import edu.ntnu.idi.idatt.application.commands.SwitchMenuCommand;
 import edu.ntnu.idi.idatt.console.CommandRegistry;

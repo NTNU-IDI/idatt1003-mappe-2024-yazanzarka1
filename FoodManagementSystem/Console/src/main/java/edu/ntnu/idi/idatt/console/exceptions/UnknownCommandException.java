@@ -6,6 +6,8 @@ package edu.ntnu.idi.idatt.console.exceptions;
 public class UnknownCommandException extends RuntimeException {
 
   /**
+   * UnknownCommandException constructor.
+   *
    * @param message Message to display when exception is thrown.
    */
   public UnknownCommandException(String message) {

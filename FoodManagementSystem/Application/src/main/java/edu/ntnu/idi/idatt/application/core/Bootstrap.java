@@ -1,9 +1,9 @@
 package edu.ntnu.idi.idatt.application.core;
 
-import edu.ntnu.idi.idatt.application.menus.groceryMenu.GroceryMenu;
-import edu.ntnu.idi.idatt.application.menus.mainMenu.MainMenu;
-import edu.ntnu.idi.idatt.application.menus.recipesMenu.RecipesMenu;
-import edu.ntnu.idi.idatt.application.menus.storageMenu.StorageUnitMenu;
+import edu.ntnu.idi.idatt.application.menus.grocery.GroceryMenu;
+import edu.ntnu.idi.idatt.application.menus.main.MainMenu;
+import edu.ntnu.idi.idatt.application.menus.recipes.RecipesMenu;
+import edu.ntnu.idi.idatt.application.menus.storage.StorageUnitMenu;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.GroceryManager;

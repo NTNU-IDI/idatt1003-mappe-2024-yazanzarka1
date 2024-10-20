@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.menus.recipesMenu;
+package edu.ntnu.idi.idatt.application.menus.recipes;
 
 import edu.ntnu.idi.idatt.application.commands.DisplayRecipeCommand;
 import edu.ntnu.idi.idatt.application.commands.DisplayRecipesCommand;

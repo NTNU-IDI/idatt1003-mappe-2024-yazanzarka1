@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.menus.groceryMenu;
+package edu.ntnu.idi.idatt.application.menus.grocery;
 
 import edu.ntnu.idi.idatt.application.commands.AddGroceryCommand;
 import edu.ntnu.idi.idatt.application.commands.DisplayGroceriesCommand;

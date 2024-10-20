@@ -19,11 +19,11 @@ class RecipeGroceryTest {
 
   @Test
   void getGrocery() {
-    assertEquals(grocery, recipeGrocery.getGrocery(), "Grocery should be Test Grocery");
+    assertEquals(grocery, recipeGrocery.grocery(), "Grocery should be Test Grocery");
   }
 
   @Test
   void getAmount() {
-    assertEquals(3.0f, recipeGrocery.getAmount(), "Amount should be 3.0f");
+    assertEquals(3.0f, recipeGrocery.amount(), "Amount should be 3.0f");
   }
 }

@@ -69,8 +69,8 @@ public class Recipe {
     List<String> headers = List.of("Grocery", "Unit", "Amount");
 
     List<List<String>> groceriesList = groceries.stream()
-        .map(entry -> List.of(entry.getGrocery().getGroceryName(),
-            entry.getGrocery().getUnit().getUnitName(), String.valueOf(entry.getAmount())
+        .map(entry -> List.of(entry.grocery().getGroceryName(),
+            entry.grocery().getUnit().getUnitName(), String.valueOf(entry.amount())
         )).toList();
 
     displayManager.printTable(headers, groceriesList);
@@ -84,7 +84,7 @@ public class Recipe {
   public float getRecipePrice() {
     float price = 0;
     for (RecipeGrocery entry : groceries) {
-      price += entry.getAmount() * entry.getGrocery().getPricePerUnit();
+      price += entry.amount() * entry.grocery().getPricePerUnit();
     }
     return price;
   }

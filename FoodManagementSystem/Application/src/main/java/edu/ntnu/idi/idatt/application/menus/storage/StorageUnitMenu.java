@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.menus.storageMenu;
+package edu.ntnu.idi.idatt.application.menus.storage;
 
 import edu.ntnu.idi.idatt.application.commands.AddGroceryToStorageUnitCommand;
 import edu.ntnu.idi.idatt.application.commands.DisplayExpiredGroceriesCommand;
