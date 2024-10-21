@@ -17,7 +17,7 @@ import org.fusesource.jansi.Ansi.Color;
 public class StorageUnit {
 
   public final String name;
-  final HashMap<String, StorageEntry> groceries;
+  private final HashMap<String, StorageEntry> groceries;
   final DisplayManager displayManager;
 
   /**
@@ -118,6 +118,13 @@ public class StorageUnit {
     displayManager.showSpace();
     displayManager.printTable(headers, groceryList);
     displayManager.showSpace();
+  }
+
+  /**
+   * Get a grocery from the storage unit.
+   */
+  public StorageEntry getGrocery(String groceryName) {
+    return groceries.get(groceryName);
   }
 
   /**

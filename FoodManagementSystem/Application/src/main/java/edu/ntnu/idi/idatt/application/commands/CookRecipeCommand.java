@@ -8,25 +8,15 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeStorageManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
-/**
- * Display a recipe.
- */
-public class DisplayRecipeCommand implements Command {
+public class CookRecipeCommand implements Command {
 
-  private final RecipeManager recipeManager;
-  private final DisplayManager displayManager;
-  private final InputHandler inputHandler;
-  private final StorageUnit storageUnit;
+  RecipeManager recipeManager;
+  DisplayManager displayManager = new DisplayManager();
+  InputHandler inputHandler = new InputHandler();
+  StorageUnit storageUnit;
 
-  /**
-   * Initiate command with given recipeManager.
-   *
-   * @param recipeManager recipe manager where recipes are stored
-   */
-  public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit) {
+  public CookRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit) {
     this.recipeManager = recipeManager;
-    this.displayManager = new DisplayManager();
-    this.inputHandler = new InputHandler();
     this.storageUnit = storageUnit;
   }
 
@@ -40,31 +30,25 @@ public class DisplayRecipeCommand implements Command {
     displayManager.showSpace();
     recipeManager.displayRecipes();
     displayManager.showSpace();
+
     int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
     displayManager.showSpace();
     Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
-
-    //Display the recipe table
-    final RecipeStorageManager recipeStorageManager =
-        new RecipeStorageManager(recipe, storageUnit);
-    recipeStorageManager.displayRecipe();
-
-    displayManager.showMessage(
-        String.format("Total recipe price: %.2f NOK", recipe.getRecipePrice()));
+    RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
+    recipeStorageManager.cookRecipe();
     displayManager.showSpace();
 
     return false;
 
-
   }
 
   /**
-   * Get command's description.
+   * Get command description.
    *
    * @return String defines the commands description
    */
   @Override
   public String getDescription() {
-    return "Display Ingredients of a recipe";
+    return "Cook a recipe";
   }
 }

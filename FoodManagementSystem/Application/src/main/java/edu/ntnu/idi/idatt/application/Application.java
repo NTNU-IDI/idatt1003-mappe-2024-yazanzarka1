@@ -49,8 +49,6 @@ public class Application {
         displayMenu = commandRegistry.executeCommand(input);
       } catch (Exception e) {
         displayManager.showColoredMessage(e.getMessage(), Color.RED);
-        displayManager.showColoredMessage(
-            "Please try again or write help to display available commands", Color.RED);
       }
     }
   }

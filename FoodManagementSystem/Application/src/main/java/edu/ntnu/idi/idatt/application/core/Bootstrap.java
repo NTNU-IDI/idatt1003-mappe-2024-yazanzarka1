@@ -42,7 +42,7 @@ public class Bootstrap {
     // Register Recipes Menu's context and add to registry
 
     RecipeManager recipeManager = new RecipeManager();
-    RecipesMenu recipesMenu = new RecipesMenu(commandRegistry, recipeManager);
+    RecipesMenu recipesMenu = new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit);
     commandRegistry.addContext(recipesMenu);
 
     // Seed data
