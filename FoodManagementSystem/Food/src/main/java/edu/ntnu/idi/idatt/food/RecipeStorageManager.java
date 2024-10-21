@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -65,7 +66,8 @@ public class RecipeStorageManager {
           recipeGrocery.grocery().getUnit().getUnitName(),
           String.valueOf(recipeGrocery.grocery().getPricePerUnit()),
           String.valueOf(recipeGrocery.amount()), String.valueOf(storageAmount),
-          String.valueOf(storageDifference)));
+          formatDifference(storageDifference)
+      ));
     });
 
     displayManager.printTable(header, rows);
@@ -119,5 +121,11 @@ public class RecipeStorageManager {
     displayManager.showColoredMessage("Recipe cooked", Color.GREEN);
   }
 
+  private String formatDifference(float difference) {
+    if (difference < 0) {
+      return Ansi.ansi().fg(Color.RED).a(difference).reset().toString();
+    }
+    return Ansi.ansi().fg(Color.GREEN).a(" " + difference).reset().toString();
+  }
 
 }

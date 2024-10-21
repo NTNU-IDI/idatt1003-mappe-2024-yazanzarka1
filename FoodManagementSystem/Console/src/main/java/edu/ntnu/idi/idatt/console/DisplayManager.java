@@ -86,7 +86,9 @@ public class DisplayManager {
   private void printRow(List<String> row, int[] columnWidths, boolean isHeader) {
     StringBuilder rowOutput = new StringBuilder("| ");
     for (int i = 0; i < row.size(); i++) {
-      rowOutput.append(padRight(row.get(i), columnWidths[i])).append(" | ");
+      rowOutput.append(padRight(row.get(i),
+              columnWidths[i] - (stripAnsiCodes(row.get(i)).length() - row.get(i).length())))
+          .append(" | ");
     }
     showColoredMessage(String.valueOf(rowOutput), isHeader ? HEADER_COLOR : DATA_COLOR);
 
