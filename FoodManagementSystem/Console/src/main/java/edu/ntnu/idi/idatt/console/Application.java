@@ -1,30 +1,33 @@
-package edu.ntnu.idi.idatt.application;
+package edu.ntnu.idi.idatt.console;
 
-import edu.ntnu.idi.idatt.application.core.Bootstrap;
-import edu.ntnu.idi.idatt.console.CommandRegistry;
-import edu.ntnu.idi.idatt.console.DisplayManager;
-import edu.ntnu.idi.idatt.console.InputHandler;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
- * Entry point for the application This class contains the main method and will initialize the
- * application and start the main loop.
+ * Main application class for the console application.
  */
-
 public class Application {
 
+  InputHandler inputHandler = new InputHandler();
+  DisplayManager displayManager = new DisplayManager();
+  Boolean displayMenu = false;
+  CommandRegistry commandRegistry;
+
   /**
-   * Main Application Function.
-   *
-   * @param args Application params
+   * @param commandRegistry CommandRegistry to use for the application.
+   * Initialize the application with predefined menus, commands and contexts
    */
-  public static void main(String[] args) {
-    InputHandler inputHandler = new InputHandler();
-    DisplayManager displayManager = new DisplayManager();
+  public void init(CommandRegistry commandRegistry) {
+    this.commandRegistry = commandRegistry;
+  }
 
-    CommandRegistry commandRegistry = Bootstrap.initCommandRegistry();
-    Boolean displayMenu = false;
-
+  /**
+   * Start the application.
+   * Main loop for the application.
+   * Get input from user and execute commands.
+   * Display menu for current context if user types "help".
+   * Exit application if user types "exit".
+   */
+  public void start() {
     while (true) {
       if (displayMenu) {
         commandRegistry.getCurrentContext().displayMenu();
@@ -52,5 +55,5 @@ public class Application {
       }
     }
   }
-
 }
+

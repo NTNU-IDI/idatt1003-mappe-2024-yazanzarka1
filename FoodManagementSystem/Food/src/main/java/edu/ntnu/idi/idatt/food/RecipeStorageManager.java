@@ -66,8 +66,7 @@ public class RecipeStorageManager {
           recipeGrocery.grocery().getUnit().getUnitName(),
           String.valueOf(recipeGrocery.grocery().getPricePerUnit()),
           String.valueOf(recipeGrocery.amount()), String.valueOf(storageAmount),
-          formatDifference(storageDifference)
-      ));
+          formatDifference(storageDifference)));
     });
 
     displayManager.printTable(header, rows);
@@ -88,6 +87,11 @@ public class RecipeStorageManager {
     return grocery.getQuantity() - recipeGrocery.amount();
   }
 
+  /**
+   * Cook a recipe. Removes groceries from storage if they are available.
+   *
+   * @throws MissingGroceryInStorage if there are not enough groceries in storage
+   */
   public void cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
     for (RecipeGrocery recipeGrocery : recipe.getGroceries()) {
@@ -106,7 +110,8 @@ public class RecipeStorageManager {
 
       displayRecipe();
       throw new MissingGroceryInStorage(
-          "You do not have enough groceries to cook this recipe. Check the table above for more information.");
+          "You do not have enough groceries to cook this recipe."
+              + " Check the table above for more information.");
     }
     for (RecipeGrocery recipeGrocery : recipe.getGroceries()) {
       StorageEntry storageEntry =
@@ -120,6 +125,7 @@ public class RecipeStorageManager {
     }
     displayManager.showColoredMessage("Recipe cooked", Color.GREEN);
   }
+
 
   private String formatDifference(float difference) {
     if (difference < 0) {

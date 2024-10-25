@@ -46,6 +46,7 @@ class AddGroceryCommandTest {
   void executeWithInvalidParameters() {
     this.addGroceryCommand = new AddGroceryCommand(groceryManager,
         new TestInputHandler(new String[] {"Milk", "notUnit", "200"}));
-    assertThrows(UserInputException.class, () -> addGroceryCommand.execute());
+    assertThrows(UserInputException.class, () -> addGroceryCommand.execute(),
+        "Should throw UserInputException if unit is not between 1-3");
   }
 }

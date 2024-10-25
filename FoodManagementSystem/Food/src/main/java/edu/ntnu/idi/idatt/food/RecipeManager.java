@@ -9,13 +9,15 @@ import java.util.List;
  */
 public class RecipeManager {
 
+  String name;
   List<Recipe> recipes;
   DisplayManager displayManager;
 
   /**
    * Initiate a recipe manager.
    */
-  public RecipeManager() {
+  public RecipeManager(String name) {
+    this.name = name;
     recipes = new ArrayList<>();
     displayManager = new DisplayManager();
   }
@@ -52,10 +54,8 @@ public class RecipeManager {
   }
 
   /**
-   * Display recipes in a recipe manager.
-   * Display index, name and description of recipes.
-   * Display in a table format.
-   *
+   * Display recipes in a recipe manager. Display index, name and description of recipes. Display in
+   * a table format.
    */
   public void displayRecipes() {
 
@@ -68,7 +68,8 @@ public class RecipeManager {
           recipes.get(i).getDescription()
       ));
     }
-    displayManager.printTable(headers, recipesList);
+
+    displayManager.printTable(name, headers, recipesList);
   }
 
 }

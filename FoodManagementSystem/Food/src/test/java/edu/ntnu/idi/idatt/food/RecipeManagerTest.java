@@ -14,7 +14,7 @@ class RecipeManagerTest {
 
   @BeforeEach
   void setUp() {
-    recipeManager = new RecipeManager();
+    recipeManager = new RecipeManager("Cook Book");
     recipe = new Recipe("Test Recipe", "Test Description");
     recipe.addGrocery(new Grocery("Test Grocery", new Kilogram(), 200), 1.0f);
   }

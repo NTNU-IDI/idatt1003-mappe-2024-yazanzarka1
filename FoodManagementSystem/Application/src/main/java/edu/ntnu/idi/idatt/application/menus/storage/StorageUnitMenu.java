@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.application.menus.storage;
 
 import edu.ntnu.idi.idatt.application.commands.AddGroceryToStorageUnitCommand;
 import edu.ntnu.idi.idatt.application.commands.DisplayExpiredGroceriesCommand;
+import edu.ntnu.idi.idatt.application.commands.DisplayGroceriesInStorageUnitBeforeDateCommand;
 import edu.ntnu.idi.idatt.application.commands.DisplayStoredGroceryCommand;
 import edu.ntnu.idi.idatt.application.commands.RemoveGroceryFromStorageUnitCommand;
 import edu.ntnu.idi.idatt.application.commands.SearchInStorageUnitCommand;
@@ -31,6 +32,7 @@ public class StorageUnitMenu extends MenuContext {
     addCommand("3", new RemoveGroceryFromStorageUnitCommand(storageUnit));
     addCommand("4", new SearchInStorageUnitCommand(storageUnit));
     addCommand("5", new DisplayExpiredGroceriesCommand(storageUnit));
+    addCommand("6", new DisplayGroceriesInStorageUnitBeforeDateCommand(storageUnit));
     addCommand("back", new SwitchMenuCommand("main-menu", commandRegistry));
 
   }

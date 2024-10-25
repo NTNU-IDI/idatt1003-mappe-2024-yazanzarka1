@@ -5,6 +5,7 @@ import static org.fusesource.jansi.Ansi.Color.CYAN;
 import static org.fusesource.jansi.Ansi.Color.WHITE;
 import static org.fusesource.jansi.Ansi.Color.YELLOW;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.fusesource.jansi.Ansi;
@@ -56,14 +57,24 @@ public class DisplayManager {
     System.out.println();
   }
 
-
   /**
-   * .
+   * Table printing method.
    *
    * @param headers list of table headers
    * @param rows    data rows
    */
   public void printTable(List<String> headers, List<List<String>> rows) {
+    printTable("", headers, rows);
+  }
+
+  /**
+   * . Print a table to the console
+   *
+   * @param title   title of the table
+   * @param headers list of table headers
+   * @param rows    data rows
+   */
+  public void printTable(String title, List<String> headers, List<List<String>> rows) {
     // Calculate the width of each column
     int[] columnWidths = new int[headers.size()];
     for (int i = 0; i < headers.size(); i++) {
@@ -76,8 +87,13 @@ public class DisplayManager {
       }
     }
 
-    printRow(headers, columnWidths, true);
+    if (!title.isEmpty()) {
+      int totalWidth = Arrays.stream(columnWidths).sum();
+      showColoredMessage(padLeft(title, Math.round((float) (totalWidth + title.length()) / 2)),
+          HEADER_COLOR);
+    }
 
+    printRow(headers, columnWidths, true);
     for (List<String> row : rows) {
       printRow(row, columnWidths, false);
     }
@@ -109,6 +125,10 @@ public class DisplayManager {
 
   private String padRight(String text, int length) {
     return String.format("%-" + length + "s", text);
+  }
+
+  private String padLeft(String text, int length) {
+    return String.format("%" + length + "s", text);
   }
 
   /**

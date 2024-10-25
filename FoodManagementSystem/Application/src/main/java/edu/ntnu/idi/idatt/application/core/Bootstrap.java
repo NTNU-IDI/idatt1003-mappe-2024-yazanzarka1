@@ -41,7 +41,7 @@ public class Bootstrap {
 
     // Register Recipes Menu's context and add to registry
 
-    RecipeManager recipeManager = new RecipeManager();
+    RecipeManager recipeManager = new RecipeManager("Cook Book");
     RecipesMenu recipesMenu = new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit);
     commandRegistry.addContext(recipesMenu);
 
