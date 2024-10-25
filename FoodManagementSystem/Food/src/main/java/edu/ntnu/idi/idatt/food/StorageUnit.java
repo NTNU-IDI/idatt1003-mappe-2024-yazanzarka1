@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,14 +57,19 @@ public class StorageUnit {
    * storage unit, the quantity will be updated.
    */
   public void removeGrocery(Grocery grocery, float quantity) {
+
+    if (grocery == null) {
+      return;
+    }
+
     if (!groceries.containsKey(grocery.groceryName)) {
       return;
     }
 
     StorageEntry groceryToRemove = groceries.get(grocery.groceryName);
     if (groceryToRemove.quantity < quantity) {
-      displayManager.showColoredMessage("Error: Cannot remove more than you have", Color.RED);
-      return;
+      throw new InsufficentGroceryInStorageUnit(
+          "Insufficient quantity of " + grocery.groceryName + " in storage unit");
     }
     if (groceryToRemove.quantity == quantity) {
       groceries.remove(grocery.groceryName);
@@ -86,8 +92,7 @@ public class StorageUnit {
   public void displayGroceries() {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
     List<List<String>> groceryList = new ArrayList<>();
-    for (Map.Entry<String, StorageEntry> entry : groceries.entrySet()) {
-      StorageEntry storageEntry = entry.getValue();
+    for (StorageEntry storageEntry : groceries.values().stream().sorted().toList()) {
       groceryList.add(
           List.of(storageEntry.groceryName, storageEntry.unit.getUnitName(), String.valueOf(
                   storageEntry.pricePerUnit), String.valueOf(storageEntry.quantity),

@@ -45,6 +45,12 @@ class StorageUnitTest {
   }
 
   @Test
+  @DisplayName("Test Remove Grocery Not Enough")
+  void removeMoreGroceryThanInStorage() {
+    storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
+  }
+
+  @Test
   @DisplayName("Get a grocery")
   void getGrocery() {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);

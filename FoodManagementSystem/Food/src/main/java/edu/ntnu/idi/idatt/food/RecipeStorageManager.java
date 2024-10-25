@@ -96,7 +96,7 @@ public class RecipeStorageManager {
       listOfNeededGroceries = new ArrayList<>();
       if (storageEntry == null) {
         listOfNeededGroceries.add(recipeGrocery);
-        continue;
+        break;
       }
       if (storageEntry.getQuantity() < recipeGrocery.amount()) {
         listOfNeededGroceries.add(recipeGrocery);
