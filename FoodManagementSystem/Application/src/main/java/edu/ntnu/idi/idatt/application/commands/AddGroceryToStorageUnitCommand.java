@@ -56,24 +56,29 @@ public class AddGroceryToStorageUnitCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    groceryManager.displayGroceries();
-    int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
-
-    float groceryAmount = Float.parseFloat(inputHandler.getInput("Enter Grocery Amount: "));
-    Date groceryBestBeforeDate;
     try {
-      groceryBestBeforeDate = new SimpleDateFormat("dd.MM.yyyy").parse(
-          inputHandler.getInput("Enter Best before date (dd.mm.yyyy): "));
-    } catch (ParseException e) {
-      throw new UserInputException("Invalid date format - " + e.getMessage());
+      groceryManager.displayGroceries();
+      int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
+
+      float groceryAmount = Float.parseFloat(inputHandler.getInput("Enter Grocery Amount: "));
+      Date groceryBestBeforeDate;
+      try {
+        groceryBestBeforeDate = new SimpleDateFormat("dd.MM.yyyy").parse(
+            inputHandler.getInput("Enter Best before date (dd.mm.yyyy): "));
+      } catch (ParseException e) {
+        throw new UserInputException("Invalid date format - " + e.getMessage());
+      }
+
+      storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(groceryIndex),
+          groceryAmount, groceryBestBeforeDate);
+
+      displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
+
+      return true;
+    } catch (Exception e) {
+      throw new UserInputException("Invalid input: " + e.getMessage());
     }
 
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(groceryIndex),
-        groceryAmount, groceryBestBeforeDate);
-
-    displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
-
-    return true;
   }
 
   @Override

@@ -15,6 +15,7 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
  */
 public class Bootstrap {
 
+
   /**
    * Initiate CommandRegistry.
    *
@@ -42,7 +43,8 @@ public class Bootstrap {
     // Register Recipes Menu's context and add to registry
 
     RecipeManager recipeManager = new RecipeManager("Cook Book");
-    RecipesMenu recipesMenu = new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit);
+    RecipesMenu recipesMenu =
+        new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager);
     commandRegistry.addContext(recipesMenu);
 
     // Seed data

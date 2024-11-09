@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnit;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import java.util.Date;
@@ -55,23 +56,23 @@ class RecipeStorageManagerTest {
   void getStorageDifference() {
     assertAll(
         () -> assertEquals(0.0f,
-            recipeStorageManager.getStorageDifference(recipe.getGroceries().get(0)),
+            recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery.getGroceryName())),
             "Storage difference should be 0.0f"),
         () -> assertEquals(1.0f,
-            recipeStorageManager.getStorageDifference(recipe.getGroceries().get(1)),
+            recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery1.getGroceryName())),
             "Storage difference should be 1.0f"),
         () -> assertEquals(2.0f,
-            recipeStorageManager.getStorageDifference(recipe.getGroceries().get(2)),
+            recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery2.getGroceryName())),
             "Storage difference should be 2.0f"),
         () -> assertEquals(-2.0f,
-            recipeStorageManager.getStorageDifference(recipe.getGroceries().get(3)),
+            recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery3.getGroceryName())),
             "Storage difference should be -2.0f")
     );
   }
 
   @Test
   void cookRecipeFailsWhenGroceryNeeded() {
-    assertThrows(MissingGroceryInStorage.class, () -> recipeStorageManager.cookRecipe(),
+    assertThrows(InsufficentGroceryInStorageUnit.class, () -> recipeStorageManager.cookRecipe(),
         "Should throw MissingGroceryInStorage");
   }
 

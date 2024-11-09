@@ -29,7 +29,7 @@ public class Application {
    */
   public void start() {
     while (true) {
-      if (displayMenu) {
+      if (Boolean.TRUE.equals(displayMenu)) {
         commandRegistry.getCurrentContext().displayMenu();
       }
       String input = inputHandler.getInput();
@@ -51,6 +51,7 @@ public class Application {
       try {
         displayMenu = commandRegistry.executeCommand(input);
       } catch (Exception e) {
+        commandRegistry.getCurrentContext().displayMenu();
         displayManager.showColoredMessage(e.getMessage(), Color.RED);
       }
     }

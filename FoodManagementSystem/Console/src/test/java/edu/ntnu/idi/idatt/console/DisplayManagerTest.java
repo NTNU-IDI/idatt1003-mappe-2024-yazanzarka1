@@ -57,9 +57,7 @@ class DisplayManagerTest {
   @DisplayName("Test Show Fancy Message")
   void testShowFancyMessage() {
     displayManager.showFancyMessage("Fancy Message");
-    String expectedOutput = Ansi.ansi().bg(Ansi.Color.BLUE).fg(Ansi.Color.WHITE).a("**** ").reset()
-        .fg(Ansi.Color.YELLOW).a("Fancy Message").reset().bg(Ansi.Color.BLUE)
-        .fg(Ansi.Color.WHITE).a(" ****").reset().toString();
+    String expectedOutput = Ansi.ansi().bg(Ansi.Color.BLUE).fg(Ansi.Color.WHITE).a("**** ").a("Fancy Message").a(" ****").reset().toString();
     assertEquals(expectedOutput.trim(), outContent.toString().trim());
   }
 }

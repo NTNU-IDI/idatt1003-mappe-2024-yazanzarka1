@@ -137,9 +137,7 @@ public class DisplayManager {
    * @param message Message to be shown to user
    */
   public void showFancyMessage(String message) {
-    System.out.println(Ansi.ansi().bg(BLUE).fg(WHITE).a("**** ").reset()
-        .fg(YELLOW).a(message).reset().bg(BLUE)
-        .fg(WHITE).a(" ****").reset());
+    System.out.println(Ansi.ansi().bg(BLUE).fg(WHITE).a("**** ").a(message).a(" ****").reset());
   }
 
   /**

@@ -48,6 +48,7 @@ public class AddGroceryCommand implements Command {
 
   @Override
   public Boolean execute() {
+
     try {
       final String groceryName = inputHandler.getInput("Enter Grocery Name: ");
 
@@ -70,16 +71,13 @@ public class AddGroceryCommand implements Command {
       Unit selectedUnit = units.get(choice - 1);
 
       float groceryPricePerUnit = Float.parseFloat(inputHandler.getInput("Enter price per unit: "));
-
       groceryManager.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));
       displayManager.showColoredMessage("Grocery added successfully", Ansi.Color.GREEN);
-
       return false;
     } catch (Exception e) {
-      throw new UserInputException(
-          "Invalid input: " + e.getMessage() + ". Grocery could not be added");
-
+      throw new UserInputException("Invalid input. Please try again.");
     }
+
   }
 
   @Override

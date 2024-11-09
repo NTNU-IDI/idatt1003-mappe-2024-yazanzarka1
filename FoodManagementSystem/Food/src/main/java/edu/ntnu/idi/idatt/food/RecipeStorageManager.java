@@ -54,7 +54,7 @@ public class RecipeStorageManager {
     List<String> header =
         List.of("Grocery", "Unit", "Price", "Recipe Amount", "In Storage", "Storage Diff");
     List<List<String>> rows = new ArrayList<>();
-    recipe.getGroceries().forEach(recipeGrocery -> {
+    recipe.getGroceries().values().forEach(recipeGrocery -> {
       float storageDifference = getStorageDifference(recipeGrocery);
       float storageAmount = 0;
       StorageEntry storageEntry =
@@ -94,7 +94,7 @@ public class RecipeStorageManager {
    */
   public void cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
-    for (RecipeGrocery recipeGrocery : recipe.getGroceries()) {
+    for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =
           storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
       listOfNeededGroceries = new ArrayList<>();
@@ -113,7 +113,7 @@ public class RecipeStorageManager {
           "You do not have enough groceries to cook this recipe."
               + " Check the table above for more information.");
     }
-    for (RecipeGrocery recipeGrocery : recipe.getGroceries()) {
+    for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =
           storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
       storageUnit.removeGrocery(storageEntry, recipeGrocery.amount());
