@@ -36,6 +36,10 @@ public class StorageUnit {
    * Adds a grocery to the storage unit. If the grocery already exists in the storage unit, the
    * quantity will be updated. If the grocery does not exist in the storage unit, a new entry will
    * be created.
+   *
+   * @param grocery        Grocery to add.
+   * @param quantity       Quantity of grocery
+   * @param bestBeforeDate Best before date of grocery
    */
   public void addGrocery(Grocery grocery, float quantity, Date bestBeforeDate) {
     if (groceries.containsKey(grocery.groceryName)) {
@@ -100,7 +104,8 @@ public class StorageUnit {
               String.format("%.2f NOK", storageEntry.quantity * storageEntry.getPricePerUnit())));
     }
     displayManager.showSpace();
-    displayManager.printTable(headers, groceryList);
+    displayManager.printTable("Groceries in Fridge", headers, groceryList);
+    displayManager.showMessage("Total value: " + getTotalValue() + " NOK");
     displayManager.showSpace();
   }
 
@@ -159,6 +164,16 @@ public class StorageUnit {
     }
     return formattedDate;
 
+  }
+
+  /**
+   * Get total value of all groceries in the storage unit.
+   *
+   * @return Total value of all groceries in the storage unit
+   */
+  public float getTotalValue() {
+    return groceries.values().stream().map(entry -> entry.quantity * entry.pricePerUnit)
+        .reduce(Float::sum).orElse(0f);
   }
 
 }

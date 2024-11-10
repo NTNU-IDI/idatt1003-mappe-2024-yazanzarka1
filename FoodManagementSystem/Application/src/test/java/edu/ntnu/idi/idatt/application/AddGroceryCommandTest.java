@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import edu.ntnu.idi.idatt.application.commands.AddGroceryCommand;
+import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.GroceryManager;

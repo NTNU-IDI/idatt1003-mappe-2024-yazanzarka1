@@ -1,8 +1,8 @@
 package edu.ntnu.idi.idatt.application.menus.grocery;
 
-import edu.ntnu.idi.idatt.application.commands.AddGroceryCommand;
-import edu.ntnu.idi.idatt.application.commands.DisplayGroceriesCommand;
-import edu.ntnu.idi.idatt.application.commands.RemoveGroceryFromGroceryManagerCommand;
+import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
+import edu.ntnu.idi.idatt.application.commands.grocery.DisplayGroceriesCommand;
+import edu.ntnu.idi.idatt.application.commands.grocery.RemoveGroceryFromGroceryManagerCommand;
 import edu.ntnu.idi.idatt.application.commands.SwitchMenuCommand;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
 import edu.ntnu.idi.idatt.console.MenuContext;

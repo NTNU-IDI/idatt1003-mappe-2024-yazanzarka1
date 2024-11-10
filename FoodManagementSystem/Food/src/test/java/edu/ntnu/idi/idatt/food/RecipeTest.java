@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RecipeTest {
@@ -44,5 +45,31 @@ class RecipeTest {
   void getDescription() {
     Assertions.assertEquals("Test Description", recipe.getDescription(),
         "Recipe description should be Test Description");
+  }
+
+  @Test
+  void getPeopleCount() {
+    Assertions.assertEquals(4, recipe.getPeopleCount(), "Recipe should be for 4 people");
+  }
+
+  @Test
+  void getSteps() {
+    recipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
+    Assertions.assertEquals("Test Steps", recipe.getSteps(), "Recipe steps should be empty");
+  }
+
+  @Test
+  @DisplayName("Test Recipe Initialization")
+  void testRecipeInitialization() {
+    new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
+    Assertions.assertAll(
+        () -> Assertions.assertEquals("Test Recipe", recipe.getName(),
+            "Recipe name should be Test Recipe"),
+        () -> Assertions.assertEquals("Test Description", recipe.getDescription(),
+            "Recipe description should be Test Description"),
+        () -> Assertions.assertEquals("Test Steps", recipe.getSteps(),
+            "Recipe steps should be Test Steps"),
+        () -> Assertions.assertEquals(4, recipe.getPeopleCount(), "Recipe should be for 4 people")
+    );
   }
 }

@@ -59,13 +59,15 @@ public class RecipeManager {
    */
   public void displayRecipes() {
 
-    List<String> headers = List.of("Index", "Name", "Description");
+    List<String> headers = List.of("Index", "Name", "Description", "Price",  "People Count");
     List<List<String>> recipesList = new ArrayList<>();
     for (int i = 0; i < recipes.size(); i++) {
       recipesList.add(List.of(
           String.valueOf(i),
           recipes.get(i).getName(),
-          recipes.get(i).getDescription()
+          recipes.get(i).getDescription(),
+          String.format("%.2f", recipes.get(i).getRecipePrice()),
+          String.valueOf(recipes.get(i).getPeopleCount())
       ));
     }
 

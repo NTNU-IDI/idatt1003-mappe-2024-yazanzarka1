@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.commands;
+package edu.ntnu.idi.idatt.application.commands.grocery;
 
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;

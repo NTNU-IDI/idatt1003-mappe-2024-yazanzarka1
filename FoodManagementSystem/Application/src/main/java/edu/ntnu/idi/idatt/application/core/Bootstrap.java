@@ -8,6 +8,7 @@ import edu.ntnu.idi.idatt.console.CommandRegistry;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.RecipeManager;
+import edu.ntnu.idi.idatt.food.RecipeSuggestionProvider;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
 /**
@@ -41,10 +42,12 @@ public class Bootstrap {
     commandRegistry.addContext(storageUnitMenu);
 
     // Register Recipes Menu's context and add to registry
-
     RecipeManager recipeManager = new RecipeManager("Cook Book");
+    RecipeSuggestionProvider recipeSuggestionProvider =
+        new RecipeSuggestionProvider(recipeManager, mainStorageUnit);
+
     RecipesMenu recipesMenu =
-        new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager);
+        new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager, recipeSuggestionProvider);
     commandRegistry.addContext(recipesMenu);
 
     // Seed data

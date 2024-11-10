@@ -39,6 +39,9 @@ class RecipeManagerTest {
     recipeManager.addRecipe(recipe);
     assertThrows(IndexOutOfBoundsException.class, () -> recipeManager.removeRecipe(1),
         "Should throw IndexOutOfBoundsException when index is out of bounds");
+
+    assertThrows(IndexOutOfBoundsException.class, () -> recipeManager.removeRecipe(-1),
+        "Should throw IndexOutOfBoundsException when index is out of bounds");
   }
 
   @Test

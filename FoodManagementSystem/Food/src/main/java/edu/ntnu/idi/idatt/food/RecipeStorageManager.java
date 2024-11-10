@@ -97,17 +97,12 @@ public class RecipeStorageManager {
     for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =
           storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
-      listOfNeededGroceries = new ArrayList<>();
-      if (storageEntry == null) {
+      if (storageEntry == null || storageEntry.getQuantity() < recipeGrocery.amount()) {
         listOfNeededGroceries.add(recipeGrocery);
-        break;
-      }
-      if (storageEntry.getQuantity() < recipeGrocery.amount()) {
-        listOfNeededGroceries.add(recipeGrocery);
+        continue;
       }
     }
     if (!listOfNeededGroceries.isEmpty()) {
-
       displayRecipe();
       throw new MissingGroceryInStorage(
           "You do not have enough groceries to cook this recipe."

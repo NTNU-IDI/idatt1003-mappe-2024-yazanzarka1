@@ -61,4 +61,12 @@ class StorageEntryTest {
     storageEntry.subtractQuantity(3.0f);
     assertEquals(7.0f, storageEntry.getQuantity(), "Quantity should be decreased to 7.0");
   }
+
+  @Test
+  @DisplayName("Test isExpired")
+  void testIsExpired() {
+    Date expiredDate = new Date(System.currentTimeMillis() - 1000);
+    storageEntry.setBestBeforeDate(expiredDate);
+    assertEquals(true, storageEntry.isExpired(), "Storage entry should be expired");
+  }
 }

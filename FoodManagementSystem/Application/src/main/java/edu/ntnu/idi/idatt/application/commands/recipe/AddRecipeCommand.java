@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.commands;
+package edu.ntnu.idi.idatt.application.commands.recipe;
 
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
@@ -39,21 +39,30 @@ public class AddRecipeCommand implements Command {
    *
    * @return Boolean redisplay commands in menu-contexts if true
    */
-
   @Override
   public Boolean execute() {
     List<RecipeGrocery> groceries = new ArrayList<>();
-    displayManager.showMessage("Available groceries: ");
-    groceryManager.displayGroceries();
+
     String recipeName = inputHandler.getInput("Enter recipe name: ");
     String recipeDescription = inputHandler.getInput("Enter recipe description: ");
+    groceryManager.displayGroceries();
     while (true) {
-      int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter grocery index: "));
-      Grocery grocery = groceryManager.getAvailableGroceries().get(groceryIndex);
+      String groceryName = inputHandler.getInput("Enter grocery name: ");
+
+      // search for grocery
+      Grocery grocery = groceryManager.getAvailableGroceries().stream()
+          .filter(g -> g.getGroceryName().toLowerCase().contains(groceryName.toLowerCase()))
+          .findFirst().orElse(null);
+
+      // if grocery not found display message and continue
       if (grocery == null) {
         displayManager.showMessage("Grocery not found");
         continue;
       }
+
+      displayManager.showMessage("Grocery found: " + grocery.getGroceryName());
+
+      // add grocery to recipe with amount and ask for more groceries
       float amount = Float.parseFloat(inputHandler.getInput("Enter amount: "));
       groceries.add(new RecipeGrocery(grocery, amount));
       String more = inputHandler.getInput("Add more groceries? (y/n): ");

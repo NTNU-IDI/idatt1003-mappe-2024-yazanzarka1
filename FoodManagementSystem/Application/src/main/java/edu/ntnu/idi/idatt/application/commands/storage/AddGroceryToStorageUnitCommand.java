@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.application.commands;
+package edu.ntnu.idi.idatt.application.commands.storage;
 
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
@@ -57,7 +57,6 @@ public class AddGroceryToStorageUnitCommand implements Command {
   @Override
   public Boolean execute() {
     try {
-      groceryManager.displayGroceries();
       int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
 
       float groceryAmount = Float.parseFloat(inputHandler.getInput("Enter Grocery Amount: "));

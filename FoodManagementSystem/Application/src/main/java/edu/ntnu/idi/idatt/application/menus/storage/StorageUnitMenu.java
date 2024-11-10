@@ -1,11 +1,11 @@
 package edu.ntnu.idi.idatt.application.menus.storage;
 
-import edu.ntnu.idi.idatt.application.commands.AddGroceryToStorageUnitCommand;
-import edu.ntnu.idi.idatt.application.commands.DisplayExpiredGroceriesCommand;
-import edu.ntnu.idi.idatt.application.commands.DisplayGroceriesInStorageUnitBeforeDateCommand;
-import edu.ntnu.idi.idatt.application.commands.DisplayStoredGroceryCommand;
-import edu.ntnu.idi.idatt.application.commands.RemoveGroceryFromStorageUnitCommand;
-import edu.ntnu.idi.idatt.application.commands.SearchInStorageUnitCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.AddGroceryToStorageUnitCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.DisplayExpiredGroceriesCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.DisplayGroceriesInStorageUnitBeforeDateCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.DisplayStoredGroceryCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.RemoveGroceryFromStorageUnitCommand;
+import edu.ntnu.idi.idatt.application.commands.storage.SearchInStorageUnitCommand;
 import edu.ntnu.idi.idatt.application.commands.SwitchMenuCommand;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
 import edu.ntnu.idi.idatt.console.MenuContext;

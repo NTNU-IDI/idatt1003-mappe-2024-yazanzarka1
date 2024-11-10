@@ -15,6 +15,8 @@ public class Recipe {
   private final String description;
   private final Map<String, RecipeGrocery> groceries;
   private final DisplayManager displayManager;
+  private int peopleCount;
+  private final String steps;
 
 
   /**
@@ -27,7 +29,26 @@ public class Recipe {
     this.name = name;
     this.groceries = new HashMap<>();
     this.description = description;
+    this.peopleCount = 4;
+    this.steps = "";
     displayManager = new DisplayManager();
+  }
+
+  /**
+   * Initiate a recipe.
+   *
+   * @param name        name of a recipe
+   * @param description description of a recipe
+   * @param steps       steps to make a recipe
+   * @param peopleCount number of people the recipe is for
+   */
+  public Recipe(String name, String description, String steps, int peopleCount) {
+    this.name = name;
+    this.groceries = new HashMap<>();
+    this.description = description;
+    displayManager = new DisplayManager();
+    this.steps = steps;
+    this.peopleCount = peopleCount;
   }
 
   /**
@@ -112,4 +133,21 @@ public class Recipe {
     return description;
   }
 
+  /**
+   * Get the steps to make a recipe.
+   *
+   * @return String steps to make a recipe
+   */
+  public String getSteps() {
+    return steps;
+  }
+
+  /**
+   * Get the number of people the recipe is for.
+   *
+   * @return int number of people the recipe is for
+   */
+  public int getPeopleCount() {
+    return peopleCount;
+  }
 }

@@ -38,6 +38,8 @@ public class DisplayManager {
 
   /**
    * simplest wrapper for System.out.println.
+   *
+   * @param message message to be shown
    */
   public void showMessage(String message) {
     System.out.println(message);
@@ -45,6 +47,8 @@ public class DisplayManager {
 
   /**
    * simplest wrapper for System.out.println.
+   *
+   * @param message message to be shown
    */
   public void showSameLineMessage(String message) {
     System.out.print(message);
@@ -83,14 +87,19 @@ public class DisplayManager {
 
     for (List<String> row : rows) {
       for (int i = 0; i < row.size(); i++) {
+        /* The i-th column should be at least as wide
+         as the i-th text in the row without ANSI color codes
+         */
         columnWidths[i] = Math.max(columnWidths[i], stripAnsiCodes(row.get(i)).length());
       }
     }
 
     if (!title.isEmpty()) {
       int totalWidth = Arrays.stream(columnWidths).sum();
-      showColoredMessage(padLeft(title, Math.round((float) (totalWidth + title.length()) / 2)),
-          HEADER_COLOR);
+
+      // Print the title
+      showColoredMessage(
+          padLeft(title, (totalWidth + columnWidths.length * 3) / 2 + title.length() / 2), HEADER_COLOR);
     }
 
     printRow(headers, columnWidths, true);
@@ -100,8 +109,18 @@ public class DisplayManager {
   }
 
   private void printRow(List<String> row, int[] columnWidths, boolean isHeader) {
+    /* each row starts with a separator | and each column is seperated by |.*/
     StringBuilder rowOutput = new StringBuilder("| ");
+
+    /* for each column in the row, pad the column to the right with spaces to match the column width
+     *
+     */
     for (int i = 0; i < row.size(); i++) {
+
+      /* strip ANSI color codes for width calculations
+       * Get the difference between column text length without ansi codes and with ansi codes
+       * then pad the text to the right with the difference to match the column width
+       */
       rowOutput.append(padRight(row.get(i),
               columnWidths[i] - (stripAnsiCodes(row.get(i)).length() - row.get(i).length())))
           .append(" | ");
