@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * Manage recipes in a recipe manager.
+ * RecipeManager can add, remove and display recipes.
+ * RecipeManager is used by the application to manage recipes.
+ * RecipeManager can also return recipes.
  */
 public class RecipeManager {
 

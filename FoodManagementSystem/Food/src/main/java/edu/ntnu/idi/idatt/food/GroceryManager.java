@@ -7,6 +7,11 @@ import java.util.List;
 
 /**
  * Manages Grocery in the app.
+ * GroceryManager can add, remove and display groceries.
+ * GroceryManager can also return available groceries.
+ * GroceryManager is used by the application to manage groceries.
+ *
+ * @see Grocery
  */
 public class GroceryManager {
 
@@ -31,7 +36,7 @@ public class GroceryManager {
   }
 
   /**
-   * .
+   * Get available groceries.
    *
    * @return List Available Groceries in the application.
    */

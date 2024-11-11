@@ -14,6 +14,9 @@ import org.fusesource.jansi.Ansi.Color;
 /**
  * Class for storage units Groceries are stored in storage units with quantity and best before
  * date.
+ * StorageUnit can add, remove and display groceries.
+ * StorageUnit can also find groceries and get the total value of all groceries in the storage unit.
+ * StorageUnit is used by the application to manage groceries.
  */
 public class StorageUnit {
 

@@ -4,6 +4,11 @@ import edu.ntnu.idi.idatt.units.Unit;
 
 /**
  * Grocery class represent a grocery that can be stored in a recipe or a storage unit.
+ * Grocery has a name, unit and price per unit.
+ * Grocery is used in StorageEntry and Recipe.
+ * Grocery is immutable.
+ *
+ * @see StorageEntry
  */
 public class Grocery {
 

@@ -8,6 +8,12 @@ import java.util.Map;
 
 /**
  * Represent a recipe in a recipe manager.
+ * A recipe has a name, description, groceries, steps and people count.
+ * A recipe can be displayed, get the price and get the groceries in a recipe.
+ * A recipe is used in RecipeManager.
+ * A recipe is immutable.
+ *
+ * @see RecipeManager
  */
 public class Recipe {
 
@@ -58,14 +64,11 @@ public class Recipe {
    * @param amount  amount of grocery in a recipe
    */
   public void addGrocery(Grocery grocery, float amount) {
-    groceries.putIfAbsent(grocery.getGroceryName(), new RecipeGrocery(grocery, amount));
     groceries.computeIfPresent(grocery.getGroceryName(), (k, v) -> {
       float newAmount = v.amount() + amount;
-      groceries.put(k, new RecipeGrocery(grocery, newAmount));
-      return v;
+      return new RecipeGrocery(grocery, newAmount);
     });
-
-
+    groceries.putIfAbsent(grocery.getGroceryName(), new RecipeGrocery(grocery, amount));
   }
 
   /**

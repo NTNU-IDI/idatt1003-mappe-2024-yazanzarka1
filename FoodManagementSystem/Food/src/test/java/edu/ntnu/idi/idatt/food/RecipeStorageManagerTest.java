@@ -79,8 +79,8 @@ class RecipeStorageManagerTest {
             recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery3.getGroceryName())),
             "Storage difference should be -2.0f"),
         () -> assertEquals(
-            -recipe.getGrocery(grocery4.getGroceryName()).amount(),
-            recipeStorageManager.getStorageDifference(recipe.getGrocery(grocery4.getGroceryName())),
+            -missingGroceryRecipe.getGrocery(grocery4.getGroceryName()).amount(),
+            recipeStorageManager.getStorageDifference(missingGroceryRecipe.getGrocery(grocery4.getGroceryName())),
             "Storage difference should be -2.0f")
     );
   }

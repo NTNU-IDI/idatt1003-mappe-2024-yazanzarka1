@@ -69,4 +69,11 @@ class StorageEntryTest {
     storageEntry.setBestBeforeDate(expiredDate);
     assertEquals(true, storageEntry.isExpired(), "Storage entry should be expired");
   }
+
+  @Test
+  @DisplayName("Test CompareTo")
+  void testCompareTo() {
+    StorageEntry storageEntry2 = new StorageEntry(new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
+    assertEquals(0, storageEntry.compareTo(storageEntry2), "Storage entries should be equal");
+  }
 }

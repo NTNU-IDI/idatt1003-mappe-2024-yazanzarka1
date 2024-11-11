@@ -7,6 +7,11 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * MenuContext is responsible for defining commands and displaying current context's commands.
+ * MenuContext is used to group commands together and display them in a menu.
+ * MenuContext is used in CommandRegistry.
+ * MenuContext is immutable.
+ *
+ * @see CommandRegistry
  */
 public class MenuContext {
 
@@ -91,11 +96,9 @@ public class MenuContext {
         commands.keySet().stream().map(String::length).max(Integer::compareTo).orElse(0);
 
     // Print each command with its description
-    for (String keyword : commands.keySet()) {
-      displayManager.showColoredMessage(
-          padRight(keyword + ":", maxWidth + 2) + commands.get(keyword).getDescription(),
-          Color.CYAN);
-    }
+    commands.keySet().forEach(keyword -> displayManager.showColoredMessage(
+        padRight(keyword + ":", maxWidth + 2) + commands.get(keyword).getDescription(),
+        Color.CYAN));
   }
 
 }

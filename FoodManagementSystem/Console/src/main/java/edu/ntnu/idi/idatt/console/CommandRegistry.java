@@ -14,14 +14,12 @@ import java.util.Map;
 public class CommandRegistry {
 
   private final Map<String, MenuContext> contexts;
-  private final DisplayManager displayManager;
   private MenuContext currentContext;
 
   /**
    * Public Constructor for command registry.
    */
   public CommandRegistry() {
-    displayManager = new DisplayManager();
     this.contexts = new HashMap<>();
   }
 

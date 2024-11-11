@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.recipe;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.Recipe;
@@ -30,6 +31,20 @@ public class AddRecipeCommand implements Command {
   public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager) {
     displayManager = new DisplayManager();
     inputHandler = new InputHandler();
+    this.recipeManager = recipeManager;
+    this.groceryManager = groceryManager;
+  }
+
+  /**
+   * Initiate the command with a RecipeManager.
+   *
+   * @param recipeManager  RecipeManager to add recipe to.
+   * @param groceryManager GroceryManager to retrieve available groceries from.
+   * @param inputHandler   InputHandler to handle user input.
+   */
+  public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager, InputHandler inputHandler) {
+    displayManager = new DisplayManager();
+    this.inputHandler = inputHandler;
     this.recipeManager = recipeManager;
     this.groceryManager = groceryManager;
   }
@@ -70,8 +85,15 @@ public class AddRecipeCommand implements Command {
         break;
       }
     }
+    String recipeSteps = inputHandler.getInput("Enter recipe steps: ");
+    int peopleCount;
+    try {
+      peopleCount = Integer.parseInt(inputHandler.getInput("Enter number of people: "));
+    } catch (NumberFormatException e) {
+      throw new UserInputException("Invalid number of people");
+    }
 
-    Recipe newRecipe = new Recipe(recipeName, recipeDescription);
+    Recipe newRecipe = new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
     for (RecipeGrocery recipeGrocery : groceries) {
       newRecipe.addGrocery(recipeGrocery.grocery(), recipeGrocery.amount());
     }

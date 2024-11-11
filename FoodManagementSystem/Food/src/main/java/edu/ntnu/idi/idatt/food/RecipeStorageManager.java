@@ -10,6 +10,9 @@ import org.fusesource.jansi.Ansi.Color;
 /**
  * RecipeStorageManager is responsible for displaying and managing a recipe, its groceries and
  * Storage entries of groceries.
+ * RecipeStorageManager can display groceries in a recipe and their storage entries.
+ * RecipeStorageManager can also cook a recipe.
+ * RecipeStorageManager is used by the application to manage recipes.
  */
 public class RecipeStorageManager {
 

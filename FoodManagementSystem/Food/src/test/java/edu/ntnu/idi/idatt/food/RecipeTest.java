@@ -27,6 +27,18 @@ class RecipeTest {
   }
 
   @Test
+  @DisplayName("Test Add Grocery Should Increase If Grocery Already Exists")
+  void addGroceryShouldIncreaseIfGroceryAlreadyExists() {
+    Grocery grocery = new Grocery("Test Grocery6", new Kilogram(), 200);
+    recipe.addGrocery(grocery, 1.0f);
+    recipe.addGrocery(grocery, 1.0f);
+
+    Assertions.assertEquals(2.0f, recipe.getGrocery(grocery.getGroceryName()).amount(), "Grocery amount should be 2.0");
+
+
+  }
+
+  @Test
   void getGroceries() {
     Assertions.assertEquals(2, recipe.getGroceries().size(), "Grocery list should contain 2 items");
   }
@@ -61,15 +73,15 @@ class RecipeTest {
   @Test
   @DisplayName("Test Recipe Initialization")
   void testRecipeInitialization() {
-    new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
+    Recipe newRecipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
     Assertions.assertAll(
-        () -> Assertions.assertEquals("Test Recipe", recipe.getName(),
+        () -> Assertions.assertEquals("Test Recipe", newRecipe.getName(),
             "Recipe name should be Test Recipe"),
-        () -> Assertions.assertEquals("Test Description", recipe.getDescription(),
+        () -> Assertions.assertEquals("Test Description", newRecipe.getDescription(),
             "Recipe description should be Test Description"),
-        () -> Assertions.assertEquals("Test Steps", recipe.getSteps(),
+        () -> Assertions.assertEquals("Test Steps", newRecipe.getSteps(),
             "Recipe steps should be Test Steps"),
-        () -> Assertions.assertEquals(4, recipe.getPeopleCount(), "Recipe should be for 4 people")
+        () -> Assertions.assertEquals(4, newRecipe.getPeopleCount(), "Recipe should be for 4 people")
     );
   }
 }
