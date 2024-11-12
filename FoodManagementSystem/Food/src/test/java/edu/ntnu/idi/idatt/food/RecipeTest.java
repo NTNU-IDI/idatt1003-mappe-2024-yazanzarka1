@@ -33,7 +33,8 @@ class RecipeTest {
     recipe.addGrocery(grocery, 1.0f);
     recipe.addGrocery(grocery, 1.0f);
 
-    Assertions.assertEquals(2.0f, recipe.getGrocery(grocery.getGroceryName()).amount(), "Grocery amount should be 2.0");
+    Assertions.assertEquals(2.0f, recipe.getGrocery(grocery.getGroceryName()).amount(),
+        "Grocery amount should be 2.0");
 
 
   }
@@ -81,7 +82,8 @@ class RecipeTest {
             "Recipe description should be Test Description"),
         () -> Assertions.assertEquals("Test Steps", newRecipe.getSteps(),
             "Recipe steps should be Test Steps"),
-        () -> Assertions.assertEquals(4, newRecipe.getPeopleCount(), "Recipe should be for 4 people")
+        () -> Assertions.assertEquals(4, newRecipe.getPeopleCount(),
+            "Recipe should be for 4 people")
     );
   }
 }
