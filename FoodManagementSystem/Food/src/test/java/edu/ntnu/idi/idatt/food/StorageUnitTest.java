@@ -28,7 +28,7 @@ class StorageUnitTest {
   @DisplayName("Test Add Grocery")
   void addGrocery() {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
-    StorageEntry entry = storageUnit.getGroceries().get(grocery.groceryName);
+    StorageEntry entry = storageUnit.findGroceryByName(grocery.getGroceryName());
     assertNotNull(entry, "Grocery should be added");
     assertEquals(10.0f, entry.getQuantity(), "Quantity should be 10.0");
     assertEquals(bestBeforeDate, entry.getBestBeforeDate(), "Best before date should match");
@@ -39,7 +39,7 @@ class StorageUnitTest {
   void removeGrocery() {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
     storageUnit.removeGrocery(grocery, 5.0f);
-    StorageEntry entry = storageUnit.getGroceries().get(grocery.groceryName);
+    StorageEntry entry = storageUnit.findGroceryByName(grocery.getGroceryName());
     assertNotNull(entry, "Grocery should still exist");
     assertEquals(5.0f, entry.getQuantity(), "Quantity should be 5.0 after removal");
   }
@@ -54,9 +54,9 @@ class StorageUnitTest {
   @DisplayName("Get a grocery")
   void getGrocery() {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
-    StorageEntry entry = storageUnit.getGrocery("Milk");
+    StorageEntry entry = storageUnit.findGroceryByName("Milk");
     assertNotNull(entry, "Grocery should be added");
-    assertEquals(entry.groceryName, grocery.getGroceryName(), "Grocery should be Milk");
+    assertEquals(entry.getGroceryName(), grocery.getGroceryName(), "Grocery should be Milk");
   }
 
 }

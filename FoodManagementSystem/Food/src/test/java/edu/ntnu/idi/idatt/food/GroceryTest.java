@@ -22,9 +22,14 @@ class GroceryTest {
   @Test
   @DisplayName("Test Grocery Initialization")
   void testGroceryInitialization() {
-    assertEquals("Milk", grocery.groceryName, "Grocery name should be Milk");
-    assertInstanceOf(Liter.class, grocery.unit, "Unit should be an instance of Liter");
-    assertEquals(50.0f, grocery.pricePerUnit, "Price per unit should be 50.0");
+    assertEquals("Milk", grocery.getGroceryName(), "Grocery name should be Milk");
+    assertInstanceOf(Liter.class, grocery.getUnit(), "Unit should be an instance of Liter");
+    assertEquals(50.0f, grocery.getPricePerUnit(), "Price per unit should be 50.0");
   }
 
+  @Test
+  void setPricePerUnit() {
+    grocery.setPricePerUnit(60.0f);
+    assertEquals(60.0f, grocery.getPricePerUnit(), "Price per unit should be 60.0");
+  }
 }

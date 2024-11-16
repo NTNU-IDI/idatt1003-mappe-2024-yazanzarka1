@@ -3,25 +3,24 @@ package edu.ntnu.idi.idatt.food;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnit;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
- * Class for storage units Groceries are stored in storage units with quantity and best before
- * date.
- * StorageUnit can add, remove and display groceries.
- * StorageUnit can also find groceries and get the total value of all groceries in the storage unit.
- * StorageUnit is used by the application to manage groceries.
+ * Class for storage units. Groceries are stored in storage units with quantity and best before
+ * date. StorageUnit can add, remove and display groceries. StorageUnit can also find groceries and
+ * get the total value of all groceries in the storage unit. StorageUnit is used by the application
+ * to manage groceries.
  */
 public class StorageUnit {
 
   public final String name;
-  private final HashMap<String, StorageEntry> groceries;
+  private final Set<StorageEntry> groceries;
   final DisplayManager displayManager;
 
   /**
@@ -32,7 +31,7 @@ public class StorageUnit {
   public StorageUnit(String name) {
     this.name = name;
     displayManager = new DisplayManager();
-    groceries = new HashMap<>();
+    groceries = new HashSet<>();
   }
 
   /**
@@ -45,18 +44,17 @@ public class StorageUnit {
    * @param bestBeforeDate Best before date of grocery
    */
   public void addGrocery(Grocery grocery, float quantity, Date bestBeforeDate) {
-    if (groceries.containsKey(grocery.groceryName)) {
-      displayManager.showColoredMessage(
-          String.format("%s - Already exists, updating quantity", grocery.groceryName),
-          Color.BLUE);
-      StorageEntry newGrocery = groceries.get(grocery.groceryName);
-      newGrocery.addQuantity(quantity);
-      newGrocery.setBestBeforeDate(bestBeforeDate);
-      groceries.put(grocery.groceryName, newGrocery);
-      return;
-    }
+    StorageEntry existingEntry = findGroceryByName(grocery.getGroceryName());
 
-    groceries.put(grocery.groceryName, new StorageEntry(grocery, quantity, bestBeforeDate));
+    if (existingEntry != null) {
+      displayManager.showColoredMessage(
+          String.format("%s - Already exists, updating quantity", grocery.getGroceryName()),
+          Color.BLUE);
+      existingEntry.addQuantity(quantity);
+      existingEntry.setBestBeforeDate(bestBeforeDate);
+    } else {
+      groceries.add(new StorageEntry(grocery, quantity, bestBeforeDate));
+    }
   }
 
   /**
@@ -69,26 +67,24 @@ public class StorageUnit {
       return;
     }
 
-    if (!groceries.containsKey(grocery.groceryName)) {
+    StorageEntry existingEntry = findGroceryByName(grocery.getGroceryName());
+
+    if (existingEntry == null) {
       return;
     }
 
-    StorageEntry groceryToRemove = groceries.get(grocery.groceryName);
-    if (groceryToRemove.quantity < quantity) {
+    if (existingEntry.quantity < quantity) {
       throw new InsufficentGroceryInStorageUnit(
-          "Insufficient quantity of " + grocery.groceryName + " in storage unit");
+          "Insufficient quantity of " + grocery.getGroceryName() + " in storage unit");
     }
-    if (groceryToRemove.quantity == quantity) {
-      groceries.remove(grocery.groceryName);
+    if (existingEntry.quantity == quantity) {
+      groceries.remove(existingEntry);
       return;
     }
-    groceryToRemove.subtractQuantity(quantity);
-    groceries.put(grocery.groceryName, groceryToRemove);
-
-
+    existingEntry.subtractQuantity(quantity);
   }
 
-  public Map<String, StorageEntry> getGroceries() {
+  public Set<StorageEntry> getGroceries() {
     return groceries;
   }
 
@@ -98,14 +94,17 @@ public class StorageUnit {
    */
   public void displayGroceries() {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
-    List<List<String>> groceryList = new ArrayList<>();
-    for (StorageEntry storageEntry : groceries.values().stream().sorted().toList()) {
-      groceryList.add(
-          List.of(storageEntry.groceryName, storageEntry.unit.getUnitName(), String.valueOf(
-                  storageEntry.pricePerUnit), String.valueOf(storageEntry.quantity),
-              formatBestBeforeDate(storageEntry),
-              String.format("%.2f NOK", storageEntry.quantity * storageEntry.getPricePerUnit())));
-    }
+    List<List<String>> groceryList = groceries.stream()
+        .sorted()
+        .map(storageEntry -> List.of(
+            storageEntry.getGroceryName(),
+            storageEntry.getUnit().getUnitName(),
+            String.valueOf(storageEntry.getPricePerUnit()),
+            String.valueOf(storageEntry.quantity),
+            formatBestBeforeDate(storageEntry),
+            String.format("%.2f NOK", storageEntry.quantity * storageEntry.getPricePerUnit())))
+        .collect(Collectors.toList());
+
     displayManager.showSpace();
     displayManager.printTable("Groceries in Fridge", headers, groceryList);
     displayManager.showMessage("Total value: " + getTotalValue() + " NOK");
@@ -120,24 +119,32 @@ public class StorageUnit {
    */
   public void displayGroceries(List<StorageEntry> storageEntries) {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
-    List<List<String>> groceryList = new ArrayList<>();
-    for (StorageEntry storageEntry : storageEntries) {
-      groceryList.add(
-          List.of(storageEntry.groceryName, storageEntry.unit.getUnitName(), String.valueOf(
-                  storageEntry.pricePerUnit), String.valueOf(storageEntry.quantity),
-              formatBestBeforeDate(storageEntry),
-              String.format("%.2f NOK", storageEntry.quantity * storageEntry.getPricePerUnit())));
-    }
+    List<List<String>> groceryList = storageEntries.stream()
+        .map(storageEntry -> List.of(
+            storageEntry.getGroceryName(),
+            storageEntry.getUnit().getUnitName(),
+            String.valueOf(storageEntry.getPricePerUnit()),
+            String.valueOf(storageEntry.quantity),
+            formatBestBeforeDate(storageEntry),
+            String.format("%.2f NOK", storageEntry.quantity * storageEntry.getPricePerUnit())))
+        .collect(Collectors.toList());
+
     displayManager.showSpace();
     displayManager.printTable(headers, groceryList);
     displayManager.showSpace();
   }
 
   /**
-   * Get a grocery from the storage unit.
+   * Get a grocery from the storage unit by name.
+   *
+   * @param groceryName Name of the grocery
+   * @return Storage entry of the grocery
    */
-  public StorageEntry getGrocery(String groceryName) {
-    return groceries.get(groceryName);
+  public StorageEntry findGroceryByName(String groceryName) {
+    return groceries.stream()
+        .filter(entry -> entry.getGroceryName().equalsIgnoreCase(groceryName))
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -148,10 +155,10 @@ public class StorageUnit {
    * @return List of storage entries that match the query
    */
   public List<StorageEntry> findGrocery(String query) {
-    return groceries.entrySet().stream().filter(entry -> entry.getKey().toLowerCase()
-        .contains(query.toLowerCase())).map(Map.Entry::getValue).toList();
+    return groceries.stream()
+        .filter(entry -> entry.getGroceryName().toLowerCase().contains(query.toLowerCase()))
+        .collect(Collectors.toList());
   }
-
 
   /**
    * Formats best before date.
@@ -166,7 +173,6 @@ public class StorageUnit {
       return Ansi.ansi().bg(Color.RED).a(formattedDate).reset().toString();
     }
     return formattedDate;
-
   }
 
   /**
@@ -175,8 +181,9 @@ public class StorageUnit {
    * @return Total value of all groceries in the storage unit
    */
   public float getTotalValue() {
-    return groceries.values().stream().map(entry -> entry.quantity * entry.pricePerUnit)
-        .reduce(Float::sum).orElse(0f);
+    return groceries.stream()
+        .map(entry -> entry.quantity * entry.getPricePerUnit())
+        .reduce(Float::sum)
+        .orElse(0f);
   }
-
 }

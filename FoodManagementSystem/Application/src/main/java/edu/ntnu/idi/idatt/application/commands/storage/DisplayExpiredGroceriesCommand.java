@@ -7,6 +7,7 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -34,10 +35,10 @@ public class DisplayExpiredGroceriesCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    Map<String, StorageEntry> storageEntries = storageUnit.getGroceries();
+    Set<StorageEntry> storageEntries = storageUnit.getGroceries();
     List<StorageEntry> expiredGroceries = new ArrayList<>();
     float totalExpiredGroceriesValue = 0;
-    for (StorageEntry storageEntry : storageEntries.values()) {
+    for (StorageEntry storageEntry : storageEntries) {
       if (Boolean.TRUE.equals(storageEntry.isExpired())) {
         totalExpiredGroceriesValue += storageEntry.getQuantity() + storageEntry.getPricePerUnit();
         expiredGroceries.add(storageEntry);

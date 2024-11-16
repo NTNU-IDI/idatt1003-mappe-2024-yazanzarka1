@@ -44,7 +44,7 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
     } catch (ParseException e) {
       throw new UserInputException("Invalid date format: " + e.getMessage());
     }
-    List<StorageEntry> storageEntryBeforeDate = storageUnit.getGroceries().values().stream()
+    List<StorageEntry> storageEntryBeforeDate = storageUnit.getGroceries().stream()
         .filter(storageEntry -> storageEntry.getBestBeforeDate().before(date)).sorted().toList();
 
     if (storageEntryBeforeDate.isEmpty()) {

@@ -26,9 +26,9 @@ class StorageEntryTest {
   @Test
   @DisplayName("Test StorageEntry Initialization")
   void testStorageEntryInitialization() {
-    assertEquals("Milk", storageEntry.groceryName, "Grocery name should be Milk");
-    assertInstanceOf(Liter.class, storageEntry.unit, "Unit should be an instance of Liter");
-    assertEquals(50.0f, storageEntry.pricePerUnit, "Price per unit should be 50.0");
+    assertEquals("Milk", storageEntry.getGroceryName(), "Grocery name should be Milk");
+    assertInstanceOf(Liter.class, storageEntry.getUnit(), "Unit should be an instance of Liter");
+    assertEquals(50.0f, storageEntry.getPricePerUnit(), "Price per unit should be 50.0");
     assertEquals(10.0f, storageEntry.getQuantity(), "Quantity should be 10.0");
     assertEquals(bestBeforeDate, storageEntry.getBestBeforeDate(), "Best before date should match");
   }

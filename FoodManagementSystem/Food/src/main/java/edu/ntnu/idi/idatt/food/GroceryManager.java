@@ -69,7 +69,7 @@ public class GroceryManager {
 
     availableGroceries.stream()
         .map(grocery -> List.of(String.valueOf(availableGroceries.indexOf(grocery)),
-            grocery.groceryName, grocery.unit.getUnitName(), String.valueOf(grocery.pricePerUnit)))
+            grocery.getGroceryName(), grocery.getUnit().getUnitName(), String.valueOf(grocery.getPricePerUnit())))
         .forEach(groceryList::add);
 
     displayManager.showSpace();

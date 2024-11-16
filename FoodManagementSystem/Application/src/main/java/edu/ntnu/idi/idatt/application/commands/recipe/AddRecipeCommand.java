@@ -78,7 +78,12 @@ public class AddRecipeCommand implements Command {
       displayManager.showMessage("Grocery found: " + grocery.getGroceryName());
 
       // add grocery to recipe with amount and ask for more groceries
-      float amount = Float.parseFloat(inputHandler.getInput("Enter amount: "));
+      float amount;
+      try {
+        amount = Float.parseFloat(inputHandler.getInput("Enter amount: "));
+      } catch (NumberFormatException e) {
+        throw new UserInputException("Invalid amount");
+      }
       groceries.add(new RecipeGrocery(grocery, amount));
       String more = inputHandler.getInput("Add more groceries? (y/n): ");
       if (more.equals("n")) {

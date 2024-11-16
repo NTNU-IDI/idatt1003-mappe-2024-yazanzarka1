@@ -29,7 +29,7 @@ class GroceryManagerTest {
     groceryManager.addGrocery(grocery);
     List<Grocery> groceries = groceryManager.getAvailableGroceries();
     assertEquals(1, groceries.size(), "Grocery list should contain 1 item");
-    assertEquals("Milk", groceries.getFirst().groceryName, "Grocery name should be Milk");
+    assertEquals("Milk", groceries.getFirst().getGroceryName(), "Grocery name should be Milk");
   }
 
   @Test

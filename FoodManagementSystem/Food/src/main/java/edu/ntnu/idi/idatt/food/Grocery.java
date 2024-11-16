@@ -3,24 +3,22 @@ package edu.ntnu.idi.idatt.food;
 import edu.ntnu.idi.idatt.units.Unit;
 
 /**
- * Grocery class represent a grocery that can be stored in a recipe or a storage unit.
- * Grocery has a name, unit and price per unit.
- * Grocery is used in StorageEntry and Recipe.
- * Grocery is immutable.
+ * Grocery class represent a grocery that can be stored in a recipe or a storage unit. Grocery has a
+ * name, unit and price per unit. Grocery is used in StorageEntry and Recipe. Grocery is immutable.
  *
  * @see StorageEntry
  */
 public class Grocery {
 
-  final String groceryName;
-  final Unit unit;
-  final float pricePerUnit;
+  private final String groceryName;
+  private final Unit unit;
+  private float pricePerUnit;
 
   /**
    * Public Grocery constructor.
    *
-   * @param groceryName grocery name
-   * @param unit SI unit
+   * @param groceryName  grocery name
+   * @param unit         SI unit
    * @param pricePerUnit price per unit NOK/KG for example
    */
   public Grocery(String groceryName, Unit unit, float pricePerUnit) {
@@ -55,6 +53,17 @@ public class Grocery {
    * @return float PricePerUnit
    */
   public float getPricePerUnit() {
+    return pricePerUnit;
+  }
+
+  /**
+   * Grocery's price per unit setter.
+   *
+   * @param pricePerUnit price per unit
+   * @return float newPricePerUnit
+   */
+  public float setPricePerUnit(float pricePerUnit) {
+    this.pricePerUnit = pricePerUnit;
     return pricePerUnit;
   }
 

@@ -61,7 +61,7 @@ public class RecipeStorageManager {
       float storageDifference = getStorageDifference(recipeGrocery);
       float storageAmount = 0;
       StorageEntry storageEntry =
-          storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
+          storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       if (storageEntry != null) {
         storageAmount = storageEntry.getQuantity();
       }
@@ -83,7 +83,7 @@ public class RecipeStorageManager {
    * @return storage difference
    */
   public float getStorageDifference(RecipeGrocery recipeGrocery) {
-    StorageEntry grocery = storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
+    StorageEntry grocery = storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
     if (grocery == null) {
       return -recipeGrocery.amount();
     }
@@ -99,7 +99,7 @@ public class RecipeStorageManager {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
     for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =
-          storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
+          storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       if (storageEntry == null || storageEntry.getQuantity() < recipeGrocery.amount()) {
         listOfNeededGroceries.add(recipeGrocery);
         continue;
@@ -113,7 +113,7 @@ public class RecipeStorageManager {
     }
     for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =
-          storageUnit.getGroceries().get(recipeGrocery.grocery().getGroceryName());
+          storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       storageUnit.removeGrocery(storageEntry, recipeGrocery.amount());
       displayManager.showColoredMessage(
           String.format("Removed %.2f %s from storage. You have %.2f %s left.",

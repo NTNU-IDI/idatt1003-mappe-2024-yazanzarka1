@@ -21,7 +21,7 @@ public class Recipe {
   private final String description;
   private final Map<String, RecipeGrocery> groceries;
   private final DisplayManager displayManager;
-  private int peopleCount;
+  private final int peopleCount;
   private final String steps;
 
 

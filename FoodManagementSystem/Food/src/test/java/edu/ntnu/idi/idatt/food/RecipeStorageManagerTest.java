@@ -99,10 +99,10 @@ class RecipeStorageManagerTest {
     storageUnit.addGrocery(grocery3, 3.0f, new Date());
     recipeStorageManager.cookRecipe();
 
-    StorageEntry storageGrocery = storageUnit.getGrocery(grocery.groceryName);
-    StorageEntry storageGrocery1 = storageUnit.getGrocery(grocery1.groceryName);
-    StorageEntry storageGrocery2 = storageUnit.getGrocery(grocery2.groceryName);
-    StorageEntry storageGrocery3 = storageUnit.getGrocery(grocery3.groceryName);
+    StorageEntry storageGrocery = storageUnit.findGroceryByName(grocery.getGroceryName());
+    StorageEntry storageGrocery1 = storageUnit.findGroceryByName(grocery1.getGroceryName());
+    StorageEntry storageGrocery2 = storageUnit.findGroceryByName(grocery2.getGroceryName());
+    StorageEntry storageGrocery3 = storageUnit.findGroceryByName(grocery3.getGroceryName());
 
     Assertions.assertAll(
         () -> assertNull(storageGrocery, "Grocery should be 1.0f"),

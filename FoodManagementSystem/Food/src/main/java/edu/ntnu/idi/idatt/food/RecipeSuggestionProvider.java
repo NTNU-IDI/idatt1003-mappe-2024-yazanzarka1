@@ -46,9 +46,9 @@ public class RecipeSuggestionProvider {
 
       boolean hasAllGroceries = true;
       for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
-        if (storageUnit.getGroceries().containsKey(recipeGrocery.grocery().groceryName)) {
+        if (storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName()) != null) {
           StorageEntry storageEntry =
-              storageUnit.getGroceries().get(recipeGrocery.grocery().groceryName);
+              storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
           score += calculateScore(storageEntry, recipeGrocery);
         } else {
           hasAllGroceries = false;

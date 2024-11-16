@@ -17,7 +17,7 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
   Date bestBeforeDate;
 
   StorageEntry(Grocery grocery, float quantity, Date bestBeforeDate) {
-    super(grocery.groceryName, grocery.unit, grocery.pricePerUnit);
+    super(grocery.getGroceryName(), grocery.getUnit(), grocery.getPricePerUnit());
     this.quantity = quantity;
     this.bestBeforeDate = bestBeforeDate;
   }
@@ -118,6 +118,6 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    */
   @Override
   public int compareTo(StorageEntry o) {
-    return this.groceryName.compareTo(o.groceryName);
+    return this.getGroceryName().compareTo(o.getGroceryName());
   }
 }
