@@ -19,10 +19,10 @@ public class RecipeManager {
   /**
    * Initiate a recipe manager.
    */
-  public RecipeManager(String name) {
+  public RecipeManager(String name, DisplayManager displayManager) {
     this.name = name;
     recipes = new ArrayList<>();
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**

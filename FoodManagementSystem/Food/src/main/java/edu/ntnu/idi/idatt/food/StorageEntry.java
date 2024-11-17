@@ -121,22 +121,4 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
   public int compareTo(StorageEntry o) {
     return this.getGroceryName().compareTo(o.getGroceryName());
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    StorageEntry storageEntry = (StorageEntry) o;
-    return getGroceryName().equals(storageEntry.getGroceryName()) && getUnit().getUnitName()
-        .equals(storageEntry.getUnit().getUnitName());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getGroceryName(), getUnit().getUnitName());
-  }
 }
