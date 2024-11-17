@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.food;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import org.junit.jupiter.api.Assertions;
@@ -67,14 +68,14 @@ class RecipeTest {
 
   @Test
   void getSteps() {
-    recipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
+    recipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4, new DisplayManager());
     Assertions.assertEquals("Test Steps", recipe.getSteps(), "Recipe steps should be empty");
   }
 
   @Test
   @DisplayName("Test Recipe Initialization")
   void testRecipeInitialization() {
-    Recipe newRecipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
+    Recipe newRecipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4, new DisplayManager());
     Assertions.assertAll(
         () -> Assertions.assertEquals("Test Recipe", newRecipe.getName(),
             "Recipe name should be Test Recipe"),

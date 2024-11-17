@@ -42,7 +42,8 @@ public class AddRecipeCommand implements Command {
    * @param groceryManager GroceryManager to retrieve available groceries from.
    * @param inputHandler   InputHandler to handle user input.
    */
-  public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager, InputHandler inputHandler) {
+  public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager,
+      InputHandler inputHandler) {
     displayManager = new DisplayManager();
     this.inputHandler = inputHandler;
     this.recipeManager = recipeManager;
@@ -98,7 +99,8 @@ public class AddRecipeCommand implements Command {
       throw new UserInputException("Invalid number of people");
     }
 
-    Recipe newRecipe = new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
+    Recipe newRecipe =
+        new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount, displayManager);
     for (RecipeGrocery recipeGrocery : groceries) {
       newRecipe.addGrocery(recipeGrocery.grocery(), recipeGrocery.amount());
     }

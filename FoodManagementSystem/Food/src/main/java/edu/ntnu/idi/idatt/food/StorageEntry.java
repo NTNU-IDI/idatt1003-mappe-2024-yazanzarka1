@@ -5,10 +5,8 @@ import java.util.Objects;
 
 /**
  * StorageEntry is responsible for storing the quantity and best before date of a grocery inside a
- * StorageUnit.
- * StorageEntry is used in StorageUnit.
- * StorageEntry is mutable.
- * StorageEntry is comparable.
+ * StorageUnit. StorageEntry is used in StorageUnit. StorageEntry is mutable. StorageEntry is
+ * comparable.
  *
  * @see StorageUnit
  */
@@ -114,11 +112,28 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @apiNote It is strongly recommended, but <i>not</i> strictly required that
    * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any class that implements
    * the {@code Comparable} interface and violates this condition should clearly indicate this fact.
-   *  The recommended language is "Note: this class has a natural ordering that is inconsistent with
+   * The recommended language is "Note: this class has a natural ordering that is inconsistent with
    * equals."
    */
   @Override
   public int compareTo(StorageEntry o) {
     return this.getGroceryName().compareTo(o.getGroceryName());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    StorageEntry that = (StorageEntry) o;
+    return this.hashCode() == that.hashCode();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getGroceryName());
   }
 }

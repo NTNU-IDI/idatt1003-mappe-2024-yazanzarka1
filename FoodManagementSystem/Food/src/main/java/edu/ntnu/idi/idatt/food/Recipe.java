@@ -47,14 +47,16 @@ public class Recipe {
    * @param description description of a recipe
    * @param steps       steps to make a recipe
    * @param peopleCount number of people the recipe is for
+   * @param displayManager DisplayManager to display groceries
    */
-  public Recipe(String name, String description, String steps, int peopleCount) {
+  public Recipe(String name, String description, String steps, int peopleCount, DisplayManager displayManager) {
     this.name = name;
     this.groceries = new HashMap<>();
     this.description = description;
-    displayManager = new DisplayManager();
     this.steps = steps;
     this.peopleCount = peopleCount;
+    this.displayManager = displayManager;
+
   }
 
   /**

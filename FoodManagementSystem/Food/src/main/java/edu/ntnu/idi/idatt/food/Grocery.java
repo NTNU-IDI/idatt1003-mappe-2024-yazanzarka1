@@ -77,7 +77,7 @@ public class Grocery {
       return false;
     }
     Grocery grocery = (Grocery) o;
-    return groceryName.equalsIgnoreCase(grocery.groceryName);
+    return this.hashCode() == grocery.hashCode();
 
   }
 
