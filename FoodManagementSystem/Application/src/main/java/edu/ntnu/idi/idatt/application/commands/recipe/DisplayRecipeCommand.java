@@ -23,10 +23,10 @@ public class DisplayRecipeCommand implements Command {
    *
    * @param recipeManager recipe manager where recipes are stored
    */
-  public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit) {
+  public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
     this.recipeManager = recipeManager;
-    this.displayManager = new DisplayManager();
-    this.inputHandler = new InputHandler();
+    this.displayManager = displayManager;
+    this.inputHandler = inputHandler;
     this.storageUnit = storageUnit;
   }
 
@@ -46,7 +46,7 @@ public class DisplayRecipeCommand implements Command {
 
     //Display the recipe table
     final RecipeStorageManager recipeStorageManager =
-        new RecipeStorageManager(recipe, storageUnit);
+        new RecipeStorageManager(recipe, storageUnit, displayManager);
     recipeStorageManager.displayRecipe();
 
     displayManager.showMessage(

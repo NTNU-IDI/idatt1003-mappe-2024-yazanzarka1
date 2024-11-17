@@ -17,9 +17,9 @@ public class DisplayRecipesCommand implements Command {
    *
    * @param recipeManager RecipeManager where recipes are stored.
    */
-  public DisplayRecipesCommand(RecipeManager recipeManager) {
+  public DisplayRecipesCommand(RecipeManager recipeManager, DisplayManager displayManager) {
     this.recipeManager = recipeManager;
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**

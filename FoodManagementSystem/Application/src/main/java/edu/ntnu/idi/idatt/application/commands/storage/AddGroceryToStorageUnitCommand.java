@@ -42,11 +42,12 @@ public class AddGroceryToStorageUnitCommand implements Command {
    * @param inputHandler   InputHandler to get input from user
    */
   public AddGroceryToStorageUnitCommand(GroceryManager groceryManager, StorageUnit storageUnit,
+      DisplayManager displayManager,
       InputHandler inputHandler) {
     this.groceryManager = groceryManager;
     this.storageUnit = storageUnit;
     this.inputHandler = inputHandler;
-    this.displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**
@@ -70,11 +71,9 @@ public class AddGroceryToStorageUnitCommand implements Command {
         throw new UserInputException("Invalid date format - " + e.getMessage());
       }
 
-      var groceryToBeAdded =  groceryManager.getAvailableGroceries().stream()
+      var groceryToBeAdded = groceryManager.getAvailableGroceries().stream()
           .filter(grocery -> grocery.getGroceryName().equals(groceryName)).findFirst()
           .orElseThrow(() -> new UserInputException("Grocery not found"));
-
-
 
       storageUnit.addGrocery(groceryToBeAdded,
           groceryAmount, groceryBestBeforeDate);

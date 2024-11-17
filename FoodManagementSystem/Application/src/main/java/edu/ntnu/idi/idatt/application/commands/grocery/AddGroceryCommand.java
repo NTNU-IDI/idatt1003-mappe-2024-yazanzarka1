@@ -25,12 +25,16 @@ public class AddGroceryCommand implements Command {
    * Adds Grocery to GroceryManager.
    *
    * @param groceryManager Grocery manager
+   * @param unitProvider Unit provider
+   * @param displayManager Display manager
+   * @param inputHandler Input handler
+   *
    */
-  public AddGroceryCommand(GroceryManager groceryManager) {
+  public AddGroceryCommand(GroceryManager groceryManager, UnitProvider unitProvider, DisplayManager displayManager, InputHandler inputHandler) {
     this.groceryManager = groceryManager;
-    this.inputHandler = new InputHandler();
-    this.displayManager = new DisplayManager();
-    this.unitProvider = new UnitProvider();
+    this.inputHandler = inputHandler;
+    this.displayManager = displayManager;
+    this.unitProvider = unitProvider;
   }
 
   /**

@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.food;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ class RecipeManagerTest {
 
   @BeforeEach
   void setUp() {
-    recipeManager = new RecipeManager("Cook Book");
+    recipeManager = new RecipeManager("Cook Book", new DisplayManager());
     recipe = new Recipe("Test Recipe", "Test Description");
     recipe.addGrocery(new Grocery("Test Grocery", new Kilogram(), 200), 1.0f);
   }

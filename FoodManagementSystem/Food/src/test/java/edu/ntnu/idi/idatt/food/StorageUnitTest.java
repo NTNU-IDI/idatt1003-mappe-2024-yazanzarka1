@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
@@ -20,7 +21,7 @@ class StorageUnitTest {
 
   @BeforeEach
   void setUp() {
-    storageUnit = new StorageUnit("Test Storage");
+    storageUnit = new StorageUnit("Test Storage", new DisplayManager());
     Unit unit = new Liter();
     grocery = new Grocery("Milk", unit, 50.0f);
     bestBeforeDate = new Date();

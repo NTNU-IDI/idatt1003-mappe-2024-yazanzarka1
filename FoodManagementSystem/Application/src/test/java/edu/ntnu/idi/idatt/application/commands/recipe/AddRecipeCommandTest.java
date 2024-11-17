@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.application.commands.recipe;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
@@ -11,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 class AddRecipeCommandTest {
 
-  private final RecipeManager recipeManager = new RecipeManager("Cook Book Test");
+  private final RecipeManager recipeManager = new RecipeManager("Cook Book Test", new DisplayManager());
   AddRecipeCommand addRecipeCommand;
   private GroceryManager groceryManager;
 
   @BeforeEach
   void setUp() {
-    this.groceryManager = new GroceryManager();
+    this.groceryManager = new GroceryManager(new DisplayManager());
     groceryManager.addGrocery(new Grocery("Milk", new Liter(), 200));
     groceryManager.addGrocery(new Grocery("Egg", new Liter(), 200));
     groceryManager.addGrocery(new Grocery("Flour", new Liter(), 200));

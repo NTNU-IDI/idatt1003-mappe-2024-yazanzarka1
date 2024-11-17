@@ -12,15 +12,17 @@ import java.util.List;
 public class SuggestRecipeCommand implements Command {
 
   RecipeSuggestionProvider recipeSuggestionProvider;
-  DisplayManager displayManager = new DisplayManager();
+  DisplayManager displayManager;
 
   /**
    * Initiate command.
    *
    * @param recipeSuggestionProvider Recipe suggestion provider to suggest recipes
+   * @param displayManager Display manager to display messages
    */
-  public SuggestRecipeCommand(RecipeSuggestionProvider recipeSuggestionProvider) {
+  public SuggestRecipeCommand(RecipeSuggestionProvider recipeSuggestionProvider, DisplayManager displayManager) {
     this.recipeSuggestionProvider = recipeSuggestionProvider;
+    this.displayManager = displayManager;
   }
 
   @Override

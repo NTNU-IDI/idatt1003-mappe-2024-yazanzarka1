@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,8 +26,8 @@ class RecipeSuggestionProviderTest {
 
   @BeforeEach
   void setUp() {
-    RecipeManager recipeManager = new RecipeManager("Recipe Manager");
-    StorageUnit storageUnit = new StorageUnit("Storage Unit");
+    RecipeManager recipeManager = new RecipeManager("Recipe Manager", new DisplayManager());
+    StorageUnit storageUnit = new StorageUnit("Storage Unit", new DisplayManager());
     recipeSuggestionProvider = new RecipeSuggestionProvider(recipeManager, storageUnit);
 
     Grocery potato = new Grocery("Potato", new Kilogram(), 50.0f);

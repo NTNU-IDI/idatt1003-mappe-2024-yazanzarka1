@@ -11,8 +11,8 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
  */
 public class RemoveRecipeCommand implements Command {
 
-  private final DisplayManager displayManager = new DisplayManager();
-  private final InputHandler inputHandler = new InputHandler();
+  private final DisplayManager displayManager;
+  private final InputHandler inputHandler;
   private final RecipeManager recipeManager;
 
   /**
@@ -20,8 +20,10 @@ public class RemoveRecipeCommand implements Command {
    *
    * @param recipeManager recipeManager where recipes are stored.
    */
-  public RemoveRecipeCommand(RecipeManager recipeManager) {
+  public RemoveRecipeCommand(RecipeManager recipeManager, DisplayManager displayManager, InputHandler inputHandler) {
     this.recipeManager = recipeManager;
+    this.displayManager = displayManager;
+    this.inputHandler = inputHandler;
   }
 
   /**

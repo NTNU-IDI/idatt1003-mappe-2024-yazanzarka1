@@ -8,16 +8,29 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeStorageManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
+/**
+ * Command to cook a recipe.
+ */
 public class CookRecipeCommand implements Command {
 
   RecipeManager recipeManager;
-  DisplayManager displayManager = new DisplayManager();
-  InputHandler inputHandler = new InputHandler();
+  DisplayManager displayManager;
+  InputHandler inputHandler;
   StorageUnit storageUnit;
 
-  public CookRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit) {
+  /**
+   * Initiate the command with a RecipeManager.
+   *
+   * @param recipeManager RecipeManager to add recipe to.
+   * @param storageUnit StorageUnit to store groceries in
+   * @param displayManager DisplayManager to display messages
+   * @param inputHandler InputHandler to handle user input
+   */
+  public CookRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
     this.recipeManager = recipeManager;
     this.storageUnit = storageUnit;
+    this.displayManager = displayManager;
+    this.inputHandler = inputHandler;
   }
 
   /**
@@ -34,7 +47,7 @@ public class CookRecipeCommand implements Command {
     int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
     displayManager.showSpace();
     Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
-    RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
+    RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit, displayManager);
     recipeStorageManager.cookRecipe();
     displayManager.showSpace();
 

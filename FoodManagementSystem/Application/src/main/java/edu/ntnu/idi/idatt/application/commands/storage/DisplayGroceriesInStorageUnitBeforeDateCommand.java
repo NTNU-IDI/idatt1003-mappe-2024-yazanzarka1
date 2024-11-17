@@ -18,16 +18,21 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
 
 
   StorageUnit storageUnit;
-  DisplayManager displayManager = new DisplayManager();
-  InputHandler inputHandler = new InputHandler();
+  DisplayManager displayManager;
+  InputHandler inputHandler;
 
   /**
    * Initiate the command with a storage unit.
    *
    * @param storageUnit StorageUnit to display groceries from.
+   * @param displayManager DisplayManager to display messages.
+   * @param inputHandler InputHandler to get input from user.
    */
-  public DisplayGroceriesInStorageUnitBeforeDateCommand(StorageUnit storageUnit) {
+  public DisplayGroceriesInStorageUnitBeforeDateCommand(StorageUnit storageUnit, DisplayManager displayManager,
+      InputHandler inputHandler) {
     this.storageUnit = storageUnit;
+    this.displayManager = displayManager;
+    this.inputHandler = inputHandler;
   }
 
   /**

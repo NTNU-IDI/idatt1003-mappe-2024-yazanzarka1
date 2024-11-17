@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.application.containers;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
 /**
@@ -11,7 +12,7 @@ public class MainFoodStorageUnit extends StorageUnit {
   /**
    * Initiate an instance of MainFoodStorageUnit.
    */
-  public MainFoodStorageUnit() {
-    super("Main Food StorageUnit");
+  public MainFoodStorageUnit(DisplayManager displayManager) {
+    super("Main Food StorageUnit", displayManager);
   }
 }

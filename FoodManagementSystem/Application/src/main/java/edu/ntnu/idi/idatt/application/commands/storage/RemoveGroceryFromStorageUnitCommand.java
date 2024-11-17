@@ -21,11 +21,13 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
    * Initiate a remove grocery from storage unit command.
    *
    * @param storageUnit Storage unit to remove grocery from
+   * @param displayManager Display manager to display messages
+   * @param inputHandler Input handler to get input from user
    */
-  public RemoveGroceryFromStorageUnitCommand(StorageUnit storageUnit) {
-    inputHandler = new InputHandler();
+  public RemoveGroceryFromStorageUnitCommand(StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
+    this.inputHandler = inputHandler;
     this.storageUnit = storageUnit;
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**

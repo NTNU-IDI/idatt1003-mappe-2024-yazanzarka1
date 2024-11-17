@@ -20,11 +20,13 @@ public class SearchInStorageUnitCommand implements Command {
    * Initiate a search in storage unit command.
    *
    * @param storageUnit Storage unit to search in
+   * @param displayManager Display manager to display messages
+   * @param inputHandler Input handler to get input from user
    */
-  public SearchInStorageUnitCommand(StorageUnit storageUnit) {
-    inputHandler = new InputHandler();
+  public SearchInStorageUnitCommand(StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
+    this.inputHandler = inputHandler;
     this.storageUnit = storageUnit;
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**

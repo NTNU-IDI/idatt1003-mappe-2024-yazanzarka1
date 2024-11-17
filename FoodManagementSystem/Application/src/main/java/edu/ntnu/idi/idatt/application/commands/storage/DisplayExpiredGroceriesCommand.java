@@ -22,9 +22,10 @@ public class DisplayExpiredGroceriesCommand implements Command {
    * DisplayExpiredGroceriesCommand constructor.
    *
    * @param storageUnit Storage unit that we should look for expired groceries in.
+   * @param displayManager DisplayManager to display the expired groceries.
    */
-  public DisplayExpiredGroceriesCommand(StorageUnit storageUnit) {
-    displayManager = new DisplayManager();
+  public DisplayExpiredGroceriesCommand(StorageUnit storageUnit, DisplayManager displayManager) {
+    this.displayManager = displayManager;
     this.storageUnit = storageUnit;
   }
 

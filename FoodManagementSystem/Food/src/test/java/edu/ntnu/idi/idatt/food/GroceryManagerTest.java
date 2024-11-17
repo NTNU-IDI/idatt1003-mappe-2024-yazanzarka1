@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryAlreadyExistsException;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.units.Liter;
@@ -21,7 +22,7 @@ class GroceryManagerTest {
 
   @BeforeEach
   void setUp() {
-    groceryManager = new GroceryManager();
+    groceryManager = new GroceryManager(new DisplayManager());
     Unit unit = new Liter();
     grocery = new Grocery("Milk", unit, 50.0f);
   }
@@ -41,7 +42,7 @@ class GroceryManagerTest {
   @DisplayName("Test Add Grocery Fails When Exists")
   void addGroceryFailsWhenExists() {
     groceryManager.addGrocery(grocery);
-    assertThrows(IllegalArgumentException.class, () -> groceryManager.addGrocery(grocery));
+    assertThrows(GroceryAlreadyExistsException.class, () -> groceryManager.addGrocery(grocery));
   }
 
   @Test

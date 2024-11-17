@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import java.util.Date;
@@ -29,7 +30,7 @@ class RecipeStorageManagerTest {
   @BeforeEach
   void setUp() {
     recipe = new Recipe("Test Recipe", "Test Description");
-    storageUnit = new StorageUnit("Test Storage Unit");
+    storageUnit = new StorageUnit("Test Storage Unit", new DisplayManager());
     storageUnit.addGrocery(grocery, 1.0f, new Date());
     storageUnit.addGrocery(grocery1, 2.0f, new Date());
     storageUnit.addGrocery(grocery2, 3.0f, new Date());
@@ -45,10 +46,10 @@ class RecipeStorageManagerTest {
     missingGroceryRecipe.addGrocery(grocery1, 1.0f);
     missingGroceryRecipe.addGrocery(grocery4, 1.0f);
 
-    recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
+    recipeStorageManager = new RecipeStorageManager(recipe, storageUnit, new DisplayManager());
 
     missingGroceryRecipeStorageManager =
-        new RecipeStorageManager(missingGroceryRecipe, storageUnit);
+        new RecipeStorageManager(missingGroceryRecipe, storageUnit, new DisplayManager());
 
   }
 

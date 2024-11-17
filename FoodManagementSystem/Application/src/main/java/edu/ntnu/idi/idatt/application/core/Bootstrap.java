@@ -5,11 +5,13 @@ import edu.ntnu.idi.idatt.application.menus.main.MainMenu;
 import edu.ntnu.idi.idatt.application.menus.recipes.RecipesMenu;
 import edu.ntnu.idi.idatt.application.menus.storage.StorageUnitMenu;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeSuggestionProvider;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import edu.ntnu.idi.idatt.units.UnitProvider;
 
 /**
  * Bootstraps CommandRegistry and registers MenuContexts.
@@ -22,7 +24,8 @@ public class Bootstrap {
    *
    * @return CommandRegistry initialized command registry
    */
-  public static CommandRegistry initCommandRegistry() {
+  public static CommandRegistry initCommandRegistry(DisplayManager displayManager,
+      InputHandler inputHandler, UnitProvider unitProvider) {
     CommandRegistry commandRegistry = new CommandRegistry();
 
     // Create and register menus
@@ -31,23 +34,24 @@ public class Bootstrap {
     commandRegistry.addContext(mainMenu);
 
     // Register Grocery Menu's context and add to registry.
-    GroceryManager groceryManager = new GroceryManager();
-    GroceryMenu groceryMenu = new GroceryMenu(commandRegistry, groceryManager);
+    GroceryManager groceryManager = new GroceryManager(displayManager);
+    GroceryMenu groceryMenu = new GroceryMenu(commandRegistry, groceryManager, unitProvider, displayManager, inputHandler);
     commandRegistry.addContext(groceryMenu);
 
     // Register Storage Menu's context and add to registry
-    StorageUnit mainStorageUnit = new StorageUnit("Main Storage Unit");
+    StorageUnit mainStorageUnit = new StorageUnit("Main Storage Unit", displayManager);
     StorageUnitMenu storageUnitMenu = new StorageUnitMenu(commandRegistry, groceryManager,
-        mainStorageUnit);
+        mainStorageUnit, displayManager, inputHandler);
     commandRegistry.addContext(storageUnitMenu);
 
     // Register Recipes Menu's context and add to registry
-    RecipeManager recipeManager = new RecipeManager("Cook Book");
+    RecipeManager recipeManager = new RecipeManager("Cook Book", displayManager);
     RecipeSuggestionProvider recipeSuggestionProvider =
         new RecipeSuggestionProvider(recipeManager, mainStorageUnit);
 
     RecipesMenu recipesMenu =
-        new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager, recipeSuggestionProvider);
+        new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager,
+            recipeSuggestionProvider, displayManager, inputHandler);
     commandRegistry.addContext(recipesMenu);
 
     // Seed data

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
+import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.Grocery;
@@ -20,7 +21,7 @@ class AddGroceryCommandTest {
 
   @BeforeEach
   void setUp() {
-    this.groceryManager = new GroceryManager();
+    this.groceryManager = new GroceryManager(new DisplayManager());
   }
 
   @Test
