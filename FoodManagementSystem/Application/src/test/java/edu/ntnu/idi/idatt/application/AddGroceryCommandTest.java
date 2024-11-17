@@ -3,10 +3,12 @@ package edu.ntnu.idi.idatt.application;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
+import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,16 +30,22 @@ class AddGroceryCommandTest {
 
     addGroceryCommand.execute();
 
+    assertTrue(groceryManager.getAvailableGroceries().stream().findFirst().isPresent(),
+        "Grocery list should contain 1 item");
+
+    Grocery
+        grocery = groceryManager.getAvailableGroceries().stream().findFirst().get();
+
     assertAll(
         () -> assertEquals(1, groceryManager.getAvailableGroceries().size(),
             "Grocery list should contain 1 item"),
         () -> assertEquals("Milk",
-            groceryManager.getAvailableGroceries().getFirst().getGroceryName(),
+            grocery.getGroceryName(),
             "Grocery name should be Milk"),
-        () -> assertEquals(200, groceryManager.getAvailableGroceries().getFirst().getPricePerUnit(),
+        () -> assertEquals(200, grocery.getPricePerUnit(),
             "Grocery quantity should be 200"),
         () -> assertEquals("KG",
-            groceryManager.getAvailableGroceries().getFirst().getUnit().getUnitName(),
+            grocery.getUnit().getUnitName(),
             "Grocery unit should be Liter")
     );
   }

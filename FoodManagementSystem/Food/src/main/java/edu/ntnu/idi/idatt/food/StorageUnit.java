@@ -1,7 +1,8 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
-import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnit;
+import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
+import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -44,17 +45,18 @@ public class StorageUnit {
    * @param bestBeforeDate Best before date of grocery
    */
   public void addGrocery(Grocery grocery, float quantity, Date bestBeforeDate) {
-    StorageEntry existingEntry = findGroceryByName(grocery.getGroceryName());
-
-    if (existingEntry != null) {
-      displayManager.showColoredMessage(
-          String.format("%s - Already exists, updating quantity", grocery.getGroceryName()),
-          Color.BLUE);
-      existingEntry.addQuantity(quantity);
-      existingEntry.setBestBeforeDate(bestBeforeDate);
-    } else {
-      groceries.add(new StorageEntry(grocery, quantity, bestBeforeDate));
+    if (grocery == null) {
+      throw new IllegalArgumentException("Grocery cannot be null");
     }
+    StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
+    if (groceries.contains(storageEntry)) {
+      StorageEntry existingEntry = findGroceryByName(storageEntry.getGroceryName());
+      existingEntry.addQuantity(storageEntry.getQuantity());
+      existingEntry.setBestBeforeDate(storageEntry.getBestBeforeDate());
+    } else {
+      groceries.add(storageEntry);
+    }
+
   }
 
   /**
@@ -64,17 +66,17 @@ public class StorageUnit {
   public void removeGrocery(Grocery grocery, float quantity) {
 
     if (grocery == null) {
-      return;
+      throw new IllegalArgumentException("Grocery cannot be null");
     }
 
     StorageEntry existingEntry = findGroceryByName(grocery.getGroceryName());
 
     if (existingEntry == null) {
-      return;
+      throw new GroceryNotFoundException("Grocery not found in storage unit");
     }
 
     if (existingEntry.quantity < quantity) {
-      throw new InsufficentGroceryInStorageUnit(
+      throw new InsufficentGroceryInStorageUnitException(
           "Insufficient quantity of " + grocery.getGroceryName() + " in storage unit");
     }
     if (existingEntry.quantity == quantity) {

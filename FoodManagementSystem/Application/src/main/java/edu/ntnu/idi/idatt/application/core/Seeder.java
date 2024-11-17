@@ -10,6 +10,8 @@ import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Piece;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Seeder class to seed the application with groceries, storage units and recipes.
@@ -64,62 +66,64 @@ public class Seeder {
     groceryManager.addGrocery(new Grocery("Grapes", new Kilogram(), 90.00f));
 
     // Add groceries with reasonable expiry dates
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(0), 2.0f,
+    List<Grocery> availableGroceries = groceryManager.getAvailableGroceries().stream().toList();
+    storageUnit.addGrocery(availableGroceries.get(0), 2.0f,
         addDays(-1)); // Milk, 7 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(1), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(1), 1.0f,
         addDays(-1)); // Avocado, 5 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(2), 6.0f,
+    storageUnit.addGrocery(availableGroceries.get(2), 6.0f,
         addDays(21)); // Egg, 21 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(3), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(3), 1.0f,
         addDays(-5)); // Lime, 14 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(4), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(4), 1.0f,
         addDays(-1)); // Paprika, 10 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(5), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(5), 1.0f,
         addDays(7)); // Tomato, 7 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(6), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(6), 1.0f,
         addDays(30)); // Garlic, 30 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(7), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(7), 1.0f,
         addDays(-4)); // Cabbage, 20 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(8), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(8), 1.0f,
         addDays(60)); // Potato, 60 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(9), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(9), 1.0f,
         addDays(-5)); // Carrot, 30 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(10), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(10), 1.0f,
         addDays(3)); // Chicken Filet, 3 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(11), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(11), 1.0f,
         addDays(5)); // Chicken Whole, 5 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(12), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(12), 1.0f,
         addDays(10)); // Beef, 10 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(13), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(13), 1.0f,
         addDays(7)); // Pork, 7 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(14), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(14), 1.0f,
         addDays(5)); // Fish, 5 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(15), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(15), 1.0f,
         addDays(2)); // Bread, 2 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(16), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(16), 1.0f,
         addDays(20)); // Butter, 20 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(17), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(17), 1.0f,
         addDays(30)); // Cheese, 30 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(18), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(18), 1.0f,
         addDays(10)); // Yogurt, 10 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(19), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(19), 1.0f,
         addDays(15)); // Apple, 15 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(20), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(20), 1.0f,
         addDays(10)); // Banana, 10 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(21), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(21), 1.0f,
         addDays(20)); // Orange, 20 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(22), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(22), 1.0f,
         addDays(5)); // Strawberry, 5 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(23), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(23), 1.0f,
         addDays(7)); // Blueberry, 7 days
-    storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(24), 1.0f,
+    storageUnit.addGrocery(availableGroceries.get(24), 1.0f,
         addDays(10)); // Grapes, 10 days
 
     // Add recipes
     for (int i = 0; i < 25; i++) {
       Recipe recipe = new Recipe("Recipe " + (i + 1), "Description for recipe " + (i + 1));
       for (int j = 0; j < 5; j++) {
-        recipe.addGrocery(groceryManager.getAvailableGroceries().get((i + j) % 25), 1.0f);
+        recipe.addGrocery(
+            availableGroceries.stream().toList().get((i + j) % 25), 1.0f);
       }
       recipeManager.addRecipe(recipe);
     }

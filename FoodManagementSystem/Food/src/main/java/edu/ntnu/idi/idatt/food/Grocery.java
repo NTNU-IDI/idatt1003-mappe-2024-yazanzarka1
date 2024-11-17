@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.units.Unit;
+import java.util.Objects;
 
 /**
  * Grocery class represent a grocery that can be stored in a recipe or a storage unit. Grocery has a
@@ -65,6 +66,24 @@ public class Grocery {
   public float setPricePerUnit(float pricePerUnit) {
     this.pricePerUnit = pricePerUnit;
     return pricePerUnit;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Grocery grocery = (Grocery) o;
+    return groceryName.equalsIgnoreCase(grocery.groceryName);
+
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(groceryName);
   }
 
 }

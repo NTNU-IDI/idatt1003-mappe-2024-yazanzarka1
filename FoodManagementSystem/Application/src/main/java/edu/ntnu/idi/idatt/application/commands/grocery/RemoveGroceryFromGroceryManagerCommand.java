@@ -30,9 +30,8 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
   @Override
   public Boolean execute() {
     groceryManager.displayGroceries();
-    int groceryIndex =
-        Integer.parseInt(inputHandler.getInput("Enter the index of the grocery: "));
-    groceryManager.removeGrocery(groceryIndex);
+    String groceryName = inputHandler.getInput("Enter the index of the grocery: ");
+    groceryManager.removeGrocery(groceryName);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
     return false;
   }

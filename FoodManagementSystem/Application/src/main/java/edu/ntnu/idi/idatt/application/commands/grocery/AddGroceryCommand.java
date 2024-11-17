@@ -76,7 +76,7 @@ public class AddGroceryCommand implements Command {
       displayManager.showColoredMessage("Grocery added successfully", Ansi.Color.GREEN);
       return false;
     } catch (Exception e) {
-      throw new UserInputException("Invalid input. Please try again.");
+      throw new UserInputException("Invalid input: " + e.getMessage());
     }
 
   }

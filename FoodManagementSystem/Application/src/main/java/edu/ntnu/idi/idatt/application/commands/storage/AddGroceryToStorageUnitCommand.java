@@ -57,7 +57,9 @@ public class AddGroceryToStorageUnitCommand implements Command {
   @Override
   public Boolean execute() {
     try {
-      int groceryIndex = Integer.parseInt(inputHandler.getInput("Enter Grocery Index: "));
+      groceryManager.displayGroceries();
+
+      String groceryName = inputHandler.getInput("Enter Grocery Index: ");
 
       float groceryAmount = Float.parseFloat(inputHandler.getInput("Enter Grocery Amount: "));
       Date groceryBestBeforeDate;
@@ -68,7 +70,13 @@ public class AddGroceryToStorageUnitCommand implements Command {
         throw new UserInputException("Invalid date format - " + e.getMessage());
       }
 
-      storageUnit.addGrocery(groceryManager.getAvailableGroceries().get(groceryIndex),
+      var groceryToBeAdded =  groceryManager.getAvailableGroceries().stream()
+          .filter(grocery -> grocery.getGroceryName().equals(groceryName)).findFirst()
+          .orElseThrow(() -> new UserInputException("Grocery not found"));
+
+
+
+      storageUnit.addGrocery(groceryToBeAdded,
           groceryAmount, groceryBestBeforeDate);
 
       displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);

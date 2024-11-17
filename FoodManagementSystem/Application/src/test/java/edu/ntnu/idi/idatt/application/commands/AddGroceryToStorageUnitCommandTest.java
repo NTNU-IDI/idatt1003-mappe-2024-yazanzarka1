@@ -29,10 +29,10 @@ class AddGroceryToStorageUnitCommandTest {
 
   @Test
   void executeWithValidParameteresTest() {
-    this.groceryManager.addGrocery(new Grocery("Milk", new Liter(), 200));
+    this.groceryManager.addGrocery(new Grocery("Milk", new Liter(), 200.0f));
     this.addGroceryToStorageUnitCommand =
         new AddGroceryToStorageUnitCommand(groceryManager, storageUnit,
-            new TestInputHandler(new String[] {"0", "1", "04.05.2021"}));
+            new TestInputHandler(new String[] {"Milk", "1", "04.05.2021"}));
 
     addGroceryToStorageUnitCommand.execute();
 
