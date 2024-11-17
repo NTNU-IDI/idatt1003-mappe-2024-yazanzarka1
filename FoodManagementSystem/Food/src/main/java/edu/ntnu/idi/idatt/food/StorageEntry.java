@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * StorageEntry is responsible for storing the quantity and best before date of a grocery inside a
@@ -119,5 +120,22 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
   @Override
   public int compareTo(StorageEntry o) {
     return this.getGroceryName().compareTo(o.getGroceryName());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    StorageEntry that = (StorageEntry) o;
+    return Float.compare(that.quantity, quantity) == 0 && getGroceryName().equals(that.getGroceryName()) && getUnit().equals(that.getUnit()) && Float.compare(that.getPricePerUnit(), getPricePerUnit()) == 0 && bestBeforeDate.equals(that.bestBeforeDate);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getGroceryName());
   }
 }
