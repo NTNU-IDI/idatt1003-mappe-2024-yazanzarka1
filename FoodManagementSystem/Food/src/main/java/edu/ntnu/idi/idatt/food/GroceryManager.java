@@ -21,9 +21,9 @@ public class GroceryManager {
   /**
    * Initiate GroceryManager.
    */
-  public GroceryManager() {
+  public GroceryManager(DisplayManager displayManager) {
     availableGroceries = new ArrayList<>();
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
   }
 
   /**

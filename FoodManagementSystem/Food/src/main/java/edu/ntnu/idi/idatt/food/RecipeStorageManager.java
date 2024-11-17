@@ -18,7 +18,7 @@ public class RecipeStorageManager {
 
   private final Recipe recipe;
   private final StorageUnit storageUnit;
-  DisplayManager displayManager = new DisplayManager();
+  DisplayManager displayManager;
 
   /**
    * Initiate RecipeStorageManager.
@@ -26,9 +26,10 @@ public class RecipeStorageManager {
    * @param recipe      recipe in a recipe
    * @param storageUnit storage unit of a recipe
    */
-  public RecipeStorageManager(Recipe recipe, StorageUnit storageUnit) {
+  public RecipeStorageManager(Recipe recipe, StorageUnit storageUnit, DisplayManager displayManager) {
     this.recipe = recipe;
     this.storageUnit = storageUnit;
+    this.displayManager = displayManager;
   }
 
   /**

@@ -28,9 +28,9 @@ public class StorageUnit {
    *
    * @param name Name of the storage unit
    */
-  public StorageUnit(String name) {
+  public StorageUnit(String name, DisplayManager displayManager) {
     this.name = name;
-    displayManager = new DisplayManager();
+    this.displayManager = displayManager;
     groceries = new HashSet<>();
   }
 
