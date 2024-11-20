@@ -22,11 +22,21 @@ public class Grocery {
    * @param unit         SI unit
    * @param pricePerUnit price per unit NOK/KG for example
    */
-  public Grocery(String groceryName, Unit unit, float pricePerUnit) {
+  public Grocery(
+      String groceryName,
+      Unit unit,
+      float pricePerUnit) {
+    if (groceryName == null || groceryName.isBlank()) {
+      throw new IllegalArgumentException("Grocery name cannot be null or blank");
+    }
+    if (unit == null) {
+      throw new IllegalArgumentException("Unit cannot be null");
+    }
     this.groceryName = groceryName;
     this.unit = unit;
-    this.pricePerUnit = pricePerUnit;
+    this.pricePerUnit = setPricePerUnit(pricePerUnit);
   }
+
 
   /**
    * Grocery's name getter.
@@ -64,6 +74,10 @@ public class Grocery {
    * @return float newPricePerUnit
    */
   public float setPricePerUnit(float pricePerUnit) {
+    if (!(pricePerUnit > 0)) {
+      throw new IllegalArgumentException("Price per unit cannot be negative or zero");
+    }
+
     this.pricePerUnit = pricePerUnit;
     return pricePerUnit;
   }

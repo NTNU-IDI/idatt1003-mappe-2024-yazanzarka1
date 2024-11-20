@@ -23,7 +23,8 @@ public class DisplayRecipeCommand implements Command {
    *
    * @param recipeManager recipe manager where recipes are stored
    */
-  public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
+  public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit,
+      DisplayManager displayManager, InputHandler inputHandler) {
     this.recipeManager = recipeManager;
     this.displayManager = displayManager;
     this.inputHandler = inputHandler;
@@ -42,8 +43,13 @@ public class DisplayRecipeCommand implements Command {
     displayManager.showSpace();
     int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
     displayManager.showSpace();
-    Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
-
+    Recipe recipe;
+    try {
+      recipe = recipeManager.getRecipes().get(recipeIndex);
+    } catch (IndexOutOfBoundsException e) {
+      displayManager.showMessage("No recipe found at index " + recipeIndex);
+      return false;
+    }
     //Display the recipe table
     final RecipeStorageManager recipeStorageManager =
         new RecipeStorageManager(recipe, storageUnit, displayManager);

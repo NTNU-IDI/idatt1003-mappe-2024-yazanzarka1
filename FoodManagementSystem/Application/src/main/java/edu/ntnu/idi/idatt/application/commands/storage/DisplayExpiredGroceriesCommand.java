@@ -36,7 +36,7 @@ public class DisplayExpiredGroceriesCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    Set<StorageEntry> storageEntries = storageUnit.getGroceries();
+    List<StorageEntry> storageEntries = storageUnit.getGroceries();
     List<StorageEntry> expiredGroceries = new ArrayList<>();
     float totalExpiredGroceriesValue = 0;
     for (StorageEntry storageEntry : storageEntries) {

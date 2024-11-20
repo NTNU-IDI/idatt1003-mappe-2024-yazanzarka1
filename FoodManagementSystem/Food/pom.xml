@@ -15,8 +15,16 @@
     <dependency>
       <artifactId>Console</artifactId>
       <groupId>org.ntnu.console</groupId>
+  </dependency>
+    <dependency>
+      <groupId>io.micronaut.validation</groupId>
+      <artifactId>micronaut-validation</artifactId>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>io.micronaut.validation</groupId>
+      <artifactId>micronaut-validation-processor</artifactId>
+    </dependency>
+</dependencies>
 
   <groupId>org.ntnu.food</groupId>
   <modelVersion>4.0.0</modelVersion>

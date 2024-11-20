@@ -5,15 +5,15 @@ import java.util.Objects;
 
 /**
  * StorageEntry is responsible for storing the quantity and best before date of a grocery inside a
- * StorageUnit. StorageEntry is used in StorageUnit. StorageEntry is mutable. StorageEntry is
+ * StorageUnit. StorageEntry is used in StorageUnit. StorageEntry is immutable. StorageEntry is
  * comparable.
  *
  * @see StorageUnit
  */
 public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
 
-  float quantity;
-  Date bestBeforeDate;
+  private float quantity;
+  private Date bestBeforeDate;
 
   StorageEntry(Grocery grocery, float quantity, Date bestBeforeDate) {
     super(grocery.getGroceryName(), grocery.getUnit(), grocery.getPricePerUnit());

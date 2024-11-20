@@ -52,7 +52,7 @@ class RecipeSuggestionProviderTest {
     recipeWithLongLastingProducts.addGrocery(garlic, 1.0f);
     recipeWithLongLastingProducts.addGrocery(milk, 1.0f);
 
-    recipeWithShortLastingProducts = new Recipe("Salad", "Salad");
+    recipeWithShortLastingProducts = new Recipe("Salad", "Salad Recipe");
     recipeWithShortLastingProducts.addGrocery(salad, 1.0f);
     recipeWithShortLastingProducts.addGrocery(milk, 1.0f);
     recipeWithShortLastingProducts.addGrocery(potato, 1.0f);

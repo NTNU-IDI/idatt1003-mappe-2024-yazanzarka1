@@ -36,6 +36,17 @@
         <groupId>org.fusesource.jansi</groupId>
         <version>2.4.0</version>
       </dependency>
+      <dependency>
+        <groupId>io.micronaut.validation</groupId>
+        <artifactId>micronaut-validation</artifactId>
+        <version>4.8.0</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.micronaut.validation</groupId>
+        <artifactId>micronaut-validation-processor</artifactId>
+        <version>4.6.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <groupId>org.ntnu</groupId>
