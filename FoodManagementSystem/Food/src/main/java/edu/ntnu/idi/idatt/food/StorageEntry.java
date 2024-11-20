@@ -17,8 +17,8 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
 
   StorageEntry(Grocery grocery, float quantity, Date bestBeforeDate) {
     super(grocery.getGroceryName(), grocery.getUnit(), grocery.getPricePerUnit());
-    this.quantity = quantity;
-    this.bestBeforeDate = bestBeforeDate;
+    setQuantity(quantity);
+    setBestBeforeDate(bestBeforeDate);
   }
 
   /**
@@ -54,6 +54,9 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param bestBeforeDate new best before date.
    */
   public void setBestBeforeDate(Date bestBeforeDate) {
+    if (bestBeforeDate.before(new Date())) {
+      throw new IllegalArgumentException("Best before date cannot be in the past");
+    }
     this.bestBeforeDate = bestBeforeDate;
   }
 
@@ -63,6 +66,9 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param quantity quantity to add to current quantity
    */
   public void addQuantity(float quantity) {
+    if (quantity < 0) {
+      throw new IllegalArgumentException("Quantity cannot be less than 0");
+    }
     this.quantity += quantity;
   }
 
@@ -72,6 +78,9 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param quantity quantity to be removed
    */
   public void subtractQuantity(float quantity) {
+    if (quantity < 0) {
+      throw new IllegalArgumentException("Quantity cannot be less than 0");
+    }
     this.quantity -= quantity;
   }
 
