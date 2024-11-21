@@ -1,7 +1,10 @@
 package edu.ntnu.idi.idatt.food;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
@@ -75,5 +78,74 @@ class StorageEntryTest {
   void testCompareTo() {
     StorageEntry storageEntry2 = new StorageEntry(new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
     assertEquals(0, storageEntry.compareTo(storageEntry2), "Storage entries should be equal");
+  }
+
+  @Test
+  @DisplayName("Test Add Quantity with Negative Value")
+  void testAddQuantityNegative() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      storageEntry.addQuantity(-5.0f);
+    });
+    assertEquals("Quantity cannot be less than 0", exception.getMessage());
+  }
+
+  @Test
+  @DisplayName("Test Subtract Quantity with Negative Value")
+  void testSubtractQuantityNegative() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      storageEntry.subtractQuantity(-3.0f);
+    });
+    assertEquals("Quantity cannot be less than 0", exception.getMessage());
+  }
+
+  @Test
+  @DisplayName("Test Equals with Same Object")
+  void testEqualsSameObject() {
+    assertEquals(storageEntry, storageEntry, "Storage entry should be equal to itself");
+  }
+
+  @Test
+  @DisplayName("Test Equals with Different Object")
+  void testEqualsDifferentObject() {
+    StorageEntry anotherStorageEntry = new StorageEntry(
+        new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
+    assertEquals(storageEntry, anotherStorageEntry, "Storage entries with the same data should be equal");
+  }
+
+  @Test
+  @DisplayName("Test Equals with Null")
+  void testEqualsNull() {
+    assertNotEquals(storageEntry, null, "Storage entry should not be equal to null");
+  }
+
+  @Test
+  @DisplayName("Test Equals with Different Class")
+  void testEqualsDifferentClass() {
+    String differentClassObject = "Not a StorageEntry";
+    assertNotEquals(storageEntry, differentClassObject, "Storage entry should not be equal to a different class object");
+  }
+
+  @Test
+  @DisplayName("Test HashCode")
+  void testHashCode() {
+    StorageEntry anotherStorageEntry = new StorageEntry(
+        new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
+    assertEquals(storageEntry.hashCode(), anotherStorageEntry.hashCode(),
+        "Hash codes of equal storage entries should be the same");
+  }
+
+  @Test
+  @DisplayName("Test Subtract Quantity Leading to Zero")
+  void testSubtractQuantityToZero() {
+    storageEntry.subtractQuantity(10.0f);
+    assertEquals(0.0f, storageEntry.getQuantity(), "Quantity should be reduced to 0");
+  }
+
+  @Test
+  @DisplayName("Test IsExpired with Future Date")
+  void testIsExpiredFutureDate() {
+    Date futureDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24); // 1 day in the future
+    storageEntry.setBestBeforeDate(futureDate);
+    assertFalse(storageEntry.isExpired(), "Storage entry should not be expired with a future date");
   }
 }

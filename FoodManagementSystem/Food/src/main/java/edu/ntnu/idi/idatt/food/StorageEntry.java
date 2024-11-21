@@ -54,9 +54,6 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param bestBeforeDate new best before date.
    */
   public void setBestBeforeDate(Date bestBeforeDate) {
-    if (bestBeforeDate.before(new Date())) {
-      throw new IllegalArgumentException("Best before date cannot be in the past");
-    }
     this.bestBeforeDate = bestBeforeDate;
   }
 

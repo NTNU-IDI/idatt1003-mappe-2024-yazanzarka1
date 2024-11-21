@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public class RecipeSuggestionProvider {
 
   RecipeManager recipeManager;
-  GroceryManager groceryManager;
   StorageUnit storageUnit;
 
   /**
