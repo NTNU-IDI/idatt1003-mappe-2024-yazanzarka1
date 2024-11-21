@@ -30,7 +30,7 @@ class RecipeStorageManagerTest {
   @BeforeEach
   void setUp() {
     recipe = new Recipe("Test Recipe", "Test Description");
-    storageUnit = new StorageUnit("Test Storage Unit", new DisplayManager());
+    storageUnit = new StorageUnit("Test Storage Unit");
     storageUnit.addGrocery(grocery, 1.0f, new Date());
     storageUnit.addGrocery(grocery1, 2.0f, new Date());
     storageUnit.addGrocery(grocery2, 3.0f, new Date());
@@ -46,10 +46,10 @@ class RecipeStorageManagerTest {
     missingGroceryRecipe.addGrocery(grocery1, 1.0f);
     missingGroceryRecipe.addGrocery(grocery4, 1.0f);
 
-    recipeStorageManager = new RecipeStorageManager(recipe, storageUnit, new DisplayManager());
+    recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
 
     missingGroceryRecipeStorageManager =
-        new RecipeStorageManager(missingGroceryRecipe, storageUnit, new DisplayManager());
+        new RecipeStorageManager(missingGroceryRecipe, storageUnit);
 
   }
 

@@ -42,7 +42,7 @@ class StorageUnitTest {
    */
   @BeforeEach
   void setUp() {
-    storageUnit = new StorageUnit("Test Storage", new DisplayManager());
+    storageUnit = new StorageUnit("Test Storage");
     Unit unit = new Liter();
     grocery = new Grocery("Milk", unit, 50.0f);
     bestBeforeDate = new Date();

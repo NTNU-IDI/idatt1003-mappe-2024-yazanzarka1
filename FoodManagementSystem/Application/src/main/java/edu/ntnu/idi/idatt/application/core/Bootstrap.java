@@ -34,18 +34,18 @@ public class Bootstrap {
     commandRegistry.addContext(mainMenu);
 
     // Register Grocery Menu's context and add to registry.
-    GroceryManager groceryManager = new GroceryManager(displayManager);
+    GroceryManager groceryManager = new GroceryManager();
     GroceryMenu groceryMenu = new GroceryMenu(commandRegistry, groceryManager, unitProvider, displayManager, inputHandler);
     commandRegistry.addContext(groceryMenu);
 
     // Register Storage Menu's context and add to registry
-    StorageUnit mainStorageUnit = new StorageUnit("Main Storage Unit", displayManager);
+    StorageUnit mainStorageUnit = new StorageUnit("Main Storage Unit");
     StorageUnitMenu storageUnitMenu = new StorageUnitMenu(commandRegistry, groceryManager,
         mainStorageUnit, displayManager, inputHandler);
     commandRegistry.addContext(storageUnitMenu);
 
     // Register Recipes Menu's context and add to registry
-    RecipeManager recipeManager = new RecipeManager("Cook Book", displayManager);
+    RecipeManager recipeManager = new RecipeManager("Cook Book");
     RecipeSuggestionProvider recipeSuggestionProvider =
         new RecipeSuggestionProvider(recipeManager, mainStorageUnit);
 

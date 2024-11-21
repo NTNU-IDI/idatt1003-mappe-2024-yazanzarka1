@@ -21,7 +21,7 @@ class AddGroceryCommandTest {
 
   @BeforeEach
   void setUp() {
-    this.groceryManager = new GroceryManager(new DisplayManager());
+    this.groceryManager = new GroceryManager();
   }
 
   @Test

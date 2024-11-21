@@ -24,8 +24,8 @@ class AddGroceryToStorageUnitCommandTest {
 
   @BeforeEach
   void setUp() {
-    this.groceryManager = new GroceryManager(new DisplayManager());
-    this.storageUnit = new StorageUnit("TestStorageUnit", new DisplayManager());
+    this.groceryManager = new GroceryManager();
+    this.storageUnit = new StorageUnit("TestStorageUnit");
   }
 
   @Test

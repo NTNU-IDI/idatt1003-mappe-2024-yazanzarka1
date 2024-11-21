@@ -49,7 +49,7 @@ public class CookRecipeCommand implements Command {
     int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
     displayManager.showSpace();
     Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
-    RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit, displayManager);
+    RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
     recipeStorageManager.cookRecipe();
     displayManager.showSpace();
 

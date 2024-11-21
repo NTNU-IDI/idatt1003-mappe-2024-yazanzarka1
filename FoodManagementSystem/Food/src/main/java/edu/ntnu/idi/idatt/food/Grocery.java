@@ -74,7 +74,7 @@ public class Grocery {
    * @return float newPricePerUnit
    */
   public float setPricePerUnit(float pricePerUnit) {
-    if (!(pricePerUnit > 0)) {
+    if (pricePerUnit <= 0) {
       throw new IllegalArgumentException("Price per unit cannot be negative or zero");
     }
 

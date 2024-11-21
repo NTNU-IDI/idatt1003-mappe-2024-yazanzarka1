@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 class AddRecipeCommandTest {
 
-  private final RecipeManager recipeManager = new RecipeManager("Cook Book Test", new DisplayManager());
+  private final RecipeManager recipeManager = new RecipeManager("Cook Book Test");
   AddRecipeCommand addRecipeCommand;
   private GroceryManager groceryManager;
 
   @BeforeEach
   void setUp() {
-    this.groceryManager = new GroceryManager(new DisplayManager());
+    this.groceryManager = new GroceryManager();
     groceryManager.addGrocery(new Grocery("Milk", new Liter(), 200));
     groceryManager.addGrocery(new Grocery("Egg", new Liter(), 200));
     groceryManager.addGrocery(new Grocery("Flour", new Liter(), 200));

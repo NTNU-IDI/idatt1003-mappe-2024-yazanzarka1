@@ -20,7 +20,6 @@ public class RecipeStorageManager {
 
   private final Recipe recipe;
   private final StorageUnit storageUnit;
-  DisplayManager displayManager;
 
   /**
    * Initiate RecipeStorageManager.
@@ -28,10 +27,9 @@ public class RecipeStorageManager {
    * @param recipe      recipe in a recipe
    * @param storageUnit storage unit of a recipe
    */
-  public RecipeStorageManager(Recipe recipe, StorageUnit storageUnit, DisplayManager displayManager) {
+  public RecipeStorageManager(Recipe recipe, StorageUnit storageUnit) {
     this.recipe = recipe;
     this.storageUnit = storageUnit;
-    this.displayManager = displayManager;
   }
 
   /**
@@ -119,13 +117,7 @@ public class RecipeStorageManager {
       StorageEntry storageEntry =
           storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       storageUnit.removeGrocery(storageEntry, recipeGrocery.amount());
-      displayManager.showColoredMessage(
-          String.format("Removed %.2f %s from storage. You have %.2f %s left.",
-              recipeGrocery.amount(), recipeGrocery.grocery().getGroceryName(),
-              storageEntry.getQuantity(), recipeGrocery.grocery().getUnit().getUnitName()),
-          Color.GREEN);
     }
-    displayManager.showColoredMessage("Recipe cooked", Color.GREEN);
   }
 
 

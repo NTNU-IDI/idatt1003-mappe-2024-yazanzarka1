@@ -22,7 +22,7 @@ class GroceryManagerTest {
 
   @BeforeEach
   void setUp() {
-    groceryManager = new GroceryManager(new DisplayManager());
+    groceryManager = new GroceryManager();
     Unit unit = new Liter();
     grocery = new Grocery("Milk", unit, 50.0f);
   }

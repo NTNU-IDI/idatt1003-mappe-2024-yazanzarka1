@@ -20,14 +20,12 @@ import java.util.Set;
 public class GroceryManager {
 
   private final Set<Grocery> availableGroceries;
-  private final DisplayManager displayManager;
 
   /**
    * Initiate GroceryManager.
    */
-  public GroceryManager(DisplayManager displayManager) {
+  public GroceryManager() {
     availableGroceries = new HashSet<>();
-    this.displayManager = displayManager;
   }
 
   /**

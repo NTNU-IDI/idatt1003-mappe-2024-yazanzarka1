@@ -54,7 +54,7 @@ public class DisplayRecipeCommand implements Command {
     }
     //Display the recipe table
     final RecipeStorageManager recipeStorageManager =
-        new RecipeStorageManager(recipe, storageUnit, displayManager);
+        new RecipeStorageManager(recipe, storageUnit);
     TableData recipeInStorageTableData = recipeStorageManager.toTableData();
     displayManager.printTable(recipeInStorageTableData);
 

@@ -26,8 +26,8 @@ class RecipeSuggestionProviderTest {
 
   @BeforeEach
   void setUp() {
-    RecipeManager recipeManager = new RecipeManager("Recipe Manager", new DisplayManager());
-    StorageUnit storageUnit = new StorageUnit("Storage Unit", new DisplayManager());
+    RecipeManager recipeManager = new RecipeManager("Recipe Manager");
+    StorageUnit storageUnit = new StorageUnit("Storage Unit");
     recipeSuggestionProvider = new RecipeSuggestionProvider(recipeManager, storageUnit);
 
     Grocery potato = new Grocery("Potato", new Kilogram(), 50.0f);

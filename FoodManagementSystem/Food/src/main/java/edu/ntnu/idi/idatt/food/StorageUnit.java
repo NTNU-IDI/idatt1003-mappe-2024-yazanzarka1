@@ -23,16 +23,14 @@ public class StorageUnit {
 
   public final String name;
   private final Map<String, StorageEntry> groceries;
-  final DisplayManager displayManager;
 
   /**
    * Initiates a storage unit with a name.
    *
    * @param name Name of the storage unit
    */
-  public StorageUnit(String name, DisplayManager displayManager) {
+  public StorageUnit(String name) {
     this.name = name;
-    this.displayManager = displayManager;
     groceries = new HashMap<>();
   }
 
