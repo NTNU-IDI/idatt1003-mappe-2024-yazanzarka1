@@ -36,6 +36,9 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param quantity new quantity
    */
   public void setQuantity(float quantity) {
+    if (quantity < 0) {
+      throw new IllegalArgumentException("Quantity cannot be less than 0");
+    }
     this.quantity = quantity;
   }
 
@@ -63,8 +66,8 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param quantity quantity to add to current quantity
    */
   public void addQuantity(float quantity) {
-    if (quantity < 0) {
-      throw new IllegalArgumentException("Quantity cannot be less than 0");
+    if (quantity <= 0) {
+      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0");
     }
     this.quantity += quantity;
   }
@@ -75,8 +78,8 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * @param quantity quantity to be removed
    */
   public void subtractQuantity(float quantity) {
-    if (quantity < 0) {
-      throw new IllegalArgumentException("Quantity cannot be less than 0");
+    if (quantity <= 0) {
+      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0 ");
     }
     this.quantity -= quantity;
   }

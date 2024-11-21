@@ -5,6 +5,7 @@ package edu.ntnu.idi.idatt.food;
  * Used in the RecipeManager class.
  *
  * @see Recipe
+ * @see RecipeManager
  */
 public record SuggestedRecipe(Recipe recipe, float score) {
 

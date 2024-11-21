@@ -10,6 +10,9 @@ import java.util.Map;
  * CommandRegistry is responsible for managing, executing and switching menu-contexts. Each context
  * has commands which will be handled on user interaction. CommandRegistry makes sure that the right
  * command is being executed.
+ *
+ * @since 0.0.1
+ * @author yazanzarka
  */
 public class CommandRegistry {
 

@@ -100,7 +100,7 @@ public class AddRecipeCommand implements Command {
     }
 
     Recipe newRecipe =
-        new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount, displayManager);
+        new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
     for (RecipeGrocery recipeGrocery : groceries) {
       newRecipe.addGrocery(recipeGrocery.grocery(), recipeGrocery.amount());
     }

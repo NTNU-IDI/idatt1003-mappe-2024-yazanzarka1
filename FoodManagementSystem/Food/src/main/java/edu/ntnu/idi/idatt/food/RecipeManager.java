@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.TableRepresentable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
  * RecipeManager is used by the application to manage recipes. RecipeManager can also return
  * recipes.
  */
-public class RecipeManager {
+public class RecipeManager implements TableRepresentable {
 
   String name;
   List<Recipe> recipes;

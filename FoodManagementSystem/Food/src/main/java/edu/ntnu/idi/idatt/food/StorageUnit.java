@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ import org.fusesource.jansi.Ansi.Color;
  * get the total value of all groceries in the storage unit. StorageUnit is used by the application
  * to manage groceries.
  */
-public class StorageUnit {
+public class StorageUnit implements TableRepresentable {
 
   public final String name;
   private final Map<String, StorageEntry> groceries;

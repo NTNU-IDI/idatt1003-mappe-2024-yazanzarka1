@@ -4,6 +4,10 @@ package edu.ntnu.idi.idatt.console;
  * A test input handler that returns a predefined list of inputs for testing purposes.
  * All inputs are returned in the order they are provided.
  * If there are no more inputs to return, an IllegalStateException is thrown.
+ *
+ * @see InputHandler in the console package
+ * @since 0.0.1
+ * @author yazanzarka
  */
 public class TestInputHandler extends InputHandler {
 

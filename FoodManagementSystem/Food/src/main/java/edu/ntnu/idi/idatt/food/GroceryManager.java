@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryAlreadyExistsException;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Set;
  *
  * @see Grocery
  */
-public class GroceryManager {
+public class GroceryManager implements TableRepresentable {
 
   private final Set<Grocery> availableGroceries;
 

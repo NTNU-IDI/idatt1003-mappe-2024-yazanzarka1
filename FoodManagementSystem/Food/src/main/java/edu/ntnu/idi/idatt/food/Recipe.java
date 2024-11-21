@@ -16,7 +16,6 @@ public class Recipe {
   private final String name;
   private final String description;
   private final Map<String, RecipeGrocery> groceries;
-  private final DisplayManager displayManager;
   private final int peopleCount;
   private final String steps;
 
@@ -28,7 +27,7 @@ public class Recipe {
    * @param description description of a recipe
    */
   public Recipe(String name, String description) {
-    this(name, description, "No Steps Added", 4, new DisplayManager());
+    this(name, description, "No Steps Added", 4);
 
   }
 
@@ -39,10 +38,13 @@ public class Recipe {
    * @param description    description of a recipe
    * @param steps          steps to make a recipe
    * @param peopleCount    number of people the recipe is for
-   * @param displayManager DisplayManager to display groceries
+   *
+   * @throws IllegalArgumentException if name is null or blank, name length is less than 3 or greater
+   * @throws IllegalArgumentException if description is null or blank, description length is less than 10 or greater
+   * @throws IllegalArgumentException if steps is null or blank, steps length is less than 10 or greater
+   * @throws IllegalArgumentException if peopleCount is less than or equal to 0 or greater than 10
    */
-  public Recipe(String name, String description, String steps, int peopleCount,
-      DisplayManager displayManager) {
+  public Recipe(String name, String description, String steps, int peopleCount) {
 
     if (name == null || name.isBlank() || name.length() < 3 || name.length() > 50) {
       throw new IllegalArgumentException(
@@ -60,23 +62,22 @@ public class Recipe {
     if (peopleCount <= 0 || peopleCount > 10) {
       throw new IllegalArgumentException("People count must be greater than 0 and less than 10");
     }
-    if (displayManager == null) {
-      throw new IllegalArgumentException("DisplayManager cannot be null");
-    }
+
     this.name = name;
     this.groceries = new HashMap<>();
     this.description = description;
     this.steps = steps;
     this.peopleCount = peopleCount;
-    this.displayManager = displayManager;
 
   }
 
   /**
-   * Add a grocery to recipe.
+   * Add a grocery to recipe with amount.
    *
    * @param grocery Grocery to be added
    * @param amount  amount of grocery in a recipe
+   * @throws NullPointerException if grocery is null
+   * @throws IllegalArgumentException if amount is less than or equal to 0
    */
   public void addGrocery(Grocery grocery, float amount) {
     if (grocery == null) {
@@ -160,5 +161,6 @@ public class Recipe {
   public int getPeopleCount() {
     return peopleCount;
   }
+
 
 }

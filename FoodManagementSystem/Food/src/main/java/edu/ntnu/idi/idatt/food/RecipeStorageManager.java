@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import org.fusesource.jansi.Ansi.Color;
  * RecipeStorageManager can also cook a recipe.
  * RecipeStorageManager is used by the application to manage recipes.
  */
-public class RecipeStorageManager {
+public class RecipeStorageManager implements TableRepresentable {
 
   private final Recipe recipe;
   private final StorageUnit storageUnit;

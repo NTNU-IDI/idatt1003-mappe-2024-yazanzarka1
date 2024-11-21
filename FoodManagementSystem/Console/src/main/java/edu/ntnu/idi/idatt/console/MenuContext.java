@@ -12,6 +12,8 @@ import org.fusesource.jansi.Ansi.Color;
  * MenuContext is immutable.
  *
  * @see CommandRegistry
+ * @since 0.0.1
+ * @author yazanzarka
  */
 public class MenuContext {
 

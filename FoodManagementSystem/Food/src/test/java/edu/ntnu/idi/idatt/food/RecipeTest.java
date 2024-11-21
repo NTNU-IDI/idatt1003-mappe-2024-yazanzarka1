@@ -68,14 +68,14 @@ class RecipeTest {
 
   @Test
   void getSteps() {
-    recipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4, new DisplayManager());
+    recipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
     Assertions.assertEquals("Test Steps", recipe.getSteps(), "Recipe steps should be empty");
   }
 
   @Test
   @DisplayName("Test Recipe Initialization")
   void testRecipeInitialization() {
-    Recipe newRecipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4, new DisplayManager());
+    Recipe newRecipe = new Recipe("Test Recipe", "Test Description", "Test Steps", 4);
     Assertions.assertAll(
         () -> Assertions.assertEquals("Test Recipe", newRecipe.getName(),
             "Recipe name should be Test Recipe"),
@@ -107,7 +107,7 @@ class RecipeTest {
   @Test
   @DisplayName("Test Recipe Price With No Groceries")
   void getRecipePriceWithNoGroceriesShouldReturnZero() {
-    Recipe emptyRecipe = new Recipe("Empty Recipe", "No Groceries Here", "No Steps Added", 2, new DisplayManager());
+    Recipe emptyRecipe = new Recipe("Empty Recipe", "No Groceries Here", "No Steps Added", 2);
     Assertions.assertEquals(0.0f, emptyRecipe.getRecipePrice(), "Recipe price with no groceries should be 0.0");
   }
 
@@ -124,7 +124,7 @@ class RecipeTest {
   @DisplayName("Test Recipe Initialization with Invalid Name")
   void testInvalidNameInitialization() {
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> new Recipe("", "Valid Description", "Valid Steps", 4, new DisplayManager()),
+        () -> new Recipe("", "Valid Description", "Valid Steps", 4),
         "Initializing a recipe with an invalid name should throw an exception");
   }
 
@@ -132,7 +132,7 @@ class RecipeTest {
   @DisplayName("Test Recipe Initialization with Invalid Description")
   void testInvalidDescriptionInitialization() {
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> new Recipe("Valid Name", "", "Valid Steps", 4, new DisplayManager()),
+        () -> new Recipe("Valid Name", "", "Valid Steps", 4),
         "Initializing a recipe with an invalid description should throw an exception");
   }
 
@@ -140,7 +140,7 @@ class RecipeTest {
   @DisplayName("Test Recipe Initialization with Invalid Steps")
   void testInvalidStepsInitialization() {
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> new Recipe("Valid Name", "Valid Description", "", 4, new DisplayManager()),
+        () -> new Recipe("Valid Name", "Valid Description", "", 4),
         "Initializing a recipe with invalid steps should throw an exception");
   }
 
@@ -148,7 +148,7 @@ class RecipeTest {
   @DisplayName("Test Recipe Initialization with Invalid People Count")
   void testInvalidPeopleCountInitialization() {
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> new Recipe("Valid Name", "Valid Description", "Valid Steps", 0, new DisplayManager()),
+        () -> new Recipe("Valid Name", "Valid Description", "Valid Steps", 0),
         "Initializing a recipe with an invalid people count should throw an exception");
   }
 

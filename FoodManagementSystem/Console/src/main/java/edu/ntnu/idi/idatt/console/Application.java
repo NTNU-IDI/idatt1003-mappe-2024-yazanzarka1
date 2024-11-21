@@ -13,8 +13,11 @@ public class Application {
   CommandRegistry commandRegistry;
 
   /**
+   * initate the application with a command registry.
+   *
    * @param commandRegistry CommandRegistry to use for the application.
-   * Initialize the application with predefined menus, commands and contexts
+   *
+   * Initialize the application with predefined menus, commands and contexts.
    */
   public void init(CommandRegistry commandRegistry) {
     this.commandRegistry = commandRegistry;
