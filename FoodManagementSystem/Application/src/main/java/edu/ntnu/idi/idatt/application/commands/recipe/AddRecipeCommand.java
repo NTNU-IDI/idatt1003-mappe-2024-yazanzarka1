@@ -61,7 +61,7 @@ public class AddRecipeCommand implements Command {
 
     String recipeName = inputHandler.getInput("Enter recipe name: ");
     String recipeDescription = inputHandler.getInput("Enter recipe description: ");
-    groceryManager.displayGroceries();
+    displayManager.printTable(groceryManager.toTableData());
     while (true) {
       String groceryName = inputHandler.getInput("Enter grocery name: ");
 

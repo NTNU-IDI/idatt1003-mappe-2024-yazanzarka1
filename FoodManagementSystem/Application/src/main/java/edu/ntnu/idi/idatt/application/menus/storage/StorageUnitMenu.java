@@ -31,7 +31,7 @@ public class StorageUnitMenu extends MenuContext {
   public StorageUnitMenu(CommandRegistry commandRegistry, GroceryManager groceryManager,
       StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
     super("Storage Menu", "storage-menu");
-    addCommand("1", new DisplayStoredGroceryCommand(storageUnit));
+    addCommand("1", new DisplayStoredGroceryCommand(storageUnit, displayManager));
     addCommand("2", new AddGroceryToStorageUnitCommand(groceryManager, storageUnit, displayManager, inputHandler));
     addCommand("3", new RemoveGroceryFromStorageUnitCommand(storageUnit, displayManager, inputHandler));
     addCommand("4", new SearchInStorageUnitCommand(storageUnit, displayManager, inputHandler));

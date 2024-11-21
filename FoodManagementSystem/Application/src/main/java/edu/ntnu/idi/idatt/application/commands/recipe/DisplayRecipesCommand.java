@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.application.commands.recipe;
 
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 
 /**
@@ -30,7 +31,8 @@ public class DisplayRecipesCommand implements Command {
   @Override
   public Boolean execute() {
     displayManager.showSpace();
-    recipeManager.displayRecipes();
+    TableData tableData = recipeManager.toTableData();
+    displayManager.printTable(tableData);
     displayManager.showSpace();
 
     return false;

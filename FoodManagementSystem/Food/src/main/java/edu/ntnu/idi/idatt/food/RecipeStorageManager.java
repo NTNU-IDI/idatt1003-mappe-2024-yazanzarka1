@@ -1,9 +1,11 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -50,14 +52,17 @@ public class RecipeStorageManager {
     return storageUnit;
   }
 
+
   /**
-   * Display groceries in a recipe and their storage entries. Display name, description, groceries,
-   * steps of a recipe and storage entries.
+   * Serialize RecipeStorageManager to a tableData object with headers and rows.
+   *
+   * @return TableData with headers and rows
+   * @see TableData
    */
-  public void displayRecipe() {
-    List<String> header =
-        List.of("Grocery", "Unit", "Price", "Recipe Amount", "In Storage", "Storage Diff");
-    List<List<String>> rows = new ArrayList<>();
+  public TableData toTableData() {
+    // Headers for the table
+    List<String> headers = List.of("Grocery", "Unit", "Price", "Recipe Amount", "In Storage", "Storage Diff");
+    List<List<String>> recipesList = new ArrayList<>();
     recipe.getGroceries().values().forEach(recipeGrocery -> {
       float storageDifference = getStorageDifference(recipeGrocery);
       float storageAmount = 0;
@@ -66,16 +71,16 @@ public class RecipeStorageManager {
       if (storageEntry != null) {
         storageAmount = storageEntry.getQuantity();
       }
-      rows.add(List.of(recipeGrocery.grocery().getGroceryName(),
+      recipesList.add(List.of(recipeGrocery.grocery().getGroceryName(),
           recipeGrocery.grocery().getUnit().getUnitName(),
           String.valueOf(recipeGrocery.grocery().getPricePerUnit()),
           String.valueOf(recipeGrocery.amount()), String.valueOf(storageAmount),
           formatDifference(storageDifference)));
     });
 
-    displayManager.printTable(header, rows);
-  }
+    return new TableData(headers, recipesList);
 
+  }
 
   /**
    * Returns difference between amount of grocery in recipe and storage.
@@ -107,10 +112,8 @@ public class RecipeStorageManager {
       }
     }
     if (!listOfNeededGroceries.isEmpty()) {
-      displayRecipe();
       throw new MissingGroceryInStorage(
-          "You do not have enough groceries to cook this recipe."
-              + " Check the table above for more information.");
+          "You do not have enough groceries to cook this recipe.");
     }
     for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
       StorageEntry storageEntry =

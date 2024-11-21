@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.grocery;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -36,7 +37,8 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    groceryManager.displayGroceries();
+    TableData tableData = groceryManager.toTableData();
+    displayManager.printTable(tableData);
     String groceryName = inputHandler.getInput("Enter the name of the grocery: ");
     groceryManager.removeGrocery(groceryName);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);

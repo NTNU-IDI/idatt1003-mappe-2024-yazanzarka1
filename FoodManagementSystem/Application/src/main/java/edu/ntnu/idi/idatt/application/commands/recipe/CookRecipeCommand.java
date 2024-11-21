@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.recipe;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeStorageManager;
@@ -41,7 +42,8 @@ public class CookRecipeCommand implements Command {
   @Override
   public Boolean execute() {
     displayManager.showSpace();
-    recipeManager.displayRecipes();
+    TableData tableData = recipeManager.toTableData();
+    displayManager.printTable(tableData);
     displayManager.showSpace();
 
     int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));

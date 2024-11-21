@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.storage;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import java.util.List;
@@ -37,7 +38,8 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    storageUnit.displayGroceries();
+    TableData tableData = storageUnit.toTableData();
+    displayManager.printTable(tableData);
     String storageEntryName = inputHandler.getInput("Enter name of grocery to remove: ");
 
     List<StorageEntry> storageEntries = storageUnit.findGrocery(storageEntryName);

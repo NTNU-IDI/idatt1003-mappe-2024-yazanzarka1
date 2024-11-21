@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
@@ -96,10 +97,12 @@ public class StorageUnit {
   }
 
   /**
-   * Displays a list of all storage entries in the storage unit. Displays grocery name, unit, price
-   * per unit, quantity, best before date and value.
+   * Serialize StorageUnit to a tableData object with headers and rows.
+   *
+   * @return TableData with headers and rows
+   * @see TableData
    */
-  public void displayGroceries() {
+  public TableData toTableData() {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
     List<List<String>> groceryList = groceries.values().stream()
         .sorted()
@@ -110,23 +113,22 @@ public class StorageUnit {
             String.valueOf(storageEntry.getQuantity()),
             formatBestBeforeDate(storageEntry),
             String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
-        .collect(Collectors.toList());
+        .toList();
 
-    displayManager.showSpace();
-    displayManager.printTable("Groceries in Fridge", headers, groceryList);
-    displayManager.showMessage("Total value: " + getTotalValue() + " NOK");
-    displayManager.showSpace();
+    return new TableData(headers, groceryList);
   }
 
   /**
-   * Displays a list of storage entries in the storage unit. Displays grocery name, unit, price per
-   * unit, quantity, best before date and value.
+   * Serialize StorageUnit to a tableData object with headers and rows.
    *
-   * @param storageEntries List of storage entries to display
+   * @param storageEntries List of storage entries to serialize
+   * @return TableData with headers and rows
+   * @see TableData
    */
-  public void displayGroceries(List<StorageEntry> storageEntries) {
+  public TableData toTableData(List<StorageEntry> storageEntries) {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
-    List<List<String>> groceryList = storageEntries.stream()
+    List<List<String>> storageEntryTableBody = storageEntries.stream()
+        .sorted()
         .map(storageEntry -> List.of(
             storageEntry.getGroceryName(),
             storageEntry.getUnit().getUnitName(),
@@ -134,12 +136,11 @@ public class StorageUnit {
             String.valueOf(storageEntry.getQuantity()),
             formatBestBeforeDate(storageEntry),
             String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
-        .collect(Collectors.toList());
+        .toList();
 
-    displayManager.showSpace();
-    displayManager.printTable(headers, groceryList);
-    displayManager.showSpace();
+    return new TableData(headers, storageEntryTableBody);
   }
+
 
   /**
    * Get a grocery from the storage unit by name.
@@ -161,7 +162,7 @@ public class StorageUnit {
   public List<StorageEntry> findGrocery(String query) {
     return groceries.values().stream()
         .filter(entry -> entry.getGroceryName().toLowerCase().contains(query.toLowerCase()))
-        .collect(Collectors.toList());
+        .toList();
   }
 
   /**

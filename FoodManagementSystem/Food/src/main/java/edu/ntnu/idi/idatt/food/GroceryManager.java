@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryAlreadyExistsException;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import java.util.ArrayList;
@@ -67,10 +68,14 @@ public class GroceryManager {
 
 
   /**
-   * Displays groceries in a table.
+   * Serialize GroceryManager to a tableData object with headers and rows.
+   *
+   * @return TableData with headers and rows
+   * @see TableData
    */
-  public void displayGroceries() {
-    List<String> headers = List.of("Grocery", "Unit", "NOK / Unit");
+  public TableData toTableData() {
+    // Headers for the table
+    List<String> headers = List.of("Grocery", "Unit", "Amount");
     List<List<String>> groceryList = new ArrayList<>();
 
     availableGroceries.stream()
@@ -79,9 +84,8 @@ public class GroceryManager {
             String.valueOf(grocery.getPricePerUnit())))
         .forEach(groceryList::add);
 
-    displayManager.showSpace();
-    displayManager.printTable(headers, groceryList);
-    displayManager.showSpace();
+
+    return new TableData(headers, groceryList);
 
   }
 

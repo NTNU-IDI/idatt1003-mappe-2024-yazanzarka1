@@ -64,28 +64,28 @@ public class DisplayManager {
   /**
    * Table printing method.
    *
-   * @param headers list of table headers
-   * @param rows    data rows
+   * @param tableData table data to be printed
+   * @see TableData
    */
-  public void printTable(List<String> headers, List<List<String>> rows) {
-    printTable("", headers, rows);
+  public void printTable(TableData tableData) {
+    printTable("", tableData);
   }
 
   /**
    * . Print a table to the console
    *
    * @param title   title of the table
-   * @param headers list of table headers
-   * @param rows    data rows
+   * @param tableData table data to be printed.
+   * @see TableData
    */
-  public void printTable(String title, List<String> headers, List<List<String>> rows) {
+  public void printTable(String title, TableData tableData) {
     // Calculate the width of each column
-    int[] columnWidths = new int[headers.size()];
-    for (int i = 0; i < headers.size(); i++) {
-      columnWidths[i] = stripAnsiCodes(headers.get(i)).length();
+    int[] columnWidths = new int[tableData.headers().size()];
+    for (int i = 0; i < tableData.headers().size(); i++) {
+      columnWidths[i] = stripAnsiCodes(tableData.headers().get(i)).length();
     }
 
-    for (List<String> row : rows) {
+    for (List<String> row : tableData.data()) {
       for (int i = 0; i < row.size(); i++) {
         /* The i-th column should be at least as wide
          as the i-th text in the row without ANSI color codes
@@ -102,8 +102,8 @@ public class DisplayManager {
           padLeft(title, (totalWidth + columnWidths.length * 3) / 2 + title.length() / 2), HEADER_COLOR);
     }
 
-    printRow(headers, columnWidths, true);
-    for (List<String> row : rows) {
+    printRow(tableData.headers(), columnWidths, true);
+    for (List<String> row : tableData.data()) {
       printRow(row, columnWidths, false);
     }
   }

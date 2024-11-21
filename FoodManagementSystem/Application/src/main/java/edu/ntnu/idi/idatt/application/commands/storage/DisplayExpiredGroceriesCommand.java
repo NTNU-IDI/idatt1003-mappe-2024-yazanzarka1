@@ -46,7 +46,7 @@ public class DisplayExpiredGroceriesCommand implements Command {
       }
     }
 
-    storageUnit.displayGroceries(expiredGroceries);
+    displayManager.printTable(storageUnit.toTableData(expiredGroceries));
     displayManager.showColoredMessage(
         String.format("Total value of expired products: %.2f NOK", totalExpiredGroceriesValue),
         Color.RED);

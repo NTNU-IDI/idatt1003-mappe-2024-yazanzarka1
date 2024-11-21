@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.storage;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
@@ -58,7 +59,9 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
     }
 
 
-    storageUnit.displayGroceries(storageEntryBeforeDate);
+    TableData tableData = storageUnit.toTableData(storageEntryBeforeDate);
+    displayManager.printTable(tableData);
+
     displayManager.showMessage("Displayed groceries before " + date);
 
     return false;

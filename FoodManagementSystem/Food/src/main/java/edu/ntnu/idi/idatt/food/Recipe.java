@@ -1,9 +1,7 @@
 package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -113,20 +111,6 @@ public class Recipe {
     return groceries.get(groceryName);
   }
 
-  /**
-   * Display groceries in a recipe.
-   */
-  public void displayRecipe() {
-    List<String> headers = List.of("Grocery", "Unit", "Amount");
-
-    List<List<String>> groceriesList = new ArrayList<>();
-    for (RecipeGrocery entry : groceries.values()) {
-      groceriesList.add(List.of(entry.grocery().getGroceryName(),
-          entry.grocery().getUnit().getClass().getSimpleName(), String.valueOf(entry.amount())));
-    }
-
-    displayManager.printTable(headers, groceriesList);
-  }
 
   /**
    * Get the price of a recipe.

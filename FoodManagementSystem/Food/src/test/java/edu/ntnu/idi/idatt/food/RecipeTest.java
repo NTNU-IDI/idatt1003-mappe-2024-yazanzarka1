@@ -96,15 +96,6 @@ class RecipeTest {
         "Adding a grocery with negative amount should throw an exception");
   }
 
-  @Test
-  @DisplayName("Test Display Recipe")
-  void testDisplayRecipe() {
-    // Use a mock or spy for DisplayManager to verify the interaction if needed
-    Recipe testRecipe = new Recipe("Display Test Recipe", "Test Description", "Test Steps", 2, new DisplayManager());
-    testRecipe.addGrocery(new Grocery("Display Grocery", new Kilogram(), 100), 2.0f);
-    Assertions.assertDoesNotThrow(() -> testRecipe.displayRecipe(),
-        "Displaying the recipe should not throw an exception");
-  }
 
   @Test
   @DisplayName("Test Get Grocery That Doesn't Exist")

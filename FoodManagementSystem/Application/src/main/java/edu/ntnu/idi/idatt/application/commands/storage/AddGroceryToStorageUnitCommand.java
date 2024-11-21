@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.storage;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
@@ -58,7 +59,8 @@ public class AddGroceryToStorageUnitCommand implements Command {
   @Override
   public Boolean execute() {
     try {
-      groceryManager.displayGroceries();
+      TableData tableData = groceryManager.toTableData();
+      displayManager.printTable(tableData);
 
       String groceryName = inputHandler.getInput("Enter Grocery Index: ");
 

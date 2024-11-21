@@ -1,6 +1,8 @@
 package edu.ntnu.idi.idatt.application.commands.storage;
 
 import edu.ntnu.idi.idatt.console.Command;
+import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
 /**
@@ -8,21 +10,24 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
  */
 public class DisplayStoredGroceryCommand implements Command {
 
-  final StorageUnit storageUnit;
+  private final StorageUnit storageUnit;
+  private final DisplayManager displayManager;
 
   /**
    * Initiate command with a given storageUnit.
    *
    * @param storageUnit storageUnit where groceries are stored.
    */
-  public DisplayStoredGroceryCommand(StorageUnit storageUnit) {
+  public DisplayStoredGroceryCommand(StorageUnit storageUnit, DisplayManager displayManager) {
     this.storageUnit = storageUnit;
+    this.displayManager = displayManager;
 
   }
 
   @Override
   public Boolean execute() {
-    storageUnit.displayGroceries();
+    TableData tableData = storageUnit.toTableData();
+    displayManager.printTable(tableData);
     return false;
   }
 

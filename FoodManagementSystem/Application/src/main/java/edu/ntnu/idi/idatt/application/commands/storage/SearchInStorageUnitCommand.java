@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.application.commands.storage;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import java.util.List;
@@ -45,7 +46,8 @@ public class SearchInStorageUnitCommand implements Command {
       displayManager.showFancyMessage("No groceries found");
       return false;
     }
-    storageUnit.displayGroceries(foundEntries);
+    TableData foundEntriesTableData = storageUnit.toTableData(foundEntries);
+    displayManager.printTable(foundEntriesTableData);
     return false;
   }
 
