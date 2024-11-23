@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
@@ -189,5 +188,14 @@ public class StorageUnit implements TableRepresentable {
         .map(entry -> entry.getQuantity() * entry.getPricePerUnit())
         .reduce(Float::sum)
         .orElse(0f);
+  }
+
+  /**
+   * Get the name of the storage unit.
+   *
+   * @return Name of the storage unit
+   */
+  public String getName() {
+    return name;
   }
 }

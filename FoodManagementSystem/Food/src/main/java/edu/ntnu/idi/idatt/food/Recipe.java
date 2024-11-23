@@ -55,9 +55,9 @@ public class Recipe {
       throw new IllegalArgumentException(
           "Recipe description cannot be null or blank and must be between 10 and 200 characters");
     }
-    if (steps == null || steps.isBlank() || steps.length() < 10 || steps.length() > 200) {
+    if (steps == null || steps.isBlank() || steps.length() < 10 || steps.length() > 500) {
       throw new IllegalArgumentException(
-          "Recipe steps cannot be null or blank and must be between 10 and 200 characters");
+          "Recipe steps cannot be null or blank and must be between 10 and 500 characters");
     }
     if (peopleCount <= 0 || peopleCount > 10) {
       throw new IllegalArgumentException("People count must be greater than 0 and less than 10");

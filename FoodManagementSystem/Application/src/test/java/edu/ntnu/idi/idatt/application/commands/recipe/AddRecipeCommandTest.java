@@ -29,7 +29,7 @@ class AddRecipeCommandTest {
     addRecipeCommand = new AddRecipeCommand(recipeManager, groceryManager,
         new TestInputHandler(
             new String[] {"Test Recipe", "Description", "Milk", "20", "n", "1. Do this, 2. Do that",
-                "4"}));
+                "4"}), new DisplayManager());
     addRecipeCommand.execute();
 
     Assertions.assertEquals(1, recipeManager.getRecipes().size());
@@ -45,7 +45,7 @@ class AddRecipeCommandTest {
         new TestInputHandler(
             new String[] {"Test Recipe", "Description", "NotValidGrocery", "20", "n",
                 "1. Do this, 2. Do that",
-                "4"}));
+                "4"}), new DisplayManager());
     Assertions.assertThrows(IllegalStateException.class, addRecipeCommand::execute,
         "Grocery not found. Will retry until user gives a valid grocery");
 
@@ -53,7 +53,9 @@ class AddRecipeCommandTest {
 
   @Test
   void getDescription() {
-    addRecipeCommand = new AddRecipeCommand(recipeManager, groceryManager);
+    addRecipeCommand =
+        new AddRecipeCommand(recipeManager, groceryManager, new TestInputHandler(new String[] {}),
+            new DisplayManager());
     Assertions.assertEquals("Add a recipe", addRecipeCommand.getDescription());
   }
 }

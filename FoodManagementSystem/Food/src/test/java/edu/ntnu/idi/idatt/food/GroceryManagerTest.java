@@ -10,6 +10,7 @@ import edu.ntnu.idi.idatt.food.exceptions.GroceryAlreadyExistsException;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +32,7 @@ class GroceryManagerTest {
   @DisplayName("Test Add Grocery")
   void addGrocery() {
     groceryManager.addGrocery(grocery);
-    Set<Grocery> groceries = groceryManager.getAvailableGroceries();
+    List<Grocery> groceries = groceryManager.getAvailableGroceries();
     assertEquals(1, groceries.size(), "Grocery list should contain 1 item");
     assertTrue(groceries.stream().findFirst().isPresent(), "Grocery list should contain 1 item");
     assertEquals("Milk", groceries.stream().findFirst().get().getGroceryName(),
@@ -49,7 +50,7 @@ class GroceryManagerTest {
   @DisplayName("Test Get Available Groceries")
   void getAvailableGroceries() {
     groceryManager.addGrocery(grocery);
-    Set<Grocery> groceries = groceryManager.getAvailableGroceries();
+    List<Grocery> groceries = groceryManager.getAvailableGroceries();
     assertNotNull(groceries, "Grocery list should not be null");
     assertEquals(1, groceries.size(), "Grocery list should contain 1 item");
   }
@@ -58,8 +59,8 @@ class GroceryManagerTest {
   @DisplayName("Test Remove Grocery")
   void removeGrocery() {
     groceryManager.addGrocery(grocery);
-    groceryManager.removeGrocery(grocery.getGroceryName());
-    Set<Grocery> groceries = groceryManager.getAvailableGroceries();
+    groceryManager.removeGrocery(grocery);
+    List<Grocery> groceries = groceryManager.getAvailableGroceries();
     assertEquals(0, groceries.size(), "Grocery list should be empty after removal");
   }
 
@@ -68,7 +69,7 @@ class GroceryManagerTest {
   void removeNonExistentGrocery() {
     groceryManager.addGrocery(grocery);
     assertThrows(GroceryNotFoundException.class,
-        () -> groceryManager.removeGrocery("Non-existent grocery"));
+        () -> groceryManager.removeGrocery(new Grocery("Bread", new Liter(), 20.0f)));
   }
 
   @Test
@@ -84,7 +85,7 @@ class GroceryManagerTest {
   @Test
   @DisplayName("Test Empty Grocery List")
   void testEmptyGroceryList() {
-    Set<Grocery> groceries = groceryManager.getAvailableGroceries();
+    List<Grocery> groceries = groceryManager.getAvailableGroceries();
     assertEquals(0, groceries.size(), "Grocery list should be empty initially");
   }
 

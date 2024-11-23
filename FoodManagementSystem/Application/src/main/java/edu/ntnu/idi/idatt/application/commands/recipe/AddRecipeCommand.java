@@ -22,18 +22,6 @@ public class AddRecipeCommand implements Command {
   RecipeManager recipeManager;
   GroceryManager groceryManager;
 
-  /**
-   * Initiate the command with a RecipeManager.
-   *
-   * @param recipeManager  RecipeManager to add recipe to.
-   * @param groceryManager GroceryManager to retrieve available groceries from.
-   */
-  public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager) {
-    displayManager = new DisplayManager();
-    inputHandler = new InputHandler();
-    this.recipeManager = recipeManager;
-    this.groceryManager = groceryManager;
-  }
 
   /**
    * Initiate the command with a RecipeManager.
@@ -43,8 +31,8 @@ public class AddRecipeCommand implements Command {
    * @param inputHandler   InputHandler to handle user input.
    */
   public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager,
-      InputHandler inputHandler) {
-    displayManager = new DisplayManager();
+      InputHandler inputHandler, DisplayManager displayManager) {
+    this.displayManager = displayManager;
     this.inputHandler = inputHandler;
     this.recipeManager = recipeManager;
     this.groceryManager = groceryManager;

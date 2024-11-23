@@ -30,9 +30,11 @@ public class GroceryManager implements TableRepresentable {
   }
 
   /**
-   * Adds Grocery to GroceryManager. Multiple groceries can have the same name.
+   * Adds Grocery to GroceryManager.
    *
    * @param grocery grocery to be added
+   * @throws GroceryAlreadyExistsException if grocery already exists
+   * @see Grocery
    */
   public void addGrocery(Grocery grocery) {
     if (availableGroceries.contains(grocery)) {
@@ -47,8 +49,8 @@ public class GroceryManager implements TableRepresentable {
    *
    * @return List Available Groceries in the application.
    */
-  public Set<Grocery> getAvailableGroceries() {
-    return availableGroceries;
+  public List<Grocery> getAvailableGroceries() {
+    return availableGroceries.stream().toList();
   }
 
 
@@ -56,13 +58,16 @@ public class GroceryManager implements TableRepresentable {
    * Removes Grocery from GroceryManager. Throws IndexOutOfBoundsException if index is out of
    * bounds.
    *
-   * @param name name of grocery to be removed
+   * @param grocery grocery to be removed
+   * @throws GroceryNotFoundException if grocery is not found
+   * @see Grocery
    */
-  public void removeGrocery(String name) {
+  public void removeGrocery(Grocery grocery) {
 
-    if (!availableGroceries.removeIf(grocery -> grocery.getGroceryName().equals(name))) {
-      throw new GroceryNotFoundException("Grocery not found: " + name);
+    if (!availableGroceries.contains(grocery)) {
+      throw new GroceryNotFoundException("Grocery not found: " + grocery.getGroceryName());
     }
+    availableGroceries.remove(grocery);
   }
 
 

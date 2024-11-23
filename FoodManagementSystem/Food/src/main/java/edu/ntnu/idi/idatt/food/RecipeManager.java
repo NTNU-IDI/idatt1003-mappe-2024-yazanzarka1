@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 /**
- * Manage recipes in a recipe manager. RecipeManager can add, remove and display recipes.
- * RecipeManager is used by the application to manage recipes. RecipeManager can also return
- * recipes.
+ * RecipeManager is responsible for managing recipes. RecipeManager can add and remove recipes.
  */
 public class RecipeManager implements TableRepresentable {
 
@@ -20,8 +18,13 @@ public class RecipeManager implements TableRepresentable {
 
   /**
    * Initiate a recipe manager.
+   *
+   * @param name Name of the recipe manager in the application - Example: "My Recipes" or "Cook Book"
    */
   public RecipeManager(String name) {
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Name cannot be empty");
+    }
     this.name = name;
     recipes = new ArrayList<>();
   }
@@ -32,6 +35,9 @@ public class RecipeManager implements TableRepresentable {
    * @param recipe Recipe to be added
    */
   public void addRecipe(Recipe recipe) {
+    if (recipe == null) {
+      throw new IllegalArgumentException("Recipe cannot be null");
+    }
     recipes.add(recipe);
   }
 
@@ -55,6 +61,15 @@ public class RecipeManager implements TableRepresentable {
    */
   public List<Recipe> getRecipes() {
     return recipes;
+  }
+
+  /**
+   * Get the name of the recipe manager.
+   *
+   * @return Name of the recipe manager
+   */
+  public String getName() {
+    return name;
   }
 
   /**

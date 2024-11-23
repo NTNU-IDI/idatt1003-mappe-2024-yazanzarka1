@@ -1,7 +1,7 @@
 package edu.ntnu.idi.idatt.application.menus.grocery;
 
 import edu.ntnu.idi.idatt.application.commands.SwitchMenuCommand;
-import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
+import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryToGroceryManagerCommand;
 import edu.ntnu.idi.idatt.application.commands.grocery.DisplayGroceriesCommand;
 import edu.ntnu.idi.idatt.application.commands.grocery.RemoveGroceryFromGroceryManagerCommand;
 import edu.ntnu.idi.idatt.console.CommandRegistry;
@@ -30,7 +30,7 @@ public class GroceryMenu extends MenuContext {
     super("Grocery", "grocery-menu");
     addCommand("1", new DisplayGroceriesCommand(groceryManager, displayManager));
     addCommand("2",
-        new AddGroceryCommand(groceryManager, unitProvider, displayManager, inputHandler));
+        new AddGroceryToGroceryManagerCommand(groceryManager, unitProvider, displayManager, inputHandler));
     addCommand("3",
         new RemoveGroceryFromGroceryManagerCommand(groceryManager, displayManager, inputHandler));
     addCommand("back",

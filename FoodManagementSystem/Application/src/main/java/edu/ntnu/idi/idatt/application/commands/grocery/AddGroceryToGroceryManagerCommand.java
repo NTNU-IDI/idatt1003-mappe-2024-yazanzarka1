@@ -14,7 +14,7 @@ import org.fusesource.jansi.Ansi;
 /**
  * Add grocery to GroceryManager.
  */
-public class AddGroceryCommand implements Command {
+public class AddGroceryToGroceryManagerCommand implements Command {
 
   final GroceryManager groceryManager;
   final InputHandler inputHandler;
@@ -30,24 +30,13 @@ public class AddGroceryCommand implements Command {
    * @param inputHandler Input handler
    *
    */
-  public AddGroceryCommand(GroceryManager groceryManager, UnitProvider unitProvider, DisplayManager displayManager, InputHandler inputHandler) {
+  public AddGroceryToGroceryManagerCommand(GroceryManager groceryManager, UnitProvider unitProvider, DisplayManager displayManager, InputHandler inputHandler) {
     this.groceryManager = groceryManager;
     this.inputHandler = inputHandler;
     this.displayManager = displayManager;
     this.unitProvider = unitProvider;
   }
 
-  /**
-   * Adds Grocery to GroceryManager.
-   *
-   * @param groceryManager Grocery manager
-   */
-  public AddGroceryCommand(GroceryManager groceryManager, InputHandler inputHandler) {
-    this.groceryManager = groceryManager;
-    this.inputHandler = inputHandler;
-    this.displayManager = new DisplayManager();
-    this.unitProvider = new UnitProvider();
-  }
 
 
 

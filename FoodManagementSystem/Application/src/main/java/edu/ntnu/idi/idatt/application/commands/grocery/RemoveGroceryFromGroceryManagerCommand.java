@@ -4,7 +4,9 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
+import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -40,7 +42,12 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
     TableData tableData = groceryManager.toTableData();
     displayManager.printTable(tableData);
     String groceryName = inputHandler.getInput("Enter the name of the grocery: ");
-    groceryManager.removeGrocery(groceryName);
+    Grocery grocery = groceryManager.getAvailableGroceries().stream()
+        .filter(g -> g.getGroceryName().equals(groceryName)).findFirst().orElse(null);
+    if (grocery == null) {
+      throw new GroceryNotFoundException("Grocery not found: " + groceryName);
+    }
+    groceryManager.removeGrocery(grocery);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
     return false;
   }

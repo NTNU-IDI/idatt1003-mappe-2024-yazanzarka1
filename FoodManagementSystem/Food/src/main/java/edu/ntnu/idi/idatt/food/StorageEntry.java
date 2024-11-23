@@ -34,6 +34,7 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * Quantity setter.
    *
    * @param quantity new quantity
+   * @throws IllegalArgumentException if quantity is less than 0
    */
   public void setQuantity(float quantity) {
     if (quantity < 0) {
@@ -64,6 +65,7 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * add quantity to current quantity.
    *
    * @param quantity quantity to add to current quantity
+   * @throws IllegalArgumentException if quantity is less than or equal to 0
    */
   public void addQuantity(float quantity) {
     if (quantity <= 0) {
@@ -76,6 +78,7 @@ public class StorageEntry extends Grocery implements Comparable<StorageEntry> {
    * subtract quantity from current quantity.
    *
    * @param quantity quantity to be removed
+   * @throws IllegalArgumentException if quantity is less than or equal to 0
    */
   public void subtractQuantity(float quantity) {
     if (quantity <= 0) {

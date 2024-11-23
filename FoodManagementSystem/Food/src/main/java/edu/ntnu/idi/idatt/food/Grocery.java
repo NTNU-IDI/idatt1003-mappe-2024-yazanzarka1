@@ -72,6 +72,8 @@ public class Grocery {
    *
    * @param pricePerUnit price per unit
    * @return float newPricePerUnit
+   * @throws IllegalArgumentException if pricePerUnit is less than or equal to 0
+   *
    */
   public float setPricePerUnit(float pricePerUnit) {
     if (pricePerUnit <= 0) {

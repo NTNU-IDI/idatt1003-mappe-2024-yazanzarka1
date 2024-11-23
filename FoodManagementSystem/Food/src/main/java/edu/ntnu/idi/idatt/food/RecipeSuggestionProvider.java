@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.food;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,30 +36,34 @@ public class RecipeSuggestionProvider {
    */
   public List<SuggestedRecipe> suggestRecipe() {
     HashMap<Recipe, Float> recipeScores = new HashMap<>();
-    for (Recipe recipe : recipeManager.getRecipes()) {
+
+    // For each recipe, calculate a score based on the groceries in the storage unit
+    recipeManager.getRecipes().forEach(recipe -> {
       float score = 0;
 
       // Skip recipes that do not have any groceries
       if (recipe.getGroceries().isEmpty()) {
-        continue;
+        return;
       }
 
       boolean hasAllGroceries = true;
+
+      // For each grocery in the recipe, calculate a score based on the storage unit
       for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
-        if (storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName()) != null) {
-          StorageEntry storageEntry =
-              storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
+        StorageEntry storageEntry =
+            storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
+        if (storageEntry != null) {
           score += calculateScore(storageEntry, recipeGrocery);
         } else {
           hasAllGroceries = false;
           break;
         }
-
       }
       if (hasAllGroceries) {
         recipeScores.put(recipe, score);
       }
-    }
+    });
+
 
     return recipeScores.entrySet().stream()
         .sorted((r1, r2) -> r2.getValue().compareTo(r1.getValue()))

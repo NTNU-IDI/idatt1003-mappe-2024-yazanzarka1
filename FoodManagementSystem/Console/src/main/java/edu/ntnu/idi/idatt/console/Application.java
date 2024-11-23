@@ -35,7 +35,7 @@ public class Application {
       if (Boolean.TRUE.equals(displayMenu)) {
         commandRegistry.getCurrentContext().displayMenu();
       }
-      String input = inputHandler.getInput();
+      String input = inputHandler.getInput("Enter command (help - Available Commands): ");
 
       // Check for help command
       if ("help".equalsIgnoreCase(input)) {

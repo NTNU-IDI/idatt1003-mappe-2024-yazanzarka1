@@ -5,17 +5,16 @@ import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
- * RecipeStorageManager is responsible for displaying and managing a recipe, its groceries and
- * Storage entries of groceries.
- * RecipeStorageManager can display groceries in a recipe and their storage entries.
- * RecipeStorageManager can also cook a recipe.
- * RecipeStorageManager is used by the application to manage recipes.
+ * RecipeStorageManager is responsible for comparing groceries in a recipe with groceries in a
+ * storage unit.
+ * RecipeStorageManager can remove groceries from storage if a recipe is cooked
  */
 public class RecipeStorageManager implements TableRepresentable {
 
@@ -102,26 +101,38 @@ public class RecipeStorageManager implements TableRepresentable {
    */
   public void cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
-    for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
+    // get all groceries in recipe
+    Collection<RecipeGrocery> groceriesInRecipe = recipe.getGroceries().values();
+
+    // check if we have all the needed groceries in storage
+    groceriesInRecipe.forEach(recipeGrocery -> {
       StorageEntry storageEntry =
           storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       if (storageEntry == null || storageEntry.getQuantity() < recipeGrocery.amount()) {
         listOfNeededGroceries.add(recipeGrocery);
-        continue;
       }
-    }
+    });
+
+    // if we do not have all the needed groceries, we throw an exception
     if (!listOfNeededGroceries.isEmpty()) {
       throw new MissingGroceryInStorage(
           "You do not have enough groceries to cook this recipe.");
     }
-    for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
+
+    // if we have all the needed groceries, we can remove them from storage to cook the recipe
+    groceriesInRecipe.forEach(recipeGrocery -> {
       StorageEntry storageEntry =
           storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       storageUnit.removeGrocery(storageEntry, recipeGrocery.amount());
-    }
+    });
   }
 
 
+  /**
+   * return a string with color based on difference between recipe and storage.
+   * If difference is negative, the string will be red. If difference is positive,
+   * the string will be green.
+   */
   private String formatDifference(float difference) {
     if (difference < 0) {
       return Ansi.ansi().fg(Color.RED).a(difference).reset().toString();

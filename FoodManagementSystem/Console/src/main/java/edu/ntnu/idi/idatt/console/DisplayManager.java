@@ -16,8 +16,8 @@ import org.fusesource.jansi.AnsiConsole;
  * tables or a simple println. DisplayManager makes modifying data output to the console easier by
  * being the standard way this application outputs data to the console.
  *
- * @since 0.0.1
  * @author yazanzarka
+ * @since 0.0.1
  */
 public class DisplayManager {
 
@@ -34,6 +34,9 @@ public class DisplayManager {
 
   /**
    * Method for displaying colored messages.
+   *
+   * @param message message to be shown
+   * @param color color of the message
    */
   public void showColoredMessage(String message, Ansi.Color color) {
     System.out.println(Ansi.ansi().fg(color).a(message).reset());
@@ -46,6 +49,16 @@ public class DisplayManager {
    */
   public void showMessage(String message) {
     System.out.println(message);
+  }
+
+  /**
+   * simplest wrapper for System.out.println.
+   *
+   * @param message message to be shown
+   * @param color   color of the message
+   */
+  public void showColoredMessageSameLine(String message, Ansi.Color color) {
+    System.out.print(Ansi.ansi().fg(color).a(message).reset());
   }
 
   /**
@@ -77,7 +90,7 @@ public class DisplayManager {
   /**
    * . Print a table to the console
    *
-   * @param title   title of the table
+   * @param title     title of the table
    * @param tableData table data to be printed.
    * @see TableData
    */
@@ -98,11 +111,17 @@ public class DisplayManager {
     }
 
     if (!title.isEmpty()) {
-      int totalWidth = Arrays.stream(columnWidths).sum();
+
+      // Calculate the total width of the table
+      int totalWidth = Arrays.stream(columnWidths).sum() + columnWidths.length * 2 + 6;
+
+      System.out.println("+" + "-".repeat(totalWidth - 2) + "+");
 
       // Print the title
-      showColoredMessage(
-          padLeft(title, (totalWidth + columnWidths.length * 3) / 2 + title.length() / 2), HEADER_COLOR);
+      showColoredMessageSameLine("|", HEADER_COLOR);
+      showColoredMessageSameLine(
+          padLeft(title, (totalWidth / 2 + title.length() / 2)), HEADER_COLOR);
+      showColoredMessage(padLeft("|", (totalWidth / 2) - title.length() / 2), HEADER_COLOR);
     }
 
     printRow(tableData.headers(), columnWidths, true);
@@ -112,6 +131,16 @@ public class DisplayManager {
   }
 
   private void printRow(List<String> row, int[] columnWidths, boolean isHeader) {
+
+    // Print a separator after the header
+    if (isHeader) {
+      StringBuilder separator = new StringBuilder("+");
+      for (int columnWidth : columnWidths) {
+        separator.append("-".repeat(columnWidth + 2)).append("+");
+      }
+      System.out.println(separator);
+    }
+
     /* each row starts with a separator | and each column is seperated by |.*/
     StringBuilder rowOutput = new StringBuilder("| ");
 

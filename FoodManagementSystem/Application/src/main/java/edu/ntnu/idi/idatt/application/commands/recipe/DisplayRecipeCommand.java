@@ -58,7 +58,12 @@ public class DisplayRecipeCommand implements Command {
     TableData recipeInStorageTableData = recipeStorageManager.toTableData();
     displayManager.printTable(recipeInStorageTableData);
 
+    //Display the total amount of ingredients in the recipe
+    displayManager.showSpace();
+    displayManager.showFancyMessage("Steps to make the recipe:");
+    displayManager.showMessage(recipe.getSteps());
 
+    //Display the total price of the recipe
     displayManager.showMessage(
         String.format("Total recipe price: %.2f NOK", recipe.getRecipePrice()));
     displayManager.showSpace();

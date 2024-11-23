@@ -1,23 +1,23 @@
-package edu.ntnu.idi.idatt.application;
+package edu.ntnu.idi.idatt.application.commands.grocery;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idi.idatt.application.commands.grocery.AddGroceryCommand;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
+import edu.ntnu.idi.idatt.units.UnitProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AddGroceryCommandTest {
+class AddGroceryToGroceryManagerCommandTest {
 
   GroceryManager groceryManager;
-  AddGroceryCommand addGroceryCommand;
+  AddGroceryToGroceryManagerCommand addGroceryToGroceryManagerCommand;
 
   @BeforeEach
   void setUp() {
@@ -26,10 +26,11 @@ class AddGroceryCommandTest {
 
   @Test
   void executeWithValidParameters() {
-    this.addGroceryCommand = new AddGroceryCommand(groceryManager,
-        new TestInputHandler(new String[] {"Milk", "1", "200"}));
+    this.addGroceryToGroceryManagerCommand =
+        new AddGroceryToGroceryManagerCommand(groceryManager, new UnitProvider(), new DisplayManager(),
+            new TestInputHandler(new String[] {"Milk", "1", "200"}));
 
-    addGroceryCommand.execute();
+    addGroceryToGroceryManagerCommand.execute();
 
     assertTrue(groceryManager.getAvailableGroceries().stream().findFirst().isPresent(),
         "Grocery list should contain 1 item");
@@ -53,9 +54,9 @@ class AddGroceryCommandTest {
 
   @Test
   void executeWithInvalidParameters() {
-    this.addGroceryCommand = new AddGroceryCommand(groceryManager,
-        new TestInputHandler(new String[] {"Milk", "notUnit", "200"}));
-    assertThrows(UserInputException.class, () -> addGroceryCommand.execute(),
+    this.addGroceryToGroceryManagerCommand = new AddGroceryToGroceryManagerCommand(groceryManager, new UnitProvider(),
+        new DisplayManager(), new TestInputHandler(new String[] {"Milk", "notUnit", "200"}));
+    assertThrows(UserInputException.class, () -> addGroceryToGroceryManagerCommand.execute(),
         "Should throw UserInputException if unit is not between 1-3");
   }
 }

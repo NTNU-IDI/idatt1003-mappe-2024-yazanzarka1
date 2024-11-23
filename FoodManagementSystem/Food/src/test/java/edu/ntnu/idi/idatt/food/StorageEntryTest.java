@@ -90,6 +90,15 @@ class StorageEntryTest {
   }
 
   @Test
+  @DisplayName("Test Set Quantity with Negative Value")
+  void testSetQuantityNegative() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      storageEntry.setQuantity(-5.0f);
+    });
+    assertEquals("Quantity cannot be less than 0", exception.getMessage());
+  }
+
+  @Test
   @DisplayName("Test Subtract Quantity with Negative Value")
   void testSubtractQuantityNegative() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {

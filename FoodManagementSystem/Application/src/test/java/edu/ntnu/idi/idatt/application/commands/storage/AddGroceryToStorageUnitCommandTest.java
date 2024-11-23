@@ -1,9 +1,8 @@
-package edu.ntnu.idi.idatt.application.commands;
+package edu.ntnu.idi.idatt.application.commands.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import edu.ntnu.idi.idatt.application.commands.storage.AddGroceryToStorageUnitCommand;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TestInputHandler;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;

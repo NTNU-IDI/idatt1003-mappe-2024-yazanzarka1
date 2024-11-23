@@ -1,8 +1,8 @@
 package edu.ntnu.idi.idatt.food;
 
 /**
- * Represents a recipe in a recipe. Contains a recipe and the amount of the recipe in a recipe.
- * Used in the Recipe class.
+ * Represents a grocery in a recipe. Contains a grocery and the amount of the grocery in a recipe.
+ * Used in the RecipeManager class.
  *
  * @see Recipe
  */

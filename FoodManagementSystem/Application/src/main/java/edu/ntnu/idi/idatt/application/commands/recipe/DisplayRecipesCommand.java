@@ -32,7 +32,7 @@ public class DisplayRecipesCommand implements Command {
   public Boolean execute() {
     displayManager.showSpace();
     TableData tableData = recipeManager.toTableData();
-    displayManager.printTable(tableData);
+    displayManager.printTable(recipeManager.getName(), tableData);
     displayManager.showSpace();
 
     return false;

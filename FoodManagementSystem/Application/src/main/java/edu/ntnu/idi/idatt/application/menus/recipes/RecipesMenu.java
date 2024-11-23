@@ -40,7 +40,8 @@ public class RecipesMenu extends MenuContext {
     addCommand("1", new DisplayRecipesCommand(recipeManager, displayManager));
     addCommand("2",
         new DisplayRecipeCommand(recipeManager, storageUnit, displayManager, inputHandler));
-    addCommand("3", new AddRecipeCommand(recipeManager, groceryManager));
+    addCommand("3",
+        new AddRecipeCommand(recipeManager, groceryManager, inputHandler, displayManager));
     addCommand("4", new RemoveRecipeCommand(recipeManager, displayManager, inputHandler));
     addCommand("5",
         new CookRecipeCommand(recipeManager, storageUnit, displayManager, inputHandler));
