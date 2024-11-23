@@ -10,6 +10,7 @@ import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.units.Liter;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ class AddGroceryToStorageUnitCommandTest {
     this.addGroceryToStorageUnitCommand =
         new AddGroceryToStorageUnitCommand(groceryManager, storageUnit,
             new DisplayManager(),
-            new TestInputHandler(new String[] {"Milk", "1", "04.05.2021"}));
+            new TestInputHandler(List.of("Milk", "1", "04.05.2021")));
 
     addGroceryToStorageUnitCommand.execute();
 
@@ -46,7 +47,7 @@ class AddGroceryToStorageUnitCommandTest {
     this.addGroceryToStorageUnitCommand =
         new AddGroceryToStorageUnitCommand(groceryManager, storageUnit,
             new DisplayManager(),
-            new TestInputHandler(new String[] {"0", "1", "invalidDate"}));
+            new TestInputHandler(List.of("0", "1", "invalidDate")));
 
     assertThrows(UserInputException.class, () -> addGroceryToStorageUnitCommand.execute());
   }

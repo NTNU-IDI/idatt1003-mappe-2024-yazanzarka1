@@ -6,6 +6,7 @@ import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.units.Liter;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,8 @@ class AddRecipeCommandTest {
   void executeWithValidParameters() {
     addRecipeCommand = new AddRecipeCommand(recipeManager, groceryManager,
         new TestInputHandler(
-            new String[] {"Test Recipe", "Description", "Milk", "20", "n", "1. Do this, 2. Do that",
-                "4"}), new DisplayManager());
+            List.of("Test Recipe", "Description", "Milk", "20", "n", "1. Do this, 2. Do that",
+                "4")), new DisplayManager());
     addRecipeCommand.execute();
 
     Assertions.assertEquals(1, recipeManager.getRecipes().size());
@@ -43,9 +44,9 @@ class AddRecipeCommandTest {
   void executeWithInvalidParameters() {
     addRecipeCommand = new AddRecipeCommand(recipeManager, groceryManager,
         new TestInputHandler(
-            new String[] {"Test Recipe", "Description", "NotValidGrocery", "20", "n",
+            List.of("Test Recipe", "Description", "NotValidGrocery", "20", "n",
                 "1. Do this, 2. Do that",
-                "4"}), new DisplayManager());
+                "4")), new DisplayManager());
     Assertions.assertThrows(IllegalStateException.class, addRecipeCommand::execute,
         "Grocery not found. Will retry until user gives a valid grocery");
 
@@ -54,7 +55,7 @@ class AddRecipeCommandTest {
   @Test
   void getDescription() {
     addRecipeCommand =
-        new AddRecipeCommand(recipeManager, groceryManager, new TestInputHandler(new String[] {}),
+        new AddRecipeCommand(recipeManager, groceryManager, new TestInputHandler(List.of()),
             new DisplayManager());
     Assertions.assertEquals("Add a recipe", addRecipeCommand.getDescription());
   }

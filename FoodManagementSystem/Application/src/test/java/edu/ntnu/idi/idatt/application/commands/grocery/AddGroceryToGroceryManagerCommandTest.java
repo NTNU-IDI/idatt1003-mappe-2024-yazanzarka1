@@ -11,6 +11,7 @@ import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.units.UnitProvider;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,7 @@ class AddGroceryToGroceryManagerCommandTest {
   void executeWithValidParameters() {
     this.addGroceryToGroceryManagerCommand =
         new AddGroceryToGroceryManagerCommand(groceryManager, new UnitProvider(), new DisplayManager(),
-            new TestInputHandler(new String[] {"Milk", "1", "200"}));
+            new TestInputHandler(List.of("Milk", "1", "200")));
 
     addGroceryToGroceryManagerCommand.execute();
 
@@ -55,7 +56,7 @@ class AddGroceryToGroceryManagerCommandTest {
   @Test
   void executeWithInvalidParameters() {
     this.addGroceryToGroceryManagerCommand = new AddGroceryToGroceryManagerCommand(groceryManager, new UnitProvider(),
-        new DisplayManager(), new TestInputHandler(new String[] {"Milk", "notUnit", "200"}));
+        new DisplayManager(), new TestInputHandler(List.of("Milk", "notUnit", "200")));
     assertThrows(UserInputException.class, () -> addGroceryToGroceryManagerCommand.execute(),
         "Should throw UserInputException if unit is not between 1-3");
   }

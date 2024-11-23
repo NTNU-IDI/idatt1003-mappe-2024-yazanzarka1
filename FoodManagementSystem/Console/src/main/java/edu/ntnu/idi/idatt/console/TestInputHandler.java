@@ -1,5 +1,7 @@
 package edu.ntnu.idi.idatt.console;
 
+import java.util.List;
+
 /**
  * A test input handler that returns a predefined list of inputs for testing purposes.
  * All inputs are returned in the order they are provided.
@@ -11,7 +13,7 @@ package edu.ntnu.idi.idatt.console;
  */
 public class TestInputHandler extends InputHandler {
 
-  private final String[] inputs;
+  private final List<String> inputs;
   private int index = 0;
 
   /**
@@ -19,14 +21,14 @@ public class TestInputHandler extends InputHandler {
    *
    * @param inputs the list of inputs to return
    */
-  public TestInputHandler(String[] inputs) {
+  public TestInputHandler(List<String> inputs) {
     this.inputs = inputs;
   }
 
   @Override
   public String getInput() {
-    if (index < inputs.length) {
-      return inputs[index++];
+    if (index < inputs.size()) {
+      return inputs.get(index++);
     }
     throw new IllegalStateException("No more inputs");
   }
