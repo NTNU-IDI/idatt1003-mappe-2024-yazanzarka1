@@ -52,7 +52,7 @@ public class RecipeSuggestionProvider {
       for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
         StorageEntry storageEntry =
             storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
-        if (storageEntry != null) {
+        if (storageEntry != null && storageEntry.getQuantity() >= recipeGrocery.amount()) {
           score += calculateScore(storageEntry, recipeGrocery);
         } else {
           hasAllGroceries = false;

@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryAlreadyExistsException;
@@ -87,7 +86,6 @@ public class GroceryManager implements TableRepresentable {
             grocery.getGroceryName(), grocery.getUnit().getUnitName(),
             String.valueOf(grocery.getPricePerUnit())))
         .forEach(groceryList::add);
-
 
     return new TableData(headers, groceryList);
 

@@ -45,6 +45,7 @@ class RecipeSuggestionProviderTest {
     storageUnit.addGrocery(salad, 1.0f, addDays(-1));
     storageUnit.addGrocery(garlic, 1.0f, addDays(25));
     storageUnit.addGrocery(onion, 1.0f, addDays(20));
+    storageUnit.addGrocery(avocado, 1.0f, addDays(20));
     
     recipeWithLongLastingProducts = new Recipe("Fish and Chips", "Fish and Chips");
     recipeWithLongLastingProducts.addGrocery(potato, 1.0f);
@@ -64,7 +65,7 @@ class RecipeSuggestionProviderTest {
     recipeWithMoreGorceriesThanInStorage = new Recipe("More groceries", "More groceries");
     recipeWithMoreGorceriesThanInStorage.addGrocery(potato, 1.0f);
     recipeWithMoreGorceriesThanInStorage.addGrocery(onion, 1.0f);
-    recipeWithMoreGorceriesThanInStorage.addGrocery(avocado, 1.0f);
+    recipeWithMoreGorceriesThanInStorage.addGrocery(avocado, 6.0f);
 
     recipeWithNoProducts = new Recipe("No products", "No products");
     recipeManager.addRecipe(recipeWithLongLastingProducts);
@@ -100,6 +101,16 @@ class RecipeSuggestionProviderTest {
   void suggestRecipeShouldPrioritizeShortLastingProducts() {
     List<SuggestedRecipe> suggestedRecipes = recipeSuggestionProvider.suggestRecipe();
     assertEquals("Salad", suggestedRecipes.getFirst().recipe().getName());
+  }
+
+  @Test
+  @DisplayName("Test suggestRecipe should not suggest recipes missing products")
+  void suggestRecipeShouldNotSuggestRecipesMissingProducts() {
+    List<SuggestedRecipe> suggestedRecipes = recipeSuggestionProvider.suggestRecipe();
+    for (SuggestedRecipe suggestedRecipe : suggestedRecipes) {
+      assertNotEquals("No products", suggestedRecipe.recipe().getName());
+    }
+
   }
 
   private Date addDays(int days) {

@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.food;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
+import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryForRecipeException;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -99,7 +100,7 @@ public class RecipeStorageManager implements TableRepresentable {
    *
    * @throws MissingGroceryInStorage if there are not enough groceries in storage
    */
-  public void cookRecipe() {
+  public List<RecipeGrocery> cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
     // get all groceries in recipe
     Collection<RecipeGrocery> groceriesInRecipe = recipe.getGroceries().values();
@@ -115,8 +116,8 @@ public class RecipeStorageManager implements TableRepresentable {
 
     // if we do not have all the needed groceries, we throw an exception
     if (!listOfNeededGroceries.isEmpty()) {
-      throw new MissingGroceryInStorage(
-          "You do not have enough groceries to cook this recipe.");
+      throw new MissingGroceryForRecipeException(
+          "You do not have enough groceries to cook this recipe.", listOfNeededGroceries);
     }
 
     // if we have all the needed groceries, we can remove them from storage to cook the recipe
@@ -125,6 +126,8 @@ public class RecipeStorageManager implements TableRepresentable {
           storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       storageUnit.removeGrocery(storageEntry, recipeGrocery.amount());
     });
+
+    return new ArrayList<>(groceriesInRecipe);
   }
 
 

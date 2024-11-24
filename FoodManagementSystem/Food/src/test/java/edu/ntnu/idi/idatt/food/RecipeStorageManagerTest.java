@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryForRecipeException;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import java.util.Date;
@@ -88,10 +89,10 @@ class RecipeStorageManagerTest {
 
   @Test
   void cookRecipeFailsWhenGroceryNeeded() {
-    assertThrows(MissingGroceryInStorage.class, () -> recipeStorageManager.cookRecipe(),
+    assertThrows(MissingGroceryForRecipeException.class, () -> recipeStorageManager.cookRecipe(),
         "Should throw MissingGroceryInStorage");
 
-    assertThrows(MissingGroceryInStorage.class,
+    assertThrows(MissingGroceryForRecipeException.class,
         () -> missingGroceryRecipeStorageManager.cookRecipe());
   }
 
