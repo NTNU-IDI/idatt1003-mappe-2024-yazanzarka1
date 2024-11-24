@@ -27,6 +27,7 @@ public class DisplayStoredGroceryCommand implements Command {
   @Override
   public Boolean execute() {
     TableData tableData = storageUnit.toTableData();
+
     displayManager.printTable(storageUnit.getName(), tableData);
     displayManager.showMessage("Total value: " + storageUnit.getTotalValue());
     return false;

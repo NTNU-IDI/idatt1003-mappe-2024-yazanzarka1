@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.validators.IntegerValidator;
 import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeGrocery;
 import edu.ntnu.idi.idatt.food.RecipeManager;
@@ -43,27 +44,41 @@ public class CookRecipeCommand implements Command {
    * Execute command.
    *
    * @return Boolean redisplay commands in menu-contexts if true
+   * @throws MissingGroceryForRecipeException if groceries is missing from the storage
    */
   @Override
   public Boolean execute() {
+    // Display available recipes
     displayManager.showSpace();
     TableData tableData = recipeManager.toTableData();
     displayManager.printTable(tableData);
     displayManager.showSpace();
 
-    int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
+    // Get recipe index from user
+    int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",
+        new IntegerValidator("Invalid index", 0, recipeManager.getRecipes().size() - 1));
     displayManager.showSpace();
+
+    // Get recipe from recipeManager
     Recipe recipe = recipeManager.getRecipes().get(recipeIndex);
+
+    // create RecipeStorageManager Instance to compare recipe with storage
     RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
     List<RecipeGrocery> recipeGroceryList;
     try {
+
+      // cook recipe
       recipeGroceryList = recipeStorageManager.cookRecipe();
+
+      // display used groceries in green
       recipeGroceryList.forEach(recipeGrocery -> displayManager.showColoredMessage(
           String.format("Used %.2f %s %s", recipeGrocery.amount(),
               recipeGrocery.grocery().getUnit().getUnitName(),
               recipeGrocery.grocery().getGroceryName()), Color.GREEN));
+      // display success message
       displayManager.showColoredMessage("Recipe cooked successfully!", Color.GREEN);
     } catch (MissingGroceryForRecipeException e) {
+      // display missing groceries in red
       displayManager.showMessage(e.getMessage());
       e.getGroceries().forEach(recipeGrocery -> displayManager.showColoredMessage(
           String.format("Missing grocery: %.2f %s %s", recipeGrocery.amount(),

@@ -1,6 +1,6 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.food.constants.RecipeConstants;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,33 +34,39 @@ public class Recipe {
   /**
    * Initiate a recipe.
    *
-   * @param name           name of a recipe
-   * @param description    description of a recipe
-   * @param steps          steps to make a recipe
-   * @param peopleCount    number of people the recipe is for
-   *
-   * @throws IllegalArgumentException if name is null or blank, name length is less than 3 or greater
-   * @throws IllegalArgumentException if description is null or blank, description length is less than 10 or greater
-   * @throws IllegalArgumentException if steps is null or blank, steps length is less than 10 or greater
+   * @param name        name of a recipe
+   * @param description description of a recipe
+   * @param steps       steps to make a recipe
+   * @param peopleCount number of people the recipe is for
+   * @throws IllegalArgumentException if name is null or blank, name length is less than 3 or
+   *                                  greater
+   * @throws IllegalArgumentException if description is null or blank, description length is less
+   *                                  than 10 or greater
+   * @throws IllegalArgumentException if steps is null or blank, steps length is less than 10 or
+   *                                  greater
    * @throws IllegalArgumentException if peopleCount is less than or equal to 0 or greater than 10
    */
   public Recipe(String name, String description, String steps, int peopleCount) {
 
-    if (name == null || name.isBlank() || name.length() < 3 || name.length() > 50) {
+    if (name == null || name.isBlank() || name.length() < RecipeConstants.MIN_RECIPE_NAME_LENGTH
+        || name.length() > RecipeConstants.MAX_RECIPE_NAME_LENGTH) {
       throw new IllegalArgumentException(
           "Recipe name cannot be null or blank and must be between 3 and 50 characters");
     }
-    if (description == null || description.isBlank() || description.length() < 10
-        || description.length() > 200) {
+    if (description == null || description.isBlank()
+        || description.length() < RecipeConstants.MIN_RECIPE_DESCRIPTION_LENGTH
+        || description.length() > RecipeConstants.MAX_RECIPE_DESCRIPTION_LENGTH) {
       throw new IllegalArgumentException(
-          "Recipe description cannot be null or blank and must be between 10 and 200 characters");
+          "Recipe description cannot be null or blank and must be between 10 and 100 characters");
     }
-    if (steps == null || steps.isBlank() || steps.length() < 10 || steps.length() > 500) {
+    if (steps == null || steps.isBlank() || steps.length() < RecipeConstants.MIN_RECIPE_STEPS_LENGTH
+        || steps.length() > RecipeConstants.MAX_RECIPE_STEPS_LENGTH) {
       throw new IllegalArgumentException(
-          "Recipe steps cannot be null or blank and must be between 10 and 500 characters");
+          "Recipe steps cannot be null or blank and must be between 10 and 100 characters");
     }
-    if (peopleCount <= 0 || peopleCount > 10) {
-      throw new IllegalArgumentException("People count must be greater than 0 and less than 10");
+    if (peopleCount < RecipeConstants.MIN_RECIPE_PEOPLE_COUNT
+        || peopleCount > RecipeConstants.MAX_RECIPE_PEOPLE_COUNT) {
+      throw new IllegalArgumentException("People count must be greater than 0 and less than 11");
     }
 
     this.name = name;
@@ -76,18 +82,21 @@ public class Recipe {
    *
    * @param grocery Grocery to be added
    * @param amount  amount of grocery in a recipe
-   * @throws NullPointerException if grocery is null
+   * @throws NullPointerException     if grocery is null
    * @throws IllegalArgumentException if amount is less than or equal to 0
    */
   public void addGrocery(Grocery grocery, float amount) {
     if (grocery == null) {
       throw new NullPointerException("Grocery cannot be null");
     }
-    if (amount <= 0) {
-      throw new IllegalArgumentException("Amount must be greater than 0");
+    if (amount <= 0.01) {
+      throw new IllegalArgumentException("Amount must be greater than 0.01");
     }
-    groceries.computeIfPresent(grocery.getGroceryName(), (k, v) -> {
-      float newAmount = v.amount() + amount;
+    if (amount > 999) {
+      throw new IllegalArgumentException("Amount must be less than 999");
+    }
+    groceries.computeIfPresent(grocery.getGroceryName(), (key, recipeGrocery) -> {
+      float newAmount = recipeGrocery.amount() + amount;
       return new RecipeGrocery(grocery, newAmount);
     });
     groceries.putIfAbsent(grocery.getGroceryName(), new RecipeGrocery(grocery, amount));

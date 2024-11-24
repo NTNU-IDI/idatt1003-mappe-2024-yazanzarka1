@@ -47,6 +47,12 @@
         <artifactId>micronaut-validation-processor</artifactId>
         <version>4.6.1</version>
       </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>5.11.0</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <groupId>org.ntnu</groupId>

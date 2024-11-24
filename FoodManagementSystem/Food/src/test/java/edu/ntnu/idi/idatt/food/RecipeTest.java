@@ -115,8 +115,8 @@ class RecipeTest {
   @DisplayName("Test Adding Grocery with Large Amount")
   void addGroceryWithLargeAmount() {
     Grocery largeGrocery = new Grocery("Large Grocery", new Kilogram(), 50);
-    recipe.addGrocery(largeGrocery, 1000.0f);
-    Assertions.assertEquals(1000.0f, recipe.getGrocery(largeGrocery.getGroceryName()).amount(),
+    recipe.addGrocery(largeGrocery, 999.0f);
+    Assertions.assertEquals(999.0f, recipe.getGrocery(largeGrocery.getGroceryName()).amount(),
         "The grocery amount should correctly reflect the large addition");
   }
 

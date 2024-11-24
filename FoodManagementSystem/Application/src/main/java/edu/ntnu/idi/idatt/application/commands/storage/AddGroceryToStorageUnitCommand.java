@@ -5,10 +5,13 @@ import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
+import edu.ntnu.idi.idatt.console.validators.DateValidator;
+import edu.ntnu.idi.idatt.console.validators.FloatValidator;
+import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
 import java.util.Date;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -21,19 +24,6 @@ public class AddGroceryToStorageUnitCommand implements Command {
   final StorageUnit storageUnit;
   final InputHandler inputHandler;
   final DisplayManager displayManager;
-
-  /**
-   * Add Grocery Command.
-   *
-   * @param groceryManager groceryManage to get available groceries in app.
-   * @param storageUnit    storageUnit where grocery will be added
-   */
-  public AddGroceryToStorageUnitCommand(GroceryManager groceryManager, StorageUnit storageUnit) {
-    this.groceryManager = groceryManager;
-    this.storageUnit = storageUnit;
-    this.inputHandler = new InputHandler();
-    this.displayManager = new DisplayManager();
-  }
 
   /**
    * Add Grocery Command.
@@ -59,30 +49,39 @@ public class AddGroceryToStorageUnitCommand implements Command {
   @Override
   public Boolean execute() {
     try {
+      // Display available groceries
       TableData tableData = groceryManager.toTableData();
       displayManager.printTable(tableData);
 
-      String groceryName = inputHandler.getInput("Enter Grocery Index: ");
+      // Get grocery name from user
+      String groceryName = inputHandler.getString("Enter Grocery Name: ", new StringValidator(
+          "Grocery name should be between 1 and 25 characters",
+          GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH
+      ));
 
-      float groceryAmount = Float.parseFloat(inputHandler.getInput("Enter Grocery Amount: "));
-      Date groceryBestBeforeDate;
-      try {
-        groceryBestBeforeDate = new SimpleDateFormat("dd.MM.yyyy").parse(
-            inputHandler.getInput("Enter Best before date (dd.mm.yyyy): "));
-      } catch (ParseException e) {
-        throw new UserInputException("Invalid date format - " + e.getMessage());
-      }
-
+      // Get grocery from groceryManager
       var groceryToBeAdded = groceryManager.getAvailableGroceries().stream()
-          .filter(grocery -> grocery.getGroceryName().equals(groceryName)).findFirst()
+          .filter(grocery -> grocery.getGroceryName().equalsIgnoreCase(groceryName)).findFirst()
           .orElseThrow(() -> new UserInputException("Grocery not found"));
 
+      // Get grocery amount from user
+      float groceryAmount =
+          inputHandler.getFloat("Enter Grocery Amount (0.1 - 999.0): ", new FloatValidator(
+              "Invalid amount", StorageEntryConstants.MIN_QUANTITY,
+              StorageEntryConstants.MAX_QUANTITY
+          ));
+
+      // Get grocery best before date from user
+      Date groceryBestBeforeDate =
+          inputHandler.getDate("Enter Best before date (dd.mm.yyyy): ",
+              new DateValidator("Invalid date format"));
+
+      // Add grocery to storage unit
       storageUnit.addGrocery(groceryToBeAdded,
           groceryAmount, groceryBestBeforeDate);
 
       displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
-
-      return true;
+      return false;
     } catch (Exception e) {
       throw new UserInputException("Invalid input: " + e.getMessage());
     }

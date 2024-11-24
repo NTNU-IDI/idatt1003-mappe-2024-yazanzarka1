@@ -5,6 +5,7 @@ import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
+import edu.ntnu.idi.idatt.console.validators.IntegerValidator;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 
 /**
@@ -21,7 +22,8 @@ public class RemoveRecipeCommand implements Command {
    *
    * @param recipeManager recipeManager where recipes are stored.
    */
-  public RemoveRecipeCommand(RecipeManager recipeManager, DisplayManager displayManager, InputHandler inputHandler) {
+  public RemoveRecipeCommand(RecipeManager recipeManager, DisplayManager displayManager,
+      InputHandler inputHandler) {
     this.recipeManager = recipeManager;
     this.displayManager = displayManager;
     this.inputHandler = inputHandler;
@@ -40,7 +42,10 @@ public class RemoveRecipeCommand implements Command {
       displayManager.printTable(tableData);
       displayManager.showSpace();
 
-      int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
+      // Get recipe index from user
+      int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",
+          new IntegerValidator("Invalid index", 0, recipeManager.getRecipes().size() - 1));
+
       displayManager.showSpace();
       recipeManager.removeRecipe(recipeIndex);
       displayManager.showMessage("Recipe removed");

@@ -21,7 +21,7 @@ public class Main {
   public static void main(String[] args) {
     Application application = new Application();
     DisplayManager displayManager = new DisplayManager();
-    InputHandler inputHandler = new InputHandler();
+    InputHandler inputHandler = new InputHandler(displayManager);
     UnitProvider unitProvider = new UnitProvider();
 
     application.init(Bootstrap.initCommandRegistry(displayManager, inputHandler, unitProvider));

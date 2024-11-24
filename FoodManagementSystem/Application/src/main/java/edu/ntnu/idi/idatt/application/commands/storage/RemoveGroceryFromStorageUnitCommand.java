@@ -4,8 +4,10 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import java.util.List;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -21,11 +23,12 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
   /**
    * Initiate a remove grocery from storage unit command.
    *
-   * @param storageUnit Storage unit to remove grocery from
+   * @param storageUnit    Storage unit to remove grocery from
    * @param displayManager Display manager to display messages
-   * @param inputHandler Input handler to get input from user
+   * @param inputHandler   Input handler to get input from user
    */
-  public RemoveGroceryFromStorageUnitCommand(StorageUnit storageUnit, DisplayManager displayManager, InputHandler inputHandler) {
+  public RemoveGroceryFromStorageUnitCommand(StorageUnit storageUnit, DisplayManager displayManager,
+      InputHandler inputHandler) {
     this.inputHandler = inputHandler;
     this.storageUnit = storageUnit;
     this.displayManager = displayManager;
@@ -38,10 +41,14 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
    */
   @Override
   public Boolean execute() {
+    // Display all groceries in storage unit
     TableData tableData = storageUnit.toTableData();
     displayManager.printTable(tableData);
-    String storageEntryName = inputHandler.getInput("Enter name of grocery to remove: ");
+    String storageEntryName = inputHandler.getString("Enter name of grocery to remove: ",
+        new StringValidator("Invalid grocery name", GroceryConstants.MIN_GROCERY_NAME_LENGTH,
+            GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
+    // Find grocery in storage unit
     List<StorageEntry> storageEntries = storageUnit.findGrocery(storageEntryName);
     if (storageEntries.isEmpty()) {
       displayManager.showColoredMessage("Error: Grocery not found", Color.RED);

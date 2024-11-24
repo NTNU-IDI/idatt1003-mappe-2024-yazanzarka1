@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
+import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
@@ -50,6 +51,15 @@ public class StorageUnit implements TableRepresentable {
 
     String groceryName = grocery.getGroceryName();
     StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
+
+    if (quantity < StorageEntryConstants.MIN_QUANTITY) {
+      throw new IllegalArgumentException("Quantity cannot be less or equal to 0.0");
+    }
+
+    if (quantity > StorageEntryConstants.MAX_QUANTITY) {
+      throw new IllegalArgumentException("Quantity cannot be greater than 999.0");
+    }
+
 
     if (groceries.containsKey(groceryName)) {
       StorageEntry existingEntry = groceries.get(groceryName);
@@ -126,7 +136,6 @@ public class StorageUnit implements TableRepresentable {
   public TableData toTableData(List<StorageEntry> storageEntries) {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
     List<List<String>> storageEntryTableBody = storageEntries.stream()
-        .sorted()
         .map(storageEntry -> List.of(
             storageEntry.getGroceryName(),
             storageEntry.getUnit().getUnitName(),

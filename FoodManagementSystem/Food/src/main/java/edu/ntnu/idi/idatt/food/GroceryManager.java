@@ -82,9 +82,10 @@ public class GroceryManager implements TableRepresentable {
     List<List<String>> groceryList = new ArrayList<>();
 
     availableGroceries.stream()
+        .sorted()
         .map(grocery -> List.of(
             grocery.getGroceryName(), grocery.getUnit().getUnitName(),
-            String.valueOf(grocery.getPricePerUnit())))
+            String.format("%.2f NOK", grocery.getPricePerUnit())))
         .forEach(groceryList::add);
 
     return new TableData(headers, groceryList);

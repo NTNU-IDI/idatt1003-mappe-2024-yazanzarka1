@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.validators.IntegerValidator;
 import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeStorageManager;
@@ -39,12 +40,18 @@ public class DisplayRecipeCommand implements Command {
    */
   @Override
   public Boolean execute() {
+    //Display the available recipes
     displayManager.showSpace();
     TableData tableData = recipeManager.toTableData();
     displayManager.printTable(tableData);
     displayManager.showSpace();
-    int recipeIndex = Integer.parseInt(inputHandler.getInput("Enter the index of the recipe: "));
+
+    //Get the index of the recipe from the user
+    int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",
+        new IntegerValidator("Invalid index", 0, recipeManager.getRecipes().size() - 1));
     displayManager.showSpace();
+
+    //Get the recipe from the recipe manager
     Recipe recipe;
     try {
       recipe = recipeManager.getRecipes().get(recipeIndex);
@@ -55,10 +62,12 @@ public class DisplayRecipeCommand implements Command {
     //Display the recipe table
     final RecipeStorageManager recipeStorageManager =
         new RecipeStorageManager(recipe, storageUnit);
+
+    //Display the recipe table
     TableData recipeInStorageTableData = recipeStorageManager.toTableData();
     displayManager.printTable(recipeInStorageTableData);
 
-    //Display the total amount of ingredients in the recipe
+    // Display the steps of the recipe
     displayManager.showSpace();
     displayManager.showFancyMessage("Steps to make the recipe:");
     displayManager.showMessage(recipe.getSteps());

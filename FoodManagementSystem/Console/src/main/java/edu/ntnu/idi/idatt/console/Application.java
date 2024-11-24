@@ -7,8 +7,8 @@ import org.fusesource.jansi.Ansi.Color;
  */
 public class Application {
 
-  InputHandler inputHandler = new InputHandler();
   DisplayManager displayManager = new DisplayManager();
+  InputHandler inputHandler = new InputHandler(displayManager);
   Boolean displayMenu = false;
   CommandRegistry commandRegistry;
 

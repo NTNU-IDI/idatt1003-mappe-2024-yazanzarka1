@@ -5,6 +5,7 @@ import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,17 +37,26 @@ public class DisplayExpiredGroceriesCommand implements Command {
    */
   @Override
   public Boolean execute() {
+    // Get all groceries from storage unit
     List<StorageEntry> storageEntries = storageUnit.getGroceries();
     List<StorageEntry> expiredGroceries = new ArrayList<>();
     float totalExpiredGroceriesValue = 0;
     for (StorageEntry storageEntry : storageEntries) {
+      // Check if grocery is expired
       if (Boolean.TRUE.equals(storageEntry.isExpired())) {
+        // Add to total value of expired groceries
         totalExpiredGroceriesValue += storageEntry.getQuantity() + storageEntry.getPricePerUnit();
+        // Add to list of expired groceries
         expiredGroceries.add(storageEntry);
       }
     }
 
-    displayManager.printTable(storageUnit.toTableData(expiredGroceries));
+    // Sort expired groceries by best before date
+    expiredGroceries = expiredGroceries.stream().sorted(
+        Comparator.comparing(StorageEntry::getBestBeforeDate)).toList();
+
+    // Display expired groceries
+    displayManager.printTable("Expired Groceries", storageUnit.toTableData(expiredGroceries));
     displayManager.showColoredMessage(
         String.format("Total value of expired products: %.2f NOK", totalExpiredGroceriesValue),
         Color.RED);

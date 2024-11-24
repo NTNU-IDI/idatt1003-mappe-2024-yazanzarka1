@@ -4,11 +4,9 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
-import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
+import edu.ntnu.idi.idatt.console.validators.DateValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,11 +23,12 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
   /**
    * Initiate the command with a storage unit.
    *
-   * @param storageUnit StorageUnit to display groceries from.
+   * @param storageUnit    StorageUnit to display groceries from.
    * @param displayManager DisplayManager to display messages.
-   * @param inputHandler InputHandler to get input from user.
+   * @param inputHandler   InputHandler to get input from user.
    */
-  public DisplayGroceriesInStorageUnitBeforeDateCommand(StorageUnit storageUnit, DisplayManager displayManager,
+  public DisplayGroceriesInStorageUnitBeforeDateCommand(StorageUnit storageUnit,
+      DisplayManager displayManager,
       InputHandler inputHandler) {
     this.storageUnit = storageUnit;
     this.displayManager = displayManager;
@@ -43,21 +42,25 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    Date date;
-    try {
-      date = new SimpleDateFormat("dd.MM.yyyy").parse(
-          inputHandler.getInput("Enter best before date (dd.mm.yyyy): "));
-    } catch (ParseException e) {
-      throw new UserInputException("Invalid date format: " + e.getMessage());
-    }
+    Date date =
+        inputHandler.getDate("Enter best before date (dd.mm.yyyy): ",
+            new DateValidator("Invalid date format"));
     List<StorageEntry> storageEntryBeforeDate = storageUnit.getGroceries().stream()
-        .filter(storageEntry -> storageEntry.getBestBeforeDate().before(date)).sorted().toList();
+        .filter(storageEntry -> storageEntry.getBestBeforeDate().before(date))
+        .sorted((entry1, entry2) -> {
+          if (entry1.getBestBeforeDate().before(entry2.getBestBeforeDate())) {
+            return -1;
+          } else if (entry1.getBestBeforeDate().after(entry2.getBestBeforeDate())) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }).toList();
 
     if (storageEntryBeforeDate.isEmpty()) {
       displayManager.showMessage("No groceries found before " + date);
       return false;
     }
-
 
     TableData tableData = storageUnit.toTableData(storageEntryBeforeDate);
     displayManager.printTable(tableData);

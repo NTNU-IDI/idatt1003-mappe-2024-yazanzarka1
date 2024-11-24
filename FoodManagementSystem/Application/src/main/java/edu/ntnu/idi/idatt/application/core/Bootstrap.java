@@ -56,7 +56,7 @@ public class Bootstrap {
 
     // Seed data
     Seeder seeder = new Seeder(groceryManager, mainStorageUnit, recipeManager);
-    boolean seedData = new InputHandler().getInput(
+    boolean seedData = new InputHandler(new DisplayManager()).getInput(
             "write 'y' to seed data, anything else to skip: ")
         .equalsIgnoreCase("y");
     if (seedData) {

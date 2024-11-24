@@ -32,6 +32,8 @@ public class SuggestRecipeCommand implements Command {
 
     List<SuggestedRecipe> suggestedRecipiesList = recipeSuggestionProvider.suggestRecipe();
     displayManager.showSpace();
+
+    // Display the suggested recipes in a table
     List<String> headers = List.of("Recipe name", "Description", "Price", "People");
     List<List<String>> body = suggestedRecipiesList.stream().map(
         suggestedRecipe -> List.of(suggestedRecipe.recipe().getName(),

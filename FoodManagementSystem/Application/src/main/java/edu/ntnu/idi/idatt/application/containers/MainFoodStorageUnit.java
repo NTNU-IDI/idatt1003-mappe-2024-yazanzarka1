@@ -12,7 +12,7 @@ public class MainFoodStorageUnit extends StorageUnit {
   /**
    * Initiate an instance of MainFoodStorageUnit.
    */
-  public MainFoodStorageUnit(DisplayManager displayManager) {
-    super("Main Food StorageUnit");
+  public MainFoodStorageUnit() {
+    super("Fridge");
   }
 }

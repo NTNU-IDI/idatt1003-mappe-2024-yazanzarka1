@@ -4,8 +4,10 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
+import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -23,9 +25,10 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    *
    * @param groceryManager GroceryManager to remove grocery from
    * @param displayManager DisplayManager to display messages
-   * @param inputHandler InputHandler to handle user input
+   * @param inputHandler   InputHandler to handle user input
    */
-  public RemoveGroceryFromGroceryManagerCommand(GroceryManager groceryManager, DisplayManager displayManager,
+  public RemoveGroceryFromGroceryManagerCommand(GroceryManager groceryManager,
+      DisplayManager displayManager,
       InputHandler inputHandler) {
     this.groceryManager = groceryManager;
     this.displayManager = displayManager;
@@ -39,14 +42,24 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    */
   @Override
   public Boolean execute() {
+    // Display available groceries
     TableData tableData = groceryManager.toTableData();
     displayManager.printTable(tableData);
-    String groceryName = inputHandler.getInput("Enter the name of the grocery: ");
+
+    // Get grocery name from user
+    String groceryName = inputHandler.getString("Enter the name of the grocery: ",
+        new StringValidator("Grocery name must be between 2 and 25 characters",
+            GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
+
+    // Check if grocery exists
     Grocery grocery = groceryManager.getAvailableGroceries().stream()
-        .filter(g -> g.getGroceryName().equals(groceryName)).findFirst().orElse(null);
+        .filter(g -> g.getGroceryName().equalsIgnoreCase(groceryName)).findFirst().orElse(null);
+
+    // if grocery not found, throw exception
     if (grocery == null) {
       throw new GroceryNotFoundException("Grocery not found: " + groceryName);
     }
+    // remove grocery from grocery manager and display message
     groceryManager.removeGrocery(grocery);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
     return false;

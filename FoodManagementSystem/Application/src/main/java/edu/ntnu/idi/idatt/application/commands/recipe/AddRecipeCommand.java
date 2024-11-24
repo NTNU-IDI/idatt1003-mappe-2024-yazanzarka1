@@ -3,12 +3,16 @@ package edu.ntnu.idi.idatt.application.commands.recipe;
 import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
-import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
+import edu.ntnu.idi.idatt.console.validators.FloatValidator;
+import edu.ntnu.idi.idatt.console.validators.IntegerValidator;
+import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeGrocery;
 import edu.ntnu.idi.idatt.food.RecipeManager;
+import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
+import edu.ntnu.idi.idatt.food.constants.RecipeConstants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +49,31 @@ public class AddRecipeCommand implements Command {
    */
   @Override
   public Boolean execute() {
+
     List<RecipeGrocery> groceries = new ArrayList<>();
 
-    String recipeName = inputHandler.getInput("Enter recipe name: ");
-    String recipeDescription = inputHandler.getInput("Enter recipe description: ");
+    // Get recipe name and description from user
+    String recipeName = inputHandler.getString("Enter recipe name (3 - 50 characters): ",
+        new StringValidator("Recipe name should be between 3 and 50 characters",
+            RecipeConstants.MIN_RECIPE_NAME_LENGTH, RecipeConstants.MAX_RECIPE_NAME_LENGTH));
+
+    String recipeDescription =
+        inputHandler.getString("Enter recipe description(10 - 100 characters): ",
+            new StringValidator("Description should be between 10 and 100 characters",
+                RecipeConstants.MIN_RECIPE_DESCRIPTION_LENGTH,
+                RecipeConstants.MAX_RECIPE_DESCRIPTION_LENGTH));
+
+    // Display available groceries
     displayManager.printTable(groceryManager.toTableData());
     while (true) {
-      String groceryName = inputHandler.getInput("Enter grocery name: ");
+      // get grocery name from user
+      String groceryName = inputHandler.getString("Enter grocery name: ",
+          new StringValidator("Grocery name should be between 1 and 25 characters",
+              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
       // search for grocery
       Grocery grocery = groceryManager.getAvailableGroceries().stream()
-          .filter(g -> g.getGroceryName().toLowerCase().contains(groceryName.toLowerCase()))
+          .filter(g -> g.getGroceryName().equalsIgnoreCase(groceryName))
           .findFirst().orElse(null);
 
       // if grocery not found display message and continue
@@ -64,37 +82,49 @@ public class AddRecipeCommand implements Command {
         continue;
       }
 
+      // display grocery found message
       displayManager.showMessage("Grocery found: " + grocery.getGroceryName());
 
       // add grocery to recipe with amount and ask for more groceries
-      float amount;
-      try {
-        amount = Float.parseFloat(inputHandler.getInput("Enter amount: "));
-      } catch (NumberFormatException e) {
-        throw new UserInputException("Invalid amount");
-      }
+      float amount = inputHandler.getFloat("Enter amount (0.1 - 999.0): ",
+          new FloatValidator("Amount should be between 0.1 and 999.0", 0.1f, 999f));
+
+      // add grocery to recipe
       groceries.add(new RecipeGrocery(grocery, amount));
-      String more = inputHandler.getInput("Add more groceries? (y/n): ");
+      // ask user if they want to add more groceries
+      String more = inputHandler.getString("Add more groceries? (y/n): ",
+          new StringValidator("Invalid input", 1, 1));
       if (more.equals("n")) {
         break;
       }
     }
-    String recipeSteps = inputHandler.getInput("Enter recipe steps: ");
-    int peopleCount;
-    try {
-      peopleCount = Integer.parseInt(inputHandler.getInput("Enter number of people: "));
-    } catch (NumberFormatException e) {
-      throw new UserInputException("Invalid number of people");
-    }
 
+    // get recipe steps and people count from user
+    String recipeSteps =
+        formatSteps(
+            inputHandler.getString(
+                "Enter recipe steps separated by \\n (10 - 400 characters): ",
+                new StringValidator("Invalid input", RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
+                    RecipeConstants.MAX_RECIPE_STEPS_LENGTH)));
+
+    int peopleCount = inputHandler.getInt("Enter number of people (1-11): ",
+        new IntegerValidator("Invalid input", RecipeConstants.MIN_RECIPE_PEOPLE_COUNT,
+            RecipeConstants.MAX_RECIPE_PEOPLE_COUNT));
+
+    // create new recipe and add groceries
     Recipe newRecipe =
         new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
     for (RecipeGrocery recipeGrocery : groceries) {
       newRecipe.addGrocery(recipeGrocery.grocery(), recipeGrocery.amount());
     }
+    // add recipe to recipe manager
     recipeManager.addRecipe(newRecipe);
     displayManager.showMessage("Recipe added: " + recipeName);
     return false;
+  }
+
+  private String formatSteps(String recipeSteps) {
+    return recipeSteps.replace("\\n", "\n");
   }
 
   /**
