@@ -2,17 +2,20 @@ package edu.ntnu.idi.idatt.food;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.console.DisplayManager;
+import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
 import java.util.Date;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -252,5 +255,39 @@ class StorageUnitTest {
 
     totalValue = storageUnit.getTotalValue();
     assertEquals(220.0f, totalValue, "Total value should now be 220.0 NOK after adding Butter");
+  }
+
+  @Test
+  @DisplayName("Get Storage Unit Name")
+  void getStorageUnitName() {
+    assertEquals("Test Storage", storageUnit.getName(), "Storage unit name should be Test Storage");
+  }
+
+  @Test
+  @DisplayName("Test Grocery Manager Has Correct Headers And Data In Table Data")
+  void storageUnitManagerHasCorrectHeadersInTableData() {
+    TableData tableData = storageUnit.toTableData();
+
+    storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
+    tableData = storageUnit.toTableData();
+
+
+    assertEquals(6, tableData.headers().size(), "Table should have 3 header");
+    assertEquals("Grocery", tableData.headers().getFirst(), "Header should be 'Grocery Name'");
+    assertEquals(1, tableData.data().size());
+
+  }
+
+  @Test
+  @DisplayName("Test Grocery Manager Has Correct Headers And Data In Table Data Of Custom Entries")
+  void storageUnitManagerHasCorrectHeadersInTableDataOfCustomEntries() {
+    storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
+    List<StorageEntry> storageEntries = storageUnit.findGrocery("Milk");
+    TableData tableData  = storageUnit.toTableData(storageEntries);
+
+    assertEquals(6, tableData.headers().size(), "Table should have 3 header");
+    assertEquals("Grocery", tableData.headers().getFirst(), "Header should be 'Grocery Name'");
+    assertEquals(1, tableData.data().size());
+
   }
 }

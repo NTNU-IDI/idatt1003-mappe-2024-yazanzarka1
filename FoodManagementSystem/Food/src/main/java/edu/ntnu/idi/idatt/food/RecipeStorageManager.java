@@ -4,7 +4,6 @@ import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryForRecipeException;
-import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryInStorage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +28,9 @@ public class RecipeStorageManager implements TableRepresentable {
    * @param storageUnit storage unit of a recipe
    */
   public RecipeStorageManager(Recipe recipe, StorageUnit storageUnit) {
+    if (recipe == null || storageUnit == null) {
+      throw new IllegalArgumentException("Recipe and storage unit cannot be null");
+    }
     this.recipe = recipe;
     this.storageUnit = storageUnit;
   }
@@ -98,7 +100,7 @@ public class RecipeStorageManager implements TableRepresentable {
   /**
    * Cook a recipe. Removes groceries from storage if they are available.
    *
-   * @throws MissingGroceryInStorage if there are not enough groceries in storage
+   * @throws MissingGroceryForRecipeException if there are not enough groceries in storage
    */
   public List<RecipeGrocery> cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
@@ -136,7 +138,7 @@ public class RecipeStorageManager implements TableRepresentable {
    * If difference is negative, the string will be red. If difference is positive,
    * the string will be green.
    */
-  private String formatDifference(float difference) {
+  String formatDifference(float difference) {
     if (difference < 0) {
       return Ansi.ansi().fg(Color.RED).a(difference).reset().toString();
     }

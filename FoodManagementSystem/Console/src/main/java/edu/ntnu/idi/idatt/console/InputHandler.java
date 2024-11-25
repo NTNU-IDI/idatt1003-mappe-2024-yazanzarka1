@@ -61,7 +61,7 @@ public class InputHandler {
         displayManager.showColoredMessage(validator.getErrorMessage(), Color.RED);
       }
     }
-    return input;
+    return input.trim();
   }
 
   /**

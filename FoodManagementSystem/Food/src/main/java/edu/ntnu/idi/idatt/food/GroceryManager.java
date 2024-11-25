@@ -36,6 +36,9 @@ public class GroceryManager implements TableRepresentable {
    * @see Grocery
    */
   public void addGrocery(Grocery grocery) {
+    if (grocery == null) {
+      throw new IllegalArgumentException("Grocery cannot be null");
+    }
     if (availableGroceries.contains(grocery)) {
       throw new GroceryAlreadyExistsException(
           "Grocery already exists: " + grocery.getGroceryName());
@@ -62,6 +65,10 @@ public class GroceryManager implements TableRepresentable {
    * @see Grocery
    */
   public void removeGrocery(Grocery grocery) {
+
+    if (grocery == null) {
+      throw new IllegalArgumentException("Grocery cannot be null");
+    }
 
     if (!availableGroceries.contains(grocery)) {
       throw new GroceryNotFoundException("Grocery not found: " + grocery.getGroceryName());
