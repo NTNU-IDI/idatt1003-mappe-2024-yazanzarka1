@@ -66,7 +66,7 @@ public class AddGroceryToStorageUnitCommand implements Command {
 
       // Get grocery amount from user
       float groceryAmount =
-          inputHandler.getFloat("Enter Grocery Amount (0.1 - 999.0): ", new FloatValidator(
+          inputHandler.getFloat("Enter Grocery Amount (0.01 - 999.0): ", new FloatValidator(
               "Invalid amount", StorageEntryConstants.MIN_QUANTITY,
               StorageEntryConstants.MAX_QUANTITY
           ));
