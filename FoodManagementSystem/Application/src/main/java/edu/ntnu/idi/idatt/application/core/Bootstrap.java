@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.application.core;
 
+import edu.ntnu.idi.idatt.application.containers.MainFoodStorageUnit;
 import edu.ntnu.idi.idatt.application.menus.grocery.GroceryMenu;
 import edu.ntnu.idi.idatt.application.menus.main.MainMenu;
 import edu.ntnu.idi.idatt.application.menus.recipes.RecipesMenu;
@@ -39,7 +40,7 @@ public class Bootstrap {
     commandRegistry.addContext(groceryMenu);
 
     // Register Storage Menu's context and add to registry
-    StorageUnit mainStorageUnit = new StorageUnit("Main Storage Unit");
+    StorageUnit mainStorageUnit = new MainFoodStorageUnit();
     StorageUnitMenu storageUnitMenu = new StorageUnitMenu(commandRegistry, groceryManager,
         mainStorageUnit, displayManager, inputHandler);
     commandRegistry.addContext(storageUnitMenu);

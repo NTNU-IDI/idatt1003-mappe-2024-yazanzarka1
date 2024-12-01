@@ -13,6 +13,6 @@ public class MainFoodStorageUnit extends StorageUnit {
    * Initiate an instance of MainFoodStorageUnit.
    */
   public MainFoodStorageUnit() {
-    super("Fridge");
+    super("Refrigerator");
   }
 }

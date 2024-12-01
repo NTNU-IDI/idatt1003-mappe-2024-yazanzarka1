@@ -72,6 +72,6 @@ public class DisplayExpiredGroceriesCommand implements Command {
    */
   @Override
   public String getDescription() {
-    return "Display expired Groceries in your storage unit";
+    return String.format("Display expired groceries in %s", storageUnit.getName().toLowerCase());
   }
 }

@@ -35,6 +35,6 @@ public class DisplayStoredGroceryCommand implements Command {
 
   @Override
   public String getDescription() {
-    return "Display stored grocery command";
+    return String.format("Display groceries in your %s", storageUnit.getName().toLowerCase());
   }
 }

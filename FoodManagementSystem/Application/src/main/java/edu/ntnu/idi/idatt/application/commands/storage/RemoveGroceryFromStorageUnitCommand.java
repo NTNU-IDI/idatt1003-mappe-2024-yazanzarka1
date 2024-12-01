@@ -75,6 +75,6 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
    */
   @Override
   public String getDescription() {
-    return "Remove grocery from storage unit";
+    return String.format("Remove grocery from %s", storageUnit.getName().toLowerCase());
   }
 }

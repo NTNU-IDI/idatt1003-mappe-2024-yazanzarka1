@@ -7,6 +7,7 @@ import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.validators.DateValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -58,14 +59,16 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
         }).toList();
 
     if (storageEntryBeforeDate.isEmpty()) {
-      displayManager.showMessage("No groceries found before " + date);
+      displayManager.showMessage(
+          "No groceries expiring before " + new SimpleDateFormat("dd.MM.yyyy").format(date));
       return false;
     }
 
     TableData tableData = storageUnit.toTableData(storageEntryBeforeDate);
     displayManager.printTable(tableData);
 
-    displayManager.showMessage("Displayed groceries before " + date);
+    displayManager.showMessage(
+        "Displayed groceries before " + new SimpleDateFormat("dd.MM.yyyy").format(date));
 
     return false;
   }
@@ -77,6 +80,6 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
    */
   @Override
   public String getDescription() {
-    return "Display all groceries in a storage unit before a given best before date";
+    return "Display groceries expiring before a specific best-before-date";
   }
 }

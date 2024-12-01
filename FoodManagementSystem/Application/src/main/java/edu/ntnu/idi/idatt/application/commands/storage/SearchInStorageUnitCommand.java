@@ -64,6 +64,6 @@ public class SearchInStorageUnitCommand implements Command {
    */
   @Override
   public String getDescription() {
-    return "Search in storage unit";
+    return String.format("Search in your %s", storageUnit.getName().toLowerCase());
   }
 }
