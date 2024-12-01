@@ -81,7 +81,7 @@ class RecipeSuggestionProviderTest {
   }
 
   @Test
-  @DisplayName("Test suggestRecipe, should return 3 recipes with 5 total recipes")
+  @DisplayName("Test suggestRecipe, should return 1 recipes with 5 total recipes")
   void suggestRecipe() {
     List<SuggestedRecipe> suggestedRecipes = recipeSuggestionProvider.suggestRecipe();
     assertEquals(3, suggestedRecipes.size());

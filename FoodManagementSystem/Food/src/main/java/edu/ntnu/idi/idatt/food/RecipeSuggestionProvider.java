@@ -1,6 +1,8 @@
 package edu.ntnu.idi.idatt.food;
 
 
+import static java.lang.Math.abs;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,9 @@ public class RecipeSuggestionProvider {
 
   RecipeManager recipeManager;
   StorageUnit storageUnit;
+
+  // days before a grocery is considered inedible
+  static final int BEST_BEFORE_DAYS_THRESHOLD = 7;
 
   /**
    * Create a new RecipeSuggestionProvider.
@@ -44,21 +49,34 @@ public class RecipeSuggestionProvider {
     // For each recipe, calculate a score based on the groceries in the storage unit
     recipeManager.getRecipes().stream().filter(recipe -> !recipe.getGroceries().isEmpty())
         .forEach(recipe -> {
-          AtomicReference<Float> score = new AtomicReference<>((float) 0);
+          AtomicReference<Float> score = new AtomicReference<>(0.0f);
 
           // Calculate the score for the recipe
           boolean hasAllGroceries =
               recipe.getGroceries().values().stream().allMatch(recipeGrocery -> {
                 StorageEntry storageEntry =
                     storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
-                if (storageEntry != null && storageEntry.getQuantity() >= recipeGrocery.amount()) {
-                  // If the grocery is in the storage unit and the quantity is sufficient,
-                  // calculate the score and continue
-                  score.accumulateAndGet(calculateScore(storageEntry, recipeGrocery), Float::sum);
-                  return true;
+
+                if (storageEntry == null || storageEntry.getQuantity() < recipeGrocery.amount()) {
+                  // If a grocery is missing or insufficient, return false
+                  return false;
                 }
-                // If a grocery is missing or insufficient, return false
-                return false;
+
+                if (storageEntry.isExpired()) {
+                  // if the best-before date is passed by more than 4 days, then it's not consumable
+                  float deltaBestBeforeDays = abs(TimeUnit.MILLISECONDS.toDays(
+                      storageEntry.getBestBeforeDate().getTime() - new Date().getTime()));
+                  // grocery is expired, absolute value of days
+                  // since expiration is compared to threshold
+                  if (deltaBestBeforeDays > BEST_BEFORE_DAYS_THRESHOLD) {
+                    return false;
+                  }
+                }
+
+                // If the grocery is in the storage unit and the quantity is sufficient,
+                // calculate the score and continue
+                score.accumulateAndGet(calculateScore(storageEntry, recipeGrocery), Float::sum);
+                return true;
               });
           // If all groceries are in the storage unit, add the recipe to the list
           if (hasAllGroceries) {
