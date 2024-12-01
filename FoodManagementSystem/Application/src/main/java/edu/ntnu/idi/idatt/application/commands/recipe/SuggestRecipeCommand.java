@@ -9,6 +9,10 @@ import java.util.List;
 
 /**
  * Suggest recipe command.
+ *
+ * @see Command
+ * @see RecipeSuggestionProvider
+ * @see SuggestedRecipe
  */
 public class SuggestRecipeCommand implements Command {
 
@@ -45,9 +49,7 @@ public class SuggestRecipeCommand implements Command {
 
     displayManager.showSpace();
     displayManager.showMessage(
-        "The suggested recipes are based on the groceries you have in your storage unit.");
-    displayManager.showMessage(
-        "The recipes are sorted by a score that is based on best-before dates and amount of groceries.");
+        "Recipes are sorted based on the expiration date of the groceries in the storage unit");
     return false;
   }
 

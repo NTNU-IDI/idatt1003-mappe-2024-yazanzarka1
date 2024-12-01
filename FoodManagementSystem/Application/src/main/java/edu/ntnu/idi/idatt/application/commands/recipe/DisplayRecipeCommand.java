@@ -11,7 +11,10 @@ import edu.ntnu.idi.idatt.food.RecipeStorageManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
 /**
- * Display a recipe.
+ * Display a single recipe and its details.
+ *
+ * @see Command
+ * @see Recipe
  */
 public class DisplayRecipeCommand implements Command {
 

@@ -17,6 +17,9 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Add Grocery to storage unit.
+ *
+ * @see Command
+ * @see StorageUnit
  */
 public class AddGroceryToStorageUnitCommand implements Command {
 

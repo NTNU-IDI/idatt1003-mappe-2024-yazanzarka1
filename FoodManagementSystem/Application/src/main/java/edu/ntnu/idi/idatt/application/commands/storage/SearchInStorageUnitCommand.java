@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * Search in storage unit.
+ *
+ * @see Command
+ * @see StorageUnit
  */
 public class SearchInStorageUnitCommand implements Command {
 

@@ -12,6 +12,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * recipe based on the groceries in the storage unit. It uses the RecipeManager to get all recipes
  * and the StorageUnit to get all groceries in the storage unit. Suggestion are then sorted based on
  * a score that is calculated with respect to Best Before Date.
+ *
+ * @see RecipeManager
+ * @see StorageUnit
  */
 public class RecipeSuggestionProvider {
 
@@ -33,37 +36,35 @@ public class RecipeSuggestionProvider {
    * Suggest a recipe based on groceries in storage unit.
    *
    * @return Recipe a recipe that can be cooked with the groceries in the storage unit
+   * @see SuggestedRecipe
    */
   public List<SuggestedRecipe> suggestRecipe() {
     HashMap<Recipe, Float> recipeScores = new HashMap<>();
 
     // For each recipe, calculate a score based on the groceries in the storage unit
-    recipeManager.getRecipes().forEach(recipe -> {
-      AtomicReference<Float> score = new AtomicReference<>((float) 0);
+    recipeManager.getRecipes().stream().filter(recipe -> !recipe.getGroceries().isEmpty())
+        .forEach(recipe -> {
+          AtomicReference<Float> score = new AtomicReference<>((float) 0);
 
-      // Skip recipes that do not have any groceries
-      if (recipe.getGroceries().isEmpty()) {
-        return;
-      }
-
-      // Calculate the score for the recipe
-      boolean hasAllGroceries = recipe.getGroceries().values().stream().allMatch(recipeGrocery -> {
-        StorageEntry storageEntry =
-            storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
-        if (storageEntry != null && storageEntry.getQuantity() >= recipeGrocery.amount()) {
-          // If the grocery is in the storage unit and the quantity is sufficient,
-          // calculate the score and continue
-          score.accumulateAndGet(calculateScore(storageEntry, recipeGrocery), Float::sum);
-          return true;
-        }
-        // If a grocery is missing or insufficient, return false
-        return false;
-      });
-      // If all groceries are in the storage unit, add the recipe to the list
-      if (hasAllGroceries) {
-        recipeScores.put(recipe, score.get());
-      }
-    });
+          // Calculate the score for the recipe
+          boolean hasAllGroceries =
+              recipe.getGroceries().values().stream().allMatch(recipeGrocery -> {
+                StorageEntry storageEntry =
+                    storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
+                if (storageEntry != null && storageEntry.getQuantity() >= recipeGrocery.amount()) {
+                  // If the grocery is in the storage unit and the quantity is sufficient,
+                  // calculate the score and continue
+                  score.accumulateAndGet(calculateScore(storageEntry, recipeGrocery), Float::sum);
+                  return true;
+                }
+                // If a grocery is missing or insufficient, return false
+                return false;
+              });
+          // If all groceries are in the storage unit, add the recipe to the list
+          if (hasAllGroceries) {
+            recipeScores.put(recipe, score.get());
+          }
+        });
 
     // Sort the recipes based on the score
     return recipeScores.entrySet().stream()
@@ -80,7 +81,7 @@ public class RecipeSuggestionProvider {
        the score should be higher so it is cooked before it expires.
      * if best before date is passed,
        the score should be first positive and decrease as it gets further away.
-     * Best before does not mean that the grocery is bad,
+     * Best before does not mean that the grocery is bad after,
        but it is a good indicator of when it is best to use it
      */
     score += calculateBestBeforeScore(deltaBestBeforeDays);
@@ -90,10 +91,12 @@ public class RecipeSuggestionProvider {
 
   private float calculateBestBeforeScore(float deltaBestBeforeDays) {
     if (deltaBestBeforeDays > 0) {
-      // if best before date is getting close, the score should be higher so it is cooked before it expires
+      // if best before date is getting close,
+      // the score should be higher so it is cooked before it expires
       return -78 * deltaBestBeforeDays + 877;
     } else {
-      // if best before date is passed, the score should be first positive and decrease as it gets further away
+      // if best before date is passed,
+      // the score should be first positive and decrease as it gets further away
       return (float) (300.0 * deltaBestBeforeDays + 1000);
     }
   }

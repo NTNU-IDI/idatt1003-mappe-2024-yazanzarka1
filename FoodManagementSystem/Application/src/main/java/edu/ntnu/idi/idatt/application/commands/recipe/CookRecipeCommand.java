@@ -16,6 +16,11 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Command to cook a recipe.
+ *
+ * @see Command
+ * @see Recipe
+ * @see RecipeManager
+ * @see RecipeStorageManager
  */
 public class CookRecipeCommand implements Command {
 

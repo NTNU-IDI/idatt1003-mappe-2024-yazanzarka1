@@ -10,6 +10,9 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
 
 /**
  * Remove a recipe from the recipeManager.
+ *
+ * @see Command
+ * @see RecipeManager
  */
 public class RemoveRecipeCommand implements Command {
 

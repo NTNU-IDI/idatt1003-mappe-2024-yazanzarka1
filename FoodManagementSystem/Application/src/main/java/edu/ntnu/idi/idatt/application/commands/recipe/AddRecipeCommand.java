@@ -19,6 +19,9 @@ import java.util.List;
 
 /**
  * Command to add a recipe to the application.
+ *
+ * @see Command
+ * @see Recipe
  */
 public class AddRecipeCommand implements Command {
 

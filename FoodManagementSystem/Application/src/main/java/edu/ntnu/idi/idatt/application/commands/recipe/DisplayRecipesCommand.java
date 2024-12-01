@@ -7,6 +7,9 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
 
 /**
  * Display all recipes stored in recipeManager.
+ *
+ * @see Command
+ * @see RecipeManager
  */
 public class DisplayRecipesCommand implements Command {
 

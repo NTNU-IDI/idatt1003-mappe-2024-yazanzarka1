@@ -13,6 +13,9 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Display expired groceries with total value summary.
+ *
+ * @see Command
+ * @see StorageUnit
  */
 public class DisplayExpiredGroceriesCommand implements Command {
 
