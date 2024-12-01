@@ -14,12 +14,13 @@ public class RecipeManager implements TableRepresentable {
 
   String name;
   List<Recipe> recipes;
-  DisplayManager displayManager;
 
   /**
    * Initiate a recipe manager.
    *
    * @param name Name of the recipe manager in the application - Example: "My Recipes" or "Cook Book"
+   * @throws IllegalArgumentException if name is null or empty
+   * @see Recipe
    */
   public RecipeManager(String name) {
     if (name == null || name.isBlank()) {

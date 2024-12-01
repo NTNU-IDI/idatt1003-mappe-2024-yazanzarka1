@@ -3,9 +3,9 @@ package edu.ntnu.idi.idatt.food;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Suggest a recipe based on groceries in storage unit. This class is responsible for suggesting a
@@ -39,32 +39,33 @@ public class RecipeSuggestionProvider {
 
     // For each recipe, calculate a score based on the groceries in the storage unit
     recipeManager.getRecipes().forEach(recipe -> {
-      float score = 0;
+      AtomicReference<Float> score = new AtomicReference<>((float) 0);
 
       // Skip recipes that do not have any groceries
       if (recipe.getGroceries().isEmpty()) {
         return;
       }
 
-      boolean hasAllGroceries = true;
-
-      // For each grocery in the recipe, calculate a score based on the storage unit
-      for (RecipeGrocery recipeGrocery : recipe.getGroceries().values()) {
+      // Calculate the score for the recipe
+      boolean hasAllGroceries = recipe.getGroceries().values().stream().allMatch(recipeGrocery -> {
         StorageEntry storageEntry =
             storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
         if (storageEntry != null && storageEntry.getQuantity() >= recipeGrocery.amount()) {
-          score += calculateScore(storageEntry, recipeGrocery);
-        } else {
-          hasAllGroceries = false;
-          break;
+          // If the grocery is in the storage unit and the quantity is sufficient,
+          // calculate the score and continue
+          score.accumulateAndGet(calculateScore(storageEntry, recipeGrocery), Float::sum);
+          return true;
         }
-      }
+        // If a grocery is missing or insufficient, return false
+        return false;
+      });
+      // If all groceries are in the storage unit, add the recipe to the list
       if (hasAllGroceries) {
-        recipeScores.put(recipe, score);
+        recipeScores.put(recipe, score.get());
       }
     });
 
-
+    // Sort the recipes based on the score
     return recipeScores.entrySet().stream()
         .sorted((r1, r2) -> r2.getValue().compareTo(r1.getValue()))
         .map(e -> new SuggestedRecipe(e.getKey(), e.getValue())).toList();

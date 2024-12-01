@@ -14,6 +14,7 @@ import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import edu.ntnu.idi.idatt.food.constants.RecipeConstants;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -86,8 +87,12 @@ public class AddRecipeCommand implements Command {
       displayManager.showMessage("Grocery found: " + grocery.getGroceryName());
 
       // add grocery to recipe with amount and ask for more groceries
-      float amount = inputHandler.getFloat("Enter amount (0.1 - 999.0): ",
-          new FloatValidator("Amount should be between 0.1 and 999.0", 0.1f, 999f));
+      float amount = inputHandler.getFloat(
+          String.format("Enter amount of %s (%.2f - %.2f): ", grocery.getGroceryName(),
+              RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT),
+          new FloatValidator(String.format("Amount should be between %.2f, %.2f",
+              RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT),
+              RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT));
 
       // add grocery to recipe
       groceries.add(new RecipeGrocery(grocery, amount));
@@ -103,7 +108,9 @@ public class AddRecipeCommand implements Command {
     String recipeSteps =
         formatSteps(
             inputHandler.getString(
-                "Enter recipe steps separated by \\n (10 - 400 characters): ",
+                String.format("Enter recipe steps seperated by (comma) (%s - %s characters): \n",
+                    RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
+                    RecipeConstants.MAX_RECIPE_STEPS_LENGTH),
                 new StringValidator("Invalid input", RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
                     RecipeConstants.MAX_RECIPE_STEPS_LENGTH)));
 
@@ -124,7 +131,9 @@ public class AddRecipeCommand implements Command {
   }
 
   private String formatSteps(String recipeSteps) {
-    return recipeSteps.replace("\\n", "\n");
+    return Arrays.stream(recipeSteps.trim().split(",")).map(String::trim)
+        .reduce((s1, s2) -> s1 + "\n" + s2).orElse("");
+
   }
 
   /**

@@ -48,7 +48,8 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
 
     // Get grocery name from user
     String groceryName = inputHandler.getString("Enter the name of the grocery: ",
-        new StringValidator("Grocery name must be between 2 and 25 characters",
+        new StringValidator(String.format("Grocery name must be between %s and %s characters",
+            GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
             GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
     // Check if grocery exists

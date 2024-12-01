@@ -4,13 +4,12 @@ import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
-import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
+import edu.ntnu.idi.idatt.food.exceptions.InsufficientGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -43,23 +42,26 @@ public class StorageUnit implements TableRepresentable {
    * @param grocery        Grocery to add.
    * @param quantity       Quantity of grocery
    * @param bestBeforeDate Best before date of grocery
+   * @throws IllegalArgumentException if grocery is null, quantity is less than 0.0 or greater than
+   *                                  999.0
+   * @throws IllegalArgumentException if unit of grocery does not match existing grocery
+   * @throws GroceryNotFoundException if grocery not found in storage unit
    */
   public void addGrocery(Grocery grocery, float quantity, Date bestBeforeDate) {
     if (grocery == null) {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
 
+    // Check if grocery already exists in storage unit
     String groceryName = grocery.getGroceryName();
     StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
 
-    if (quantity < StorageEntryConstants.MIN_QUANTITY) {
-      throw new IllegalArgumentException("Quantity cannot be less or equal to 0.0");
+    if (quantity < StorageEntryConstants.MIN_QUANTITY
+        || quantity > StorageEntryConstants.MAX_QUANTITY) {
+      throw new IllegalArgumentException(
+          String.format("Quantity must be between %.2f and %.2f",
+              StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY));
     }
-
-    if (quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException("Quantity cannot be greater than 999.0");
-    }
-
 
     if (groceries.containsKey(groceryName)) {
       StorageEntry existingEntry = groceries.get(groceryName);
@@ -74,8 +76,16 @@ public class StorageUnit implements TableRepresentable {
   }
 
   /**
-   * Removes a grocery from the storage unit. If the quantity is less than the quantity in the
-   * storage unit, the quantity will be updated.
+   * Removes a grocery from the storage unit. If the quantity of the grocery is less than the
+   * quantity to remove, an exception will be thrown. If the quantity of the grocery is equal to the
+   * quantity to remove, the grocery will be removed from the storage unit.
+   *
+   * @param grocery  Grocery to remove
+   * @param quantity Quantity of grocery to remove
+   * @throws IllegalArgumentException                  if grocery is null
+   * @throws GroceryNotFoundException                  if grocery not found in storage unit
+   * @throws InsufficientGroceryInStorageUnitException if quantity of grocery is less than quantity
+   * @see StorageEntry
    */
   public void removeGrocery(Grocery grocery, float quantity) {
     if (grocery == null) {
@@ -90,7 +100,7 @@ public class StorageUnit implements TableRepresentable {
     }
 
     if (existingEntry.getQuantity() < quantity) {
-      throw new InsufficentGroceryInStorageUnitException(
+      throw new InsufficientGroceryInStorageUnitException(
           "Insufficient quantity of " + groceryName + " in storage unit");
     }
     if (existingEntry.getQuantity() == quantity) {
@@ -172,20 +182,6 @@ public class StorageUnit implements TableRepresentable {
         .toList();
   }
 
-  /**
-   * Formats best before date.
-   *
-   * @param storageEntry Storage entry to format best before date
-   * @return Formatted best before date
-   */
-  private String formatBestBeforeDate(StorageEntry storageEntry) {
-    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-    String formattedDate = formatter.format(storageEntry.getBestBeforeDate());
-    if (storageEntry.isExpired().equals(Boolean.TRUE)) {
-      return Ansi.ansi().bg(Color.RED).a(formattedDate).reset().toString();
-    }
-    return formattedDate;
-  }
 
   /**
    * Get total value of all groceries in the storage unit.
@@ -207,4 +203,20 @@ public class StorageUnit implements TableRepresentable {
   public String getName() {
     return name;
   }
+
+  /**
+   * Formats best before date.
+   *
+   * @param storageEntry Storage entry to format best before date
+   * @return Formatted best before date
+   */
+  private String formatBestBeforeDate(StorageEntry storageEntry) {
+    SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+    String formattedDate = formatter.format(storageEntry.getBestBeforeDate());
+    if (storageEntry.isExpired().equals(Boolean.TRUE)) {
+      return Ansi.ansi().bg(Color.RED).a(formattedDate).reset().toString();
+    }
+    return formattedDate;
+  }
+
 }

@@ -16,4 +16,8 @@ public class RecipeConstants {
 
   public static int MAX_RECIPE_PEOPLE_COUNT = 10;
   public static int MIN_RECIPE_PEOPLE_COUNT = 1;
+
+  public static float MAX_RECIPE_AMOUNT = 999.99f;
+  public static float MIN_RECIPE_AMOUNT = 0.01f;
+
 }

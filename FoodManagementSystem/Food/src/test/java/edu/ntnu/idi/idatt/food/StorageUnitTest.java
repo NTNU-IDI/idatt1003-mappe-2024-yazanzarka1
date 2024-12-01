@@ -7,10 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
-import edu.ntnu.idi.idatt.food.exceptions.InsufficentGroceryInStorageUnitException;
+import edu.ntnu.idi.idatt.food.exceptions.InsufficientGroceryInStorageUnitException;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
@@ -165,7 +164,7 @@ class StorageUnitTest {
   @DisplayName("Test Remove Grocery with Insufficient Quantity")
   void removeGroceryWithInsufficientQuantity() {
     storageUnit.addGrocery(grocery, 5.0f, bestBeforeDate);
-    assertThrows(InsufficentGroceryInStorageUnitException.class,
+    assertThrows(InsufficientGroceryInStorageUnitException.class,
         () -> storageUnit.removeGrocery(grocery, 10.0f),
         "Should throw InsufficientGroceryInStorageUnitException when trying to remove more than available");
   }

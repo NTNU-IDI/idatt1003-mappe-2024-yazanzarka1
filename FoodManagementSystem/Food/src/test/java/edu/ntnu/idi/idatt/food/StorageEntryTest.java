@@ -86,7 +86,7 @@ class StorageEntryTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       storageEntry.addQuantity(-5.0f);
     });
-    assertEquals("Quantity cannot be less than or equal to 0.0", exception.getMessage());
+    assertEquals("Quantity must be between 0.01 and 999.99", exception.getMessage());
   }
 
   @Test
@@ -104,7 +104,7 @@ class StorageEntryTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       storageEntry.subtractQuantity(-3.0f);
     });
-    assertEquals("Quantity cannot be less than or equal to 0 ", exception.getMessage());
+    assertEquals("Quantity cannot be less than or equal to 0", exception.getMessage());
   }
 
   @Test

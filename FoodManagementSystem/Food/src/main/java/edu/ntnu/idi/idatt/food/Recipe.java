@@ -51,22 +51,34 @@ public class Recipe {
     if (name == null || name.isBlank() || name.length() < RecipeConstants.MIN_RECIPE_NAME_LENGTH
         || name.length() > RecipeConstants.MAX_RECIPE_NAME_LENGTH) {
       throw new IllegalArgumentException(
-          "Recipe name cannot be null or blank and must be between 3 and 50 characters");
+          String.format(
+              "Recipe name cannot be null or blank and must be between %s and %s characters",
+              RecipeConstants.MIN_RECIPE_NAME_LENGTH,
+              RecipeConstants.MAX_RECIPE_NAME_LENGTH));
     }
     if (description == null || description.isBlank()
         || description.length() < RecipeConstants.MIN_RECIPE_DESCRIPTION_LENGTH
         || description.length() > RecipeConstants.MAX_RECIPE_DESCRIPTION_LENGTH) {
       throw new IllegalArgumentException(
-          "Recipe description cannot be null or blank and must be between 10 and 100 characters");
+          String.format(
+              "Recipe description cannot be null or blank and must be between %s and %s characters",
+              RecipeConstants.MIN_RECIPE_DESCRIPTION_LENGTH,
+              RecipeConstants.MAX_RECIPE_DESCRIPTION_LENGTH));
     }
     if (steps == null || steps.isBlank() || steps.length() < RecipeConstants.MIN_RECIPE_STEPS_LENGTH
         || steps.length() > RecipeConstants.MAX_RECIPE_STEPS_LENGTH) {
       throw new IllegalArgumentException(
-          "Recipe steps cannot be null or blank and must be between 10 and 100 characters");
+          String.format(
+              "Recipe steps cannot be null or blank and must be between %s and %s characters",
+              RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
+              RecipeConstants.MAX_RECIPE_STEPS_LENGTH));
     }
     if (peopleCount < RecipeConstants.MIN_RECIPE_PEOPLE_COUNT
         || peopleCount > RecipeConstants.MAX_RECIPE_PEOPLE_COUNT) {
-      throw new IllegalArgumentException("People count must be greater than 0 and less than 11");
+      throw new IllegalArgumentException(
+          String.format("People count must be between %s and %s",
+              RecipeConstants.MIN_RECIPE_PEOPLE_COUNT,
+              RecipeConstants.MAX_RECIPE_PEOPLE_COUNT));
     }
 
     this.name = name;
@@ -89,11 +101,15 @@ public class Recipe {
     if (grocery == null) {
       throw new NullPointerException("Grocery cannot be null");
     }
-    if (amount <= 0.01) {
-      throw new IllegalArgumentException("Amount must be greater than 0.01");
+    if (amount < RecipeConstants.MIN_RECIPE_AMOUNT) {
+      throw new IllegalArgumentException(String.format("amount of %s can't be less than %.2f",
+          grocery.getGroceryName(),
+          RecipeConstants.MIN_RECIPE_AMOUNT));
     }
-    if (amount > 999) {
-      throw new IllegalArgumentException("Amount must be less than 999");
+    if (amount > RecipeConstants.MAX_RECIPE_AMOUNT) {
+      throw new IllegalArgumentException(String.format("amount of %s can't be more than %.2f",
+          grocery.getGroceryName(),
+          RecipeConstants.MAX_RECIPE_AMOUNT));
     }
     groceries.computeIfPresent(grocery.getGroceryName(), (key, recipeGrocery) -> {
       float newAmount = recipeGrocery.amount() + amount;
@@ -103,7 +119,7 @@ public class Recipe {
   }
 
   /**
-   * Get Groceries in a recipe.
+   * Get groceries in a recipe.
    *
    * @return Map of Groceries and value in a recipe
    */

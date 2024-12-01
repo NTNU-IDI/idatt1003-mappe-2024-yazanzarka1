@@ -48,8 +48,12 @@ public class AddGroceryToGroceryManagerCommand implements Command {
 
     try {
       // Get grocery name from user
-      final String groceryName = inputHandler.getString("Enter Grocery Name (Max 25 characters): ",
-          new StringValidator("Grocery name must be between 2 and 25 characters", GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
+      final String groceryName = inputHandler.getString(
+          String.format("Enter Grocery Name (%s-%s characters): ",
+              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
+          new StringValidator(String.format("Grocery name must be between %s and %s characters",
+              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
+              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
       // Display available units
       List<Unit> units = unitProvider.getUnits();
@@ -62,7 +66,8 @@ public class AddGroceryToGroceryManagerCommand implements Command {
 
       // Get user choice
       int choice = inputHandler.getInt("Enter Choice (1-3): ",
-          new IntegerValidator("Choice must be between 1 and 3", 1, units.size()));
+          new IntegerValidator(String.format("Choice must be between 1 and %s", units.size()), 1,
+              units.size()));
 
       // Check if choice is valid
       if (choice < 1 || choice > units.size()) {
@@ -75,8 +80,13 @@ public class AddGroceryToGroceryManagerCommand implements Command {
 
       // Get price per unit from user
       float groceryPricePerUnit =
-          inputHandler.getFloat("Enter price per unit (0.1 - 9999.0): ",
-              new FloatValidator("Price must be between 0.1 and 9999.0", GroceryConstants.MIN_PRICE_PER_UNIT, GroceryConstants.MAX_PRICE_PER_UNIT));
+          inputHandler.getFloat(
+              String.format("Enter price per unit (%.2ff - %.2f): ",
+                  GroceryConstants.MIN_PRICE_PER_UNIT,
+                  GroceryConstants.MAX_PRICE_PER_UNIT),
+              new FloatValidator(String.format("Price per unit must be between %.2f and %.2f",
+                  GroceryConstants.MIN_PRICE_PER_UNIT, GroceryConstants.MAX_PRICE_PER_UNIT),
+                  GroceryConstants.MIN_PRICE_PER_UNIT, GroceryConstants.MAX_PRICE_PER_UNIT));
 
       // Add grocery to grocery manager
       groceryManager.addGrocery(new Grocery(groceryName, selectedUnit, groceryPricePerUnit));

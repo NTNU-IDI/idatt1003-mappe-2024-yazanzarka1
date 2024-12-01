@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 /**
- * Manages Grocery in the app. GroceryManager can add, remove and display groceries. GroceryManager
+ * Manages Grocery in the app. GroceryManager can add and remove groceries. GroceryManager
  * can also return available groceries. GroceryManager is used by the application to manage
  * groceries.
  *

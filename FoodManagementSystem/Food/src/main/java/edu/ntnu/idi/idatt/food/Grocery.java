@@ -31,7 +31,9 @@ public class Grocery implements Comparable<Grocery> {
       throw new IllegalArgumentException("Grocery name cannot be null or blank");
     }
     if (groceryName.length() > GroceryConstants.MAX_GROCERY_NAME_LENGTH) {
-      throw new IllegalArgumentException("Grocery name cannot be longer than 25 characters");
+      throw new IllegalArgumentException(
+          String.format("Grocery name cannot be more than %s characters",
+              GroceryConstants.MAX_GROCERY_NAME_LENGTH));
     }
     if (unit == null) {
       throw new IllegalArgumentException("Unit cannot be null");
@@ -77,14 +79,17 @@ public class Grocery implements Comparable<Grocery> {
    * @param pricePerUnit price per unit
    * @return float newPricePerUnit
    * @throws IllegalArgumentException if pricePerUnit is less than or equal to 0
-   *
    */
   public float setPricePerUnit(float pricePerUnit) {
     if (pricePerUnit <= GroceryConstants.MIN_PRICE_PER_UNIT) {
-      throw new IllegalArgumentException("Price per unit cannot be less than 0.1 NOK");
+      throw new IllegalArgumentException(
+          String.format("Price per unit cannot be less than %.2f NOK",
+              GroceryConstants.MIN_PRICE_PER_UNIT));
     }
     if (pricePerUnit >= GroceryConstants.MAX_PRICE_PER_UNIT) {
-      throw new IllegalArgumentException("Price per unit cannot be more than 9999 NOK");
+      throw new IllegalArgumentException(
+          String.format("Price per unit cannot be more than %.2f NOK",
+              GroceryConstants.MAX_PRICE_PER_UNIT));
     }
     this.pricePerUnit = pricePerUnit;
     return pricePerUnit;
@@ -134,7 +139,7 @@ public class Grocery implements Comparable<Grocery> {
    * @apiNote It is strongly recommended, but <i>not</i> strictly required that
    * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any class that implements
    * the {@code Comparable} interface and violates this condition should clearly indicate this fact.
-   *  The recommended language is "Note: this class has a natural ordering that is inconsistent with
+   * The recommended language is "Note: this class has a natural ordering that is inconsistent with
    * equals."
    */
   @Override

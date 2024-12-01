@@ -41,6 +41,18 @@ public class StorageEntry extends Grocery {
     if (quantity < 0) {
       throw new IllegalArgumentException("Quantity cannot be less than 0");
     }
+    if (quantity > StorageEntryConstants.MAX_QUANTITY) {
+      throw new IllegalArgumentException(String.format(
+          "Quantity cannot be more than %.2f. Current quantity: %.2f",
+          StorageEntryConstants.MAX_QUANTITY, this.quantity));
+    }
+    if (quantity < StorageEntryConstants.MIN_QUANTITY) {
+      throw new IllegalArgumentException(
+          String.format("Quantity must be between %.2f and %.2f",
+              StorageEntryConstants.MIN_QUANTITY,
+              StorageEntryConstants.MAX_QUANTITY));
+    }
+
     this.quantity = quantity;
   }
 
@@ -67,18 +79,25 @@ public class StorageEntry extends Grocery {
    *
    * @param quantity quantity to add to current quantity
    * @throws IllegalArgumentException if quantity is less than or equal to 0
+   * @throws IllegalArgumentException if quantity is greater than 999.0
+   * @throws IllegalArgumentException if quantity + current quantity is greater than 999.0
    */
   public void addQuantity(float quantity) {
-    if (quantity < StorageEntryConstants.MIN_QUANTITY) {
-      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0.0");
-    }
-    if (quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException("Quantity cannot be greater than 999.0");
+    if (quantity < StorageEntryConstants.MIN_QUANTITY
+        || quantity > StorageEntryConstants.MAX_QUANTITY) {
+      throw new IllegalArgumentException(
+          String.format("Quantity must be between %.2f and %.2f",
+              StorageEntryConstants.MIN_QUANTITY,
+              StorageEntryConstants.MAX_QUANTITY));
     }
 
     if (this.quantity + quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException("Cannot store more than 999.0 of the same grocery");
+      throw new IllegalArgumentException(String.format(
+          "Quantity cannot be more than %.2f. Current quantity: %.2f",
+          StorageEntryConstants.MAX_QUANTITY, this.quantity));
     }
+
+    // Add quantity to current quantity
     this.quantity += quantity;
   }
 
@@ -90,7 +109,7 @@ public class StorageEntry extends Grocery {
    */
   public void subtractQuantity(float quantity) {
     if (quantity <= 0) {
-      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0 ");
+      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0");
     }
     this.quantity -= quantity;
   }
@@ -103,7 +122,6 @@ public class StorageEntry extends Grocery {
   public Boolean isExpired() {
     Date currentDate = new Date();
     return currentDate.after(bestBeforeDate);
-
   }
 
 
