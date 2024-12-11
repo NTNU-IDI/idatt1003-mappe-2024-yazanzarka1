@@ -1,7 +1,7 @@
 package edu.ntnu.idi.idatt.application;
 
 import edu.ntnu.idi.idatt.application.core.Bootstrap;
-import edu.ntnu.idi.idatt.console.Application;
+import edu.ntnu.idi.idatt.console.Ui;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.units.UnitProvider;
@@ -19,13 +19,13 @@ public class Main {
    * @param args Main params
    */
   public static void main(String[] args) {
-    Application application = new Application();
+    Ui ui = new Ui();
     DisplayManager displayManager = new DisplayManager();
     InputHandler inputHandler = new InputHandler(displayManager);
     UnitProvider unitProvider = new UnitProvider();
 
-    application.init(Bootstrap.initCommandRegistry(displayManager, inputHandler, unitProvider));
-    application.start();
+    ui.init(Bootstrap.initCommandRegistry(displayManager, inputHandler, unitProvider));
+    ui.start();
 
 
   }

@@ -12,7 +12,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>edu.ntnu.idi.idatt.application.Main</mainClass>
+              <mainClass>edu.ntnu.idi.idatt.UI.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -51,7 +51,7 @@
       <groupId>org.junit.jupiter</groupId>
     </dependency>
   </dependencies>
-  <groupId>org.ntnu.application</groupId>
+  <groupId>org.ntnu.UI</groupId>
 
   <modelVersion>4.0.0</modelVersion>
 

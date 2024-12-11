@@ -45,7 +45,7 @@ public class MenuContext {
   /**
    * Unique Key.
    *
-   * @return String Key used to identify context in Application lifecycle.
+   * @return String Key used to identify context in Ui lifecycle.
    */
   public String getKey() {
     return menuKey;

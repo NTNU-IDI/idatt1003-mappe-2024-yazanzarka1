@@ -5,20 +5,19 @@ import org.fusesource.jansi.Ansi.Color;
 /**
  * Main application class for the console application.
  */
-public class Application {
+public class Ui {
 
-  DisplayManager displayManager = new DisplayManager();
-  InputHandler inputHandler = new InputHandler(displayManager);
-  Boolean displayMenu = false;
-  CommandRegistry commandRegistry;
+  private final DisplayManager displayManager = new DisplayManager();
+  private final InputHandler inputHandler = new InputHandler(displayManager);
+  private Boolean displayMenu = false;
+  private CommandRegistry commandRegistry;
 
   /**
-   * initate the application with a command registry.
+   * Initialize the application with predefined menus, commands and
+   * contexts.
    *
    * @param commandRegistry CommandRegistry to use for the application.
-   *                        <p>
-   *                        Initialize the application with predefined menus, commands and
-   *                        contexts.
+   *
    */
   public void init(CommandRegistry commandRegistry) {
     this.commandRegistry = commandRegistry;
