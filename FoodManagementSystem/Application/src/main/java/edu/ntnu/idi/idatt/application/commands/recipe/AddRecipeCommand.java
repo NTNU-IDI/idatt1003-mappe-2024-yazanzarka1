@@ -78,7 +78,8 @@ public class AddRecipeCommand implements Command {
     while (true) {
       // get grocery name from user
       String groceryName = inputHandler.getString("Enter grocery name: ",
-          new StringValidator("Grocery name should be between 1 and 25 characters",
+          new StringValidator(String.format("Grocery name should be between %s and %s characters",
+              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
               GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
       // search for grocery

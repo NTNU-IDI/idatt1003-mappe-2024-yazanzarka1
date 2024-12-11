@@ -9,6 +9,7 @@ import edu.ntnu.idi.idatt.food.Recipe;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import edu.ntnu.idi.idatt.food.RecipeStorageManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Display a single recipe and its details.
@@ -48,6 +49,10 @@ public class DisplayRecipeCommand implements Command {
     TableData tableData = recipeManager.toTableData();
     displayManager.printTable(tableData);
     displayManager.showSpace();
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Color.YELLOW);
 
     //Get the index of the recipe from the user
     int recipeIndex = inputHandler.getInt("Enter the ID of the recipe: ",

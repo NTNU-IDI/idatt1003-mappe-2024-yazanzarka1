@@ -51,46 +51,42 @@ public class AddGroceryToStorageUnitCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    try {
-      // Display available groceries
-      TableData tableData = groceryManager.toTableData();
-      displayManager.printTable(tableData);
 
-      displayManager.showColoredMessage(
-          String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
-          Ansi.Color.YELLOW);
+    // Display available groceries
+    TableData tableData = groceryManager.toTableData();
+    displayManager.printTable(tableData);
 
-      // Get grocery name from user
-      String groceryName = inputHandler.getString("Enter Grocery Name: ", new StringValidator(
-          String.format("Grocery name should be between %s and %s characters",
-              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
-          GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
-      // Get grocery from groceryManager
-      var groceryToBeAdded = groceryManager.getAvailableGroceries().stream()
-          .filter(grocery -> grocery.getGroceryName().equalsIgnoreCase(groceryName)).findFirst()
-          .orElseThrow(() -> new UserInputException("Grocery not found"));
+    // Get grocery name from user
+    String groceryName = inputHandler.getString("Enter Grocery Name: ", new StringValidator(
+        String.format("Grocery name should be between %s and %s characters",
+            GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
+        GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
-      // Get grocery amount from user
-      float groceryAmount = inputHandler.getFloat(
-          String.format("Enter amount of %s (%s-%s): ", groceryToBeAdded.getGroceryName(),
-              StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY),
-          new FloatValidator("Invalid amount", StorageEntryConstants.MIN_QUANTITY,
-              StorageEntryConstants.MAX_QUANTITY));
+    // Get grocery from groceryManager
+    var groceryToBeAdded = groceryManager.getAvailableGroceries().stream()
+        .filter(grocery -> grocery.getGroceryName().equalsIgnoreCase(groceryName)).findFirst()
+        .orElseThrow(() -> new UserInputException("Grocery not found"));
 
-      // Get grocery best before date from user
-      Date groceryBestBeforeDate = inputHandler.getDate("Enter Best before date (dd.mm.yyyy): ",
-          new DateValidator("Invalid date format"));
+    // Get grocery amount from user
+    float groceryAmount = inputHandler.getFloat(
+        String.format("Enter amount of %s (%s-%s): ", groceryToBeAdded.getGroceryName(),
+            StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY),
+        new FloatValidator("Invalid amount", StorageEntryConstants.MIN_QUANTITY,
+            StorageEntryConstants.MAX_QUANTITY));
 
-      // Add grocery to storage unit
-      storageUnit.addGrocery(groceryToBeAdded, groceryAmount, groceryBestBeforeDate);
+    // Get grocery best before date from user
+    Date groceryBestBeforeDate = inputHandler.getDate("Enter Best before date (dd.mm.yyyy): ",
+        new DateValidator("Invalid date format"));
 
-      displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
-      return false;
-    } catch (Exception e) {
-      throw new UserInputException("Invalid input: " + e.getMessage());
-    }
+    // Add grocery to storage unit
+    storageUnit.addGrocery(groceryToBeAdded, groceryAmount, groceryBestBeforeDate);
 
+    displayManager.showColoredMessage("Grocery added successfully", Color.GREEN);
+    return false;
   }
 
   @Override

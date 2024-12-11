@@ -4,7 +4,6 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
-import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.console.validators.IntegerValidator;
 import edu.ntnu.idi.idatt.food.RecipeManager;
 import org.fusesource.jansi.Ansi;
@@ -40,30 +39,28 @@ public class RemoveRecipeCommand implements Command {
    */
   @Override
   public Boolean execute() {
-    try {
-      displayManager.showSpace();
-      TableData tableData = recipeManager.toTableData();
-      displayManager.printTable(tableData);
-      displayManager.showSpace();
 
-      displayManager.showColoredMessage(
-          String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
-          Ansi.Color.YELLOW);
+    displayManager.showSpace();
+    TableData tableData = recipeManager.toTableData();
+    displayManager.printTable(tableData);
+    displayManager.showSpace();
 
-      // Get recipe index from user
-      int recipeIndex = inputHandler.getInt("Enter the ID of the recipe: ",
-          new IntegerValidator("Invalid ID", 0, recipeManager.getRecipes().size() - 1));
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
-      displayManager.showSpace();
-      recipeManager.removeRecipe(recipeIndex);
-      displayManager.showMessage("Recipe removed");
-      displayManager.showSpace();
+    // Get recipe index from user
+    int recipeIndex = inputHandler.getInt("Enter the ID of the recipe: ",
+        new IntegerValidator("Invalid ID", 0, recipeManager.getRecipes().size() - 1));
 
-      return false;
+    displayManager.showSpace();
+    recipeManager.removeRecipe(recipeIndex);
+    displayManager.showMessage("Recipe removed");
+    displayManager.showSpace();
 
-    } catch (Exception e) {
-      throw new UserInputException("Invalid input: " + e.getMessage());
-    }
+    return false;
+
+
   }
 
   /**
