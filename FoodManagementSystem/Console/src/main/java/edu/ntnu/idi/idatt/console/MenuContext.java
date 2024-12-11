@@ -1,6 +1,8 @@
 package edu.ntnu.idi.idatt.console;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -92,13 +94,23 @@ public class MenuContext {
    * Print all commands in the context. with evenly spaced padding.
    */
   private void printCommands() {
+    // add hardcoded commands to the menu
+    List<String> commandsList = new ArrayList<>(List.copyOf(commands.keySet()));
+    commandsList.add("help");
+    commandsList.add("exit");
+
     // Find the longest command keyword to pad the output
-    int maxWidth = commands.keySet().stream().map(String::length).max(Integer::compareTo).orElse(0);
+    int maxWidth = commandsList.stream().map(String::length).max(Integer::compareTo).orElse(0);
 
     // Print each command with its description
     commands.keySet().forEach(keyword -> displayManager.showColoredMessage(
         padRight(keyword + ":", maxWidth + 2) + commands.get(keyword).getDescription(),
         Color.CYAN));
+    displayManager.showColoredMessage(padRight("help:", maxWidth + 2) + "Show this menu",
+        Color.CYAN);
+    displayManager.showColoredMessage(padRight("exit:", maxWidth + 2) + "Exit the program",
+        Color.CYAN);
+
   }
 
 }
