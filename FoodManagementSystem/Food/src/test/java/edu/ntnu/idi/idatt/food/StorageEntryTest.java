@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import edu.ntnu.idi.idatt.units.Liter;
 import edu.ntnu.idi.idatt.units.Unit;
 import java.util.Date;
@@ -82,15 +83,6 @@ class StorageEntryTest {
   }
 
   @Test
-  @DisplayName("Test Add Quantity with Negative Value")
-  void testAddQuantityNegative() {
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-      storageEntry.addQuantity(-5.0f);
-    });
-    assertEquals("Quantity must be between 0.01 and 999.99", exception.getMessage());
-  }
-
-  @Test
   @DisplayName("Test Set Quantity with Negative Value")
   void testSetQuantityNegative() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -105,7 +97,7 @@ class StorageEntryTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       storageEntry.subtractQuantity(-3.0f);
     });
-    assertEquals("Quantity cannot be less than or equal to 0", exception.getMessage());
+    assertEquals("Quantity cannot be less than or equal to 0.01", exception.getMessage());
   }
 
   @Test
@@ -160,5 +152,39 @@ class StorageEntryTest {
         new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24); // 1 day in the future
     storageEntry.setBestBeforeDate(futureDate);
     assertFalse(storageEntry.isExpired(), "Storage entry should not be expired with a future date");
+  }
+
+
+  @Test
+  @DisplayName("Test Add Quantity Beyond Maximum Allowed")
+  void testAddQuantityBelowMinimumAllowed() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      storageEntry.addQuantity(StorageUnitConstants.MIN_QUANTITY - 0.1f);
+    });
+
+  }
+
+  @Test
+  @DisplayName("Test Set Quantity to Minimum Allowed")
+  void testSetQuantityToMinimumAllowed() {
+    storageEntry.setQuantity(StorageUnitConstants.MIN_QUANTITY);
+    assertEquals(StorageUnitConstants.MIN_QUANTITY, storageEntry.getQuantity(),
+        "Quantity should be set to the minimum allowed value");
+  }
+
+  @Test
+  @DisplayName("Test Add Quantity with Minimum Allowed Value")
+  void testAddQuantityWithMinimumAllowedValue() {
+    storageEntry.addQuantity(StorageUnitConstants.MIN_QUANTITY);
+    assertEquals(10.0f + StorageUnitConstants.MIN_QUANTITY, storageEntry.getQuantity(),
+        "Quantity should increase by the minimum allowed value");
+  }
+
+
+  @Test
+  @DisplayName("Test Set Best Before Date to Null")
+  void testSetBestBeforeDateToNull() {
+    storageEntry.setBestBeforeDate(null);
+    assertEquals(null, storageEntry.getBestBeforeDate(), "Best before date should be null");
   }
 }

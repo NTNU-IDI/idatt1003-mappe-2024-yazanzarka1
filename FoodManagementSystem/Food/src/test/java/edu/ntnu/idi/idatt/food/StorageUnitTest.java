@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficientGroceryInStorageUnitException;
 import edu.ntnu.idi.idatt.units.Kilogram;
@@ -286,5 +287,43 @@ class StorageUnitTest {
     assertEquals("Grocery", tableData.headers().getFirst(), "Header should be 'Grocery Name'");
     assertEquals(1, tableData.data().size());
 
+  }
+
+  @Test
+  @DisplayName("Test Add Grocery with Quantity Below Minimum")
+  void addGroceryWithQuantityBelowMinimum() {
+    assertThrows(IllegalArgumentException.class,
+        () -> storageUnit.addGrocery(grocery, StorageUnitConstants.MIN_QUANTITY - 0.01f,
+            bestBeforeDate),
+        "Adding a grocery with quantity below minimum should throw an exception");
+  }
+
+  @Test
+  @DisplayName("Test Add Grocery with Quantity Above Maximum")
+  void addGroceryWithQuantityAboveMaximum() {
+    assertThrows(IllegalArgumentException.class,
+        () -> storageUnit.addGrocery(grocery, StorageUnitConstants.MAX_QUANTITY + 0.01f,
+            bestBeforeDate),
+        "Adding a grocery with quantity above maximum should throw an exception");
+  }
+
+  @Test
+  @DisplayName("Test Add To Existing Grocery More Than Maximum Allowed")
+  void addGroceryMoreThanMaximumAllowed() {
+    storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
+
+    assertThrows(IllegalArgumentException.class,
+        () -> storageUnit.addGrocery(grocery, StorageUnitConstants.MAX_QUANTITY,
+            bestBeforeDate),
+        "Adding more than the maximum allowed quantity should throw an exception");
+  }
+
+  @Test
+  @DisplayName("Test Remove Grocery More Than Available")
+  void removeGroceryMoreThanAvailable() {
+    storageUnit.addGrocery(grocery, 3, bestBeforeDate);
+
+    assertThrows(InsufficientGroceryInStorageUnitException.class,
+        () -> storageUnit.removeGrocery(grocery, 4), "Removing more than the available quantity should throw an exception");
   }
 }

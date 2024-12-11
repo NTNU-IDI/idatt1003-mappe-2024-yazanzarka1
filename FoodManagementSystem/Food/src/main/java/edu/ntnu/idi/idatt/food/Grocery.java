@@ -39,15 +39,10 @@ public class Grocery implements Comparable<Grocery> {
       throw new IllegalArgumentException("Unit cannot be null");
     }
 
-    if (pricePerUnit <= GroceryConstants.MIN_PRICE_PER_UNIT) {
+    if (pricePerUnit < GroceryConstants.MIN_PRICE_PER_UNIT || pricePerUnit > GroceryConstants.MAX_PRICE_PER_UNIT) {
       throw new IllegalArgumentException(
-          String.format("Price per unit cannot be less than %.2f NOK",
-              GroceryConstants.MIN_PRICE_PER_UNIT));
-    }
-    if (pricePerUnit >= GroceryConstants.MAX_PRICE_PER_UNIT) {
-      throw new IllegalArgumentException(
-          String.format("Price per unit cannot be more than %.2f NOK",
-              GroceryConstants.MAX_PRICE_PER_UNIT));
+          String.format("Price per unit cannot be less than %.2f NOK or more than %.2f NOK",
+              GroceryConstants.MIN_PRICE_PER_UNIT, GroceryConstants.MAX_PRICE_PER_UNIT));
     }
     this.groceryName = groceryName;
     this.unit = unit;

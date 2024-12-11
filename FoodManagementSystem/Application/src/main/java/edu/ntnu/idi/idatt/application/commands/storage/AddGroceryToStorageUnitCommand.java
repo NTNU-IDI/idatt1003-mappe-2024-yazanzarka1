@@ -11,7 +11,7 @@ import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
-import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import java.util.Date;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
@@ -75,9 +75,9 @@ public class AddGroceryToStorageUnitCommand implements Command {
     // Get grocery amount from user
     float groceryAmount = inputHandler.getFloat(
         String.format("Enter amount of %s (%s-%s): ", groceryToBeAdded.getGroceryName(),
-            StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY),
-        new FloatValidator("Invalid amount", StorageEntryConstants.MIN_QUANTITY,
-            StorageEntryConstants.MAX_QUANTITY));
+            StorageUnitConstants.MIN_QUANTITY, StorageUnitConstants.MAX_QUANTITY),
+        new FloatValidator("Invalid amount", StorageUnitConstants.MIN_QUANTITY,
+            StorageUnitConstants.MAX_QUANTITY));
 
     // Get grocery best before date from user
     Date groceryBestBeforeDate = inputHandler.getDate("Enter Best before date (dd.mm.yyyy): ",

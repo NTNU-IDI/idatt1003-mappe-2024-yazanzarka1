@@ -2,7 +2,7 @@ package edu.ntnu.idi.idatt.food;
 
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
-import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import edu.ntnu.idi.idatt.food.exceptions.InsufficientGroceryInStorageUnitException;
 import java.text.SimpleDateFormat;
@@ -52,21 +52,27 @@ public class StorageUnit implements TableRepresentable {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
 
-    // Check if grocery already exists in storage unit
     String groceryName = grocery.getGroceryName();
-    StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
 
-    if (quantity < StorageEntryConstants.MIN_QUANTITY
-        || quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException(
-          String.format("Quantity must be between %.2f and %.2f",
-              StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY));
+    if (quantity < StorageUnitConstants.MIN_QUANTITY
+        || quantity > StorageUnitConstants.MAX_QUANTITY) {
+      throw new IllegalArgumentException(String.format("Quantity must be between %.2f and %.2f",
+          StorageUnitConstants.MIN_QUANTITY, StorageUnitConstants.MAX_QUANTITY));
     }
 
+    StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
+
+    // Check if grocery already exists in storage unit
     if (groceries.containsKey(groceryName)) {
       StorageEntry existingEntry = groceries.get(groceryName);
       if (existingEntry.getUnit() != storageEntry.getUnit()) {
         throw new IllegalArgumentException("Unit of grocery does not match existing grocery");
+      }
+      if (existingEntry.getQuantity() + storageEntry.getQuantity()
+          > StorageUnitConstants.MAX_QUANTITY) {
+        throw new IllegalArgumentException(
+            String.format("Cannot store more than %.2f | Currently Stored: %.2f ",
+                StorageUnitConstants.MAX_QUANTITY, existingEntry.getQuantity()));
       }
       existingEntry.addQuantity(storageEntry.getQuantity());
       existingEntry.setBestBeforeDate(storageEntry.getBestBeforeDate());
@@ -122,15 +128,11 @@ public class StorageUnit implements TableRepresentable {
    */
   public TableData toTableData() {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
-    List<List<String>> groceryList = groceries.values().stream()
-        .sorted()
-        .map(storageEntry -> List.of(
-            storageEntry.getGroceryName(),
-            storageEntry.getUnit().getUnitName(),
-            String.valueOf(storageEntry.getPricePerUnit()),
-            String.valueOf(storageEntry.getQuantity()),
-            formatBestBeforeDate(storageEntry),
-            String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
+    List<List<String>> groceryList = groceries.values().stream().sorted().map(
+            storageEntry -> List.of(storageEntry.getGroceryName(), storageEntry.getUnit().getUnitName(),
+                String.valueOf(storageEntry.getPricePerUnit()),
+                String.valueOf(storageEntry.getQuantity()), formatBestBeforeDate(storageEntry),
+                String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
         .toList();
 
     return new TableData(headers, groceryList);
@@ -145,14 +147,11 @@ public class StorageUnit implements TableRepresentable {
    */
   public TableData toTableData(List<StorageEntry> storageEntries) {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
-    List<List<String>> storageEntryTableBody = storageEntries.stream()
-        .map(storageEntry -> List.of(
-            storageEntry.getGroceryName(),
-            storageEntry.getUnit().getUnitName(),
-            String.valueOf(storageEntry.getPricePerUnit()),
-            String.valueOf(storageEntry.getQuantity()),
-            formatBestBeforeDate(storageEntry),
-            String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
+    List<List<String>> storageEntryTableBody = storageEntries.stream().map(
+            storageEntry -> List.of(storageEntry.getGroceryName(), storageEntry.getUnit().getUnitName(),
+                String.valueOf(storageEntry.getPricePerUnit()),
+                String.valueOf(storageEntry.getQuantity()), formatBestBeforeDate(storageEntry),
+                String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
         .toList();
 
     return new TableData(headers, storageEntryTableBody);
@@ -189,10 +188,8 @@ public class StorageUnit implements TableRepresentable {
    * @return Total value of all groceries in the storage unit
    */
   public float getTotalValue() {
-    return groceries.values().stream()
-        .map(entry -> entry.getQuantity() * entry.getPricePerUnit())
-        .reduce(Float::sum)
-        .orElse(0f);
+    return groceries.values().stream().map(entry -> entry.getQuantity() * entry.getPricePerUnit())
+        .reduce(Float::sum).orElse(0f);
   }
 
   /**

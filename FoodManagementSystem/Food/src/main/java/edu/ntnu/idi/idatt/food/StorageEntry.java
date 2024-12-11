@@ -1,6 +1,6 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class StorageEntry extends Grocery {
   StorageEntry(Grocery grocery, float quantity, Date bestBeforeDate) {
     super(grocery.getGroceryName(), grocery.getUnit(), grocery.getPricePerUnit());
     setQuantity(quantity);
-    setBestBeforeDate(bestBeforeDate);
+    this.bestBeforeDate = bestBeforeDate;
   }
 
   /**
@@ -43,18 +43,6 @@ public class StorageEntry extends Grocery {
     if (quantity < 0) {
       throw new IllegalArgumentException("Quantity cannot be less than 0");
     }
-    if (quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException(String.format(
-          "Quantity cannot be more than %.2f. Current quantity: %.2f",
-          StorageEntryConstants.MAX_QUANTITY, this.quantity));
-    }
-    if (quantity < StorageEntryConstants.MIN_QUANTITY) {
-      throw new IllegalArgumentException(
-          String.format("Quantity must be between %.2f and %.2f",
-              StorageEntryConstants.MIN_QUANTITY,
-              StorageEntryConstants.MAX_QUANTITY));
-    }
-
     this.quantity = quantity;
   }
 
@@ -80,24 +68,12 @@ public class StorageEntry extends Grocery {
    * add quantity to current quantity.
    *
    * @param quantity quantity to add to current quantity
-   * @throws IllegalArgumentException if quantity is less than or equal to 0
    * @throws IllegalArgumentException if quantity is less than 0.01
-   * @throws IllegalArgumentException if quantity is greater than 999.99
-   * @throws IllegalArgumentException if quantity + current quantity is greater than 999.99
    */
   public void addQuantity(float quantity) {
-    if (quantity < StorageEntryConstants.MIN_QUANTITY
-        || quantity > StorageEntryConstants.MAX_QUANTITY) {
+    if (quantity < StorageUnitConstants.MIN_QUANTITY) {
       throw new IllegalArgumentException(
-          String.format("Quantity must be between %.2f and %.2f",
-              StorageEntryConstants.MIN_QUANTITY,
-              StorageEntryConstants.MAX_QUANTITY));
-    }
-
-    if (this.quantity + quantity > StorageEntryConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException(String.format(
-          "Quantity cannot be more than %.2f. Current quantity: %.2f",
-          StorageEntryConstants.MAX_QUANTITY, this.quantity));
+          String.format("Quantity must be more than %.2f", StorageUnitConstants.MIN_QUANTITY));
     }
 
     // Add quantity to current quantity
@@ -108,12 +84,14 @@ public class StorageEntry extends Grocery {
    * subtract quantity from current quantity.
    *
    * @param quantity quantity to be removed
-   * @throws IllegalArgumentException if quantity is less than or equal to 0
+   * @throws IllegalArgumentException if quantity is less than or equal to 0.1
    */
   public void subtractQuantity(float quantity) {
-    if (quantity <= 0) {
-      throw new IllegalArgumentException("Quantity cannot be less than or equal to 0");
+    if (quantity < StorageUnitConstants.MIN_QUANTITY) {
+      throw new IllegalArgumentException(String.format("Quantity cannot be less than or equal to %.2f",
+          StorageUnitConstants.MIN_QUANTITY));
     }
+
     this.quantity -= quantity;
   }
 

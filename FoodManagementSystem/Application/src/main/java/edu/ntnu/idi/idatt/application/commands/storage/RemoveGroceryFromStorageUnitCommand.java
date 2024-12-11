@@ -9,7 +9,7 @@ import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
-import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageUnitConstants;
 import java.util.List;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
@@ -76,8 +76,8 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
     // Get quantity to remove from user
     float quantity = inputHandler.getFloat("Enter quantity to remove: ", new FloatValidator(
         String.format("Invalid quantity. Quantity should be between %s and %s",
-            StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY),
-        StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY));
+            StorageUnitConstants.MIN_QUANTITY, StorageUnitConstants.MAX_QUANTITY),
+        StorageUnitConstants.MIN_QUANTITY, StorageUnitConstants.MAX_QUANTITY));
 
     // Remove grocery from storage unit
     storageUnit.removeGrocery(storageEntries.getFirst(), quantity);

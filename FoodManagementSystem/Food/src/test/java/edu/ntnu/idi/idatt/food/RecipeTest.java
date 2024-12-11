@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.food;
 
+import edu.ntnu.idi.idatt.food.constants.RecipeConstants;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import org.junit.jupiter.api.Assertions;
@@ -169,5 +170,24 @@ class RecipeTest {
         "Recipes with the same name should be considered equal by name");
     Assertions.assertEquals(recipe.getDescription(), identicalRecipe.getDescription(),
         "Recipes with the same description should be considered equal by description");
+  }
+
+  @Test
+  @DisplayName("Test Adding Grocery with Maximum Allowed Amount")
+  void addGroceryWithMaximumAllowedAmount() {
+    Grocery grocery = new Grocery("Max Grocery", new Kilogram(), 100);
+    recipe.addGrocery(grocery, RecipeConstants.MAX_RECIPE_AMOUNT);
+    Assertions.assertEquals(RecipeConstants.MAX_RECIPE_AMOUNT,
+        recipe.getGrocery(grocery.getGroceryName()).amount(),
+        "The grocery amount should equal the maximum allowed amount");
+  }
+
+  @Test
+  @DisplayName("Test Adding Grocery Beyond Maximum Allowed Amount")
+  void addGroceryBeyondMaximumAllowedAmountShouldThrowException() {
+    Grocery grocery = new Grocery("Excess Grocery", new Kilogram(), 100);
+    Assertions.assertThrows(IllegalArgumentException.class,
+        () -> recipe.addGrocery(grocery, RecipeConstants.MAX_RECIPE_AMOUNT + 1.0f),
+        "Adding a grocery amount beyond the maximum should throw an exception");
   }
 }
