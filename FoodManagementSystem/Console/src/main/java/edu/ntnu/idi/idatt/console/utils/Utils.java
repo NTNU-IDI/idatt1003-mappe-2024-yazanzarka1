@@ -17,7 +17,10 @@ public class Utils {
    */
   public static String truncateSentence(String sentence, int wordCount) {
     List<String> wordsArray = Arrays.stream(sentence.trim().split(" ")).toList();
-    return wordsArray.subList(0, Math.min(wordsArray.size(), wordCount)).stream()
+    if (wordsArray.size() <= wordCount) {
+      return sentence;
+    }
+    return wordsArray.subList(0, wordCount).stream()
         .reduce((a, b) -> a + " " + b).orElse("").concat("...");
   }
 

@@ -82,10 +82,10 @@ public class RecipeManager implements TableRepresentable {
    */
   public TableData toTableData() {
     // Headers for the table
-    List<String> headers = List.of("ID", "Name", "Description", "Price", "People Count");
+    List<String> headers = List.of("ID", "Name", "Description", "Price", "People");
     List<List<String>> recipesList = IntStream.range(0, recipes.size()).mapToObj(
-        i -> List.of(String.valueOf(i), recipes.get(i).getName(),
-            Utils.truncateSentence(recipes.get(i).getDescription(), 5),
+        i -> List.of(String.valueOf(i), Utils.truncateSentence(recipes.get(i).getName(), 4),
+            Utils.truncateSentence(recipes.get(i).getDescription(), 4),
             String.format("%.2f", recipes.get(i).getRecipePrice()),
             String.valueOf(recipes.get(i).getPeopleCount()))).toList();
 
