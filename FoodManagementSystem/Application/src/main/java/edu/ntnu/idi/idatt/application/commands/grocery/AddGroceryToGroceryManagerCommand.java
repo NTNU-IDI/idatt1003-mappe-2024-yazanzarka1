@@ -92,7 +92,7 @@ public class AddGroceryToGroceryManagerCommand implements Command {
     // Get price per unit from user
     float groceryPricePerUnit =
         inputHandler.getFloat(
-            String.format("Enter price per unit (%.2ff - %.2f): ",
+            String.format("Enter price per unit (%.2f - %.2f): ",
                 GroceryConstants.MIN_PRICE_PER_UNIT,
                 GroceryConstants.MAX_PRICE_PER_UNIT),
             new FloatValidator(String.format("Price per unit must be between %.2f and %.2f",

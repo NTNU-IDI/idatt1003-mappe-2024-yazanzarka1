@@ -119,23 +119,35 @@ public class DisplayManager {
     }
 
     if (!title.isEmpty()) {
+      // Check if the title length is even for padding issues
+      int titleLength = title.length();
+      boolean isTitleLengthEven = title.length() % 2 == 0;
 
       // Calculate the total width of the table
-      int totalWidth = Arrays.stream(columnWidths).sum() + columnWidths.length * 2 + 6;
+      int totalWidth = Arrays.stream(columnWidths).sum() + columnWidths.length * 3 + 1;
+      int halfWidth = totalWidth / 2;
+      int halfTitleLength = titleLength / 2;
+      boolean isTotalWidthEven = totalWidth % 2 == 0;
 
       System.out.println("+" + "-".repeat(totalWidth - 2) + "+");
 
-      // Print the title
-      showColoredMessageSameLine("|", HEADER_COLOR);
+      // Print the title in the middle of the table
       showColoredMessageSameLine(
-          padLeft(title, (totalWidth / 2 + title.length() / 2)), HEADER_COLOR);
-      showColoredMessage(padLeft("|", (totalWidth / 2) - title.length() / 2), HEADER_COLOR);
+          padRight("|", (halfWidth - halfTitleLength + (isTotalWidthEven ? 0 : 1))),
+          HEADER_COLOR);
+      showColoredMessageSameLine(
+          title, HEADER_COLOR);
+      showColoredMessage(padLeft("|", (halfWidth - halfTitleLength - (isTitleLengthEven ? 0 : 1))),
+          HEADER_COLOR);
+
+
     }
 
     printRow(tableData.headers(), columnWidths, true);
     for (List<String> row : tableData.data()) {
       printRow(row, columnWidths, false);
     }
+    return;
   }
 
   private void printRow(List<String> row, int[] columnWidths, boolean isHeader) {

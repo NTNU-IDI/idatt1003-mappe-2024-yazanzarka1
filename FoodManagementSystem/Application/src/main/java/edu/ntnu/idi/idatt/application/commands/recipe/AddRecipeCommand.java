@@ -89,18 +89,19 @@ public class AddRecipeCommand implements Command {
 
       // if grocery not found display message and continue
       if (grocery == null) {
-        displayManager.showMessage("Grocery not found");
+        displayManager.showColoredMessage("Grocery not found", Ansi.Color.RED);
         continue;
       }
 
       // display grocery found message
-      displayManager.showMessage("Grocery found: " + grocery.getGroceryName());
+      displayManager.showColoredMessage("Grocery found: " + grocery.getGroceryName(),
+          Ansi.Color.GREEN);
 
       // add grocery to recipe with amount and ask for more groceries
       float amount = inputHandler.getFloat(
           String.format("Enter amount of %s (%.2f - %.2f): ", grocery.getGroceryName(),
               RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT),
-          new FloatValidator(String.format("Amount should be between %.2f, %.2f",
+          new FloatValidator(String.format("Amount should be between %.2f - %.2f",
               RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT),
               RecipeConstants.MIN_RECIPE_AMOUNT, RecipeConstants.MAX_RECIPE_AMOUNT));
 
@@ -136,7 +137,7 @@ public class AddRecipeCommand implements Command {
     }
     // add recipe to recipe manager
     recipeManager.addRecipe(newRecipe);
-    displayManager.showMessage("Recipe added: " + recipeName);
+    displayManager.showColoredMessage("Recipe added: " + recipeName, Ansi.Color.GREEN);
     return false;
   }
 

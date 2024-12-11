@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Display stored groceries in a storageUnit.
@@ -32,7 +33,7 @@ public class DisplayStoredGroceryCommand implements Command {
     TableData tableData = storageUnit.toTableData();
 
     displayManager.printTable(storageUnit.getName(), tableData);
-    displayManager.showMessage("Total value: " + storageUnit.getTotalValue());
+    displayManager.showColoredMessage(String.format("Total Value: %.2f NOK", storageUnit.getTotalValue()), Color.CYAN);
     return false;
   }
 

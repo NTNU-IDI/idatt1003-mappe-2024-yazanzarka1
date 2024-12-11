@@ -29,8 +29,7 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    * @param inputHandler   InputHandler to handle user input
    */
   public RemoveGroceryFromGroceryManagerCommand(GroceryManager groceryManager,
-      DisplayManager displayManager,
-      InputHandler inputHandler) {
+      DisplayManager displayManager, InputHandler inputHandler) {
     this.groceryManager = groceryManager;
     this.displayManager = displayManager;
     this.inputHandler = inputHandler;
@@ -66,6 +65,7 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
     if (grocery == null) {
       throw new GroceryNotFoundException("Grocery not found: " + groceryName);
     }
+
     // remove grocery from grocery manager and display message
     groceryManager.removeGrocery(grocery);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
