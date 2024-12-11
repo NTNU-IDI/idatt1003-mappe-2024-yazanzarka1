@@ -15,9 +15,9 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Class for storage units. Groceries are stored in storage units with quantity and best before
- * date. StorageUnit can add, remove and display groceries. StorageUnit can also find groceries and
- * get the total value of all groceries in the storage unit. StorageUnit is used by the application
- * to manage groceries.
+ * date. StorageUnit can add, remove and serialize groceries. StorageUnit can also find groceries
+ * and get the total value of all groceries in the storage unit. StorageUnit is used by the
+ * application to manage stored groceries.
  */
 public class StorageUnit implements TableRepresentable {
 
@@ -52,31 +52,40 @@ public class StorageUnit implements TableRepresentable {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
 
+    //
     String groceryName = grocery.getGroceryName();
 
+    // Check if quantity is within limits
     if (quantity < StorageUnitConstants.MIN_QUANTITY
         || quantity > StorageUnitConstants.MAX_QUANTITY) {
-      throw new IllegalArgumentException(String.format("Quantity must be between %.2f and %.2f",
-          StorageUnitConstants.MIN_QUANTITY, StorageUnitConstants.MAX_QUANTITY));
+      throw new IllegalArgumentException(
+          String.format("Quantity must be between %.2f and %.2f", StorageUnitConstants.MIN_QUANTITY,
+              StorageUnitConstants.MAX_QUANTITY));
     }
 
     StorageEntry storageEntry = new StorageEntry(grocery, quantity, bestBeforeDate);
 
     // Check if grocery already exists in storage unit
     if (groceries.containsKey(groceryName)) {
+
+      // Check if unit of grocery matches existing grocery
       StorageEntry existingEntry = groceries.get(groceryName);
       if (existingEntry.getUnit() != storageEntry.getUnit()) {
         throw new IllegalArgumentException("Unit of grocery does not match existing grocery");
       }
+      // Check if quantity is within limits after adding
       if (existingEntry.getQuantity() + storageEntry.getQuantity()
           > StorageUnitConstants.MAX_QUANTITY) {
         throw new IllegalArgumentException(
             String.format("Cannot store more than %.2f | Currently Stored: %.2f ",
                 StorageUnitConstants.MAX_QUANTITY, existingEntry.getQuantity()));
       }
+
+      // Update quantity and best before date
       existingEntry.addQuantity(storageEntry.getQuantity());
       existingEntry.setBestBeforeDate(storageEntry.getBestBeforeDate());
     } else {
+      // Add new grocery to storage unit if it does not exist
       groceries.put(groceryName, storageEntry);
     }
   }
@@ -94,25 +103,32 @@ public class StorageUnit implements TableRepresentable {
    * @see StorageEntry
    */
   public void removeGrocery(Grocery grocery, float quantity) {
+    // Check if grocery is null
     if (grocery == null) {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
 
+    // Check if grocery exists in storage unit
     String groceryName = grocery.getGroceryName();
     StorageEntry existingEntry = groceries.get(groceryName);
 
+    // Check if grocery exists in storage unit
     if (existingEntry == null) {
       throw new GroceryNotFoundException("Grocery not found in storage unit");
     }
 
+    // Check if quantity of grocery is less than quantity
     if (existingEntry.getQuantity() < quantity) {
       throw new InsufficientGroceryInStorageUnitException(
           "Insufficient quantity of " + groceryName + " in storage unit");
     }
+
+    // Remove grocery if quantity is equal to quantity to remove
     if (existingEntry.getQuantity() == quantity) {
       groceries.remove(groceryName);
       return;
     }
+    // Subtract quantity from grocery
     existingEntry.subtractQuantity(quantity);
   }
 

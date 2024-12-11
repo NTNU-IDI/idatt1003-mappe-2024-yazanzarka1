@@ -3,6 +3,9 @@ package edu.ntnu.idi.idatt.console.validators;
 import edu.ntnu.idi.idatt.console.InputValidator;
 import java.util.Date;
 
+/**
+ * A validator for dates.
+ */
 public class DateValidator implements InputValidator<Date> {
 
   private final String errorMessage;

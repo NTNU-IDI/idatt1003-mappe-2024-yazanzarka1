@@ -27,23 +27,29 @@ public class Grocery implements Comparable<Grocery> {
    * @throws IllegalArgumentException if pricePerUnit is less than 0.01 or more than 9999.99
    */
   public Grocery(String groceryName, Unit unit, float pricePerUnit) {
+    // Check if grocery name is valid
     if (groceryName == null || groceryName.isBlank()) {
       throw new IllegalArgumentException("Grocery name cannot be null or blank");
     }
+    // Check if grocery name is within limits
     if (groceryName.length() > GroceryConstants.MAX_GROCERY_NAME_LENGTH) {
       throw new IllegalArgumentException(
           String.format("Grocery name cannot be more than %s characters",
               GroceryConstants.MAX_GROCERY_NAME_LENGTH));
     }
+
+    // Check if unit is valid
     if (unit == null) {
       throw new IllegalArgumentException("Unit cannot be null");
     }
 
+    // Check if price per unit is within limits
     if (pricePerUnit < GroceryConstants.MIN_PRICE_PER_UNIT || pricePerUnit > GroceryConstants.MAX_PRICE_PER_UNIT) {
       throw new IllegalArgumentException(
           String.format("Price per unit cannot be less than %.2f NOK or more than %.2f NOK",
               GroceryConstants.MIN_PRICE_PER_UNIT, GroceryConstants.MAX_PRICE_PER_UNIT));
     }
+    // Set values
     this.groceryName = groceryName;
     this.unit = unit;
     this.pricePerUnit = pricePerUnit;

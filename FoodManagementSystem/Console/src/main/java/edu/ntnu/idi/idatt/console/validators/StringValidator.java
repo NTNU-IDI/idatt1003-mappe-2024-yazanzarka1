@@ -2,6 +2,9 @@ package edu.ntnu.idi.idatt.console.validators;
 
 import edu.ntnu.idi.idatt.console.InputValidator;
 
+/**
+ * A validator for integers.
+ */
 public class StringValidator implements InputValidator<String> {
 
   private final String errorMessage;

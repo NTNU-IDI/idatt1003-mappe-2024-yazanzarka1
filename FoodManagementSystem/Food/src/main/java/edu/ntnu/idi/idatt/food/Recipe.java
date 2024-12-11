@@ -99,15 +99,18 @@ public class Recipe {
           String.format("amount of %s can't be less than %.2f", grocery.getGroceryName(),
               RecipeConstants.MIN_RECIPE_AMOUNT));
     }
+    // Check if amount is within limits
     if (amount > RecipeConstants.MAX_RECIPE_AMOUNT) {
       throw new IllegalArgumentException(
           String.format("amount of %s can't be more than %.2f", grocery.getGroceryName(),
               RecipeConstants.MAX_RECIPE_AMOUNT));
     }
+    // Update grocery if it already exists
     groceries.computeIfPresent(grocery.getGroceryName(), (key, recipeGrocery) -> {
       float newAmount = recipeGrocery.amount() + amount;
       return new RecipeGrocery(grocery, newAmount);
     });
+    // Add grocery to recipe if it does not exist
     groceries.putIfAbsent(grocery.getGroceryName(), new RecipeGrocery(grocery, amount));
   }
 

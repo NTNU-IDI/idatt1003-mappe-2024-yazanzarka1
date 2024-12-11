@@ -51,8 +51,7 @@ public class RecipeManager implements TableRepresentable {
    */
   public void removeRecipe(int index) {
     if (index < 0 || index >= recipes.size()) {
-      throw new IndexOutOfBoundsException(
-          "Index out of bounds: No recipe found at index " + index);
+      throw new IndexOutOfBoundsException("Index out of bounds: No recipe found at index " + index);
     }
     recipes.remove(index);
   }
@@ -84,15 +83,11 @@ public class RecipeManager implements TableRepresentable {
   public TableData toTableData() {
     // Headers for the table
     List<String> headers = List.of("ID", "Name", "Description", "Price", "People Count");
-    List<List<String>> recipesList = IntStream.range(0, recipes.size())
-        .mapToObj(i -> List.of(
-            String.valueOf(i),
-            recipes.get(i).getName(),
+    List<List<String>> recipesList = IntStream.range(0, recipes.size()).mapToObj(
+        i -> List.of(String.valueOf(i), recipes.get(i).getName(),
             Utils.truncateSentence(recipes.get(i).getDescription(), 5),
             String.format("%.2f", recipes.get(i).getRecipePrice()),
-            String.valueOf(recipes.get(i).getPeopleCount())
-        ))
-        .toList();
+            String.valueOf(recipes.get(i).getPeopleCount()))).toList();
 
     return new TableData(headers, recipesList);
 

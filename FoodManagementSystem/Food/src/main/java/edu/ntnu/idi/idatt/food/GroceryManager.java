@@ -36,13 +36,18 @@ public class GroceryManager implements TableRepresentable {
    * @see Grocery
    */
   public void addGrocery(Grocery grocery) {
+    // Check if grocery is null
     if (grocery == null) {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
+
+    // Check if grocery already exists and throw exception if it does
     if (availableGroceries.contains(grocery)) {
       throw new GroceryAlreadyExistsException(
           "Grocery already exists: " + grocery.getGroceryName());
     }
+
+    // Add grocery to available groceries
     availableGroceries.add(grocery);
   }
 
@@ -67,13 +72,16 @@ public class GroceryManager implements TableRepresentable {
    */
   public void removeGrocery(Grocery grocery) {
 
+    // Check if grocery is null
     if (grocery == null) {
       throw new IllegalArgumentException("Grocery cannot be null");
     }
 
+    // Check if grocery exists in available groceries
     if (!availableGroceries.contains(grocery)) {
       throw new GroceryNotFoundException("Grocery not found: " + grocery.getGroceryName());
     }
+    //  Remove grocery from available groceries
     availableGroceries.remove(grocery);
   }
 

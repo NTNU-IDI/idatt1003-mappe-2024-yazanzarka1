@@ -2,6 +2,9 @@ package edu.ntnu.idi.idatt.console.validators;
 
 import edu.ntnu.idi.idatt.console.InputValidator;
 
+/**
+ * A validator for floats.
+ */
 public class FloatValidator implements InputValidator<Float> {
 
   private final String errorMessage;
