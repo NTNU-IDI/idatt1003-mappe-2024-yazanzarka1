@@ -13,7 +13,7 @@ public class MissingGroceryForRecipeException extends RuntimeException {
   /**
    * Create a new MissingGroceryForRecipe exception.
    *
-   * @param message the message to display
+   * @param message   the message to display
    * @param groceries the groceries that are missing
    */
   public MissingGroceryForRecipeException(String message, List<RecipeGrocery> groceries) {

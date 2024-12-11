@@ -13,6 +13,7 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
 import java.util.Date;
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -54,6 +55,10 @@ public class AddGroceryToStorageUnitCommand implements Command {
       // Display available groceries
       TableData tableData = groceryManager.toTableData();
       displayManager.printTable(tableData);
+
+      displayManager.showColoredMessage(
+          String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+          Ansi.Color.YELLOW);
 
       // Get grocery name from user
       String groceryName = inputHandler.getString("Enter Grocery Name: ", new StringValidator(

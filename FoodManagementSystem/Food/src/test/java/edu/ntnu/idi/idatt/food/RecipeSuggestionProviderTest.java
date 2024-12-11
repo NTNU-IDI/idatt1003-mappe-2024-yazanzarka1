@@ -1,8 +1,9 @@
 package edu.ntnu.idi.idatt.food;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,6 @@ class RecipeSuggestionProviderTest {
   Recipe recipeWithNoProducts;
 
 
-
   @BeforeEach
   void setUp() {
     RecipeManager recipeManager = new RecipeManager("Recipe Manager");
@@ -38,7 +38,6 @@ class RecipeSuggestionProviderTest {
     Grocery onion = new Grocery("Onion", new Kilogram(), 20.0f);
     Grocery avocado = new Grocery("Avocado", new Kilogram(), 20.0f);
 
-
     storageUnit.addGrocery(potato, 1.0f, addDays(4));
     storageUnit.addGrocery(milk, 1.0f, addDays(3));
     storageUnit.addGrocery(fish, 1.0f, addDays(-2));
@@ -46,7 +45,7 @@ class RecipeSuggestionProviderTest {
     storageUnit.addGrocery(garlic, 1.0f, addDays(25));
     storageUnit.addGrocery(onion, 1.0f, addDays(20));
     storageUnit.addGrocery(avocado, 1.0f, addDays(20));
-    
+
     recipeWithLongLastingProducts = new Recipe("Fish and Chips", "Fish and Chips");
     recipeWithLongLastingProducts.addGrocery(potato, 1.0f);
     recipeWithLongLastingProducts.addGrocery(onion, 1.0f);
@@ -73,9 +72,6 @@ class RecipeSuggestionProviderTest {
     recipeManager.addRecipe(recipeWithNoProducts);
     recipeManager.addRecipe(recipeWithExpiredProducts);
     recipeManager.addRecipe(recipeWithMoreGorceriesThanInStorage);
-
-
-
 
 
   }

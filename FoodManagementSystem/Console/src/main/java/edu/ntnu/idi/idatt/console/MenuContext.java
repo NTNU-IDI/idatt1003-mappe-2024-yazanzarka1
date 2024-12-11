@@ -7,13 +7,12 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * MenuContext is responsible for defining commands and displaying current context's commands.
- * MenuContext is used to group commands together and display them in a menu.
- * MenuContext is used in CommandRegistry.
- * MenuContext is immutable.
+ * MenuContext is used to group commands together and display them in a menu. MenuContext is used in
+ * CommandRegistry. MenuContext is immutable.
  *
+ * @author yazanzarka
  * @see CommandRegistry
  * @since 0.0.1
- * @author yazanzarka
  */
 public class MenuContext {
 

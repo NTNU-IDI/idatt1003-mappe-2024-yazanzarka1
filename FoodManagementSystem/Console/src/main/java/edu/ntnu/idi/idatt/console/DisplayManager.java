@@ -36,7 +36,7 @@ public class DisplayManager {
    * Method for displaying colored messages.
    *
    * @param message message to be shown
-   * @param color color of the message
+   * @param color   color of the message
    */
   public void showColoredMessage(String message, Ansi.Color color) {
     System.out.println(Ansi.ansi().fg(color).a(message).reset());
@@ -75,6 +75,14 @@ public class DisplayManager {
    */
   public void showSpace() {
     System.out.println();
+  }
+
+  /**
+   * Clear the console screen.
+   */
+  public void clearScreen() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
   }
 
   /**

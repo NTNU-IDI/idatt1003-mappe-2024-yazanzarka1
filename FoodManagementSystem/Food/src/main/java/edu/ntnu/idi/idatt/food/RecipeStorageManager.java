@@ -1,20 +1,17 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryForRecipeException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.IntStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
  * RecipeStorageManager is responsible for comparing groceries in a recipe with groceries in a
- * storage unit.
- * RecipeStorageManager can remove groceries from storage if a recipe is cooked
+ * storage unit. RecipeStorageManager can remove groceries from storage if a recipe is cooked
  */
 public class RecipeStorageManager implements TableRepresentable {
 
@@ -62,16 +59,25 @@ public class RecipeStorageManager implements TableRepresentable {
    */
   public TableData toTableData() {
     // Headers for the table
-    List<String> headers = List.of("Grocery", "Unit", "Price", "Recipe Amount", "In Storage", "Storage Diff");
+    List<String> headers =
+        List.of("Grocery", "Unit", "Price", "Recipe Amount", "In Storage", "Storage Diff");
+
+    // List of groceries in recipe
     List<List<String>> recipesList = new ArrayList<>();
+
+    // Get all groceries in recipe
     recipe.getGroceries().values().forEach(recipeGrocery -> {
+      // Get difference between amount of grocery in recipe and storage
       float storageDifference = getStorageDifference(recipeGrocery);
       float storageAmount = 0;
+
+      // Get amount of grocery in storage
       StorageEntry storageEntry =
           storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
       if (storageEntry != null) {
         storageAmount = storageEntry.getQuantity();
       }
+      // Add grocery to list
       recipesList.add(List.of(recipeGrocery.grocery().getGroceryName(),
           recipeGrocery.grocery().getUnit().getUnitName(),
           String.valueOf(recipeGrocery.grocery().getPricePerUnit()),
@@ -134,9 +140,8 @@ public class RecipeStorageManager implements TableRepresentable {
 
 
   /**
-   * return a string with color based on difference between recipe and storage.
-   * If difference is negative, the string will be red. If difference is positive,
-   * the string will be green.
+   * return a string with color based on difference between recipe and storage. If difference is
+   * negative, the string will be red. If difference is positive, the string will be green.
    */
   String formatDifference(float difference) {
     if (difference < 0) {

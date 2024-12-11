@@ -1,8 +1,8 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.TableRepresentable;
+import edu.ntnu.idi.idatt.console.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -18,7 +18,8 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Initiate a recipe manager.
    *
-   * @param name Name of the recipe manager in the application - Example: "My Recipes" or "Cook Book"
+   * @param name Name of the recipe manager in the application - Example: "My Recipes" or "Cook
+   *             Book"
    * @throws IllegalArgumentException if name is null or empty
    * @see Recipe
    */
@@ -46,6 +47,7 @@ public class RecipeManager implements TableRepresentable {
    * Remove a recipe from recipe manager.
    *
    * @param index Index of recipe to be removed
+   * @throws IndexOutOfBoundsException if index is out of bounds
    */
   public void removeRecipe(int index) {
     if (index < 0 || index >= recipes.size()) {
@@ -81,12 +83,12 @@ public class RecipeManager implements TableRepresentable {
    */
   public TableData toTableData() {
     // Headers for the table
-    List<String> headers = List.of("Index", "Name", "Description", "Price", "People Count");
+    List<String> headers = List.of("ID", "Name", "Description", "Price", "People Count");
     List<List<String>> recipesList = IntStream.range(0, recipes.size())
         .mapToObj(i -> List.of(
             String.valueOf(i),
             recipes.get(i).getName(),
-            recipes.get(i).getDescription(),
+            Utils.truncateSentence(recipes.get(i).getDescription(), 5),
             String.format("%.2f", recipes.get(i).getRecipePrice()),
             String.valueOf(recipes.get(i).getPeopleCount())
         ))

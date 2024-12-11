@@ -2,7 +2,6 @@ package edu.ntnu.idi.idatt.food;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -270,7 +269,6 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
     tableData = storageUnit.toTableData();
 
-
     assertEquals(6, tableData.headers().size(), "Table should have 3 header");
     assertEquals("Grocery", tableData.headers().getFirst(), "Header should be 'Grocery Name'");
     assertEquals(1, tableData.data().size());
@@ -282,7 +280,7 @@ class StorageUnitTest {
   void storageUnitManagerHasCorrectHeadersInTableDataOfCustomEntries() {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
     List<StorageEntry> storageEntries = storageUnit.findGrocery("Milk");
-    TableData tableData  = storageUnit.toTableData(storageEntries);
+    TableData tableData = storageUnit.toTableData(storageEntries);
 
     assertEquals(6, tableData.headers().size(), "Table should have 3 header");
     assertEquals("Grocery", tableData.headers().getFirst(), "Header should be 'Grocery Name'");

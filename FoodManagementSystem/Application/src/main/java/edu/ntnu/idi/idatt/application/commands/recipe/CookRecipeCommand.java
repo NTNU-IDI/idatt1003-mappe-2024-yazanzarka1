@@ -12,6 +12,7 @@ import edu.ntnu.idi.idatt.food.RecipeStorageManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.exceptions.MissingGroceryForRecipeException;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -58,6 +59,10 @@ public class CookRecipeCommand implements Command {
     TableData tableData = recipeManager.toTableData();
     displayManager.printTable(tableData);
     displayManager.showSpace();
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
     // Get recipe index from user
     int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",

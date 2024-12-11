@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.food;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import edu.ntnu.idi.idatt.units.Liter;
 import org.junit.jupiter.api.Assertions;
@@ -92,7 +91,8 @@ class RecipeTest {
   @DisplayName("Test Adding a Grocery with Invalid Amount")
   void addGroceryWithInvalidAmountShouldThrowException() {
     Grocery invalidGrocery = new Grocery("Invalid Grocery", new Kilogram(), 100);
-    Assertions.assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery(invalidGrocery, -1.0f),
+    Assertions.assertThrows(IllegalArgumentException.class,
+        () -> recipe.addGrocery(invalidGrocery, -1.0f),
         "Adding a grocery with negative amount should throw an exception");
   }
 
@@ -108,7 +108,8 @@ class RecipeTest {
   @DisplayName("Test Recipe Price With No Groceries")
   void getRecipePriceWithNoGroceriesShouldReturnZero() {
     Recipe emptyRecipe = new Recipe("Empty Recipe", "No Groceries Here", "No Steps Added", 2);
-    Assertions.assertEquals(0.0f, emptyRecipe.getRecipePrice(), "Recipe price with no groceries should be 0.0");
+    Assertions.assertEquals(0.0f, emptyRecipe.getRecipePrice(),
+        "Recipe price with no groceries should be 0.0");
   }
 
   @Test

@@ -16,19 +16,17 @@ public class Application {
    * initate the application with a command registry.
    *
    * @param commandRegistry CommandRegistry to use for the application.
-   *
-   * Initialize the application with predefined menus, commands and contexts.
+   *                        <p>
+   *                        Initialize the application with predefined menus, commands and
+   *                        contexts.
    */
   public void init(CommandRegistry commandRegistry) {
     this.commandRegistry = commandRegistry;
   }
 
   /**
-   * Start the application.
-   * Main loop for the application.
-   * Get input from user and execute commands.
-   * Display menu for current context if user types "help".
-   * Exit application if user types "exit".
+   * Start the application. Main loop for the application. Get input from user and execute commands.
+   * Display menu for current context if user types "help". Exit application if user types "exit".
    */
   public void start() {
     while (true) {

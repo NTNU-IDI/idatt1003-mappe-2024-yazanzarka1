@@ -16,6 +16,7 @@ import edu.ntnu.idi.idatt.food.constants.RecipeConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 
 /**
  * Command to add a recipe to the application.
@@ -37,6 +38,7 @@ public class AddRecipeCommand implements Command {
    * @param recipeManager  RecipeManager to add recipe to.
    * @param groceryManager GroceryManager to retrieve available groceries from.
    * @param inputHandler   InputHandler to handle user input.
+   * @param displayManager DisplayManager to display messages.
    */
   public AddRecipeCommand(RecipeManager recipeManager, GroceryManager groceryManager,
       InputHandler inputHandler, DisplayManager displayManager) {
@@ -55,6 +57,10 @@ public class AddRecipeCommand implements Command {
   public Boolean execute() {
 
     List<RecipeGrocery> groceries = new ArrayList<>();
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
     // Get recipe name and description from user
     String recipeName = inputHandler.getString("Enter recipe name (3 - 50 characters): ",

@@ -20,11 +20,10 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class RecipeSuggestionProvider {
 
-  RecipeManager recipeManager;
-  StorageUnit storageUnit;
-
   // days before a grocery is considered inedible
   static final int BEST_BEFORE_DAYS_THRESHOLD = 7;
+  RecipeManager recipeManager;
+  StorageUnit storageUnit;
 
   /**
    * Create a new RecipeSuggestionProvider.

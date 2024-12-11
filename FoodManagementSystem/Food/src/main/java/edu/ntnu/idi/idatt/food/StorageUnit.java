@@ -42,8 +42,8 @@ public class StorageUnit implements TableRepresentable {
    * @param grocery        Grocery to add.
    * @param quantity       Quantity of grocery
    * @param bestBeforeDate Best before date of grocery
-   * @throws IllegalArgumentException if grocery is null, quantity is less than 0.0 or greater than
-   *                                  999.0
+   * @throws IllegalArgumentException if grocery is null, quantity is less than 0.1 or greater than
+   *                                  999.99
    * @throws IllegalArgumentException if unit of grocery does not match existing grocery
    * @throws GroceryNotFoundException if grocery not found in storage unit
    */

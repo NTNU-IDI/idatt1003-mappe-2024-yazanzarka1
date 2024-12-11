@@ -9,6 +9,7 @@ import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 
 /**
  * Search in storage unit.
@@ -44,6 +45,10 @@ public class SearchInStorageUnitCommand implements Command {
   @Override
   public Boolean execute() {
     displayManager.showMessage("Search in storage unit");
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
     String query = inputHandler.getString("Enter grocery name: ",
         new StringValidator("Invalid grocery name", GroceryConstants.MIN_GROCERY_NAME_LENGTH,

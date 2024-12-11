@@ -6,5 +6,4 @@ public class StorageEntryConstants {
   public static float MIN_QUANTITY = 0.01f;
 
 
-
 }

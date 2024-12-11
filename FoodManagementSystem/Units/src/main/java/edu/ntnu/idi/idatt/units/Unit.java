@@ -1,7 +1,7 @@
 package edu.ntnu.idi.idatt.units;
 
 /**
- *  Unit that represents SI units.
+ * Unit that represents SI units.
  */
 public abstract class Unit {
 

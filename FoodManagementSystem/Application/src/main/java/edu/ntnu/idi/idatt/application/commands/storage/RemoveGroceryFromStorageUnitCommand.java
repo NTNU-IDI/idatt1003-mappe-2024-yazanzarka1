@@ -9,6 +9,7 @@ import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -47,6 +48,10 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
     // Display all groceries in storage unit
     TableData tableData = storageUnit.toTableData();
     displayManager.printTable(tableData);
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
     String storageEntryName = inputHandler.getString("Enter name of grocery to remove: ",
         new StringValidator("Invalid grocery name", GroceryConstants.MIN_GROCERY_NAME_LENGTH,
             GroceryConstants.MAX_GROCERY_NAME_LENGTH));

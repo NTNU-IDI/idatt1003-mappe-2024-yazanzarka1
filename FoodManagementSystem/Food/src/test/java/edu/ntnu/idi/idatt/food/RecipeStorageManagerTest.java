@@ -82,15 +82,18 @@ class RecipeStorageManagerTest {
             "Storage difference should be -2.0f"),
         () -> assertEquals(
             -missingGroceryRecipe.getGrocery(grocery4.getGroceryName()).amount(),
-            recipeStorageManager.getStorageDifference(missingGroceryRecipe.getGrocery(grocery4.getGroceryName())),
+            recipeStorageManager.getStorageDifference(
+                missingGroceryRecipe.getGrocery(grocery4.getGroceryName())),
             "Storage difference should be -2.0f")
     );
   }
 
   @Test
   void cookRecipeFailsWhenGroceryNeeded() {
-    MissingGroceryForRecipeException exception = assertThrows(MissingGroceryForRecipeException.class, () -> recipeStorageManager.cookRecipe(),
-        "Should throw MissingGroceryForRecipeException");
+    MissingGroceryForRecipeException exception =
+        assertThrows(MissingGroceryForRecipeException.class,
+            () -> recipeStorageManager.cookRecipe(),
+            "Should throw MissingGroceryForRecipeException");
 
     assertEquals(1, exception.getGroceries().size());
 
@@ -140,14 +143,17 @@ class RecipeStorageManagerTest {
 
     assertEquals(4, tableData.data().size(), "TableData should contain 4 rows");
     assertEquals(6, tableData.headers().size(), "TableData should have 6 columns");
-    assertEquals("Test Grocery", tableData.data().get(0).get(0), "First row should match grocery name");
+    assertEquals("Test Grocery", tableData.data().get(0).get(0),
+        "First row should match grocery name");
   }
 
   @Test
   @DisplayName("Test getStorageDifference with Missing Grocery")
   void getStorageDifferenceWithMissingGrocery() {
-    float difference = recipeStorageManager.getStorageDifference(missingGroceryRecipe.getGrocery(grocery4.getGroceryName()));
-    assertEquals(-1.0f, difference, "Storage difference for a missing grocery should match its negative amount");
+    float difference = recipeStorageManager.getStorageDifference(
+        missingGroceryRecipe.getGrocery(grocery4.getGroceryName()));
+    assertEquals(-1.0f, difference,
+        "Storage difference for a missing grocery should match its negative amount");
   }
 
   @Test
@@ -167,13 +173,17 @@ class RecipeStorageManagerTest {
     }
 
     assertAll(
-        () -> assertEquals(1.0f, storageUnit.findGroceryByName(grocery.getGroceryName()).getQuantity(),
+        () -> assertEquals(1.0f,
+            storageUnit.findGroceryByName(grocery.getGroceryName()).getQuantity(),
             "Grocery quantity should remain unchanged"),
-        () -> assertEquals(2.0f, storageUnit.findGroceryByName(grocery1.getGroceryName()).getQuantity(),
+        () -> assertEquals(2.0f,
+            storageUnit.findGroceryByName(grocery1.getGroceryName()).getQuantity(),
             "Grocery1 quantity should remain unchanged"),
-        () -> assertEquals(3.0f, storageUnit.findGroceryByName(grocery2.getGroceryName()).getQuantity(),
+        () -> assertEquals(3.0f,
+            storageUnit.findGroceryByName(grocery2.getGroceryName()).getQuantity(),
             "Grocery2 quantity should remain unchanged"),
-        () -> assertEquals(1.0f, storageUnit.findGroceryByName(grocery3.getGroceryName()).getQuantity(),
+        () -> assertEquals(1.0f,
+            storageUnit.findGroceryByName(grocery3.getGroceryName()).getQuantity(),
             "Grocery3 quantity should remain unchanged")
     );
   }
@@ -187,11 +197,14 @@ class RecipeStorageManagerTest {
     assertAll(
         () -> assertNull(storageUnit.findGroceryByName(grocery.getGroceryName()),
             "Grocery should be completely removed from storage"),
-        () -> assertEquals(1.0f, storageUnit.findGroceryByName(grocery1.getGroceryName()).getQuantity(),
+        () -> assertEquals(1.0f,
+            storageUnit.findGroceryByName(grocery1.getGroceryName()).getQuantity(),
             "Grocery1 should have correct remaining quantity"),
-        () -> assertEquals(2.0f, storageUnit.findGroceryByName(grocery2.getGroceryName()).getQuantity(),
+        () -> assertEquals(2.0f,
+            storageUnit.findGroceryByName(grocery2.getGroceryName()).getQuantity(),
             "Grocery2 should have correct remaining quantity"),
-        () -> assertEquals(1.0f, storageUnit.findGroceryByName(grocery3.getGroceryName()).getQuantity(),
+        () -> assertEquals(1.0f,
+            storageUnit.findGroceryByName(grocery3.getGroceryName()).getQuantity(),
             "Grocery3 should have correct remaining quantity")
     );
   }

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.units.Kilogram;
 import org.junit.jupiter.api.BeforeEach;

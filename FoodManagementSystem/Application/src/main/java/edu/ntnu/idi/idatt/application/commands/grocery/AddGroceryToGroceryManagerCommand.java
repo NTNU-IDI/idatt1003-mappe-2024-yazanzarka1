@@ -47,6 +47,10 @@ public class AddGroceryToGroceryManagerCommand implements Command {
   public Boolean execute() {
 
     try {
+      displayManager.showColoredMessage(
+          String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+          Ansi.Color.YELLOW);
+
       // Get grocery name from user
       final String groceryName = inputHandler.getString(
           String.format("Enter Grocery Name (%s-%s characters): ",

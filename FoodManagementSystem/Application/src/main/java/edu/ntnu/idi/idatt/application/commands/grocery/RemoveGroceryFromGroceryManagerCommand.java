@@ -9,6 +9,7 @@ import edu.ntnu.idi.idatt.food.Grocery;
 import edu.ntnu.idi.idatt.food.GroceryManager;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
 import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -42,9 +43,14 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    */
   @Override
   public Boolean execute() {
+
     // Display available groceries
     TableData tableData = groceryManager.toTableData();
     displayManager.printTable(tableData);
+
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
 
     // Get grocery name from user
     String groceryName = inputHandler.getString("Enter the name of the grocery: ",
@@ -73,6 +79,6 @@ public class RemoveGroceryFromGroceryManagerCommand implements Command {
    */
   @Override
   public String getDescription() {
-    return "Remove grocery from grocery manager";
+    return "Remove grocery from application";
   }
 }

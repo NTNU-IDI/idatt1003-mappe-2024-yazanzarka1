@@ -11,9 +11,8 @@ import java.util.Set;
 
 
 /**
- * Manages Grocery in the app. GroceryManager can add and remove groceries. GroceryManager
- * can also return available groceries. GroceryManager is used by the application to manage
- * groceries.
+ * Manages Grocery in the app. GroceryManager can add and remove groceries. GroceryManager can also
+ * return available groceries. GroceryManager is used by the application to manage groceries.
  *
  * @see Grocery
  */
@@ -32,6 +31,7 @@ public class GroceryManager implements TableRepresentable {
    * Adds Grocery to GroceryManager.
    *
    * @param grocery grocery to be added
+   * @throws IllegalArgumentException if grocery is null
    * @throws GroceryAlreadyExistsException if grocery already exists
    * @see Grocery
    */
@@ -61,6 +61,7 @@ public class GroceryManager implements TableRepresentable {
    * bounds.
    *
    * @param grocery grocery to be removed
+   * @throws IllegalArgumentException if grocery is null
    * @throws GroceryNotFoundException if grocery is not found
    * @see Grocery
    */

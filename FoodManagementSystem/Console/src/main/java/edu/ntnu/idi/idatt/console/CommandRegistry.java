@@ -11,8 +11,8 @@ import java.util.Map;
  * has commands which will be handled on user interaction. CommandRegistry makes sure that the right
  * command is being executed.
  *
- * @since 0.0.1
  * @author yazanzarka
+ * @since 0.0.1
  */
 public class CommandRegistry {
 

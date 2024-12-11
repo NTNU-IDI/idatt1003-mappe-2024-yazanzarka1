@@ -30,7 +30,8 @@ public class GroceryMenu extends MenuContext {
     super("Grocery", "grocery-menu");
     addCommand("1", new DisplayGroceriesCommand(groceryManager, displayManager));
     addCommand("2",
-        new AddGroceryToGroceryManagerCommand(groceryManager, unitProvider, displayManager, inputHandler));
+        new AddGroceryToGroceryManagerCommand(groceryManager, unitProvider, displayManager,
+            inputHandler));
     addCommand("3",
         new RemoveGroceryFromGroceryManagerCommand(groceryManager, displayManager, inputHandler));
     addCommand("back",

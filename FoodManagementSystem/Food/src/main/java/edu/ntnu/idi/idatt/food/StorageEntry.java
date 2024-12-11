@@ -36,6 +36,8 @@ public class StorageEntry extends Grocery {
    *
    * @param quantity new quantity
    * @throws IllegalArgumentException if quantity is less than 0
+   * @throws IllegalArgumentException if quantity is greater than 999.99
+   * @throws IllegalArgumentException if quantity is less than 0.01
    */
   public void setQuantity(float quantity) {
     if (quantity < 0) {
@@ -79,8 +81,9 @@ public class StorageEntry extends Grocery {
    *
    * @param quantity quantity to add to current quantity
    * @throws IllegalArgumentException if quantity is less than or equal to 0
-   * @throws IllegalArgumentException if quantity is greater than 999.0
-   * @throws IllegalArgumentException if quantity + current quantity is greater than 999.0
+   * @throws IllegalArgumentException if quantity is less than 0.01
+   * @throws IllegalArgumentException if quantity is greater than 999.99
+   * @throws IllegalArgumentException if quantity + current quantity is greater than 999.99
    */
   public void addQuantity(float quantity) {
     if (quantity < StorageEntryConstants.MIN_QUANTITY

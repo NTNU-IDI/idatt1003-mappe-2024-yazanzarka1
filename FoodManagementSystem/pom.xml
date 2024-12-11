@@ -37,21 +37,21 @@
         <version>2.4.0</version>
       </dependency>
       <dependency>
-        <groupId>io.micronaut.validation</groupId>
         <artifactId>micronaut-validation</artifactId>
-        <version>4.8.0</version>
+        <groupId>io.micronaut.validation</groupId>
         <scope>runtime</scope>
+        <version>4.8.0</version>
       </dependency>
       <dependency>
-        <groupId>io.micronaut.validation</groupId>
         <artifactId>micronaut-validation-processor</artifactId>
+        <groupId>io.micronaut.validation</groupId>
         <version>4.6.1</version>
       </dependency>
       <dependency>
-        <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>5.11.0</version>
+        <groupId>org.mockito</groupId>
         <scope>test</scope>
+        <version>5.11.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

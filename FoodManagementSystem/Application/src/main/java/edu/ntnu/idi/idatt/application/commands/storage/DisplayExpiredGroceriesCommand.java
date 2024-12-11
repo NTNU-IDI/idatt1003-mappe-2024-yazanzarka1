@@ -7,8 +7,6 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
@@ -25,7 +23,7 @@ public class DisplayExpiredGroceriesCommand implements Command {
   /**
    * DisplayExpiredGroceriesCommand constructor.
    *
-   * @param storageUnit Storage unit that we should look for expired groceries in.
+   * @param storageUnit    Storage unit that we should look for expired groceries in.
    * @param displayManager DisplayManager to display the expired groceries.
    */
   public DisplayExpiredGroceriesCommand(StorageUnit storageUnit, DisplayManager displayManager) {

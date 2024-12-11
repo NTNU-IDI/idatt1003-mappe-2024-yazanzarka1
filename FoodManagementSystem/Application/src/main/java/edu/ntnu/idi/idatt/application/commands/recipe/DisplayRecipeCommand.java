@@ -50,8 +50,8 @@ public class DisplayRecipeCommand implements Command {
     displayManager.showSpace();
 
     //Get the index of the recipe from the user
-    int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",
-        new IntegerValidator("Invalid index", 0, recipeManager.getRecipes().size() - 1));
+    int recipeIndex = inputHandler.getInt("Enter the ID of the recipe: ",
+        new IntegerValidator("Invalid ID", 0, recipeManager.getRecipes().size() - 1));
     displayManager.showSpace();
 
     //Get the recipe from the recipe manager
@@ -59,7 +59,7 @@ public class DisplayRecipeCommand implements Command {
     try {
       recipe = recipeManager.getRecipes().get(recipeIndex);
     } catch (IndexOutOfBoundsException e) {
-      displayManager.showMessage("No recipe found at index " + recipeIndex);
+      displayManager.showMessage("No recipe found with given ID. " + recipeIndex);
       return false;
     }
     //Display the recipe table
@@ -68,7 +68,13 @@ public class DisplayRecipeCommand implements Command {
 
     //Display the recipe table
     TableData recipeInStorageTableData = recipeStorageManager.toTableData();
-    displayManager.printTable(recipeInStorageTableData);
+    displayManager.printTable(recipe.getName(), recipeInStorageTableData);
+
+    // Display the recipe description
+    displayManager.showSpace();
+    displayManager.showFancyMessage("Description of the recipe:");
+    displayManager.showMessage(recipe.getDescription());
+
 
     // Display the steps of the recipe
     displayManager.showSpace();

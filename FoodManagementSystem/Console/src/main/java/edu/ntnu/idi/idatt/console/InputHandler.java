@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.console;
 
+import edu.ntnu.idi.idatt.console.exceptions.UserInputException;
 import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ public class InputHandler {
 
   private final Scanner scanner;
   private final DisplayManager displayManager;
+  public static final String CANCEL_WORD = "cancel";
 
   /**
    * Initiate InputHandler with a scanner instance.
@@ -60,6 +62,9 @@ public class InputHandler {
       } else {
         displayManager.showColoredMessage(validator.getErrorMessage(), Color.RED);
       }
+    }
+    if (input.equals(CANCEL_WORD)) {
+      throw new UserInputException("User cancelled operation");
     }
     return input.trim();
   }
@@ -119,7 +124,8 @@ public class InputHandler {
       try {
         input = new SimpleDateFormat("dd.MM.yyyy").parse(value);
       } catch (ParseException e) {
-        displayManager.showColoredMessage("Invalid input. Please enter a date in the format dd.MM.yyyy.", Color.RED);
+        displayManager.showColoredMessage(
+            "Invalid input. Please enter a date in the format dd.MM.yyyy.", Color.RED);
       }
       if (!validator.validateInput(input)) {
         input = null;

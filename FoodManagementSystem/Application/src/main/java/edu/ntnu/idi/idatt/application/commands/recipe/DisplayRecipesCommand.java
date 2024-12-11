@@ -27,7 +27,7 @@ public class DisplayRecipesCommand implements Command {
   }
 
   /**
-   *  Execute command.
+   * Execute command.
    *
    * @return Boolean redisplay commands in menu-contexts if true
    */

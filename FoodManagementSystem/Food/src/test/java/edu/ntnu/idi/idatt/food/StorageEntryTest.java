@@ -76,7 +76,8 @@ class StorageEntryTest {
   @Test
   @DisplayName("Test CompareTo")
   void testCompareTo() {
-    StorageEntry storageEntry2 = new StorageEntry(new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
+    StorageEntry storageEntry2 =
+        new StorageEntry(new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
     assertEquals(0, storageEntry.compareTo(storageEntry2), "Storage entries should be equal");
   }
 
@@ -118,7 +119,8 @@ class StorageEntryTest {
   void testEqualsDifferentObject() {
     StorageEntry anotherStorageEntry = new StorageEntry(
         new Grocery("Milk", new Liter(), 50.0f), 10.0f, bestBeforeDate);
-    assertEquals(storageEntry, anotherStorageEntry, "Storage entries with the same data should be equal");
+    assertEquals(storageEntry, anotherStorageEntry,
+        "Storage entries with the same data should be equal");
   }
 
   @Test
@@ -131,7 +133,8 @@ class StorageEntryTest {
   @DisplayName("Test Equals with Different Class")
   void testEqualsDifferentClass() {
     String differentClassObject = "Not a StorageEntry";
-    assertNotEquals(storageEntry, differentClassObject, "Storage entry should not be equal to a different class object");
+    assertNotEquals(storageEntry, differentClassObject,
+        "Storage entry should not be equal to a different class object");
   }
 
   @Test
@@ -153,7 +156,8 @@ class StorageEntryTest {
   @Test
   @DisplayName("Test IsExpired with Future Date")
   void testIsExpiredFutureDate() {
-    Date futureDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24); // 1 day in the future
+    Date futureDate =
+        new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24); // 1 day in the future
     storageEntry.setBestBeforeDate(futureDate);
     assertFalse(storageEntry.isExpired(), "Storage entry should not be expired with a future date");
   }

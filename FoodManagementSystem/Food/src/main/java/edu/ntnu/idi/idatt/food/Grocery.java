@@ -14,7 +14,7 @@ public class Grocery implements Comparable<Grocery> {
 
   private final String groceryName;
   private final Unit unit;
-  private float pricePerUnit;
+  private final float pricePerUnit;
 
   /**
    * Public Grocery constructor.
@@ -22,11 +22,11 @@ public class Grocery implements Comparable<Grocery> {
    * @param groceryName  grocery name
    * @param unit         SI unit
    * @param pricePerUnit price per unit NOK/KG for example
+   * @throws IllegalArgumentException if groceryName is null or blank, groceryName is more than 25
+   * @throws IllegalArgumentException if unit is null
+   * @throws IllegalArgumentException if pricePerUnit is less than 0.01 or more than 9999.99
    */
-  public Grocery(
-      String groceryName,
-      Unit unit,
-      float pricePerUnit) {
+  public Grocery(String groceryName, Unit unit, float pricePerUnit) {
     if (groceryName == null || groceryName.isBlank()) {
       throw new IllegalArgumentException("Grocery name cannot be null or blank");
     }
@@ -38,9 +38,20 @@ public class Grocery implements Comparable<Grocery> {
     if (unit == null) {
       throw new IllegalArgumentException("Unit cannot be null");
     }
+
+    if (pricePerUnit <= GroceryConstants.MIN_PRICE_PER_UNIT) {
+      throw new IllegalArgumentException(
+          String.format("Price per unit cannot be less than %.2f NOK",
+              GroceryConstants.MIN_PRICE_PER_UNIT));
+    }
+    if (pricePerUnit >= GroceryConstants.MAX_PRICE_PER_UNIT) {
+      throw new IllegalArgumentException(
+          String.format("Price per unit cannot be more than %.2f NOK",
+              GroceryConstants.MAX_PRICE_PER_UNIT));
+    }
     this.groceryName = groceryName;
     this.unit = unit;
-    setPricePerUnit(pricePerUnit);
+    this.pricePerUnit = pricePerUnit;
   }
 
 
@@ -73,27 +84,6 @@ public class Grocery implements Comparable<Grocery> {
     return pricePerUnit;
   }
 
-  /**
-   * Grocery's price per unit setter.
-   *
-   * @param pricePerUnit price per unit
-   * @return float newPricePerUnit
-   * @throws IllegalArgumentException if pricePerUnit is less than or equal to 0
-   */
-  public float setPricePerUnit(float pricePerUnit) {
-    if (pricePerUnit <= GroceryConstants.MIN_PRICE_PER_UNIT) {
-      throw new IllegalArgumentException(
-          String.format("Price per unit cannot be less than %.2f NOK",
-              GroceryConstants.MIN_PRICE_PER_UNIT));
-    }
-    if (pricePerUnit >= GroceryConstants.MAX_PRICE_PER_UNIT) {
-      throw new IllegalArgumentException(
-          String.format("Price per unit cannot be more than %.2f NOK",
-              GroceryConstants.MAX_PRICE_PER_UNIT));
-    }
-    this.pricePerUnit = pricePerUnit;
-    return pricePerUnit;
-  }
 
   @Override
   public boolean equals(Object o) {

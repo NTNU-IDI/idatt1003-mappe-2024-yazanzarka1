@@ -31,12 +31,6 @@ class GroceryTest {
   }
 
   @Test
-  void setPricePerUnit() {
-    grocery.setPricePerUnit(60.0f);
-    assertEquals(60.0f, grocery.getPricePerUnit(), "Price per unit should be 60.0");
-  }
-
-  @Test
   @DisplayName("Test Grocery with Null Name")
   void testGroceryNullName() {
     Exception exception = assertThrows(
@@ -102,28 +96,11 @@ class GroceryTest {
   void testEqualsAndHashCodeDifferent() {
     Unit unit = new Liter();
     Grocery differentGrocery = new Grocery("Juice", unit, 60.0f);
-    assertNotEquals(grocery, differentGrocery, "Groceries with different names should not be equal");
+    assertNotEquals(grocery, differentGrocery,
+        "Groceries with different names should not be equal");
     assertNotEquals(grocery.hashCode(), differentGrocery.hashCode(), "Hash codes should not match");
   }
 
-  @Test
-  @DisplayName("Test Set Price Per Unit with Negative Value")
-  void testSetPricePerUnitNegative() {
-    Exception exception = assertThrows(
-        IllegalArgumentException.class,
-        () -> grocery.setPricePerUnit(-20.0f),
-        "Expected exception for setting a negative price per unit"
-    );
-  }
 
-  @Test
-  @DisplayName("Test Set Price Per Unit with Zero")
-  void testSetPricePerUnitZero() {
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> grocery.setPricePerUnit(0.0f),
-        "Expected exception for setting a price per unit of zero"
-    );
-  }
 }
 

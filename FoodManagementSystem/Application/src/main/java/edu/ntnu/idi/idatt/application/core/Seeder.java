@@ -11,7 +11,6 @@ import edu.ntnu.idi.idatt.units.Piece;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Seeder class to seed the application with groceries, storage units and recipes.

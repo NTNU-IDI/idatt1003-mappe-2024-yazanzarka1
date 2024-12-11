@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.application.containers;
 
-import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 
 /**

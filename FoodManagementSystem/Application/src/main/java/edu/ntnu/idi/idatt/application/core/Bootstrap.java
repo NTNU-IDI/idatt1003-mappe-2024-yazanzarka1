@@ -36,7 +36,9 @@ public class Bootstrap {
 
     // Register Grocery Menu's context and add to registry.
     GroceryManager groceryManager = new GroceryManager();
-    GroceryMenu groceryMenu = new GroceryMenu(commandRegistry, groceryManager, unitProvider, displayManager, inputHandler);
+    GroceryMenu groceryMenu =
+        new GroceryMenu(commandRegistry, groceryManager, unitProvider, displayManager,
+            inputHandler);
     commandRegistry.addContext(groceryMenu);
 
     // Register Storage Menu's context and add to registry
