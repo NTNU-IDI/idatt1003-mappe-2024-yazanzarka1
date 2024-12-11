@@ -37,7 +37,7 @@ public class Seeder {
    * Seed the application with groceries, storage units and recipes.
    */
   public void seed() {
-    // Add groceries
+    // Add groceries with prices and units to grocery manager
     groceryManager.addGrocery(new Grocery("Milk", new Liter(), 24.80f));
     groceryManager.addGrocery(new Grocery("Avocado", new Kilogram(), 94.75f));
     groceryManager.addGrocery(new Grocery("Egg", new Piece(), 4.35f));
@@ -117,7 +117,7 @@ public class Seeder {
     storageUnit.addGrocery(availableGroceries.get(24), 1.0f,
         addDays(10)); // Grapes, 10 days
 
-    // Add recipes with steps
+    // Add recipes with steps and groceries to recipe manager
     Recipe recipe1 = new Recipe(
         "Avocado Toast",
         "Toast with avocado slices",

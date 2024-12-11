@@ -93,8 +93,7 @@ public class MenuContext {
    */
   private void printCommands() {
     // Find the longest command keyword to pad the output
-    int maxWidth =
-        commands.keySet().stream().map(String::length).max(Integer::compareTo).orElse(0);
+    int maxWidth = commands.keySet().stream().map(String::length).max(Integer::compareTo).orElse(0);
 
     // Print each command with its description
     commands.keySet().forEach(keyword -> displayManager.showColoredMessage(

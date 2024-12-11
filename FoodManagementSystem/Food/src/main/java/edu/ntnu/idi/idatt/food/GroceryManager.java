@@ -31,7 +31,7 @@ public class GroceryManager implements TableRepresentable {
    * Adds Grocery to GroceryManager.
    *
    * @param grocery grocery to be added
-   * @throws IllegalArgumentException if grocery is null
+   * @throws IllegalArgumentException      if grocery is null
    * @throws GroceryAlreadyExistsException if grocery already exists
    * @see Grocery
    */

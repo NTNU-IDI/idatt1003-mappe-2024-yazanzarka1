@@ -11,7 +11,7 @@ public class UnitProvider {
   final List<Unit> units;
 
   /**
-   * Constructor.
+   * Initiate a new UnitProvider with registered units.
    */
   public UnitProvider() {
     units = new ArrayList<>();

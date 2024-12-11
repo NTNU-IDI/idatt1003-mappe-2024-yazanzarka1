@@ -133,10 +133,8 @@ public class DisplayManager {
 
       // Print the title in the middle of the table
       showColoredMessageSameLine(
-          padRight("|", (halfWidth - halfTitleLength + (isTotalWidthEven ? 0 : 1))),
-          HEADER_COLOR);
-      showColoredMessageSameLine(
-          title, HEADER_COLOR);
+          padRight("|", (halfWidth - halfTitleLength + (isTotalWidthEven ? 0 : 1))), HEADER_COLOR);
+      showColoredMessageSameLine(title, HEADER_COLOR);
       showColoredMessage(padLeft("|", (halfWidth - halfTitleLength - (isTitleLengthEven ? 0 : 1))),
           HEADER_COLOR);
 

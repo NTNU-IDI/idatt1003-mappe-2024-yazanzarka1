@@ -1,9 +1,9 @@
 package edu.ntnu.idi.idatt.application;
 
 import edu.ntnu.idi.idatt.application.core.Bootstrap;
-import edu.ntnu.idi.idatt.console.Ui;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
+import edu.ntnu.idi.idatt.console.Ui;
 import edu.ntnu.idi.idatt.units.UnitProvider;
 
 /**

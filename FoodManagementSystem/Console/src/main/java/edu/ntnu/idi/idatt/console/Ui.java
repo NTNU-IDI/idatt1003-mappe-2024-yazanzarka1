@@ -13,11 +13,9 @@ public class Ui {
   private CommandRegistry commandRegistry;
 
   /**
-   * Initialize the application with predefined menus, commands and
-   * contexts.
+   * Initialize the application with predefined menus, commands and contexts.
    *
    * @param commandRegistry CommandRegistry to use for the application.
-   *
    */
   public void init(CommandRegistry commandRegistry) {
     this.commandRegistry = commandRegistry;

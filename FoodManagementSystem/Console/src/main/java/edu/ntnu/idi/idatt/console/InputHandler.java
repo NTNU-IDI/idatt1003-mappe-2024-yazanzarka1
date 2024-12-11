@@ -18,9 +18,9 @@ import org.fusesource.jansi.Ansi.Color;
  */
 public class InputHandler {
 
+  public static final String CANCEL_WORD = "cancel";
   private final Scanner scanner;
   private final DisplayManager displayManager;
-  public static final String CANCEL_WORD = "cancel";
 
   /**
    * Initiate InputHandler with a scanner instance.
@@ -79,9 +79,8 @@ public class InputHandler {
   public Float getFloat(String prompt, InputValidator<Float> validator) {
     Float input = null;
     while (input == null) {
-      String value =
-          getString(prompt,
-              new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
+      String value = getString(prompt,
+          new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
       try {
         input = Float.parseFloat(value);
       } catch (NumberFormatException e) {
@@ -99,9 +98,8 @@ public class InputHandler {
   public int getInt(String prompt, InputValidator<Integer> validator) {
     Integer input = null;
     while (input == null) {
-      String value =
-          getString(prompt,
-              new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
+      String value = getString(prompt,
+          new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
       try {
         input = Integer.parseInt(value);
       } catch (NumberFormatException e) {
@@ -118,9 +116,8 @@ public class InputHandler {
   public Date getDate(String prompt, InputValidator<Date> validator) {
     Date input = null;
     while (input == null) {
-      String value =
-          getString(prompt,
-              new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
+      String value = getString(prompt,
+          new StringValidator("Invalid input. This field cannot be empty.", 1, 10));
       try {
         input = new SimpleDateFormat("dd.MM.yyyy").parse(value);
       } catch (ParseException e) {

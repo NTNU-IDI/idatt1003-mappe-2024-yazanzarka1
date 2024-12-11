@@ -34,8 +34,7 @@ public class GroceryMenu extends MenuContext {
             inputHandler));
     addCommand("3",
         new RemoveGroceryFromGroceryManagerCommand(groceryManager, displayManager, inputHandler));
-    addCommand("back",
-        new SwitchMenuCommand("main-menu", commandRegistry));
+    addCommand("back", new SwitchMenuCommand("main-menu", commandRegistry));
   }
 }
 

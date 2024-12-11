@@ -30,6 +30,9 @@ public class SwitchMenuCommand implements Command {
   @Override
   public Boolean execute() {
     commandRegistry.switchContext(targetMenu);
+
+    // we don't want to show the commands again
+    // CommandRegistry displays the commands for the new context
     return false;
   }
 

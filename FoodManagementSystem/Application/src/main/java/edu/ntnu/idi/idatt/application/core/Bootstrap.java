@@ -23,6 +23,10 @@ public class Bootstrap {
   /**
    * Initiate CommandRegistry.
    *
+   * @param displayManager DisplayManager to display messages
+   * @param inputHandler   InputHandler to get input from user
+   * @param unitProvider   UnitProvider to provide units
+   *
    * @return CommandRegistry initialized command registry
    */
   public static CommandRegistry initCommandRegistry(DisplayManager displayManager,
@@ -52,6 +56,7 @@ public class Bootstrap {
     RecipeSuggestionProvider recipeSuggestionProvider =
         new RecipeSuggestionProvider(recipeManager, mainStorageUnit);
 
+    // Register Recipes Menu's context and add to registry
     RecipesMenu recipesMenu =
         new RecipesMenu(commandRegistry, recipeManager, mainStorageUnit, groceryManager,
             recipeSuggestionProvider, displayManager, inputHandler);
