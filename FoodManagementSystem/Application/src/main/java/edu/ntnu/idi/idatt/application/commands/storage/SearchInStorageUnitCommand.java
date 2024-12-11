@@ -50,9 +50,11 @@ public class SearchInStorageUnitCommand implements Command {
         String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
         Ansi.Color.YELLOW);
 
+    // get search query from user
     String query = inputHandler.getString("Enter grocery name: ",
         new StringValidator("Invalid grocery name", GroceryConstants.MIN_GROCERY_NAME_LENGTH,
             GroceryConstants.MAX_GROCERY_NAME_LENGTH));
+
     // search in storage unit
     List<StorageEntry> foundEntries = storageUnit.findGrocery(query);
     if (foundEntries.isEmpty()) {

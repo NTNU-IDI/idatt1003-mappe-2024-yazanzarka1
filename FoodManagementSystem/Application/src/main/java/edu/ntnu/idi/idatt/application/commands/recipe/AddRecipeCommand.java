@@ -67,6 +67,7 @@ public class AddRecipeCommand implements Command {
         new StringValidator("Recipe name should be between 3 and 50 characters",
             RecipeConstants.MIN_RECIPE_NAME_LENGTH, RecipeConstants.MAX_RECIPE_NAME_LENGTH));
 
+    // Get recipe description from user
     String recipeDescription =
         inputHandler.getString("Enter recipe description(10 - 100 characters): ",
             new StringValidator("Description should be between 10 and 100 characters",
@@ -77,15 +78,14 @@ public class AddRecipeCommand implements Command {
     displayManager.printTable(groceryManager.toTableData());
     while (true) {
       // get grocery name from user
-      String groceryName = inputHandler.getString("Enter grocery name: ",
-          new StringValidator(String.format("Grocery name should be between %s and %s characters",
+      String groceryName = inputHandler.getString("Enter grocery name: ", new StringValidator(
+          String.format("Grocery name should be between %s and %s characters",
               GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH),
-              GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
+          GroceryConstants.MIN_GROCERY_NAME_LENGTH, GroceryConstants.MAX_GROCERY_NAME_LENGTH));
 
       // search for grocery
       Grocery grocery = groceryManager.getAvailableGroceries().stream()
-          .filter(g -> g.getGroceryName().equalsIgnoreCase(groceryName))
-          .findFirst().orElse(null);
+          .filter(g -> g.getGroceryName().equalsIgnoreCase(groceryName)).findFirst().orElse(null);
 
       // if grocery not found display message and continue
       if (grocery == null) {
@@ -116,22 +116,18 @@ public class AddRecipeCommand implements Command {
     }
 
     // get recipe steps and people count from user
-    String recipeSteps =
-        formatSteps(
-            inputHandler.getString(
-                String.format("Enter recipe steps seperated by (comma) (%s - %s characters): \n",
-                    RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
-                    RecipeConstants.MAX_RECIPE_STEPS_LENGTH),
-                new StringValidator("Invalid input", RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
-                    RecipeConstants.MAX_RECIPE_STEPS_LENGTH)));
+    String recipeSteps = formatSteps(inputHandler.getString(
+        String.format("Enter recipe steps seperated by (comma) (%s - %s characters): \n",
+            RecipeConstants.MIN_RECIPE_STEPS_LENGTH, RecipeConstants.MAX_RECIPE_STEPS_LENGTH),
+        new StringValidator("Invalid input", RecipeConstants.MIN_RECIPE_STEPS_LENGTH,
+            RecipeConstants.MAX_RECIPE_STEPS_LENGTH)));
 
     int peopleCount = inputHandler.getInt("Enter number of people (1-11): ",
         new IntegerValidator("Invalid input", RecipeConstants.MIN_RECIPE_PEOPLE_COUNT,
             RecipeConstants.MAX_RECIPE_PEOPLE_COUNT));
 
     // create new recipe and add groceries
-    Recipe newRecipe =
-        new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
+    Recipe newRecipe = new Recipe(recipeName, recipeDescription, recipeSteps, peopleCount);
     for (RecipeGrocery recipeGrocery : groceries) {
       newRecipe.addGrocery(recipeGrocery.grocery(), recipeGrocery.amount());
     }

@@ -7,7 +7,7 @@ import edu.ntnu.idi.idatt.food.StorageUnit;
 import org.fusesource.jansi.Ansi.Color;
 
 /**
- * Display stored groceries in a storageUnit.
+ * Display stored groceries in a ٍٍStorageUnit.
  *
  * @see Command
  * @see StorageUnit
@@ -21,6 +21,7 @@ public class DisplayStoredGroceryCommand implements Command {
    * Initiate command with a given storageUnit.
    *
    * @param storageUnit storageUnit where groceries are stored.
+   * @param displayManager DisplayManager to display messages.
    */
   public DisplayStoredGroceryCommand(StorageUnit storageUnit, DisplayManager displayManager) {
     this.storageUnit = storageUnit;

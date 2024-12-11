@@ -20,10 +20,9 @@ STUDENT ID = 530542
 
 ## Project description
 
-[//] Food Management System is a system that is built with scalability in mind. The system is built to manage food items in a restaurant. The system is built with the following features:
-- Manage Groceries (Add, Remove, List)
-- Manage Recipes (Add, Remove, List)
-- Store Groceries in Storage Units (Add, Remove, List)
+[//] Food Management System is a system that is built with scalability in mind. The system is built to manage groceries and recipes. The system is built with the following features:
+
+![alt text](./assets/Picture1.png)
 
 
 
@@ -44,12 +43,13 @@ STUDENT ID = 530542
 
 
 * Application (Main Module)
-    * Application - The main class of the system
+    * Main - The main class of the system
     * Menus - A directory containing the menu contexts of the system and commands
     * Commands - A directory containing the commands of the system
     * Core - A directory containing the Bootstrapper and the Application Context
     * Containers - A directory containing the Food Storage Containers of the system.
 * Food - Contains the classes for managing food items 
+
 * Console - Contains the classes for managing the console input and output
 * Unit - Contains SI units
 
@@ -68,7 +68,7 @@ STUDENT ID = 530542
 ## How to run the tests
 
 [//] you run the tests by running the following command in the terminal:
-` ./RunTests.ps1 
+`  ./RunTests.ps1 
 `
 
 ## References

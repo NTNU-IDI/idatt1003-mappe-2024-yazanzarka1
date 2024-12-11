@@ -24,6 +24,8 @@ public class RemoveRecipeCommand implements Command {
    * Initiate command with a given recipeManager.
    *
    * @param recipeManager recipeManager where recipes are stored.
+   * @param displayManager displayManager to display messages
+   * @param inputHandler inputHandler to handle user input
    */
   public RemoveRecipeCommand(RecipeManager recipeManager, DisplayManager displayManager,
       InputHandler inputHandler) {

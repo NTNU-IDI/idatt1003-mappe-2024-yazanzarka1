@@ -7,9 +7,11 @@ import edu.ntnu.idi.idatt.console.TableData;
 import edu.ntnu.idi.idatt.console.validators.DateValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
+import edu.ntnu.idi.idatt.food.exceptions.GroceryNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.fusesource.jansi.Ansi;
 
 /**
  * Command to display all groceries in a storage unit before a given best before date.
@@ -46,9 +48,17 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
    */
   @Override
   public Boolean execute() {
+    displayManager.showMessage("Display groceries expiring before a specific best-before-date");
+    displayManager.showColoredMessage(
+        String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
+        Ansi.Color.YELLOW);
+
+    // Get best before date from user
     Date date =
         inputHandler.getDate("Enter best before date (dd.mm.yyyy): ",
             new DateValidator("Invalid date format"));
+
+    // Get all groceries before date and sort them by best before date
     List<StorageEntry> storageEntryBeforeDate = storageUnit.getGroceries().stream()
         .filter(storageEntry -> storageEntry.getBestBeforeDate().before(date))
         .sorted((entry1, entry2) -> {
@@ -61,17 +71,16 @@ public class DisplayGroceriesInStorageUnitBeforeDateCommand implements Command {
           }
         }).toList();
 
+    // Display all groceries before date
     if (storageEntryBeforeDate.isEmpty()) {
-      displayManager.showMessage(
-          "No groceries expiring before " + new SimpleDateFormat("dd.MM.yyyy").format(date));
-      return false;
+      throw new GroceryNotFoundException(String.format("No groceries expiring before %s",
+          new SimpleDateFormat("dd.MM.yyyy").format(date)));
     }
 
     TableData tableData = storageUnit.toTableData(storageEntryBeforeDate);
-    displayManager.printTable(tableData);
-
-    displayManager.showMessage(
-        "Displayed groceries before " + new SimpleDateFormat("dd.MM.yyyy").format(date));
+    displayManager.printTable(
+        String.format("Expiring before %s", new SimpleDateFormat("dd.MM.yyyy").format(date)),
+        tableData);
 
     return false;
   }

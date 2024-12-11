@@ -4,10 +4,12 @@ import edu.ntnu.idi.idatt.console.Command;
 import edu.ntnu.idi.idatt.console.DisplayManager;
 import edu.ntnu.idi.idatt.console.InputHandler;
 import edu.ntnu.idi.idatt.console.TableData;
+import edu.ntnu.idi.idatt.console.validators.FloatValidator;
 import edu.ntnu.idi.idatt.console.validators.StringValidator;
 import edu.ntnu.idi.idatt.food.StorageEntry;
 import edu.ntnu.idi.idatt.food.StorageUnit;
 import edu.ntnu.idi.idatt.food.constants.GroceryConstants;
+import edu.ntnu.idi.idatt.food.constants.StorageEntryConstants;
 import java.util.List;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
@@ -52,6 +54,8 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
     displayManager.showColoredMessage(
         String.format("type '%s' to cancel the operation", InputHandler.CANCEL_WORD),
         Ansi.Color.YELLOW);
+
+    // Get grocery name from user
     String storageEntryName = inputHandler.getString("Enter name of grocery to remove: ",
         new StringValidator("Invalid grocery name", GroceryConstants.MIN_GROCERY_NAME_LENGTH,
             GroceryConstants.MAX_GROCERY_NAME_LENGTH));
@@ -63,13 +67,19 @@ public class RemoveGroceryFromStorageUnitCommand implements Command {
       return true;
     }
 
+    // If multiple groceries found, ask user to specify
     if (storageEntries.size() > 1) {
-      displayManager.showColoredMessage("Error: Multiple groceries found", Color.RED);
-      return true;
+      throw new UnsupportedOperationException(
+          "Multiple groceries matched. Specify which one to remove.");
     }
 
-    float quantity = Float.parseFloat(inputHandler.getInput("Enter quantity to remove: "));
+    // Get quantity to remove from user
+    float quantity = inputHandler.getFloat("Enter quantity to remove: ", new FloatValidator(
+        String.format("Invalid quantity. Quantity should be between %s and %s",
+            StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY),
+        StorageEntryConstants.MIN_QUANTITY, StorageEntryConstants.MAX_QUANTITY));
 
+    // Remove grocery from storage unit
     storageUnit.removeGrocery(storageEntries.getFirst(), quantity);
     displayManager.showColoredMessage("Grocery removed successfully", Color.GREEN);
     return false;

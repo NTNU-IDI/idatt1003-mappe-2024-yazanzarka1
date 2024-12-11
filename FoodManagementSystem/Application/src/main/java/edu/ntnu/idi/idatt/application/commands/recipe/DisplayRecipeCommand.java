@@ -28,6 +28,9 @@ public class DisplayRecipeCommand implements Command {
    * Initiate command with given recipeManager.
    *
    * @param recipeManager recipe manager where recipes are stored
+   * @param storageUnit storage unit where groceries are stored
+   * @param displayManager display manager to display messages
+   * @param inputHandler input handler to handle user input
    */
   public DisplayRecipeCommand(RecipeManager recipeManager, StorageUnit storageUnit,
       DisplayManager displayManager, InputHandler inputHandler) {

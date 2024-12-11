@@ -39,7 +39,7 @@ Generert fra Del 1,2 og 3 ved bruk av CHATGPT
     - [x] Sett opp initiale applikasjonskonfigurasjoner, som å instansiere registreringsklassen.
 - [x] **start() Metode**:
     - [x] Legg til noen matvarer i registeret (test grunnleggende funksjonalitet).
-    - [ x Lag en metode for å skrive ut matvarer fra registeret (forbered for senere brukergrensesnitt).
+    - [x] Lag en metode for å skrive ut matvarer fra registeret (forbered for senere brukergrensesnitt).
 
 ---
 

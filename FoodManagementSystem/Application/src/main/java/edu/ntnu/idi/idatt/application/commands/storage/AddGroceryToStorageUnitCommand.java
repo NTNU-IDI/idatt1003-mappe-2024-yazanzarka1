@@ -33,15 +33,16 @@ public class AddGroceryToStorageUnitCommand implements Command {
    * Add Grocery Command.
    *
    * @param groceryManager groceryManage to get available groceries in app.
-   * @param storageUnit    storageUnit where grocery will be added
-   * @param inputHandler   InputHandler to get input from user
+   * @param storageUnit    storageUnit where grocery will be added.
+   * @param displayManager DisplayManager to display messages.
+   * @param inputHandler   InputHandler to get input from user.
    */
   public AddGroceryToStorageUnitCommand(GroceryManager groceryManager, StorageUnit storageUnit,
       DisplayManager displayManager, InputHandler inputHandler) {
     this.groceryManager = groceryManager;
     this.storageUnit = storageUnit;
-    this.inputHandler = inputHandler;
     this.displayManager = displayManager;
+    this.inputHandler = inputHandler;
   }
 
   /**
