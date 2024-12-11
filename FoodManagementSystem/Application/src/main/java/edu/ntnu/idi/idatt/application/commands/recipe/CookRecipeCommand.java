@@ -65,7 +65,7 @@ public class CookRecipeCommand implements Command {
         Ansi.Color.YELLOW);
 
     // Get recipe index from user
-    int recipeIndex = inputHandler.getInt("Enter the index of the recipe: ",
+    int recipeIndex = inputHandler.getInt("Enter the ID of the recipe: ",
         new IntegerValidator("Invalid index", 0, recipeManager.getRecipes().size() - 1));
     displayManager.showSpace();
 
@@ -75,6 +75,7 @@ public class CookRecipeCommand implements Command {
     // create RecipeStorageManager Instance to compare recipe with storage
     RecipeStorageManager recipeStorageManager = new RecipeStorageManager(recipe, storageUnit);
     List<RecipeGrocery> recipeGroceryList;
+
     try {
 
       // cook recipe
