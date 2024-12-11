@@ -161,15 +161,18 @@ class RecipeStorageManagerTest {
   void cookRecipeWithPartialAvailability() {
     storageUnit.addGrocery(grocery3, 1.0f, new Date()); // Insufficient quantity for grocery3
     assertThrows(MissingGroceryForRecipeException.class, () -> recipeStorageManager.cookRecipe(),
-        "Cooking a recipe with insufficient groceries should throw MissingGroceryForRecipeException");
+        "Cooking a recipe with insufficient groceries"
+            + " should throw MissingGroceryForRecipeException");
   }
 
+  @SuppressWarnings("checkstyle:EmptyCatchBlock")
   @Test
   @DisplayName("Test StorageUnit Remains Unchanged on Failed Cook")
   void storageUnitUnchangedOnFailedCook() {
     try {
       recipeStorageManager.cookRecipe();
     } catch (MissingGroceryForRecipeException ignored) {
+
     }
 
     assertAll(

@@ -121,7 +121,11 @@ public class Seeder {
     Recipe recipe1 = new Recipe(
         "Avocado Toast",
         "Toast with avocado slices",
-        "1. Toast the bread.\n2. Slice the avocado.\n3. Spread the avocado on the toasted bread.\n4. Serve immediately.",
+        """
+            1. Toast the bread.
+            2. Slice the avocado.
+            3. Spread the avocado on the toasted bread.
+            4. Serve immediately.""",
         4
     );
     recipe1.addGrocery(availableGroceries.get(15), 4.0f); // Bread
@@ -131,7 +135,12 @@ public class Seeder {
     Recipe recipe2 = new Recipe(
         "Chicken Stir-Fry",
         "A quick stir-fry with chicken and vegetables",
-        "1. Cut chicken and vegetables into small pieces.\n2. Heat a pan with oil and stir-fry garlic.\n3. Add chicken and cook until browned.\n4. Add vegetables and stir-fry for another 5-7 minutes.\n5. Serve hot.",
+        """
+            1. Cut chicken and vegetables into small pieces.
+            2. Heat a pan with oil and stir-fry garlic.
+            3. Add chicken and cook until browned.
+            4. Add vegetables and stir-fry for another 5-7 minutes.
+            5. Serve hot.""",
         4
     );
     recipe2.addGrocery(availableGroceries.get(10), 1.0f); // Chicken Filet
@@ -143,7 +152,11 @@ public class Seeder {
     Recipe recipe3 = new Recipe(
         "Garlic Mashed Potatoes",
         "Creamy mashed potatoes flavored with garlic and butter",
-        "1. Peel and boil the potatoes until tender.\n2. Mash the potatoes and mix with butter and minced garlic.\n3. Add salt and pepper to taste.\n4. Serve warm.",
+        """
+            1. Peel and boil the potatoes until tender.
+            2. Mash the potatoes and mix with butter and minced garlic.
+            3. Add salt and pepper to taste.
+            4. Serve warm.""",
         6
     );
     recipe3.addGrocery(availableGroceries.get(8), 1.5f);  // Potato
@@ -154,7 +167,13 @@ public class Seeder {
     Recipe recipe4 = new Recipe(
         "Beef and Cabbage Stew",
         "A hearty stew with tender beef and cabbage",
-        "1. Cut beef, cabbage, and carrots into small pieces.\n2. Heat oil in a pot and sauté garlic until fragrant.\n3. Add beef and cook until browned.\n4. Add cabbage, carrots, and water to cover.\n5. Simmer for 30-40 minutes.\n6. Serve hot.",
+        """
+            1. Cut beef, cabbage, and carrots into small pieces.
+            2. Heat oil in a pot and sauté garlic until fragrant.
+            3. Add beef and cook until browned.
+            4. Add cabbage, carrots, and water to cover.
+            5. Simmer for 30-40 minutes.
+            6. Serve hot.""",
         6
     );
     recipe4.addGrocery(availableGroceries.get(12), 1.0f); // Beef
@@ -166,7 +185,11 @@ public class Seeder {
     Recipe recipe5 = new Recipe(
         "Fruit Salad",
         "A refreshing mix of fruits, perfect for a light dessert or snack",
-        "1. Wash and chop all fruits into bite-sized pieces.\n2. Mix them in a bowl.\n3. Optionally, drizzle with honey or lemon juice.\n4. Serve chilled.",
+        """
+            1. Wash and chop all fruits into bite-sized pieces.
+            2. Mix them in a bowl.
+            3. Optionally, drizzle with honey or lemon juice.
+            4. Serve chilled.""",
         4
     );
     recipe5.addGrocery(availableGroceries.get(19), 0.5f); // Apple
@@ -179,7 +202,11 @@ public class Seeder {
     Recipe recipe6 = new Recipe(
         "Baked Fish with Lime",
         "Lime-marinated fish baked to perfection",
-        "1. Marinate the fish with lime juice, garlic, salt, and pepper.\n2. Preheat oven to 180°C.\n3. Bake the fish for 20-25 minutes.\n4. Serve with a garnish of lime slices.",
+        """
+            1. Marinate the fish with lime juice, garlic, salt, and pepper.
+            2. Preheat oven to 180°C.
+            3. Bake the fish for 20-25 minutes.
+            4. Serve with a garnish of lime slices.""",
         4
     );
     recipe6.addGrocery(availableGroceries.get(14), 1.0f); // Fish
@@ -190,7 +217,12 @@ public class Seeder {
     Recipe recipe7 = new Recipe(
         "Chicken Caesar Salad",
         "A classic Caesar salad with grilled chicken and a hint of garlic",
-        "1. Grill the chicken and slice into strips.\n2. Chop the cabbage into small pieces.\n3. Mix the cabbage with garlic, avocado, and grilled chicken.\n4. Add dressing and toss to coat.\n5. Serve chilled.",
+        """
+            1. Grill the chicken and slice into strips.
+            2. Chop the cabbage into small pieces.
+            3. Mix the cabbage with garlic, avocado, and grilled chicken.
+            4. Add dressing and toss to coat.
+            5. Serve chilled.""",
         4
     );
     recipe7.addGrocery(availableGroceries.get(10), 0.5f); // Chicken Filet
@@ -202,7 +234,12 @@ public class Seeder {
     Recipe recipe8 = new Recipe(
         "Tomato and Cheese Sandwich",
         "A simple sandwich with fresh tomato and melted cheese",
-        "1. Slice the tomato and cheese.\n2. Spread butter on the bread.\n3. Layer the tomato and cheese between the bread slices.\n4. Toast the sandwich until the cheese melts.\n5. Serve warm.",
+        """
+            1. Slice the tomato and cheese.
+            2. Spread butter on the bread.
+            3. Layer the tomato and cheese between the bread slices.
+            4. Toast the sandwich until the cheese melts.
+            5. Serve warm.""",
         4
     );
     recipe8.addGrocery(availableGroceries.get(15), 4.0f); // Bread
@@ -214,7 +251,12 @@ public class Seeder {
     Recipe recipe9 = new Recipe(
         "Potato and Garlic Soup",
         "A creamy soup with potatoes and a touch of garlic",
-        "1. Peel and chop the potatoes.\n2. Boil the potatoes until tender.\n3. Blend the potatoes with garlic and butter until smooth.\n4. Add salt, pepper, and water to achieve desired consistency.\n5. Serve hot.",
+        """
+            1. Peel and chop the potatoes.
+            2. Boil the potatoes until tender.
+            3. Blend the potatoes with garlic and butter until smooth.
+            4. Add salt, pepper, and water to achieve desired consistency.
+            5. Serve hot.""",
         4
     );
     recipe9.addGrocery(availableGroceries.get(8), 1.0f);  // Potato
@@ -225,7 +267,11 @@ public class Seeder {
     Recipe recipe10 = new Recipe(
         "Avocado and Lime Smoothie",
         "A healthy and refreshing smoothie with avocado and lime",
-        "1. Peel the avocado and remove the seed.\n2. Blend avocado, lime juice, and yogurt until smooth.\n3. Add water or ice cubes if needed.\n4. Serve chilled.",
+        """
+            1. Peel the avocado and remove the seed.
+            2. Blend avocado, lime juice, and yogurt until smooth.
+            3. Add water or ice cubes if needed.
+            4. Serve chilled.""",
         2
     );
     recipe10.addGrocery(availableGroceries.get(1), 0.5f);  // Avocado

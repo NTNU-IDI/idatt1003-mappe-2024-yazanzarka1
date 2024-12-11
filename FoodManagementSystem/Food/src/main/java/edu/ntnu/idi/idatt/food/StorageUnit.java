@@ -145,10 +145,14 @@ public class StorageUnit implements TableRepresentable {
   public TableData toTableData() {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
     List<List<String>> groceryList = groceries.values().stream().sorted().map(
-            storageEntry -> List.of(storageEntry.getGroceryName(), storageEntry.getUnit().getUnitName(),
+            storageEntry -> List.of(
+                storageEntry.getGroceryName(),
+                storageEntry.getUnit().getUnitName(),
                 String.valueOf(storageEntry.getPricePerUnit()),
-                String.valueOf(storageEntry.getQuantity()), formatBestBeforeDate(storageEntry),
-                String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
+                String.valueOf(storageEntry.getQuantity()),
+                formatBestBeforeDate(storageEntry),
+                String.format("%.2f NOK",
+                    storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
         .toList();
 
     return new TableData(headers, groceryList);
@@ -164,10 +168,13 @@ public class StorageUnit implements TableRepresentable {
   public TableData toTableData(List<StorageEntry> storageEntries) {
     List<String> headers = List.of("Grocery", "Unit", "NOK / Unit", "Quantity", "B.B.D", "Value");
     List<List<String>> storageEntryTableBody = storageEntries.stream().map(
-            storageEntry -> List.of(storageEntry.getGroceryName(), storageEntry.getUnit().getUnitName(),
+            storageEntry -> List.of(
+                storageEntry.getGroceryName(),
+                storageEntry.getUnit().getUnitName(),
                 String.valueOf(storageEntry.getPricePerUnit()),
                 String.valueOf(storageEntry.getQuantity()), formatBestBeforeDate(storageEntry),
-                String.format("%.2f NOK", storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
+                String.format("%.2f NOK",
+                    storageEntry.getQuantity() * storageEntry.getPricePerUnit())))
         .toList();
 
     return new TableData(headers, storageEntryTableBody);

@@ -88,8 +88,9 @@ public class StorageEntry extends Grocery {
    */
   public void subtractQuantity(float quantity) {
     if (quantity < StorageUnitConstants.MIN_QUANTITY) {
-      throw new IllegalArgumentException(String.format("Quantity cannot be less than or equal to %.2f",
-          StorageUnitConstants.MIN_QUANTITY));
+      throw new IllegalArgumentException(
+          String.format("Quantity cannot be less than or equal to %.2f",
+              StorageUnitConstants.MIN_QUANTITY));
     }
 
     this.quantity -= quantity;

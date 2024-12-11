@@ -95,6 +95,13 @@ public class InputHandler {
   }
 
 
+  /**
+   * Gets input from user with a prompt and a validator.
+   *
+   * @param prompt    prompt to show to user
+   * @param validator validator to validate input
+   * @return String trimmed input from user
+   */
   public int getInt(String prompt, InputValidator<Integer> validator) {
     Integer input = null;
     while (input == null) {
@@ -113,6 +120,13 @@ public class InputHandler {
     return input;
   }
 
+  /**
+   * Gets input from user with a prompt and a validator.
+   *
+   * @param prompt    prompt to show to user
+   * @param validator validator to validate input
+   * @return String trimmed input from user
+   */
   public Date getDate(String prompt, InputValidator<Date> validator) {
     Date input = null;
     while (input == null) {

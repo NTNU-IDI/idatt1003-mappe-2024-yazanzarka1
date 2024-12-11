@@ -26,7 +26,6 @@ public class Bootstrap {
    * @param displayManager DisplayManager to display messages
    * @param inputHandler   InputHandler to get input from user
    * @param unitProvider   UnitProvider to provide units
-   *
    * @return CommandRegistry initialized command registry
    */
   public static CommandRegistry initCommandRegistry(DisplayManager displayManager,

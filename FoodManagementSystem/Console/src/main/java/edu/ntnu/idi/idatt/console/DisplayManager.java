@@ -121,7 +121,6 @@ public class DisplayManager {
     if (!title.isEmpty()) {
       // Check if the title length is even for padding issues
       int titleLength = title.length();
-      boolean isTitleLengthEven = title.length() % 2 == 0;
 
       // Calculate the total width of the table
       int totalWidth = Arrays.stream(columnWidths).sum() + columnWidths.length * 3 + 1;
@@ -130,6 +129,7 @@ public class DisplayManager {
       boolean isTotalWidthEven = totalWidth % 2 == 0;
 
       System.out.println("+" + "-".repeat(totalWidth - 2) + "+");
+      boolean isTitleLengthEven = title.length() % 2 == 0;
 
       // Print the title in the middle of the table
       showColoredMessageSameLine(

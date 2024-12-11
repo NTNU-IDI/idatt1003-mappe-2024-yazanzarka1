@@ -166,7 +166,8 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 5.0f, bestBeforeDate);
     assertThrows(InsufficientGroceryInStorageUnitException.class,
         () -> storageUnit.removeGrocery(grocery, 10.0f),
-        "Should throw InsufficientGroceryInStorageUnitException when trying to remove more than available");
+        "Should throw InsufficientGroceryInStorageUnitException"
+            + " when trying to remove more than available");
   }
 
   /**
@@ -233,7 +234,8 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
     assertThrows(IllegalArgumentException.class,
         () -> storageUnit.addGrocery(grocery2, 5.0f, bestBeforeDate),
-        "Should throw IllegalArgumentException when adding grocery with same name but different unit");
+        "Should throw IllegalArgumentException when"
+            + " adding grocery with same name but different unit");
   }
 
   /**
@@ -313,8 +315,7 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 10.0f, bestBeforeDate);
 
     assertThrows(IllegalArgumentException.class,
-        () -> storageUnit.addGrocery(grocery, StorageUnitConstants.MAX_QUANTITY,
-            bestBeforeDate),
+        () -> storageUnit.addGrocery(grocery, StorageUnitConstants.MAX_QUANTITY, bestBeforeDate),
         "Adding more than the maximum allowed quantity should throw an exception");
   }
 
@@ -324,6 +325,7 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 3, bestBeforeDate);
 
     assertThrows(InsufficientGroceryInStorageUnitException.class,
-        () -> storageUnit.removeGrocery(grocery, 4), "Removing more than the available quantity should throw an exception");
+        () -> storageUnit.removeGrocery(grocery, 4),
+        "Removing more than the available quantity should throw an exception");
   }
 }
