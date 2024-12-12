@@ -57,6 +57,14 @@ STUDENT ID = 530542
 
 [//] https://github.com/NTNU-IDI/idatt1003-mappe-2024-yazanzarka1.git
 
+### How to fix not digitally signed error
+
+[//] If you get an error saying that the file is not digitally signed, you can fix it by running the following command in the terminal:
+
+* Open PowerShell as Administrator and change execution policy for the current session.
+* run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`
+* Run the script again.
+
 ## How to run the project
 
 
