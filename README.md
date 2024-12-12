@@ -63,13 +63,23 @@ STUDENT ID = 530542
 [//] you run the project by running the following command in the terminal:
 ` ./BuildAndRun.ps1 
 `
+Alternatively, you can run the project in IntelliJ IDEA by following these steps:
 
+* Open the Run menu and select Edit Configurations.
+* Click the + icon to add a new configuration and select Application.
+* Set the Main class to your main class (e.g., edu.ntnu.idi.idatt.application.Main).
+* Click OK to save the configuration.
+* Click the Run button (green play icon) in the toolbar to run the program.
 
 ## How to run the tests
 
 [//] you run the tests by running the following command in the terminal:
 `  ./RunTests.ps1 
 `
+* alternatively, you can run the tests in IntelliJ IDEA by following these steps:
+* Open the Maven tool window (View > Tool Windows > Maven).
+* Navigate to root module and expand the Lifecycle node.
+* Double-click on the test phase to run all tests.
 
 ## References
 
