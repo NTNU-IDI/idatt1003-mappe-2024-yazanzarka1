@@ -2,6 +2,10 @@ package edu.ntnu.idi.idatt.console;
 
 /**
  * Command blueprint.
+ *
+ * @author yazanzarka
+ * @see CommandRegistry
+ * @since 0.0.1
  */
 public interface Command {
 

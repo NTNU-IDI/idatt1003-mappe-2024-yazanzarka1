@@ -9,7 +9,9 @@ import java.util.Map;
  * people count. A recipe can be displayed, get the price and get the groceries in a recipe. A
  * recipe is used in RecipeManager. A recipe is immutable.
  *
+ * @author yazanzarka
  * @see RecipeManager
+ * @since 0.0.1
  */
 public class Recipe {
 
@@ -34,10 +36,10 @@ public class Recipe {
   /**
    * Initiate a recipe.
    *
-   * @param name        name of a recipe
-   * @param description description of a recipe
-   * @param steps       steps to make a recipe
-   * @param peopleCount number of people the recipe is for
+   * @param name        {@link String}name of a recipe
+   * @param description {@link String}description of a recipe
+   * @param steps       {@link String}steps to make a recipe
+   * @param peopleCount {@link Integer}number of people the recipe is for
    * @throws IllegalArgumentException if name is null or blank, name length is less than 3 or
    *                                  greater
    * @throws IllegalArgumentException if description is null or blank, description length is less
@@ -85,8 +87,8 @@ public class Recipe {
   /**
    * Add a grocery to recipe with amount.
    *
-   * @param grocery Grocery to be added
-   * @param amount  amount of grocery in a recipe
+   * @param grocery {@link Grocery} to be added
+   * @param amount  {@link Float} amount of grocery in a recipe
    * @throws NullPointerException     if grocery is null
    * @throws IllegalArgumentException if amount is less than or equal to 0
    */
@@ -117,7 +119,7 @@ public class Recipe {
   /**
    * Get groceries in a recipe.
    *
-   * @return Map of Groceries and value in a recipe
+   * @return {@link Map} Map of Groceries and value in a recipe
    */
   public Map<String, RecipeGrocery> getGroceries() {
     return groceries;
@@ -126,7 +128,7 @@ public class Recipe {
   /**
    * Get a grocery in a recipe.
    *
-   * @param groceryName name of grocery
+   * @param groceryName {@link String} name of grocery
    * @return RecipeGrocery
    */
   public RecipeGrocery getGrocery(String groceryName) {
@@ -137,7 +139,7 @@ public class Recipe {
   /**
    * Get the price of a recipe.
    *
-   * @return float price of a recipe
+   * @return {@link Float} price of a recipe
    */
   public float getRecipePrice() {
     float price = 0;
@@ -150,7 +152,7 @@ public class Recipe {
   /**
    * Get the name of a recipe.
    *
-   * @return String name of a recipe
+   * @return {@link String} name of a recipe
    */
   public String getName() {
     return name;
@@ -159,7 +161,7 @@ public class Recipe {
   /**
    * Get the description of a recipe.
    *
-   * @return String description of a recipe
+   * @return {@link String} description of a recipe
    */
   public String getDescription() {
     return description;
@@ -168,7 +170,7 @@ public class Recipe {
   /**
    * Get the steps to make a recipe.
    *
-   * @return String steps to make a recipe
+   * @return {@link String} steps to make a recipe
    */
   public String getSteps() {
     return steps;
@@ -177,7 +179,7 @@ public class Recipe {
   /**
    * Get the number of people the recipe is for.
    *
-   * @return int number of people the recipe is for
+   * @return {@link Integer} number of people the recipe is for
    */
   public int getPeopleCount() {
     return peopleCount;

@@ -9,6 +9,10 @@ import java.util.stream.IntStream;
 
 /**
  * RecipeManager is responsible for managing recipes. RecipeManager can add and remove recipes.
+ *
+ * @author yazanzarka
+ * @see Recipe
+ * @since 0.0.1
  */
 public class RecipeManager implements TableRepresentable {
 
@@ -34,7 +38,7 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Add a recipe to recipe manager.
    *
-   * @param recipe Recipe to be added
+   * @param recipe {@link Recipe} Recipe to be added
    */
   public void addRecipe(Recipe recipe) {
     if (recipe == null) {
@@ -46,7 +50,7 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Remove a recipe from recipe manager.
    *
-   * @param index Index of recipe to be removed
+   * @param index {@link Integer} Index of recipe to be removed
    * @throws IndexOutOfBoundsException if index is out of bounds
    */
   public void removeRecipe(int index) {
@@ -59,7 +63,7 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Get recipes in a recipe manager.
    *
-   * @return List of recipes in a recipe manager
+   * @return {@link List} List of recipes in a recipe manager
    */
   public List<Recipe> getRecipes() {
     return recipes;
@@ -68,7 +72,7 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Get the name of the recipe manager.
    *
-   * @return Name of the recipe manager
+   * @return {@link String} Name of the recipe manager
    */
   public String getName() {
     return name;
@@ -77,7 +81,7 @@ public class RecipeManager implements TableRepresentable {
   /**
    * Serialize RecipeManager to a tableData object with headers and rows.
    *
-   * @return TableData with headers and rows
+   * @return {@link TableData} TableData with headers and rows
    * @see TableData
    */
   public TableData toTableData() {

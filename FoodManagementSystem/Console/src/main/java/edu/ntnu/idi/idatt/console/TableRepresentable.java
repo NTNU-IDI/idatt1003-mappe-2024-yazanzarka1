@@ -2,6 +2,10 @@ package edu.ntnu.idi.idatt.console;
 
 /**
  * Interface for classes that can be represented as a table.
+ *
+ * @author yazanzarka
+ * @see TableData
+ * @since 0.0.5
  */
 public interface TableRepresentable {
 

@@ -8,7 +8,9 @@ import java.util.Objects;
  * Grocery class represent a grocery that can be stored in a recipe or a storage unit. Grocery has a
  * name, unit and price per unit. Grocery is used in StorageEntry and Recipe. Grocery is immutable.
  *
+ * @author yazanzarka
  * @see StorageEntry
+ * @since 0.0.1
  */
 public class Grocery implements Comparable<Grocery> {
 
@@ -19,8 +21,8 @@ public class Grocery implements Comparable<Grocery> {
   /**
    * Public Grocery constructor.
    *
-   * @param groceryName  grocery name
-   * @param unit         SI unit
+   * @param groceryName  {@link String} grocery name
+   * @param unit         {@link Unit} SI unit
    * @param pricePerUnit price per unit NOK/KG for example
    * @throws IllegalArgumentException if groceryName is null or blank, groceryName is more than 25
    * @throws IllegalArgumentException if unit is null
@@ -60,7 +62,7 @@ public class Grocery implements Comparable<Grocery> {
   /**
    * Grocery's name getter.
    *
-   * @return String Grocery Name
+   * @return {@link String} Grocery Name
    */
   public String getGroceryName() {
     return groceryName;
@@ -70,7 +72,7 @@ public class Grocery implements Comparable<Grocery> {
   /**
    * Grocery's unit getter.
    *
-   * @return Unit Grocery's unit
+   * @return {@link Unit} Grocery's unit
    */
   public Unit getUnit() {
     return unit;
@@ -80,7 +82,7 @@ public class Grocery implements Comparable<Grocery> {
   /**
    * Grocery's price per unit getter.
    *
-   * @return float PricePerUnit
+   * @return {@link Float} PricePerUnit
    */
   public float getPricePerUnit() {
     return pricePerUnit;

@@ -73,5 +73,9 @@ STUDENT ID = 530542
 
 ## References
 
-[//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
-Or if you have used code from a website or other source, include a link to the source.)
+* [Java Documentation](https://docs.oracle.com/en/java/)
+* [Maven Documentation](https://maven.apache.org/guides/index.html)
+* [JUnit 5 Documentation](https://junit.org/junit5/docs/current/user-guide/)
+* Cay S. Horstmann, core java fundamentals volume 1, 2007
+* https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
+

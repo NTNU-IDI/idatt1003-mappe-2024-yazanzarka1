@@ -4,6 +4,10 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Main application class for the console application.
+ *
+ * @author yazanzarka
+ * @version 0.0.8
+ * @since 0.0.1
  */
 public class Ui {
 

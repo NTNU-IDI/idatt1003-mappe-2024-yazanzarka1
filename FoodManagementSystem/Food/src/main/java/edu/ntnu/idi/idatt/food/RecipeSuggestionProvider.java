@@ -15,8 +15,10 @@ import java.util.concurrent.atomic.AtomicReference;
  * and the StorageUnit to get all groceries in the storage unit. Suggestion are then sorted based on
  * a score that is calculated with respect to Best Before Date.
  *
+ * @author yazanzarka
  * @see RecipeManager
  * @see StorageUnit
+ * @since 0.0.2
  */
 public class RecipeSuggestionProvider {
 
@@ -39,7 +41,7 @@ public class RecipeSuggestionProvider {
   /**
    * Suggest a recipe based on groceries in storage unit.
    *
-   * @return Recipe a recipe that can be cooked with the groceries in the storage unit
+   * @return {@link List} Recipe a recipe that can be cooked with the groceries in the storage unit
    * @see SuggestedRecipe
    */
   public List<SuggestedRecipe> suggestRecipe() {

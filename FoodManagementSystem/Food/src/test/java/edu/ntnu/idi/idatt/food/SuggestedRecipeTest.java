@@ -10,7 +10,7 @@ class SuggestedRecipeTest {
 
   SuggestedRecipe suggestedRecipe;
   Recipe recipe;
-  Float score = 5.0f;
+  float score = 5.0f;
 
 
   @BeforeEach

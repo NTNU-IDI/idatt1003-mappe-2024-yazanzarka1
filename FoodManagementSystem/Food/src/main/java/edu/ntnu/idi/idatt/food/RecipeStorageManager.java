@@ -12,6 +12,11 @@ import org.fusesource.jansi.Ansi.Color;
 /**
  * RecipeStorageManager is responsible for comparing groceries in a recipe with groceries in a
  * storage unit. RecipeStorageManager can remove groceries from storage if a recipe is cooked
+ *
+ * @author yazanzarka
+ * @see Recipe
+ * @see StorageUnit
+ * @since 0.0.1
  */
 public class RecipeStorageManager implements TableRepresentable {
 
@@ -92,8 +97,8 @@ public class RecipeStorageManager implements TableRepresentable {
   /**
    * Returns difference between amount of grocery in recipe and storage.
    *
-   * @param recipeGrocery recipe grocery
-   * @return storage difference
+   * @param recipeGrocery {@link RecipeGrocery} recipe grocery
+   * @return {@link Float} storage difference
    */
   public float getStorageDifference(RecipeGrocery recipeGrocery) {
     StorageEntry grocery = storageUnit.findGroceryByName(recipeGrocery.grocery().getGroceryName());
@@ -106,7 +111,8 @@ public class RecipeStorageManager implements TableRepresentable {
   /**
    * Cook a recipe. Removes groceries from storage if they are available.
    *
-   * @throws MissingGroceryForRecipeException if there are not enough groceries in storage
+   * @return {@link List} of groceries used to cook the recipe
+   * @throws MissingGroceryForRecipeException if there are not enough groceries in storage.
    */
   public List<RecipeGrocery> cookRecipe() {
     List<RecipeGrocery> listOfNeededGroceries = new ArrayList<>();
@@ -142,6 +148,9 @@ public class RecipeStorageManager implements TableRepresentable {
   /**
    * return a string with color based on difference between recipe and storage. If difference is
    * negative, the string will be red. If difference is positive, the string will be green.
+   *
+   * @param difference difference between recipe and storage
+   * @return {@link String} formatted string with color
    */
   String formatDifference(float difference) {
     if (difference < 0) {

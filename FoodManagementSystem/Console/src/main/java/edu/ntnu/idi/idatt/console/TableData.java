@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author yazanzarka
  * @see DisplayManager
- * @since 0.0.1
+ * @since 0.0.5
  */
 public record TableData(List<String> headers, List<List<String>> data) {
 

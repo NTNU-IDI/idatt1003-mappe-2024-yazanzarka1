@@ -9,7 +9,10 @@ import java.util.Objects;
  * StorageUnit. StorageEntry is used in StorageUnit. StorageEntry is immutable. StorageEntry is
  * comparable.
  *
+ * @author yazanzarka
  * @see StorageUnit
+ * @see Grocery
+ * @since 0.0.1
  */
 public class StorageEntry extends Grocery {
 
@@ -34,7 +37,7 @@ public class StorageEntry extends Grocery {
   /**
    * Quantity setter.
    *
-   * @param quantity new quantity
+   * @param  quantity {@link Float} new quantity
    * @throws IllegalArgumentException if quantity is less than 0
    * @throws IllegalArgumentException if quantity is greater than 999.99
    * @throws IllegalArgumentException if quantity is less than 0.01
@@ -49,7 +52,7 @@ public class StorageEntry extends Grocery {
   /**
    * bestBeforeDate getter.
    *
-   * @return Date BestBeforeDate when the grocery expires
+   * @return {@link Date} BestBeforeDate when the grocery expires
    */
   public Date getBestBeforeDate() {
     return bestBeforeDate;
@@ -58,7 +61,7 @@ public class StorageEntry extends Grocery {
   /**
    * BestBeforeDate setter.
    *
-   * @param bestBeforeDate new best before date.
+   * @param bestBeforeDate {@link Date} new best before date.
    */
   public void setBestBeforeDate(Date bestBeforeDate) {
     this.bestBeforeDate = bestBeforeDate;
@@ -67,7 +70,7 @@ public class StorageEntry extends Grocery {
   /**
    * add quantity to current quantity.
    *
-   * @param quantity quantity to add to current quantity
+   * @param quantity {@link Float} quantity to add to current quantity
    * @throws IllegalArgumentException if quantity is less than 0.01
    */
   public void addQuantity(float quantity) {
@@ -99,7 +102,7 @@ public class StorageEntry extends Grocery {
   /**
    * check if the grocery is expired.
    *
-   * @return Boolean is the grocery expired
+   * @return {@link Boolean} is the grocery expired
    */
   public Boolean isExpired() {
     Date currentDate = new Date();

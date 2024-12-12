@@ -4,6 +4,9 @@ package edu.ntnu.idi.idatt.console;
  * Interface for input validation.
  *
  * @param <T> type of input to validate
+ * @author yazanzarka
+ * @see InputHandler
+ * @since 0.0.5
  */
 public interface InputValidator<T> {
 

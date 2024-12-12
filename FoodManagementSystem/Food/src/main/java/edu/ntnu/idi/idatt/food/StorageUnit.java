@@ -18,6 +18,11 @@ import org.fusesource.jansi.Ansi.Color;
  * date. StorageUnit can add, remove and serialize groceries. StorageUnit can also find groceries
  * and get the total value of all groceries in the storage unit. StorageUnit is used by the
  * application to manage stored groceries.
+ *
+ * @author yazanzarka
+ * @see StorageEntry
+ * @see Grocery
+ * @since 0.0.1
  */
 public class StorageUnit implements TableRepresentable {
 
@@ -27,7 +32,7 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Initiates a storage unit with a name.
    *
-   * @param name Name of the storage unit
+   * @param name {@link String} Name of the storage unit.
    */
   public StorageUnit(String name) {
     this.name = name;
@@ -39,7 +44,7 @@ public class StorageUnit implements TableRepresentable {
    * quantity will be updated. If the grocery does not exist in the storage unit, a new entry will
    * be created.
    *
-   * @param grocery        Grocery to add.
+   * @param grocery        {@link Grocery} to add.
    * @param quantity       Quantity of grocery
    * @param bestBeforeDate Best before date of grocery
    * @throws IllegalArgumentException if grocery is null, quantity is less than 0.1 or greater than
@@ -95,12 +100,11 @@ public class StorageUnit implements TableRepresentable {
    * quantity to remove, an exception will be thrown. If the quantity of the grocery is equal to the
    * quantity to remove, the grocery will be removed from the storage unit.
    *
-   * @param grocery  Grocery to remove
+   * @param grocery  {@link Grocery} to remove
    * @param quantity Quantity of grocery to remove
    * @throws IllegalArgumentException                  if grocery is null
    * @throws GroceryNotFoundException                  if grocery not found in storage unit
    * @throws InsufficientGroceryInStorageUnitException if quantity of grocery is less than quantity
-   * @see StorageEntry
    */
   public void removeGrocery(Grocery grocery, float quantity) {
     // Check if grocery is null
@@ -161,8 +165,8 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Serialize StorageUnit to a tableData object with headers and rows.
    *
-   * @param storageEntries List of storage entries to serialize
-   * @return TableData with headers and rows
+   * @param storageEntries {@link List<StorageEntry>} List of storage entries to serialize
+   * @return {@link TableData} TableData with headers and rows
    * @see TableData
    */
   public TableData toTableData(List<StorageEntry> storageEntries) {
@@ -184,8 +188,8 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Get a grocery from the storage unit by name.
    *
-   * @param groceryName Name of the grocery
-   * @return Storage entry of the grocery
+   * @param groceryName {@link String} Name of the grocery.
+   * @return {@link StorageEntry} Storage entry of the grocery
    */
   public StorageEntry findGroceryByName(String groceryName) {
     return groceries.get(groceryName);
@@ -195,8 +199,8 @@ public class StorageUnit implements TableRepresentable {
    * Finds a grocery in the storage unit. The search is case-insensitive and can be a partial
    * match.
    *
-   * @param query Query to search for
-   * @return List of storage entries that match the query
+   * @param query {@link String} Query to search for
+   * @return {@link String} List of storage entries that match the query
    */
   public List<StorageEntry> findGrocery(String query) {
     return groceries.values().stream()
@@ -208,7 +212,7 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Get total value of all groceries in the storage unit.
    *
-   * @return Total value of all groceries in the storage unit
+   * @return {@link Float} Total value of all groceries in the storage unit
    */
   public float getTotalValue() {
     return groceries.values().stream().map(entry -> entry.getQuantity() * entry.getPricePerUnit())
@@ -218,7 +222,7 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Get the name of the storage unit.
    *
-   * @return Name of the storage unit
+   * @return {@link String} Name of the storage unit
    */
   public String getName() {
     return name;
@@ -227,8 +231,8 @@ public class StorageUnit implements TableRepresentable {
   /**
    * Formats best before date.
    *
-   * @param storageEntry Storage entry to format best before date
-   * @return Formatted best before date
+   * @param storageEntry {@link StorageEntry} Storage entry to format best before date
+   * @return {@link String} Formatted best before date
    */
   private String formatBestBeforeDate(StorageEntry storageEntry) {
     SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");

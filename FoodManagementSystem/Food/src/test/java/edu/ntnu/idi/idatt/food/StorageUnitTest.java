@@ -325,7 +325,7 @@ class StorageUnitTest {
     storageUnit.addGrocery(grocery, 3, bestBeforeDate);
 
     assertThrows(InsufficientGroceryInStorageUnitException.class,
-        () -> storageUnit.removeGrocery(grocery, 4),
+        () -> storageUnit.removeGrocery(grocery, 4f),
         "Removing more than the available quantity should throw an exception");
   }
 }

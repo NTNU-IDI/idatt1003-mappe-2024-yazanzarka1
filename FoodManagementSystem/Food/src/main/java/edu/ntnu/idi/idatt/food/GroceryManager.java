@@ -14,7 +14,9 @@ import java.util.Set;
  * Manages Grocery in the app. GroceryManager can add and remove groceries. GroceryManager can also
  * return available groceries. GroceryManager is used by the application to manage groceries.
  *
+ * @author yazanzarka
  * @see Grocery
+ * @since 0.0.1
  */
 public class GroceryManager implements TableRepresentable {
 
@@ -30,7 +32,7 @@ public class GroceryManager implements TableRepresentable {
   /**
    * Adds Grocery to GroceryManager.
    *
-   * @param grocery grocery to be added
+   * @param grocery {@link Grocery} to be added
    * @throws IllegalArgumentException      if grocery is null
    * @throws GroceryAlreadyExistsException if grocery already exists
    * @see Grocery
@@ -54,7 +56,7 @@ public class GroceryManager implements TableRepresentable {
   /**
    * Get available groceries.
    *
-   * @return List Available Groceries in the application.
+   * @return {@link List} List Available Groceries in the application.
    */
   public List<Grocery> getAvailableGroceries() {
     return availableGroceries.stream().toList();
@@ -65,7 +67,7 @@ public class GroceryManager implements TableRepresentable {
    * Removes Grocery from GroceryManager. Throws IndexOutOfBoundsException if index is out of
    * bounds.
    *
-   * @param grocery grocery to be removed
+   * @param grocery {@link Grocery} to be removed
    * @throws IllegalArgumentException if grocery is null
    * @throws GroceryNotFoundException if grocery is not found
    * @see Grocery
